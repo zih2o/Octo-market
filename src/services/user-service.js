@@ -1,5 +1,5 @@
-import { userModel } from '../db';
-
+import { usersModel } from '../db';
+import { customError } from '../middlewares';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -10,29 +10,19 @@ class UserService {
   }
 
   // 회원가입
-  async addUser(userInfo) {
-    // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+  async createUser(userInfo) {
 
-    // 이메일 중복 확인
+    const { name, email, password, phoneNum, address, userType } = userInfo;
     const user = await this.userModel.findByEmail(email);
     if (user) {
-      throw new Error(
-        '이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요.',
-      );
+      throw new customError(409, `${email}은 이미 가입 된 회원입니다.`)
     }
-
-    // 이메일 중복은 이제 아니므로, 회원가입을 진행함
 
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUserInfo = { fullName, email, password: hashedPassword };
-
-    // db에 저장
-    const createdNewUser = await this.userModel.create(newUserInfo);
-
-    return createdNewUser;
+    const newUserInfo = { name, email, password: hashedPassword, phoneNum, address, userType };
+    const newUser = await this.userModel.createUser(newUserInfo);
+    return newUser;
   }
 
   // 로그인
@@ -72,12 +62,6 @@ class UserService {
     const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
 
     return { token };
-  }
-
-  // 사용자 목록을 받음.
-  async getUsers() {
-    const users = await this.userModel.findAll();
-    return users;
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
@@ -128,6 +112,5 @@ class UserService {
   }
 }
 
-const userService = new UserService(userModel);
-
+const userService = new UserService(usersModel);
 export { userService };
