@@ -1,5 +1,7 @@
-import cors from "cors";
 import express from "express";
+import cors from "cors";
+import morgan from 'morgan'
+
 import { viewsRouter, userRouter } from "./routers";
 import { errorHandler } from "./middlewares";
 
@@ -10,7 +12,7 @@ app.use(cors());
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
-
+app.use(morgan('dev'))
 // Content-Type: application/x-www-form-urlencoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.urlencoded({ extended: false }));
 
