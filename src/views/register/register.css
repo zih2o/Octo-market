@@ -1,0 +1,31 @@
+.register-user-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+}
+
+#registerUserForm {
+  width: 30rem;
+}
+
+.title {
+  text-align: center;
+}
+
+.button {
+  font-weight: bold;
+}
+
+.input:focus {
+  border-color: #00d1b2;
+  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+}
+
+.input {
+  margin-bottom: 5px;
+}
+
+#sample6_postcode {
+  width: 50%;
+}
