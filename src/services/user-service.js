@@ -1,7 +1,7 @@
-import { usersModel } from '../db';
-import { customError } from '../middlewares';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { usersModel } from '../db';
+import { CustomError } from '../middlewares';
 
 class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -11,57 +11,53 @@ class UserService {
 
   // 회원가입
   async createUser(userInfo) {
-
     const { name, email, password, phoneNum, address, userType } = userInfo;
     const user = await this.userModel.findByEmail(email);
     if (user) {
-      throw new customError(409, `${email}은 이미 가입 된 회원입니다.`)
+      throw new CustomError(409, `${email}은 이미 가입 된 회원입니다.`);
     }
 
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUserInfo = { name, email, password: hashedPassword, phoneNum, address, userType };
+    const newUserInfo = {
+      name,
+      email,
+      password: hashedPassword,
+      phoneNum,
+      address,
+      userType,
+    };
     const newUser = await this.userModel.createUser(newUserInfo);
     return newUser;
   }
 
   // 로그인
-  async getUserToken(loginInfo) {
-    // 객체 destructuring
+  async createUserInfo(loginInfo) {
     const { email, password } = loginInfo;
 
-    // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(email);
     if (!user) {
-      throw new Error(
-        '해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
+      throw new CustomError(
+        401,
+        'email 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.',
       );
     }
-
-    // 이제 이메일은 문제 없는 경우이므로, 비밀번호를 확인함
-
-    // 비밀번호 일치 여부 확인
-    const correctPasswordHash = user.password; // db에 저장되어 있는 암호화된 비밀번호
-
-    // 매개변수의 순서 중요 (1번째는 프론트가 보내온 비밀번호, 2번쨰는 db에 있떤 암호화된 비밀번호)
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      correctPasswordHash,
-    );
-
-    if (!isPasswordCorrect) {
-      throw new Error(
-        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      throw new CustomError(
+        401,
+        'email 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.',
       );
     }
 
     // 로그인 성공 -> JWT 웹 토큰 생성
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const accessToken = jwt.sign(
+      { userId: user.id, role: user.userType },
+      secretKey,
+    );
 
-    // 2개 프로퍼티를 jwt 토큰에 담음
-    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
-
-    return { token };
+    return { accessToken, userId: user.id, userType: user.userType };
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.

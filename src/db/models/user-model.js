@@ -1,9 +1,9 @@
-import { model } from "mongoose";
-import { usersSchema } from "../schemas/user-schema";
+import { model } from 'mongoose';
+import { usersSchema } from '../schemas/user-schema';
 import { createVirtualId } from '..';
 
-createVirtualId(usersSchema)
-const User = model("users", usersSchema);
+createVirtualId(usersSchema);
+const User = model('users', usersSchema);
 
 export class UsersModel {
   async findByEmail(email) {
@@ -16,6 +16,7 @@ export class UsersModel {
     return user;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async createUser(userInfo) {
     const createdNewUser = await new User(userInfo).save();
     return createdNewUser;
@@ -28,7 +29,7 @@ export class UsersModel {
   }
 
   async removeUser(userId) {
-    return await User.findByIdAndDelete(userId)    
+    return await User.findByIdAndDelete(userId);
   }
 }
 
