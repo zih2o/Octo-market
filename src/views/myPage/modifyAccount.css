@@ -1,9 +1,36 @@
-.container {
+.nav-bar {
     display: flex;
-}
+    width: 100vw;
+    height: 100px;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  #menu {
+    display: flex;
+    justify-content: center;
+    
+    width:20%;
+    min-width: 170px;
+  }
+  
+  #content {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:80vw;
+    height:80vh;
+    border-color:lightgray white white lightgray;
+    border-style: solid;
+    border-width:1px 0px 0px 1px;
+  }
 
-.field {
-    align-self: center;
-    width : 40vw;
-}
+  .data {
+    margin-top: 100px;
+  }
 
+  .field {
+    width : 400px;
+  }

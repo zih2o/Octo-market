@@ -1,48 +1,34 @@
+.nav-bar {
+  display: flex;
+  width: 100vw;
+  height: 100px;
+}
+
 .container {
   display: flex;
 }
 
 #menu {
-  justify-content: space-around;
-
-  width:200px;
-  margin-top: 100px;
-
-
-}
-/* #common {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  
+  width:20%;
+  min-width: 170px;
 }
-
-#is_admin {
-  display: flex;
-  flex-direction: column;
-} */
-
-
 
 #content {
   display:flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 100px;
   width:80vw;
-  height:400px;
+  height:80vh;
 
   border-color:lightgray white white lightgray;
   border-style: solid;
   border-width:1px 0px 0px 1px;
 }
 
-.input {
-  width : 500px;
-}
-
-.control {
-  justify-content:right;
-}
 
 .password-form {
   display: flex;
@@ -73,5 +59,5 @@
 
 .password-form .password-form__button {
   display: flex;
-  justify-content: flex-end;
+  justify-content: right;
 }

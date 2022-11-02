@@ -1,0 +1,115 @@
+.nav-bar {
+    display: flex;
+    width: 100vw;
+    height: 100px;
+}
+
+.container {
+    display: flex;
+
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    
+    width:20%;
+    min-width: 170px;
+}
+
+#content {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:80vw;
+    height:80vh;
+
+
+    border-color:lightgray white white lightgray;
+    border-style: solid;
+    border-width:1px 0px 0px 1px;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    height:100%;
+    width:100%;
+}
+
+#notifier {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height:10%;
+    width:100%;
+    margin: 10px 10px 10px 40px;
+}
+
+
+#progress {
+    display: flex;  
+    height:40%;
+    width:100%;
+    overflow-x: hidden;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#progress > div > p{
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    width:96px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top:5px;
+}
+
+#itemTable {
+    margin-left:40px;
+    vertical-align: middle;
+}
+
+.orderId {
+    width:15%;
+    text-align: center;
+}
+.orderSummary {
+    width:45%;
+    text-align: left;
+}
+.orderStatus {
+    width:20%;
+}
+.orderModify {
+    width:20%;
+}
+
+
+
+
+/* .order {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    border-color:lightgray white white lightgray;
+    border-style: solid;
+    border-width:1px 0px 0px 1px;
+} */
+
+/* .order > .orderId {
+    width:15%;
+}
+.order > .orderSummary {
+    width:45%;
+    text-align: left;
+    text-indent: 20px;
+}
+.order > .orderStatus {
+    width:20%;
+}
+.order > .orderModify {
+    width:20%;
+} */

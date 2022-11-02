@@ -1,8 +1,7 @@
 const loggedAdmin = document.querySelector('#is-admin');
 
 var admin = false;
-var adminTemplate = 
-`
+var adminTemplate = `
 <span class="">관리자 옵션</span>
     <ul>
         <li><a>상품 추가/삭제</a></li>
