@@ -9,6 +9,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../elice-rabbit-favicon.png" />
   <!-- bulma css -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+  <link href="~bulma-carousel/dist/css/bulma-carousel.min.css" rel="stylesheet">
   <!-- 폰트 어썸: 아이콘 -->
   <script defer src="https://kit.fontawesome.com/9daa42bcef.js" crossorigin="anonymous"></script>
   <!-- 커스텀 css, js -->
@@ -73,6 +75,60 @@
   <!-- 메인 콘텐츠 -->
   <main>
 
+    <section id="carousel-top">
+      <p>카테고리 이동 캐러셀</p>
+      <div class="carousel-container">
+        <!-- Start Carousel -->
+        <div id="carousel-demo" class="carousel">
+          <div class="item-1">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/view-all.png" alt="전체보기">
+            </a>
+          </div>
+          <div class="item-2">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/sausage.jpg" alt="가공식품">
+            </a>
+          </div>
+          <div class="item-3">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/marin-food.jpg" alt="수산식품">
+            </a>
+          </div>
+          <div class="item-4">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/noodle.jpg" alt="면, 튀김">
+            </a>
+          </div>
+          <div class="item-5">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/seasoning.jpeg" alt="양념, 조미료">
+            </a>
+          </div>
+          <div class="item-6">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/rice.jpg" alt="쌀, 견과류">
+            </a>
+          </div>
+          <div class="item-7">
+            <!-- Slide Content -->
+            <a href="">
+              <img src="../images/main/carousel/can.jpg" alt="캔, 통조림">
+            </a>
+          </div>
+        </div>
+        <!-- End Carousel -->
+      </div>
+    </section>
+
+
+
   </main>
 
 
@@ -108,6 +164,20 @@
     </div>
 
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+  <script src="~bulma-carousel/dist/js/bulma-carousel.min.js"></script>
+  <script>
+    bulmaCarousel.attach('#carousel-demo', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      infinite: true,
+      autoplay: true,
+      duration: 300,
+      pauseOnHover: true,
+    });
+  </script>
 
 </body>
 

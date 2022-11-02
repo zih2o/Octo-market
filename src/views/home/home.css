@@ -66,6 +66,25 @@
 }
 
 /* 메인 콘텐츠 영역*/
+#carousel-top > p {
+  color: white;
+}
+
+.carousel-container {
+  overflow: hidden;
+}
+
+.slider-pagination .slider-page {
+  width: 15px;
+  height: 15px;
+  margin: 10px;
+  background-color: #c4fcef;
+}
+
+.slider-pagination .slider-page.is-active {
+  background-color: #00c9a7;
+  transform: scale(1.8);
+}
 
 /* 푸터 영역 */
 
