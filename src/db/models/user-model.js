@@ -16,15 +16,18 @@ export class UsersModel {
     return user;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async createUser(userInfo) {
     const createdNewUser = await new User(userInfo).save();
     return createdNewUser;
   }
 
-  async update({ userId, update }) {
+  async update({ user_id, update }) {
     const option = { returnOriginal: false };
-    const updatedUser = await User.findOneAndUpdate(userId, update, option);
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: user_id },
+      update,
+      option,
+    );
     return updatedUser;
   }
 

@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 const usersSchema = new Schema(
   {
@@ -27,20 +27,20 @@ const usersSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
     userType: {
       type: String,
       required: false,
-      default: "user",
+      default: 'user',
     },
   },
   {
-    collection: "users",
+    collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
 export { usersSchema };
