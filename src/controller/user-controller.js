@@ -56,10 +56,19 @@ const updateUser = async (req, res, next) => {
       toUpdate,
     );
 
-    // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
     res.status(200).json(updatedUserInfo);
   } catch (error) {
     next(error);
   }
 };
-export { signup, login, updateUser };
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    await userService.removeUser(user_id);
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
+export { signup, login, updateUser, deleteUser };
