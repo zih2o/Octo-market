@@ -4,12 +4,13 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": ["plugin:prettier/recommended"],
   "rules": {
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "prettier/prettier": ["error"],
     "implicit-arrow-linebreak": ["error", "below"],
     "import/no-unresolved": "off",
-    "no-multiple-empty-lines": 2
+    "no-multiple-empty-lines": 2,
+    "import/prefer-default-export": "off"
   },
   "ignorePatterns": ["views", "node_modules/"],
   "parserOptions": {
