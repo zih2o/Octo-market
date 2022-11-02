@@ -43,3 +43,35 @@
 .control {
   justify-content:right;
 }
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  max-width: 350px;
+  width: 350px;
+}
+
+.password-form > label{
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.password-form .password-form__input {
+  position: relative;
+}
+
+.password-form .password-form__input > i{
+  position: absolute;
+  top: 11px;
+  left: 10px;
+}
+
+.password-form .password-form__input > .input-custom{
+  padding-left: 30px;
+}
+
+.password-form .password-form__button {
+  display: flex;
+  justify-content: flex-end;
+}
