@@ -9,23 +9,33 @@ export class CategoryModel {
         return categories
     }
 
+    async findByName(cat_name){
+        const category = await Category.findOne({name: cat_name})
+        return category
+    }
+
     async findById(cat_id){
-        const category = await Category.find({id: cat_id})
+        const category = await Category.findOne({_id: cat_id})
         return category
     }
 
-    async create(data){
-        const category = await Category.create(data)
-        return category
+    async createCategory(categoryInfo){
+        const newCategory = await new Category(categoryInfo).save()
+        return newCategory
     }
 
-    async update(cat_id, data){
-        const category = await Category.updateOne({id: cat_id, data})
-        return category
+    async updateCategory(cat_id, update){
+        const option = { returnOriginal: false };
+        const updatedCategory = await Category.findOneAndUpdate(
+            {_id: cat_id},
+            update, 
+            option,
+            );
+        return updatedCategory;
     }
 
-    async delete(cat_id){
-        await Category.deleteOne({id: cat_id})
+    async removeCategory(cat_id){
+        await Category.deleteOne({_id: cat_id})
         return;
     }
 }
