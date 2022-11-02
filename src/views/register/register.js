@@ -66,18 +66,20 @@ async function handleSubmit(e) {
     return alert('상세주소를 입력해 주세요.');
   }
 
-  // 회원가입 api 요청 
+  // 회원가입 api 요청
   try {
     const data = {
       fullName,
       email,
       password,
       phone,
-      adress: [postCode, adress, detailAdress],
-      type: 'User'
+      postCode,
+      adress1: adress,
+      adress2: detailAdress,
+      type: 'User',
     };
 
-    await Api.post("http://localhost://5000/auth/sign-in", data);
+    await Api.post('http://localhost://5000/auth/sign-in', data);
 
     alert(`정상적으로 회원가입되었습니다.`);
 
