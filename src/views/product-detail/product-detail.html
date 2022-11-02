@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>문어상점</title>
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="product-detail.css" />
+    <script src="product-detail.js" type="module" defer></script>
+  </head>
+
+  <body>
+    <!--네비바-->
+    <nav></nav>
+
+    <!--상세페이지 본문 영역-->
+    <main>
+      <div class="tile is-parent" id="detailContent">
+        <div class="tile is-4 is-child" id="image">사진</div>
+        <div id="spacing" style="width: 20px; height: 100%"></div>
+        <div class="tile is-child" id="detail">
+          <div class="box is-size-5" id="name">
+            <div id="productName">상품명</div>
+            <div id="brand">브랜드</div>
+          </div>
+          <div class="box" id="description">
+            상품 상세 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Autem quibusdam aliquid nemo. Commodi facilis omnis provident enim
+            possimus optio dolor reiciendis dicta quibusdam sint? Perspiciatis
+            quos alias aliquam deleniti beatae.
+          </div>
+          <div class="box is-size-5" id="price">금액</div>
+          <div class="buttons">
+            <button class="button is-primary" id="addToCart">
+              장바구니에 추가
+            </button>
+            <button class="button is-primary" id="buy">바로 결제</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
