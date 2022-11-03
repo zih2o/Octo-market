@@ -31,7 +31,7 @@ export class UsersModel {
     return updatedUser;
   }
 
-  async removeUser(userId) {
+  async remove(userId) {
     return await User.findByIdAndDelete(userId);
   }
 }

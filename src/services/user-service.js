@@ -62,7 +62,6 @@ class UserService {
   async updateUser(userInfoRequired, toUpdate) {
     const { user_id, currentPassword } = userInfoRequired;
     let user = await this.userModel.findById(user_id);
-    console.log(user);
     if (!user) {
       throw new CustomError(
         404,
@@ -89,13 +88,28 @@ class UserService {
       const newPassword = await bcrypt.hash(password, 10);
       toUpdate.password = newPassword;
     }
-    console.log(user_id);
-    // 업데이트 진행
     const updatedUser = await this.userModel.update({
       user_id,
       update: toUpdate,
     });
     return updatedUser;
+  }
+
+  // 회원계정삭제
+  async removeUser(userId) {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new CustomError(
+        404,
+        '가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
+      );
+    }
+
+    if (user.id !== userId) {
+      throw new CustomError(403, '접근 권한이 없습니다.');
+    }
+
+    await this.userModel.remove(userId);
   }
 }
 
