@@ -1,5 +1,5 @@
 import * as Api from '../api.js';
-import { validateEmail } from '../useful-functions.js';
+import { validateEmail, hasWhiteSpace } from '../useful-functions.js';
 
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector('#fullNameInput');
@@ -39,27 +39,44 @@ async function handleSubmit(e) {
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
   const isEmailValid = validateEmail(email);
-  const isPasswordValid = password.length >= 4;
+  const isPasswordValid = password.length >= 8 && password.length <= 20;
+  const isPasswordWhitespaceValid = hasWhiteSpace(password);
   const isPasswordSame = password === passwordConfirm;
   const isNumberValid = Number(phone);
   const isdetailAdressValid = detailAdress.length;
 
   console.log(isEmailValid);
 
-  if (!isFullNameValid || !isPasswordValid) {
-    return alert('이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.');
+  if (!isFullNameValid) {
+    return alert('이름은 2글자 이상이어야 합니다.');
+  }
+
+  if (!isPasswordValid) {
+    return alert('비밀번호는 8글자 이상, 20글자 이하여야 합니다.');
   }
 
   if (!isEmailValid) {
     return alert('이메일 형식이 맞지 않습니다.');
   }
 
+  if (isPasswordWhitespaceValid) {
+    return alert('비밀번호는 여백없이 설정해 주세요.');
+  }
+
   if (!isPasswordSame) {
     return alert('비밀번호가 일치하지 않습니다.');
   }
 
+  if (!phone) {
+    return alert('전화번호를 입력해 주세요.');
+  }
+
   if (isNumberValid === NaN) {
-    return alert('번호는 숫자만 입력해 주세요.');
+    return alert('전화번호는 숫자만 입력해 주세요.');
+  }
+
+  if (!postCode) {
+    return alert('우편번호 찾기를 진행해 주세요.');
   }
 
   if (!isdetailAdressValid) {
