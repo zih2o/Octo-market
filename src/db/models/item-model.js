@@ -6,6 +6,11 @@ createVirtualId(itemSchema);
 const Item = model('items', itemSchema);
 
 export class ItemsModel {
+  async findAll() {
+    const items = await Item.find({});
+    return items;
+  }
+
   async findByName(name) {
     const item = await Item.findOne({ name });
     return item;
