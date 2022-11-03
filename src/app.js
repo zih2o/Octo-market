@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from 'morgan'
 
-import { viewsRouter, usersRouter, categoriesRouter } from "./routers";
+import { viewsRouter, usersRouter, categoriesRouter, adminRouter } from "./routers";
 import { errorHandler } from "./middlewares";
 
 const app = express();
@@ -19,6 +19,7 @@ app.use(viewsRouter);
 
 app.use("/users", usersRouter);
 app.use("/categories", categoriesRouter)
+app.use("/admin", adminRouter)
 
 app.use((req, res, next) => {
   res.sendStatus(404);
