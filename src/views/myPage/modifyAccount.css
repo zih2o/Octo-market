@@ -99,6 +99,26 @@
   width : 400px;
 }
 
+#addressField {
+  display: flex;
+  justify-content: space-around;
+}
+
+#sample6_postcode {
+  width:60%;
+  margin-bottom: 3px;
+}
+
+#search_postcode {
+  margin-left:10px;
+  flex-grow: 1;
+}
+
+#sample6_address {
+  margin-bottom: 3px;
+}
+
+
 /* 푸터 영역 */
 #footer-icons {
   margin-top: 20px;

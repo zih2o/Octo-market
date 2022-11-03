@@ -1,16 +1,16 @@
-const loggedAdmin = document.querySelector('#is-admin');
+const pwBtn = document.querySelector("#pwSubmitBtn")
+const pwInput = document.querySelector('.input')
 
-var admin = false;
-var adminTemplate = `
-<span class="">관리자 옵션</span>
-    <ul>
-        <li><a>상품 추가/삭제</a></li>
-    </ul>
-`
+/* Dummy password */
+const pw = "1111"
 
-isAdmin();
-function isAdmin()
-{
-    if (admin)
-        loggedAdmin.insertAdjacentHTML('beforeend', adminTemplate)
-}
+pwBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    
+    /* This part must be handled with additional api 
+    that compares pwInput value, hash it, compare with actual hased pw, and returns boolean. */
+    if (pwInput.value !== pw)
+        alert("비밀번호가 일치하지 않습니다")
+
+    
+})
