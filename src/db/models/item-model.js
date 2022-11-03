@@ -7,7 +7,7 @@ const Item = model('items', itemSchema);
 
 export class ItemsModel {
   async findAll() {
-    const items = await Item.find({});
+    const items = await Item.find({}).sort({ createdAt: -1 });
     return items;
   }
 
@@ -16,12 +16,19 @@ export class ItemsModel {
     return item;
   }
 
+  async findByCategory(catId) {
+    const items = await Item.find({ category: catId }).sort({
+      createdAt: -1,
+    });
+    return items;
+  }
+
   async findById(itemId) {
     const item = await Item.findOne({ _id: itemId });
     return item;
   }
 
-  async createItem(ItemInfo) {
+  async create(ItemInfo) {
     const createdNewItem = await new Item(ItemInfo).save();
     return createdNewItem;
   }

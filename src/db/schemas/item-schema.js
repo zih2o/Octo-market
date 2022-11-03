@@ -14,13 +14,17 @@ const itemSchema = new Schema(
       type: String,
       required: true,
     },
-    desription: {
+    description: {
       type: String,
       required: true,
     },
     category: {
       type: Schema.Types.ObjectId,
       ref: 'categories',
+      required: true,
+    },
+    imageUrl: {
+      type: String,
       required: true,
     },
   },
