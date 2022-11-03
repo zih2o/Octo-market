@@ -1,11 +1,9 @@
-import { model } from 'mongoose';
-import { usersSchema } from '../schemas/user-schema';
-import { createVirtualId } from '..';
+import { model } from "mongoose";
+import { UserSchema } from "../schemas/user-schema";
 
-createVirtualId(usersSchema);
-const User = model('users', usersSchema);
+const User = model("users", UserSchema);
 
-export class UsersModel {
+export class UserModel {
   async findByEmail(email) {
     const user = await User.findOne({ email });
     return user;
@@ -16,26 +14,25 @@ export class UsersModel {
     return user;
   }
 
-  async createUser(userInfo) {
-    const createdNewUser = await new User(userInfo).save();
+  async create(userInfo) {
+    const createdNewUser = await User.create(userInfo);
     return createdNewUser;
   }
 
-  async update({ user_id, update }) {
-    const option = { returnOriginal: false };
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: user_id },
-      update,
-      option,
-    );
-    return updatedUser;
+  async findAll() {
+    const users = await User.find({});
+    return users;
   }
 
-  async removeUser(userId) {
-    return await User.findByIdAndDelete(userId);
+  async update({ userId, update }) {
+    const filter = { _id: userId };
+    const option = { returnOriginal: false };
+
+    const updatedUser = await User.findOneAndUpdate(filter, update, option);
+    return updatedUser;
   }
 }
 
-const usersModel = new UsersModel();
+const userModel = new UserModel();
 
-export { usersModel };
+export { userModel };
