@@ -62,7 +62,6 @@ class UserService {
   async updateUser(userInfoRequired, toUpdate) {
     const { user_id, currentPassword } = userInfoRequired;
     let user = await this.userModel.findById(user_id);
-    console.log(user);
     if (!user) {
       throw new CustomError(
         404,
@@ -89,7 +88,6 @@ class UserService {
       const newPassword = await bcrypt.hash(password, 10);
       toUpdate.password = newPassword;
     }
-    console.log(user_id);
     const updatedUser = await this.userModel.update({
       user_id,
       update: toUpdate,

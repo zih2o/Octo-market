@@ -35,7 +35,6 @@ const login = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    console.log(user_id);
     const { password, currentPassword, address, phoneNum } = req.body;
 
     if (!currentPassword) {

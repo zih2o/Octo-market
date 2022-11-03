@@ -1,4 +1,3 @@
-
 import jwt from 'jsonwebtoken';
 import { adminModel } from '../db';
 
@@ -36,7 +35,7 @@ const adminRequired = async (req, res, next) => {
     }
 
     req.currentAdminId = admin.id; // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
-    req.userType = "admin"
+    req.userType = 'admin';
     next();
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
