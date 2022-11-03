@@ -55,8 +55,6 @@ class AdminService {
 
     return { accessToken, adminId: admin.id, userType: admin.userType };
   }
-
-  
 }
 
 const adminService = new AdminService(adminModel);

@@ -12,5 +12,10 @@ usersRouter.put(
   loginRequired,
   usersController.updateUser,
 );
+usersRouter.delete(
+  '/deleteuser/:user_id',
+  loginRequired,
+  usersController.deleteUser,
+);
 
 export { usersRouter };
