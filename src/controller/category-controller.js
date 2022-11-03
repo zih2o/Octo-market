@@ -1,4 +1,3 @@
-import { CustomError } from "../middlewares/custom-error";
 import { categoryService } from "../services";
 
 // 전체 카테고리 조회
@@ -25,18 +24,12 @@ const getCategory = async (req, res, next) => {
     }
 }
 
+// 카테고리 추가
 const createCategory = async (req, res, next) => {
     try{
-        if (req.userType != 'admin'){
-            return res.status(403).json({
-                result: 'forbidden-approach',
-                reason: '관리자가 아닙니다.',
-              })
-        }
-
         const { name } = req.body;
         const newCategoryInfo = { name }
-        const newCategory = await categoryService.createCategory(newCategoryInfo)
+        const newCategory = await categoryService.createCategory(req.userType, newCategoryInfo)
 
         return res.status(201).json(newCategory)
 
@@ -45,18 +38,13 @@ const createCategory = async (req, res, next) => {
     }
 }
 
+// 카테고리 업데이트
 const updateCategory = async (req, res, next) => {
     try{
-        if (req.userType != 'admin'){
-            return res.status(403).json({
-                result: 'forbidden-approach',
-                reason: '관리자가 아닙니다.',
-              })
-        }
-
         const { cat_id } = req.params;
         const { name } = req.body;
         const updatedCategory = await categoryService.updateCategory(
+            req.userType,
             cat_id, 
             { name }
         );
@@ -70,19 +58,10 @@ const updateCategory = async (req, res, next) => {
 
 const removeCategory = async (req, res, next) => {
     try{
-        if (req.userType != 'admin'){
-            return res.status(403).json({
-                result: 'forbidden-approach',
-                reason: '관리자가 아닙니다.',
-              })
-        }
-
         const { cat_id } = req.params;
-        await categoryService.removeCategory(cat_id)
+        await categoryService.removeCategory(req.userType, cat_id)
 
-        return res.status(204).json({
-            message: "카테고리가 삭제되었습니다."
-        })
+        return res.sendStatus(204)
 
     }catch(err){
         next(err)
