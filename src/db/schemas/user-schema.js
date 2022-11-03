@@ -1,12 +1,12 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
-const UserSchema = new Schema(
+const usersSchema = new Schema(
   {
-    email: {
+    name: {
       type: String,
       required: true,
     },
-    fullName: {
+    email: {
       type: String,
       required: true,
     },
@@ -14,9 +14,9 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    phoneNumber: {
+    phoneNum: {
       type: String,
-      required: false,
+      required: true,
     },
     address: {
       type: new Schema(
@@ -27,20 +27,20 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
-    role: {
+    userType: {
       type: String,
       required: false,
-      default: "basic-user",
+      default: 'user',
     },
   },
   {
-    collection: "users",
+    collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
-export { UserSchema };
+export { usersSchema };
