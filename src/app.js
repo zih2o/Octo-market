@@ -6,6 +6,7 @@ import {
   viewsRouter,
   usersRouter,
   categoriesRouter,
+  itemsRouter,
   adminRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
@@ -21,6 +22,7 @@ app.use(viewsRouter);
 
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
+app.use('/items', itemsRouter);
 app.use('/admin', adminRouter);
 
 app.use((req, res, next) => {
