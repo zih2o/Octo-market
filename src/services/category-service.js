@@ -23,7 +23,7 @@ class CategoryService {
     return newCategory;
   }
 
-  async updateCategory(cat_id, userType, update) {
+  async updateCategory(cat_id, userType, name) {
     if (userType !== 'admin') {
       throw new CustomError(403, '접근권한이 없습니다.');
     }
@@ -31,12 +31,17 @@ class CategoryService {
     if (!category) {
       throw new CustomError(
         404,
-        `존재하지 않는 카테고리입니다. 다시 한 번 확인해주세요.`,
+        '존재하지 않는 카테고리입니다. 다시 한 번 확인해주세요.',
       );
     }
+
+    if (category.name === name) {
+      throw new CustomError(409, `${name}은 이미 존재하는 카테고리입니다.`);
+    }
+
     const updatedCategory = await this.categoryModel.updateCategory(
       cat_id,
-      update,
+      name,
     );
     return updatedCategory;
   }
@@ -46,7 +51,7 @@ class CategoryService {
     if (!category) {
       throw new CustomError(
         404,
-        `존재하지 않는 카테고리입니다. 다시 한 번 확인해주세요.`,
+        '존재하지 않는 카테고리입니다. 다시 한 번 확인해주세요.',
       );
     }
     return category;
@@ -58,9 +63,18 @@ class CategoryService {
   }
 
   async removeCategory(userType, cat_id) {
+    const category = await this.categoryModel.findById(cat_id);
+    if (!category) {
+      throw new CustomError(
+        404,
+        `존재하지 않는 카테고리입니다. 다시 한 번 확인해주세요.`,
+      );
+    }
+
     if (userType !== 'admin') {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
+
     await this.categoryModel.removeCategory(cat_id);
     return;
   }

@@ -56,6 +56,10 @@ class ItemService {
     if (userType !== 'admin') {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
+    const { name } = toUpdate;
+    if (item.name === name) {
+      throw new CustomError(409, `${name}은 이미 등록 된 상품입니다.`);
+    }
 
     const updatedUser = await this.itemModel.update({
       itemId,
