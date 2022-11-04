@@ -3,9 +3,12 @@ import { itemService } from '../services';
 // 전체 items 조회
 const getItems = async (req, res, next) => {
   try {
+    const sorting = req.query.sort;
+    const sortCondition = Number(req.query.sc);
     const count = Number(req.query.count || 1);
     const perCount = Number(req.query.perCount || 20);
-    const items = await itemService.getAll(count, perCount);
+    const sortingInfo = { sorting, sortCondition, count, perCount };
+    const items = await itemService.getAll(sortingInfo);
 
     console.log(items);
     res.status(200).json(items);
@@ -18,9 +21,12 @@ const getItems = async (req, res, next) => {
 const getByCategoryID = async (req, res, next) => {
   try {
     const { cat_id } = req.params;
+    const sorting = req.query.sort;
+    const sortCondition = Number(req.query.sc);
     const count = Number(req.query.count || 1);
     const perCount = Number(req.query.perCount || 20);
-    const items = await itemService.getByCategoryId(cat_id, count, perCount);
+    const sortingInfo = { sorting, sortCondition, count, perCount };
+    const items = await itemService.getByCategoryId(cat_id, sortingInfo);
 
     res.status(200).json(items);
   } catch (error) {

@@ -6,11 +6,14 @@ createVirtualId(itemSchema);
 const Item = model('items', itemSchema);
 
 export class ItemsModel {
-  async findAll(count, perCount) {
+  async findAll(sortingInfo) {
+    const { sorting, sortCondition, count, perCount } = sortingInfo;
+
     const items = await Item.find({})
-      .sort({ createdAt: -1 })
+      .sort({ [sorting]: sortCondition })
       .skip(perCount * (count - 1))
       .limit(perCount);
+
     return items;
   }
 
@@ -19,11 +22,14 @@ export class ItemsModel {
     return item;
   }
 
-  async findByCategory(catId, count, perCount) {
+  async findByCategory(catId, sortingInfo) {
+    const { sorting, sortCondition, count, perCount } = sortingInfo;
+
     const items = await Item.find({ category: catId })
-      .sort({ createdAt: -1 })
+      .sort({ [sorting]: sortCondition })
       .skip(perCount * (count - 1))
       .limit(perCount);
+
     return items;
   }
 
