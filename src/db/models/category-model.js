@@ -1,6 +1,8 @@
 import { model } from 'mongoose';
 import { categorySchema } from '../schemas/category-schema';
+import { createVirtualId } from '..';
 
+createVirtualId(categorySchema);
 const Category = model('categories', categorySchema);
 
 export class CategoryModel {
