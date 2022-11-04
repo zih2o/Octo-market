@@ -100,7 +100,14 @@
   
   .field {
     width : 50vw;
+  }
 
+  #productClassify {
+    display:flex;
+    justify-content: space-around;
+  }
+  #productClassify > div {
+    width: 49%;
   }
   
   /* 푸터 영역 */
