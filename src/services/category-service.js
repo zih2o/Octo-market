@@ -8,7 +8,7 @@ class CategoryService {
 
   async createCategory(userType, categoryInfo) {
     if (userType !== 'admin') {
-      throw new CustomError(403, '관리자가 아닙니다.');
+      throw new CustomError(403, '접근 권한이 없습니다.');
     }
     const { name } = categoryInfo;
     const category = await this.categoryModel.findByName(name);
@@ -23,9 +23,9 @@ class CategoryService {
     return newCategory;
   }
 
-  async updateCategory(userType, cat_id, update) {
+  async updateCategory(cat_id, userType, update) {
     if (userType !== 'admin') {
-      throw new CustomError(403, '관리자가 아닙니다.');
+      throw new CustomError(403, '접근권한이 없습니다.');
     }
     const category = this.categoryModel.findById(cat_id);
     if (!category) {
@@ -59,7 +59,7 @@ class CategoryService {
 
   async removeCategory(userType, cat_id) {
     if (userType !== 'admin') {
-      throw new CustomError(403, '관리자가 아닙니다.');
+      throw new CustomError(403, '접근 권한이 없습니다.');
     }
     await this.categoryModel.removeCategory(cat_id);
     return;
