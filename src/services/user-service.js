@@ -61,7 +61,7 @@ class UserService {
   // 회원정보수정
   async updateUser(userInfoRequired, toUpdate) {
     const { user_id, currentPassword } = userInfoRequired;
-    let user = await this.userModel.findById(user_id);
+    const user = await this.userModel.findById(user_id);
     if (!user) {
       throw new CustomError(
         404,

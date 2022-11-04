@@ -28,9 +28,10 @@ const getCategory = async (req, res, next) => {
 const createCategory = async (req, res, next) => {
   try {
     const { name } = req.body;
+    const userType = req.userType;
     const newCategoryInfo = { name };
     const newCategory = await categoryService.createCategory(
-      req.userType,
+      userType,
       newCategoryInfo,
     );
 
@@ -45,10 +46,12 @@ const updateCategory = async (req, res, next) => {
   try {
     const { cat_id } = req.params;
     const { name } = req.body;
+    const userType = req.userType;
+    const toUpdate = { name };
     const updatedCategory = await categoryService.updateCategory(
-      req.userType,
       cat_id,
-      { name },
+      userType,
+      toUpdate,
     );
 
     return res.status(201).json(updatedCategory);
