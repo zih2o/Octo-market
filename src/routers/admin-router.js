@@ -42,13 +42,8 @@ adminRouter.put(
 );
 
 adminRouter.delete(
-<<<<<<< HEAD
-  '/categories/delete/:cat_id',
-  adminRequired,
-=======
   '/categories/:cat_id',
   loginRequired,
->>>>>>> 6fa61c0 ([feat]: OrderAPI)
   categoryController.removeCategory,
 );
 
