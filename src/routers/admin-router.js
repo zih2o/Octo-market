@@ -34,14 +34,14 @@ adminRouter.post(
 );
 
 adminRouter.put(
-  '/categories/:cat_id',
+  '/categories/updateInfo/:cat_id',
   validator.body(categoryBodySchema),
   adminRequired,
   categoryController.updateCategory,
 );
 
 adminRouter.delete(
-  '/categories/:cat_id',
+  '/categories/delete/:cat_id',
   adminRequired,
   categoryController.removeCategory,
 );
@@ -49,7 +49,15 @@ adminRouter.delete(
 // Item admin
 
 adminRouter.post('/items', adminRequired, itemController.createItem);
-adminRouter.put('/items/:item_id', adminRequired, itemController.updateItem);
-adminRouter.delete('/items/:item_id', adminRequired, itemController.deleteItem);
+adminRouter.put(
+  '/items/updateInfo/:item_id',
+  adminRequired,
+  itemController.updateItem,
+);
+adminRouter.delete(
+  '/items/delete/:item_id',
+  adminRequired,
+  itemController.deleteItem,
+);
 
 export { adminRouter };

@@ -47,11 +47,10 @@ const updateCategory = async (req, res, next) => {
     const { cat_id } = req.params;
     const { name } = req.body;
     const userType = req.userType;
-    const toUpdate = { name };
     const updatedCategory = await categoryService.updateCategory(
       cat_id,
       userType,
-      toUpdate,
+      name,
     );
 
     return res.status(201).json(updatedCategory);
@@ -63,7 +62,8 @@ const updateCategory = async (req, res, next) => {
 const removeCategory = async (req, res, next) => {
   try {
     const { cat_id } = req.params;
-    await categoryService.removeCategory(req.userType, cat_id);
+    const userType = req.userType;
+    await categoryService.removeCategory(userType, cat_id);
 
     return res.sendStatus(204);
   } catch (err) {
