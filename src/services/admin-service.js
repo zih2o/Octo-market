@@ -49,11 +49,11 @@ class AdminService {
 
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const accessToken = jwt.sign(
-      { adminId: admin.id, role: admin.userType },
+      { userId: admin.id, role: admin.userType },
       secretKey,
     );
 
-    return { accessToken, adminId: admin.id, userType: admin.userType };
+    return { accessToken, userId: admin.id, userType: admin.userType };
   }
 }
 
