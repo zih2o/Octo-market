@@ -6,6 +6,7 @@ import {
   viewsRouter,
   usersRouter,
   categoriesRouter,
+  itemsRouter,
   adminRouter,
 } from './routers';
 import { errorHandler } from './middlewares';
@@ -16,12 +17,12 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
-
 // html, css, js 라우팅
 app.use(viewsRouter);
 
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
+app.use('/items', itemsRouter);
 app.use('/admin', adminRouter);
 
 app.use((req, res, next) => {

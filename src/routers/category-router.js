@@ -1,6 +1,4 @@
 import { Router } from 'express';
-import { loginRequired } from '../middlewares';
-import { adminRequired } from '../middlewares';
 import * as categoryController from '../controller/category-controller';
 
 const categoriesRouter = Router();

@@ -28,39 +28,15 @@ export const wait = ms => {
   return new Promise(r => setTimeout(r, ms));
 };
 
-// 상품 배열을 최근등록순으로 정렬해주는 함수
-export const sortByProductNo = arr =>
-  arr.sort((a, b) => Number(b.productNo) - Number(a.productNo));
-
-// 상품 배열을 낮은가격순으로 정렬해주는 함수
-export const sortByLowerPrice = arr =>
-  arr.sort((a, b) => Number(a.price) - Number(b.price));
-
-// 상품 배열을 높은가격순으로 정렬해주는 함수
-export const sortByHigherPrice = arr =>
-  arr.sort((a, b) => Number(b.price) - Number(a.price));
-
 // 상품 추가 무한스크롤 -- 수정 중 --
 export const infiniteScroll = () => {
-  const listEnd = document.querySelector('.product-container');
+  const listEnd = document.querySelector('reqPoint');
   const itemList = document.querySelectorAll('.product-item');
   const option = {
     root: null,
     rootMargin: '0px',
     thredhold: '0',
   };
-
-  const template = `
-  <li class="product-item" style="width:25%;">
-  <div class="item-container">
-  <div class="item-photobox"><a href="${productDetailUrl}"><img src="${productImgUrl}" alt="${productName}"></a></div>
-  <div class="item-info-container">
-  <div class="item-namebox"><strong><span>${productName}</span></strong></div>
-  <div class="item-pricebox"><strong><span>${productPrice}</span></strong></div>
-  </div>
-  </div>
-  </li>
-`;
 
   const onIntersect = entries => {
     entries.forEach(el => {
