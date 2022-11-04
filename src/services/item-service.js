@@ -57,7 +57,7 @@ class ItemService {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
 
-    const updatedUser = await this.userModel.update({
+    const updatedUser = await this.itemModel.update({
       itemId,
       update: toUpdate,
     });

@@ -27,7 +27,8 @@ const getByCategoryID = async (req, res, next) => {
 const getByItemID = async (req, res, next) => {
   try {
     const { item_id } = req.params;
-    const item = itemService.getByItemID(item_id);
+    console.log(item_id);
+    const item = await itemService.getByItemID(item_id);
 
     res.status(200).json(item);
   } catch (error) {
@@ -39,7 +40,7 @@ const getByItemID = async (req, res, next) => {
 const createItem = async (req, res, next) => {
   try {
     const { name, brand, price, description, category, imageUrl } = req.body;
-    const { userType } = req.userType;
+    const userType = req.userType;
     const newItem = await itemService.createItem(
       {
         name,
@@ -61,7 +62,7 @@ const createItem = async (req, res, next) => {
 const updateItem = async (req, res, next) => {
   try {
     const { item_id } = req.params;
-    const { userType } = req.userType;
+    const userType = req.userType;
     const { name, brand, price, description, imageUrl } = req.body;
 
     const toUpdate = {
@@ -72,7 +73,11 @@ const updateItem = async (req, res, next) => {
       ...(imageUrl && { imageUrl }),
     };
 
-    const updatedItemInfo = await itemService(item_id, userType, toUpdate);
+    const updatedItemInfo = await itemService.updateItem(
+      item_id,
+      userType,
+      toUpdate,
+    );
     res.status(200).json(updatedItemInfo);
   } catch (error) {
     next(error);
@@ -82,7 +87,7 @@ const updateItem = async (req, res, next) => {
 const deleteItem = async (req, res, next) => {
   try {
     const { item_id } = req.params;
-    const { userType } = req.userType;
+    const userType = req.userType;
     await itemService.deleteItem(item_id, userType);
     res.sendStatus(204);
   } catch (error) {
