@@ -158,6 +158,12 @@
   margin: 0;
 }
 
+.item-photobox img {
+  width: 270px;
+  height: 270px;
+  object-fit: cover;
+}
+
 .item-info-container {
   width: 100%;
 }
