@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { usersModel } from '../db';
+import { adminModel } from '../db';
 
 const loginRequired = async (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -25,17 +26,17 @@ const loginRequired = async (req, res, next) => {
     const jwtDecoded = jwt.verify(userToken, secretKey);
 
     const userId = jwtDecoded.userId;
-
     const user = await usersModel.findById(userId);
-    if (!user) {
+    const admin = await adminModel.findById(userId);
+
+    if (user === null && admin === null) {
       return res.status(401).json({
         result: 'not found from users collection',
         message: '회원정보를 찾을 수 없습니다.',
       });
     }
-
-    req.currentUserId = user.id; // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
-
+    req.currentUserId = user !== null ? user.id : admin.id; // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
+    req.userType = user !== null ? user.userType : admin.userType;
     next();
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.

@@ -12,5 +12,7 @@
   "eslint.alwaysShowStatus": true,
   "files.autoSave": "onFocusChange",
   "editor.tabSize": 2,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "editor.wordWrap": "on",
+  "diffEditor.wordWrap": "on"
 }

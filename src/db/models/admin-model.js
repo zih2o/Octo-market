@@ -1,6 +1,8 @@
 import { model } from 'mongoose';
 import { adminSchema } from '../schemas/admin-schema';
+import { createVirtualId } from '..';
 
+createVirtualId(adminSchema);
 const Admin = model('admins', adminSchema);
 
 export class AdminModel {
