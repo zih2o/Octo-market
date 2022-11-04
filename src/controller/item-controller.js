@@ -3,8 +3,11 @@ import { itemService } from '../services';
 // 전체 items 조회
 const getItems = async (req, res, next) => {
   try {
-    const items = await itemService.getAll();
+    const count = Number(req.query.count || 1);
+    const perCount = Number(req.query.perCount || 20);
+    const items = await itemService.getAll(count, perCount);
 
+    console.log(items);
     res.status(200).json(items);
   } catch (error) {
     next(error);
@@ -15,7 +18,9 @@ const getItems = async (req, res, next) => {
 const getByCategoryID = async (req, res, next) => {
   try {
     const { cat_id } = req.params;
-    const items = await itemService.getByCategoryId(cat_id);
+    const count = Number(req.query.count || 1);
+    const perCount = Number(req.query.perCount || 20);
+    const items = await itemService.getByCategoryId(cat_id, count, perCount);
 
     res.status(200).json(items);
   } catch (error) {

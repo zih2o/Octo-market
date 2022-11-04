@@ -6,14 +6,14 @@ class ItemService {
     this.itemModel = itemModel;
   }
   // 전체 item 조회
-  async getAll() {
-    const items = await this.itemModel.findAll();
+  async getAll(count, perCount) {
+    const items = await this.itemModel.findAll(count, perCount);
     return items;
   }
 
   // 카테고리별 item 조회
-  async getByCategoryId(catId) {
-    const items = await this.itemModel.findByCategory(catId);
+  async getByCategoryId(catId, count, perCount) {
+    const items = await this.itemModel.findByCategory(catId, count, perCount);
     return items;
   }
 
