@@ -133,7 +133,7 @@
   border-top: 1px solid #e1e1e1;
 }
 
-.product-ul {
+#product-ul {
   display: flex;
   flex-wrap: wrap;
 }

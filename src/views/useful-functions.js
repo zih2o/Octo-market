@@ -27,26 +27,3 @@ export const convertToNumber = string => {
 export const wait = ms => {
   return new Promise(r => setTimeout(r, ms));
 };
-
-// 상품 추가 무한스크롤 -- 수정 중 --
-export const infiniteScroll = () => {
-  const listEnd = document.querySelector('reqPoint');
-  const itemList = document.querySelectorAll('.product-item');
-  const option = {
-    root: null,
-    rootMargin: '0px',
-    thredhold: '0',
-  };
-
-  const onIntersect = entries => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        const listWrap = document.querySelector('.product-ul');
-        listWrap.insertAdjacentHTML('beforeend', addedItems);
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(onIntersect, option);
-  observer.observe(listEnd);
-};

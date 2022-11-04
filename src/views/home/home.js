@@ -3,6 +3,10 @@
 // 코드 예시를 남겨 두었습니다.
 
 import * as Api from '../api.js';
+import { URL, URLSearchParams } from 'url';
+// const { URL, URLSearchParams } = require('url');
+// import * as url from 'url';
+console.log(url);
 // import {
 //   sortByProductNo,
 //   sortByLowerPrice,
@@ -55,7 +59,7 @@ try {
   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
 }
 // 전체 카테고리 조회 시 url
-let url = `http://localhost:5050/items?${query}`;
+// let url = `http://localhost:5050/items?${query}`;
 
 // 특정 카테고리 조회 시 rul
 // let url = `http://localhost:5050/items/category/:cat_id?${query}`;
@@ -64,23 +68,17 @@ let url = `http://localhost:5050/items?${query}`;
 let page = 1;
 
 // fetch 쿼리 보내기
-let params = {
-  perpage: '20',
-  page: `${page}`,
-};
 
-let query = Object.keys(params)
-  .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-  .join('&');
+fetch(``);
 
-fetch(url)
-  .then(data => data.text())
-  .then(text => {
-    console.log('request succeeded with JSON response', text);
-  })
-  .catch(function (error) {
-    console.log('request failed', error);
-  });
+// fetch(url)
+//   .then(data => data.text())
+//   .then(text => {
+//     console.log('request succeeded with JSON response', text);
+//   })
+//   .catch(function (error) {
+//     console.log('request failed', error);
+//   });
 
 // 상풍 박스 li 템플릿 수정 가능
 const template = `
@@ -118,12 +116,23 @@ window.addEventListener('DOMContentLoaded', function () {
   callApi();
 });
 
-const callApi = () => {
-  // 데이터를 페칭한다고 가정
+const callApi = async () => {
+  // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
+  let url = new URL('http://localhost:5050/items');
+  let params = {
+    perpage: '20',
+    page: `${page}`,
+  };
+
+  url.search = new URLSearchParams(params).toString();
+  const res = await fetch(url);
+  const fetchedProducts = await res.json();
+  console.log('fetchedProducts: ', fetchedProducts);
+
   const result = dummy[page - 1];
 
   const docFragment = document.createDocumentFragment();
-  const targetUl = document.getElementById('item-list');
+  const targetUl = document.getElementById('product-ul');
   if (targetUl) {
     result?.forEach((value, index) => {
       const li = document.createElement('li');
