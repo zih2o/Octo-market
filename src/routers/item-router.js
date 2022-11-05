@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import * as itemsController from '../controller/item-controller.js';
-
 const itemsRouter = Router();
 
 itemsRouter.get('/', itemsController.getItems);

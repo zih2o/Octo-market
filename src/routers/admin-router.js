@@ -6,6 +6,10 @@ import * as itemController from '../controller/item-controller';
 import * as orderController from '../controller/order-controller';
 import * as Joi from 'joi';
 import { createValidator } from 'express-joi-validation';
+import {
+  createItemJoiSchema,
+  updateItemJoiSchema,
+} from '../db/schemas/joi-schemas';
 
 const adminRouter = Router();
 const validator = createValidator({});
@@ -15,10 +19,6 @@ const validator = createValidator({});
 const categoryBodySchema = Joi.object({
   name: Joi.string().trim().required().min(1).max(10),
 });
-
-// const itemBodySchema = Joi.object({
-
-// })
 
 // Admin login
 
@@ -49,8 +49,18 @@ adminRouter.delete(
 
 // Item admin
 
-adminRouter.post('/items', loginRequired, itemController.createItem);
-adminRouter.put('/items/:item_id', loginRequired, itemController.updateItem);
+adminRouter.post(
+  '/items',
+  validator.body(createItemJoiSchema),
+  loginRequired,
+  itemController.createItem,
+);
+adminRouter.put(
+  '/items/:item_id',
+  validator.body(updateItemJoiSchema),
+  loginRequired,
+  itemController.updateItem,
+);
 adminRouter.delete('/items/:item_id', loginRequired, itemController.deleteItem);
 
 // Order admin
