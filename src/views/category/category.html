@@ -1,0 +1,257 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>문어상점</title>
+  <!-- 아이콘 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../elice-rabbit-favicon.png" />
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <!-- 폰트 어썸: 아이콘 -->
+  <script defer src="https://kit.fontawesome.com/9daa42bcef.js" crossorigin="anonymous"></script>
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="./category.css" />
+  <script src="./category.js" type="module" defer></script>
+</head>
+
+<body>
+
+  <!-- header 네비바(메뉴, 카테고리) -->
+  <header>
+
+    <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand" id="nav-logobox">
+        <img id="nav-logo" src="../images/octo-logo.png" alt="">
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons" id="menu-box">
+              <a class="button is-primary" id="login">
+                <strong>로그인</strong>
+              </a>
+              <a class="button is-primary" id="logout">
+                <strong>로그아웃</strong>
+              </a>
+              <a class="button is-primary" id="join">
+                <strong>회원가입</strong>
+              </a>
+              <a class="button is-primary" id="withdrawal">
+                <strong>회원탈퇴</strong>
+              </a>
+              <a class="button is-primary" id="cart">
+                <strong>장바구니</strong>
+              </a>
+              <a class="button is-primary" id="mypage">
+                <strong>마이페이지</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="title-container">
+      <div id="title">
+        <img src="../images/octopus-title.png" alt="문어상점">
+      </div>
+    </div>
+
+    <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
+    <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
+    <div class="tabs is-medium is-centered">
+      <ul>
+
+        <li><a href=""><strong>전체보기</strong></a></li>
+        <li><a href=""><strong>가공식품</strong></a></li>
+        <li><a href=""><strong>수산식품</strong></a></li>
+        <li><a href=""><strong>면 · 튀김</strong></a></li>
+        <li><a href=""><strong>양념 · 조미료</strong></a></li>
+        <li><a href=""><strong>쌀 · 견과류</strong></a></li>
+        <li><a href=""><strong>캔 · 통조림</strong></a></li>
+      </ul>
+    </div>
+
+  </header>
+
+
+  <!-- 메인 콘텐츠 -->
+  <main>
+
+    <!-- 상품 목록 섹션 -->
+    <section class="product-section">
+
+      <div class="product-category">
+        <h2>가공식품</h2>
+      </div>
+
+      <!-- 상품 정렬 버튼 -->
+      <div class="product-sortbox">
+        <div class="buttons" id="sort-box">
+          <div class="button is-primary" id="latest">
+            <strong>최근등록순</strong>
+          </div>
+          <div class="button is-primary" id="low-price">
+            <strong>낮은가격순</strong>
+          </div>
+          <div class="button is-primary" id="high-price">
+            <strong>높은가격순</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-container">
+        <ul id="product-ul">
+          <!-- 돔 로딩시 js에서 추가할 부분이라 주석처리. 예시로 남김 -->
+          <!-- <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/main/carousel/noodle.jpg" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li>
+          <li class="product-item" style="width:25%;">
+            <div class="item-container">
+              <div class="item-photobox"><a href=""><img src="../images/dummy.png" alt=""></a></div>
+              <div class="item-info-container">
+                <div class="item-namebox"><strong><span>상품명</span></strong></div>
+                <div class="item-pricebox"><strong><span>10000원</span></strong></div>
+              </div>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- footer -->
+  <footer class="footer">
+
+    <div id="footer-container">
+      <div id="footer-icons">
+        <a href="https://www.instagram.com/">
+          <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
+        </a>
+        <a href="https://ko-kr.facebook.com/">
+          <img src="../images/facebook-icon.png" alt="옥토 페이스북">
+        </a>
+        <a href="https://twitter.com/?lang=ko">
+          <img src="../images/twitter-icon.png" alt="옥토 트위터">
+        </a>
+      </div>
+      <div id="footer-textbox">
+        <div id="footer-info">
+          <a href="">Info</a>
+          <a href="">Support</a>
+          <a href="">Marketing</a>
+        </div>
+        <div id="footer-policy">
+          <a href="">Terms of Use</a>
+          <a href="">Private Policy</a>
+        </div>
+        <div id="footer-company">
+          <a href="">ⓒ 2022 OCTO infinite</a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+
+</html>
