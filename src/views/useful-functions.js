@@ -27,3 +27,8 @@ export const convertToNumber = string => {
 export const wait = ms => {
   return new Promise(r => setTimeout(r, ms));
 };
+
+//비밀번호 빈 칸 여부 검증
+export const hasWhiteSpace = s => {
+  return s.indexOf(' ') >= 0;
+};
