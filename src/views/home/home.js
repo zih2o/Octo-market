@@ -4,124 +4,193 @@
 
 import * as Api from '../api.js';
 import { URL, URLSearchParams } from 'url';
+
 // const { URL, URLSearchParams } = require('url');
 // import * as url from 'url';
-console.log(url);
-// import {
-//   sortByProductNo,
-//   sortByLowerPrice,
-//   sortByHigherPrice,
-// } from '../useful-functions.js';
+// console.log(url);
 
-// import { getCategories } from '../../controller/category-controller.js';
-
-try {
-  // 응답으로 가져올 더미 데이터 예시
-  const itemlist = {
-    items: [
+const itemlist = {
+  items: [
+    [
       {
-        productNo: '00000023',
-        name: '소세지',
-        brand: 'kakao',
-        price: '20000',
-        description: '고급 소세지',
-        category: 0,
-      },
-      {
-        productNo: '00000052',
-        name: '고등어',
-        brand: 'kakao',
+        _id: '63648af2f6cbdc57bcdd5345',
+        name: '고등어1',
+        brand: '청년수산',
         price: '10000',
-        description: '노르웨이 순살 고등어',
-        category: 1,
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:45:54.191Z',
+        updatedAt: '2022-11-04T03:45:54.191Z',
+        __v: 0,
+        id: '63648af2f6cbdc57bcdd5345',
       },
       {
-        productNo: '00000035',
-        name: '열라면',
-        brand: 'kakao',
-        price: '4000',
-        description: '얼큰한 열라면',
-        category: 2,
+        _id: '6364887e39e4d0963d6ed1de',
+        name: '청어1',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:35:26.431Z',
+        updatedAt: '2022-11-04T03:41:31.051Z',
+        __v: 0,
+        id: '6364887e39e4d0963d6ed1de',
       },
       {
-        productNo: '00000019',
-        name: '참치',
-        brand: 'kakao',
-        price: '30000',
-        description: '최고급 횟감 참치',
-        category: 1,
+        _id: '63648af2f6cbdc57bcdd5345',
+        name: '고등어2',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:45:54.191Z',
+        updatedAt: '2022-11-04T03:45:54.191Z',
+        __v: 0,
+        id: '63648af2f6cbdc57bcdd5345',
+      },
+      {
+        _id: '6364887e39e4d0963d6ed1de',
+        name: '청어2',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:35:26.431Z',
+        updatedAt: '2022-11-04T03:41:31.051Z',
+        __v: 0,
+        id: '6364887e39e4d0963d6ed1de',
+      },
+      {
+        _id: '63648af2f6cbdc57bcdd5345',
+        name: '고등어3',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:45:54.191Z',
+        updatedAt: '2022-11-04T03:45:54.191Z',
+        __v: 0,
+        id: '63648af2f6cbdc57bcdd5345',
+      },
+      {
+        _id: '6364887e39e4d0963d6ed1de',
+        name: '청어3',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:35:26.431Z',
+        updatedAt: '2022-11-04T03:41:31.051Z',
+        __v: 0,
+        id: '6364887e39e4d0963d6ed1de',
+      },
+      {
+        _id: '63648af2f6cbdc57bcdd5345',
+        name: '고등어4',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:45:54.191Z',
+        updatedAt: '2022-11-04T03:45:54.191Z',
+        __v: 0,
+        id: '63648af2f6cbdc57bcdd5345',
+      },
+      {
+        _id: '6364887e39e4d0963d6ed1de',
+        name: '청어4',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:35:26.431Z',
+        updatedAt: '2022-11-04T03:41:31.051Z',
+        __v: 0,
+        id: '6364887e39e4d0963d6ed1de',
+      },
+      {
+        _id: '63648af2f6cbdc57bcdd5345',
+        name: '고등어5',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:45:54.191Z',
+        updatedAt: '2022-11-04T03:45:54.191Z',
+        __v: 0,
+        id: '63648af2f6cbdc57bcdd5345',
+      },
+      {
+        _id: '6364887e39e4d0963d6ed1de',
+        name: '청어5',
+        brand: '청년수산',
+        price: '10000',
+        description: '맛있엉',
+        category: '63622c58942ce8e513937058',
+        imageUrl: 'http://ddd',
+        createdAt: '2022-11-04T03:35:26.431Z',
+        updatedAt: '2022-11-04T03:41:31.051Z',
+        __v: 0,
+        id: '6364887e39e4d0963d6ed1de',
       },
     ],
-    message: 'success',
-  };
-} catch (err) {
-  console.error(err.stack);
-  alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-}
+  ],
+};
+
 // 전체 카테고리 조회 시 url
 // let url = `http://localhost:5050/items?${query}`;
 
 // 특정 카테고리 조회 시 rul
 // let url = `http://localhost:5050/items/category/:cat_id?${query}`;
 
-// 스크롤 페이지네이션 시 page 확인 변수
-let page = 1;
+// 스크롤 페이지네이션 시 페이지 확인용 통신 횟수 카운트 변수
+let cnt = 1;
 
-// fetch 쿼리 보내기
+// 상풍 박스 추가 함수
+const createProductBox = data => {
+  const product = `
+        <li class="product-item" style="width:25%;">
+            <div class="item-container">
+                <div class="item-photobox">
+                    <a href="http://localhost:5050/items/${data._id}">
+                        <img src="${data.imageUrl}" alt="${data.name}" loading="lazy">
+                    </a>
+                </div>
+                <div class="item-info-container">
+                        <div class="item-namebox"><strong><span>${data.name}</span></strong></div>
+                        <div class="item-pricebox"><strong><span>${data.price}</span></strong></div>
+                    </div>
+                </div>
+            </li>
+            `;
+  return product;
+};
 
-fetch(``);
-
-// fetch(url)
-//   .then(data => data.text())
-//   .then(text => {
-//     console.log('request succeeded with JSON response', text);
-//   })
-//   .catch(function (error) {
-//     console.log('request failed', error);
-//   });
-
-// 상풍 박스 li 템플릿 수정 가능
-const template = `
-  <li class="product-item" style="width:25%;">
-    <div class="item-container">
-      <div class="item-photobox">
-        <a href="${productDetailUrl}"><img src="${productImgUrl}" alt="${productName} loading="lazy"></a>
-      </div>
-      <div class="item-info-container">
-        <div class="item-namebox">
-          <strong><span>${productName}</span></strong>
-        </div>
-        <div class="item-pricebox">
-          <strong><span>${productPrice}</span></strong>
-        </div>
-      </div>
-    </div>
-  </li>
-`;
-
-// 인터섹션 옵저버 감시 시, 상품 데이터 API 요청
-const dummy = [
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'],
-  ['가', '나', '다', '라', '마', '바', '사', '아', '자', '차'],
-  ['a10', 'b11', 'c12', 'd13', 'e14', 'f15', 'g16', 'h17', 'i18', 'j19'],
-  ['a@', 'b@', 'c@', 'd@', 'e@', 'f@', 'g@', 'h@', 'i@', 'j@'],
-  ['az', 'bz', 'cz', 'dz', 'ez', 'fz', 'gz', 'hz', 'iz', 'jz'],
-  ['ax', 'bx', 'cx', 'dx', 'ex', 'fx', 'gx', 'hx', 'ix', 'jx'],
-];
-
-let list = [];
+// let list = [];
+// 초기 렌더링 시 데이터가 페칭된다고 가정
 window.addEventListener('DOMContentLoaded', function () {
-  // 초기 렌더링 시 데이터가 페칭된다고 가정
   callApi();
 });
 
+// 인터섹션 옵저버 감시 시, 상품 데이터 API 요청
+// 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
+// 낮은 가격순 lowPrice, 높은 가격순 HighPrice, 최근 등록순 createdAt
+// 내림차순 sc: -1 / 오름차순 sc: 1
 const callApi = async () => {
-  // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
   let url = new URL('http://localhost:5050/items');
   let params = {
-    perpage: '20',
-    page: `${page}`,
+    cnt: `${cnt}`,
+    per: '20',
+    sort: 'createdAt',
   };
 
   url.search = new URLSearchParams(params).toString();
@@ -129,23 +198,25 @@ const callApi = async () => {
   const fetchedProducts = await res.json();
   console.log('fetchedProducts: ', fetchedProducts);
 
-  const result = dummy[page - 1];
+  const result = dummy[cnt - 1];
 
+  const boxes = dummy.map(el => createProductBox(el));
   const docFragment = document.createDocumentFragment();
   const targetUl = document.getElementById('product-ul');
   if (targetUl) {
-    result?.forEach((value, index) => {
-      const li = document.createElement('li');
-      li.textContent = value;
-      docFragment.appendChild(li);
+    let templateStr = '';
+    Object.keys(boxes).forEach(box => {
+      templateStr += boxes[box];
     });
 
     const lastLi = document.createElement('li');
-    lastLi.classList.add('skeleton-item');
     lastLi.id = 'intersaction';
     docFragment.appendChild(lastLi);
-
     targetUl.appendChild(docFragment);
+
+    // 다른 방식으로 구현 실패 부분.
+    const endpoint = document.querySelector('#intersaction');
+    endpoint.insertAdjacentHTML('beforeend', templateStr);
 
     // 옵저브
     intersaction();
@@ -163,7 +234,7 @@ const intersaction = () => {
     entries?.forEach(entry => {
       if (entry.isIntersecting) {
         console.log(entry);
-        page += 1;
+        cnt += 1;
         observer.unobserve(entry.target); // 감시 해제
         entry.target.remove();
         callApi();
