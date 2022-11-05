@@ -66,11 +66,17 @@ const updateJoiSchema = Joi.object({
   }),
   address: Joi.object()
     .keys({
-      postalCode: Joi.string().trim().length(5).allow('').optional(),
-      address1: Joi.string().trim().min(1).allow('').optional(),
-      address2: Joi.string().trim().min(1).allow('').optional(),
+      postalCode: Joi.string().trim().length(5).required().allow('').messages({
+        'string.length': 'postalCode는 5글자입니다.',
+      }),
+      address1: Joi.string().trim().min(1).required().allow('').messages({
+        'string.min': 'address1은 최소 1글자입니다.',
+      }),
+      address2: Joi.string().trim().min(1).required().allow('').messages({
+        'string.min': 'address2은 최소 1글자입니다.',
+      }),
     })
     .optional(),
-  phoneNum: Joi.string().trim().allow('').optional(),
+  phoneNum: Joi.string().trim().required().allow(''),
 });
 export { signUpJoiSchema, loginJoiSchema, updateJoiSchema };
