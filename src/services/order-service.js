@@ -33,7 +33,7 @@ export class OrderService {
   async getById(currentUserId, order_id) {
     const order = await orderModel.findById(order_id);
     if (!order || order === null) {
-      throw new CustomError(404, '주문을 찾을 수 없습니다.');
+      throw new CustomError(404, '조회하신 주문이 존재하지 않습니다.');
     }
     const userEmail = order.email;
     console.log(userEmail);
@@ -61,6 +61,9 @@ export class OrderService {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
     const updatedOrder = await orderModel.updateOrder(order_id, toUpdate);
+    if (updatedOrder === null) {
+      throw new CustomError(404, '조회하신 주문이 존재하지 않습니다.');
+    }
     return updatedOrder;
   }
 
