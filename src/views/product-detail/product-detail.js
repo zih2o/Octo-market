@@ -12,9 +12,11 @@ const price = document.querySelector("#price");
 const addToCartBtn = document.querySelector("#addToCart");
 const buyNowBtn = document.querySelector("#buyNow");
 
+const item_id = window.location.pathname.slice(1);
+
 //서버에서 데이터 받아 각 요소에 넣어주는 함수
 async function makeProductDetail() {
-  const res = await fetch(`/items${window.location.pathname}`);
+  const res = await fetch(`/items/${item_id}`);
   const data = await res.json();
 
   image.setAttribute("src", data.imageUrl);
@@ -24,9 +26,8 @@ async function makeProductDetail() {
   price.innerHTML = `${addCommas(data.price)} 원`;
 }
 
-//장바구니 추가  /// 데이터 받아오는 걸 한번에 묶어도 될듯?
+//장바구니 추가
 async function addToCart() {
-  const item_id = window.location.pathname.slice(1);
 
   //세션스토리지에 담겨 있는지 확인
   if (!sessionStorage.getItem("cart")) {
