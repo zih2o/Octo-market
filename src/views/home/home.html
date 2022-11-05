@@ -140,8 +140,22 @@
         <h2>전체보기</h2>
       </div>
 
-      <!-- 돔 로딩시 js에서 추가할 부분이라 주석처리. 예시로 남김 -->
+      <!-- 상품 정렬 버튼 -->
+      <div class="product-sortbox">
+        <div class="buttons" id="sort-box">
+          <div class="button is-primary" id="latest">
+            <strong>최근등록순</strong>
+          </div>
+          <div class="button is-primary" id="low-price">
+            <strong>낮은가격순</strong>
+          </div>
+          <div class="button is-primary" id="high-price">
+            <strong>높은가격순</strong>
+          </div>
+        </div>
+      </div>
 
+      <!-- 상품 12개 이후로 lazy loading 적용 -->
       <div class="product-container">
         <ul id="product-ul">
           <!-- <li class="product-item" style="width:25%;">
@@ -252,6 +266,7 @@
               </div>
             </div>
           </li> -->
+          <div id="reqPoint"></div>
         </ul>
       </div>
     </section>
