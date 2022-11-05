@@ -15,15 +15,15 @@ export class OrderModel {
     return orders;
   }
 
-  async findById(order_id) {
-    const order = await Order.findOne({ _id: order_id });
+  async findById(_id) {
+    const order = await Order.findOne({ _id });
     return order;
   }
 
-  async updateOrder(order_id, toUpdate) {
+  async updateOrder(_id, toUpdate) {
     const option = { returnOriginal: false };
     const updatedOrder = await Order.findOneAndUpdate(
-      { _id: order_id },
+      { _id },
       toUpdate,
       option,
     );
@@ -35,8 +35,8 @@ export class OrderModel {
     return order;
   }
 
-  async removeOrder(order_id) {
-    await Order.deleteOne({ _id: order_id });
+  async removeOrder(_id) {
+    await Order.deleteOne({ _id });
     return;
   }
 }

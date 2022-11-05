@@ -4,21 +4,16 @@ import * as categoryController from '../controller/category-controller';
 import * as adminController from '../controller/admin-controller';
 import * as itemController from '../controller/item-controller';
 import * as orderController from '../controller/order-controller';
-import * as Joi from 'joi';
 import { createValidator } from 'express-joi-validation';
 import {
   createItemJoiSchema,
   updateItemJoiSchema,
 } from '../db/schemas/joi-schemas';
+import { categoryJoiSchema } from '../db/schemas/joi-schemas';
+import { updateOrderJoiSchema } from '../db/schemas/joi-schemas';
 
 const adminRouter = Router();
 const validator = createValidator({});
-
-// Joi Validation Schema
-
-const categoryBodySchema = Joi.object({
-  name: Joi.string().trim().required().min(1).max(10),
-});
 
 // Admin login
 
@@ -29,14 +24,14 @@ adminRouter.post('/signup', adminController.signup);
 
 adminRouter.post(
   '/categories',
-  validator.body(categoryBodySchema),
+  validator.body(categoryJoiSchema),
   loginRequired,
   categoryController.createCategory,
 );
 
 adminRouter.put(
   '/categories/updateInfo/:cat_id',
-  validator.body(categoryBodySchema),
+  validator.body(categoryJoiSchema),
   loginRequired,
   categoryController.updateCategory,
 );
@@ -67,12 +62,13 @@ adminRouter.delete('/items/:item_id', loginRequired, itemController.deleteItem);
 
 adminRouter.get('/orders', loginRequired, orderController.getAll);
 adminRouter.put(
-  '/orders/:order_id',
+  '/orders/:orderId',
+  validator.body(updateOrderJoiSchema),
   loginRequired,
   orderController.updateOrder,
 );
 adminRouter.delete(
-  '/orders/:order_id',
+  '/orders/:orderId',
   loginRequired,
   orderController.removeOrder,
 );

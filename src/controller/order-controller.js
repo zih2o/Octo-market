@@ -12,9 +12,9 @@ const getAll = async (req, res, next) => {
 
 const getByEmail = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
+    const { userId } = req.params;
     const currentUserId = req.currentUserId;
-    const orders = await orderService.getByEmail(currentUserId, user_id);
+    const orders = await orderService.getByEmail(currentUserId, userId);
     return res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -23,9 +23,9 @@ const getByEmail = async (req, res, next) => {
 
 const getById = async (req, res, next) => {
   try {
-    const { order_id } = req.params;
+    const { orderId } = req.params;
     const currentUserId = req.currentUserId;
-    const order = await orderService.getById(currentUserId, order_id);
+    const order = await orderService.getById(currentUserId, orderId);
     return res.status(200).json(order);
   } catch (err) {
     next(err);
@@ -34,10 +34,10 @@ const getById = async (req, res, next) => {
 
 const createOrder = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
+    const { userId } = req.params;
     const currentUserId = req.currentUserId;
     const { orderInfo, totalPrice, email, address } = req.body;
-    const order = await orderService.createOrder(user_id, currentUserId, {
+    const order = await orderService.createOrder(userId, currentUserId, {
       orderInfo,
       totalPrice,
       email,
@@ -51,10 +51,10 @@ const createOrder = async (req, res, next) => {
 
 const updateOrder = async (req, res, next) => {
   try {
-    const { order_id } = req.params;
+    const { orderId } = req.params;
     const currentUserId = req.currentUserId;
     const { orderInfo, totalPrice, email, address, state } = req.body;
-    const order = await orderService.updateOrder(currentUserId, order_id, {
+    const order = await orderService.updateOrder(currentUserId, orderId, {
       orderInfo,
       totalPrice,
       email,
@@ -69,9 +69,9 @@ const updateOrder = async (req, res, next) => {
 
 const removeOrder = async (req, res, next) => {
   try {
-    const { order_id } = req.params;
+    const { orderId } = req.params;
     const currentUserId = req.currentUserId;
-    await orderService.removeOrder(currentUserId, order_id);
+    await orderService.removeOrder(currentUserId, orderId);
     return res.sendStatus(204);
   } catch (err) {
     next(err);
