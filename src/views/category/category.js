@@ -2,14 +2,12 @@
 // 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
 // 코드 예시를 남겨 두었습니다.
 
-import * as Api from '../api.js';
+// import * as Api from '../api.js';
 import { URL, URLSearchParams } from 'url';
 
-// const { URL, URLSearchParams } = require('url');
 // import * as url from 'url';
-// console.log(url);
 
-const itemlist = {
+const dummys = {
   items: [
     [
       {
@@ -175,7 +173,6 @@ const createProductBox = data => {
   return product;
 };
 
-// let list = [];
 // 초기 렌더링 시 데이터가 페칭된다고 가정
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
@@ -185,23 +182,24 @@ window.addEventListener('DOMContentLoaded', function () {
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 // 낮은 가격순 lowPrice, 높은 가격순 HighPrice, 최근 등록순 createdAt
 // 내림차순 sc: -1 / 오름차순 sc: 1
-const callApi = async () => {
-  let url = new URL('http://localhost:5050/items');
-  let params = {
-    cnt: `${cnt}`,
-    per: '20',
-    sort: 'createdAt',
-  };
+let url = new URL('http://localhost:5050/items/category/:cat_id');
+let params = {
+  cnt: `${cnt}`,
+  per: '20',
+  sort: 'price',
+  sc: -1,
+};
 
+const callApi = async () => {
   url.search = new URLSearchParams(params).toString();
   const res = await fetch(url);
   const fetchedProducts = await res.json();
   console.log('fetchedProducts: ', fetchedProducts);
 
-  const result = dummy[cnt - 1];
+  const dummy = dummys[cnt - 1];
 
   const boxes = dummy.map(el => createProductBox(el));
-  const docFragment = document.createDocumentFragment();
+  // const docFragment = document.createDocumentFragment();
   const targetUl = document.getElementById('product-ul');
   if (targetUl) {
     let templateStr = '';
@@ -244,12 +242,6 @@ const intersaction = () => {
   const observer = new IntersectionObserver(callback, options);
   observer.observe(document.querySelector('#intersaction')); // 감시 설정
 };
-
-// async function addProductData() {
-//   const datas = await Api.get('http://localhost:5000/items');
-//   console.log('datas', datas);
-// }
-// addProductData();
 
 // console.log(Api);
 // console.log(getCategories());
