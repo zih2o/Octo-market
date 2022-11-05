@@ -4,25 +4,28 @@ const orderSchema = new Schema(
   {
     orderInfo: {
       type: [
-        new Schema({
-          item_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'items',
-            required: true,
+        new Schema(
+          {
+            itemId: {
+              type: Schema.Types.ObjectId,
+              ref: 'items',
+              required: true,
+            },
+            name: {
+              type: String,
+              required: true,
+            },
+            amount: {
+              type: Number,
+              required: true,
+            },
+            price: {
+              type: Number,
+              required: true,
+            },
           },
-          name: {
-            type: String,
-            required: true,
-          },
-          amount: {
-            type: Number,
-            required: true,
-          },
-          price: {
-            type: Number,
-            required: true,
-          },
-        }),
+          { _id: false },
+        ),
       ],
       required: true,
     },
