@@ -4,8 +4,23 @@
 
 // import * as Api from '../api.js';
 import { URL, URLSearchParams } from 'url';
+import { drawMenuOption } from '../useful-functions';
 
-// import * as url from 'url';
+// nav 버튼
+const loginBtn = document.getElementById('login');
+const logoutBtn = document.getElementById('logout');
+const joinBtn = document.getElementById('join');
+
+// 카테고리 버튼
+const entireBtn = document.getElementById('entire');
+const processedBtn = document.getElementById('processed');
+const marineBtn = document.getElementById('marine');
+const noodleBtn = document.getElementById('noodle');
+const seasoningBtn = document.getElementById('seasoning');
+const riceBtn = document.getElementById('rice');
+const canBtn = document.getElementById('can');
+
+drawMenuOption();
 
 const dummys = {
   items: [
