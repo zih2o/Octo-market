@@ -1,7 +1,3 @@
-/* * {
-  border: 1px solid black;
-} */
-
 /* 헤더 영역 */
 header {
   width: 100%;
@@ -140,13 +136,19 @@ header {
   text-align: center;
 }
 
-.eachTatalPrice {
+.eachTotalPrice {
   width: 30%;
   text-align: right;
 }
 
-.amount > .eachTatalPrice {
+.amount > .eachTotalPrice {
   width: 40%;
+}
+
+#spacing {
+  padding: 0;
+  width: 10px;
+  visibility: hidden;
 }
 
 #cart,
@@ -161,7 +163,7 @@ header {
 #payment {
   height: 40vh;
   width: 30%;
-  background-color: #c5ebf3;
+  background-color: #eefffd;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-auto-columns: 1fr;
