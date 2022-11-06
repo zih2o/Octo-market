@@ -38,6 +38,10 @@ export const drawNavbar = () => {
   const logoutBtn = document.getElementById('logout');
   const joinBtn = document.getElementById('join');
 
+  const loginAfter = document.getElementById('vb-login-after');
+  const logoutAfter = document.getElementById('vb-logout-after');
+  const joinAfter = document.getElementById('vb-join-after');
+
   // 카테고리 버튼
   // const entireBtn = document.getElementById('entire');
   // const processedBtn = document.getElementById('processed');
@@ -54,18 +58,25 @@ export const drawNavbar = () => {
   // css 에 active 관련 추가해서 사용할 것
   if (sessionStorage.getItem('loginToken')) {
     loginBtn.classList.add('active');
+    loginAfter.classList.add('active');
     joinBtn.classList.add('active');
+    joinAfter.classList.add('active');
     logoutBtn.classList.remove('active');
+    logoutAfter.classList.remove('active');
   } else {
     // 토큰이 없다면
     console.log('로그인 확인 토큰 없음');
     loginBtn.classList.remove('active');
+    loginAfter.classList.remove('active');
     joinBtn.classList.remove('active');
+    joinAfter.classList.remove('active');
     logoutBtn.classList.add('active');
+    logoutAfter.classList.add('active');
   }
 
   // 로그아웃 시 세션스토리지 토큰 제거
   if (!logoutBtn.classList.contains('active')) {
     sessionStorage.removeItem('loginToken');
+    sessionStorage.removeItem('userEmail');
   }
 };

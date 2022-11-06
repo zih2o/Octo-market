@@ -18,63 +18,113 @@
 <body>
 
   <!-- 헤더 -->
-  <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand" id="nav-logobox">
-      <img id="nav-logo" src="../images/octo-logo.png" alt="">
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons" id="menu-box">
-            <a href="" class="button is-primary" id="login">
-              <strong>로그인</strong>
-            </a>
-            <a href="" class="button is-primary" id="logout">
-              <strong>로그아웃</strong>
-            </a>
-            <a href="../join/register.html" class="button is-primary" id="join">
-              <strong>회원가입</strong>
-            </a>
-            <a href="../cart/cart.html" class="button is-primary" id="cart">
-              <strong>장바구니</strong>
-            </a>
-            <a href="../myPage/" class="button is-primary" id="mypage">
-              <strong>마이페이지</strong>
-            </a>
+  <header>
+
+    <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand" id="nav-logobox">
+        <img id="nav-logo" src="../images/octo-logo.png" alt="">
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons" id="menu-box">
+              <a href="./login.html" class="button is-primary" id="login">
+                <strong>로그인</strong>
+              </a>
+              <div class="vertical-bar" id="vb-login-after"></div>
+              <a href="../home/home.html" class="button is-primary" id="logout">
+                <strong>로그아웃</strong>
+              </a>
+              <div class="vertical-bar" id="vb-logout-after"></div>
+              <a href="../join/register.html" class="button is-primary" id="join">
+                <strong>회원가입</strong>
+              </a>
+              <div class="vertical-bar" id="vb-join-after"></div>
+              <a href="../cart/cart.html" class="button is-primary" id="cart">
+                <strong>장바구니</strong>
+              </a>
+              <div class="vertical-bar" id="vb-cart-after"></div>
+              <a href="" class="button is-primary" id="mypage">
+                <strong>마이페이지</strong>
+              </a>
+            </div>
           </div>
         </div>
       </div>
+    </nav>
+
+    <div id="title-container">
+      <div id="title">
+        <img src="../images/octopus-title.png" alt="문어상점">
+      </div>
     </div>
-  </nav>
-  <div id="title-container">
-    <div id="title">
-      <img src="../images/octopus-title.png" alt="문어상점">
-    </div>
-  </div>
+
+  </header>
 
 
-  <div class="login-form-container">
-    <form class="box login-form-box" id="loginForm">
-      <p class="title is-5 has-text-info">어서오세요!</p>
-      <div class="field">
-        <label class="label" for="emailInput">이메일</label>
-        <div class="control">
-          <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
+  <!-- 메인 -->
+  <main>
+
+    <div class="login-form-container">
+      <form class="box login-form-box" id="loginForm">
+        <p class="title is-5 has-text-primary">Login</p>
+        <div class="field">
+          <label class="label" for="emailInput">이메일</label>
+          <div class="control">
+            <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
+          </div>
+        </div>
+
+        <div class="field mb-5">
+          <label class="label" for="passwordInput">비밀번호</label>
+          <div class="control">
+            <input class="input" id="passwordInput" type="password" placeholder="********" autocomplete="on" />
+          </div>
+        </div>
+
+        <button class="button is-primary is-fullwidth" id="submitButton">
+          로그인
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+
+  <!-- 푸터 -->
+  <footer class="footer">
+
+    <div id="footer-container">
+      <div id="footer-icons">
+        <a href="https://www.instagram.com/">
+          <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
+        </a>
+        <a href="https://ko-kr.facebook.com/">
+          <img src="../images/facebook-icon.png" alt="옥토 페이스북">
+        </a>
+        <a href="https://twitter.com/?lang=ko">
+          <img src="../images/twitter-icon.png" alt="옥토 트위터">
+        </a>
+      </div>
+      <div id="footer-textbox">
+        <div id="footer-info">
+          <a href="">Info</a>
+          <a href="">Support</a>
+          <a href="">Marketing</a>
+        </div>
+        <div id="footer-policy">
+          <a href="">Terms of Use</a>
+          <a href="">Private Policy</a>
+        </div>
+        <div id="footer-company">
+          <a href="">ⓒ 2022 OCTO infinite</a>
         </div>
       </div>
+    </div>
 
-      <div class="field mb-5">
-        <label class="label" for="passwordInput">비밀번호</label>
-        <div class="control">
-          <input class="input" id="passwordInput" type="password" placeholder="********" autocomplete="on" />
-        </div>
-      </div>
+  </footer>
 
-      <button class="button is-info is-fullwidth" id="submitButton">
-        로그인하기
-      </button>
-    </form>
-  </div>
+
 </body>
 
 </html>

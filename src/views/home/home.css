@@ -4,6 +4,21 @@
   color: #4b4453;
 }
 
+/* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
 /* 헤더 영역 */
 #nav-top {
   position: relative;
@@ -45,11 +60,7 @@
   border: none;
 }
 
-#menu-box a:nth-child(n + 2)::after {
-  position: absolute;
-  left: 0;
-  top: 20px;
-  content: '';
+.vertical-bar {
   width: 1px;
   height: 15px;
   background-color: #4b4453;
