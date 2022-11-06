@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #4b4453;
+}
+
+/* 헤더 영역 */
+#nav-top {
+  position: relative;
+}
+
+#nav-logobox {
+  position: absolute;
+}
+
+#nav-logo {
+  width: 130px;
+  height: 130px;
+  margin-top: 50px;
+  margin-left: 180px;
+}
+
+#menu-box {
+  padding-right: 30px;
+}
+
+#menu-box a,
+#sort-box > div {
+  color: #4b4453;
+  background-color: white;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+#menu-box {
+  margin: 30px 20px 0 0;
+}
+
+#menu-box a,
+#sort-box > div {
+  position: relative;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #4b4453;
+  border: none;
+}
+
+#menu-box a:nth-child(n + 2)::after {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  content: '';
+  width: 1px;
+  height: 15px;
+  background-color: #4b4453;
+}
+
+#title-container {
+  display: flex;
+  justify-content: center;
+}
+
+#title {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  z-index: 99;
+}
+
+.active {
+  display: none;
+}
+/* 헤더 영역 end */
+
+.login-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+}
+
+.login-form-box {
+  width: 30rem;
+}
+
+.login-form-box .title {
+  text-align: center;
+}
+
+.login-form-box .button {
+  font-weight: bold;
+}

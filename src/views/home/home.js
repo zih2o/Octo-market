@@ -1,37 +1,7 @@
-// nav 버튼
-const loginBtn = document.getElementById('login');
-const logoutBtn = document.getElementById('logout');
-const joinBtn = document.getElementById('join');
+import { drawNavbar } from '../useful-functions.js';
 
-// 카테고리 버튼
-// const entireBtn = document.getElementById('entire');
-// const processedBtn = document.getElementById('processed');
-// const marineBtn = document.getElementById('marine');
-// const noodleBtn = document.getElementById('noodle');
-// const seasoningBtn = document.getElementById('seasoning');
-// const riceBtn = document.getElementById('rice');
-// const canBtn = document.getElementById('can');
-
-// 로그인 시 세션 스토리지 확인용
-// sessionStorage.setItem('loginToken', '1');
-
-// 세션 스토리지 토큰에 따라
-if (sessionStorage.getItem('loginToken')) {
-  loginBtn.classList.add('active');
-  joinBtn.classList.add('active');
-  logoutBtn.classList.remove('active');
-} else {
-  // 토큰이 없다면
-  console.log('토큰 없음');
-  loginBtn.classList.remove('active');
-  joinBtn.classList.remove('active');
-  logoutBtn.classList.add('active');
-}
-
-// 로그아웃 시 세션스토리지 토큰 제거
-if (!logoutBtn.classList.contains('active')) {
-  sessionStorage.removeItem('loginToken');
-}
+// 토큰 확인하여 네비바 구성
+drawNavbar();
 
 // top 스크롤 버튼
 let topBtn = document.getElementById('scroll-top-Btn');
@@ -74,8 +44,10 @@ const categoryOj = {
   'http://localhost:5050/items/category/can': '캔 · 통조림',
 };
 
+// url queryparams 값으로 카테고리 타이틀 텍스트 설정
 categoryTitle.innerHTML = categoryOj[pathname];
 console.log(categoryTitle.innerText);
+
 // fetch 사용 전 더미 데이터
 const dummys = {
   items: [
