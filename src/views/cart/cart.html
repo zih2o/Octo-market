@@ -24,7 +24,7 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="cart.css" />
-    <script src="cart.js" type="module" defer></script>
+    <script src="cart copy.js" type="module" defer></script>
   </head>
 
   <body>
@@ -68,7 +68,7 @@
 
       <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
       <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
-      <div class="tabs is-medium is-centered">
+      <!-- <div class="tabs is-medium is-centered">
         <ul>
           <li>
             <a><strong>전체보기</strong></a>
@@ -92,7 +92,7 @@
             <a><strong>캔, 통조림</strong></a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </header>
 
     <!-- 메인 콘텐츠 -->
@@ -104,13 +104,12 @@
             <!--상품 목록 들어갈 박스-->
             <div class="box" id="cartList">
               <div id="checkBox">
-                <label class="checkbox" id="allCheckbox">
-                  <a id="selectAll">전체선택</a> |
-                  <a id="deleteSelec">선택삭제</a>
-                </label>
+                <a id="selectAll">전체선택</a> |
+                <a id="delSelect">선택삭제</a>
               </div>
             </div>
           </div>
+          <div class="box" id="spacing"></div>
           <div class="box is-4" id="payment">
             <div class="info is-size-4 paymentInfo" id="paymentInfo">
               결제 정보
@@ -132,13 +131,7 @@
               <div id="totalPrice">0원</div>
             </div>
 
-            <button
-              class="button is-primary"
-              id="goToBuy"
-              style="background-color: #7cd2e4"
-            >
-              결제하기
-            </button>
+            <button class="button is-primary" id="goToBuy">결제하기</button>
           </div>
         </div>
       </div>
