@@ -1,35 +1,4 @@
-//임시 데이터
-const data = [
-  {
-    name: "고등어",
-    brand: "청년수산",
-    price: "10000",
-    description: "맛있엉",
-    imageUrl: "http://ddd",
-  },
-  {
-    name: "갈치",
-    brand: "청년수산",
-    price: "12000",
-    description: "맛있엉",
-    imageUrl: "http://ddd",
-  },
-  {
-    name: "이면수",
-    brand: "청년수산",
-    price: "11000",
-    description: "맛있엉",
-    imageUrl: "http://ddd",
-  },
-];
-
-//임시 셋팅
-sessionStorage.setItem("cart", "0,1,2");
-
-//임시 함수
-const addCommas = (n) => {
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
+import { addCommas } from "../useful-functions.js";
 
 //기본 데이터 셋팅
 //모든 상품 목록
@@ -48,6 +17,11 @@ const productsPrice = document.querySelector("#productsPrice");
 const deliveryCharge = document.querySelector("#deliveryCharge");
 const totalPrice = document.querySelector("#totalPrice");
 
+makeProductList();
+firstView();
+settingInfo();
+
+//총 결제 정보 html 입력
 function settingInfo() {
   productsCount.innerHTML = state.productsCount + "개";
   productsPrice.innerHTML = state.productsPrice + "원";
@@ -56,59 +30,68 @@ function settingInfo() {
   return;
 }
 
-//데이터 받아서 item에 저장하기 + 첫 화면 장바구니 목록 구성
-async function itemSave() {
+//처음 화면 진입 시 모든 체크박스 활성화
+function firstView() {
+  const checkbox = document.querySelectorAll("input");
+  checkbox.forEach((e) => {
+    e.checked = true;
+  });
+}
+
+//세션스토리지 값 받아서 item 목록 구성
+async function makeProductList() {
   if (!sessionStorage.getItem("cart")) {
     return;
   } else {
-    const itemList = sessionStorage.getItem("cart").split(",");
-    itemList.forEach((itemId) => (items[itemId] = {}));
-    itemList.forEach((itemId) => {
-      // const res = await fetch(`http://localhost:5050/items/${itemId}`);
-      // const item = await res.json();
+    const itemList = sessionStorage
+      .getItem("cart")
+      .split(",")
+      .filter((e) => e !== "");
+    itemList.forEach(async (itemId) => {
+      items[itemId] = {};
+      try {
+        const res = await fetch(`http://localhost:5050/items/${itemId}`);
+        const item = await res.json();
 
-      //임시 코드
-      const item = data[itemId];
+        if (sessionStorage.getItem(itemId)) {
+          items[itemId].name = item.name;
+          items[itemId].price = Number(item.price);
+          amount[itemId] = Number(sessionStorage.getItem(itemId));
+          state.productsPrice += Number(item.price);
+          state.productsCount += Number(sessionStorage.getItem(itemId));
 
-      items[itemId].name = item.name;
-      items[itemId].price = Number(item.price);
-      amount[itemId] = 1;
-      state.productsPrice += Number(item.price);
-      state.productsCount++;
-
-      const cartList = document.querySelector("#cartList");
-      cartList.insertAdjacentHTML(
-        "beforeend",
-        ` <div class="productElement" id="check_${itemId}">
-              <label class="checkbox include">
-                <input type="checkbox"/>
-              </label>
-            <div class="productimg" ><img src=${item.imageUrl}/></div>
-          <div class="productDescription">
-            <span class="productName is-size-5">${items[itemId].name}</span>
-            <span class="eachPrice">${addCommas(items[itemId].price)}원</span>
-            <nav class="eachAmount" data-itemid="${itemId}">
-              <button class="minusBtn">-</button>
-              <span>1</span>
-              <button class="plusBtn">+</button>
-            </nav>
-            <span class="eachTotalPrice" id="eachTotalPrice_${itemId}">${addCommas(
-          items[itemId].price
-        )}원</span>
-          </div>
-        </div>`
-      );
-    });
-    state.deliveryCharge = 3000;
-    const checkbox = document.querySelectorAll("input");
-    checkbox.forEach((e) => {
-      e.checked = true;
+          cartList.insertAdjacentHTML(
+            "beforeend",
+            ` <div class="productElement" id="check_${itemId}">         
+                <input type="checkbox" class="checkbox include" autocomplete="off" />  
+                <div class="productimg"><img src=${item.imageUrl}/></div>
+              <div class="productDescription">
+                <span class="productName is-size-5">${items[itemId].name}</span>
+                <span class="eachPrice">${addCommas(
+                  items[itemId].price
+                )}원</span>
+                <nav class="eachAmount" id="nav_${itemId}">
+                  <button class="minusBtn">-</button>
+                  <span>${sessionStorage.getItem(itemId)}</span>
+                  <button class="plusBtn">+</button>
+                </nav>
+                <span class="eachTotalPrice" id="eachTotalPrice_${itemId}">${addCommas(
+              items[itemId].price
+            )}원</span>
+              </div>
+            </div>`
+          );
+          state.deliveryCharge = 3000;
+        }
+      } catch (err) {
+        alert(
+          `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`
+        );
+      }
     });
   }
   return;
 }
-itemSave();
-settingInfo();
 
 //+,- 누를 때 체크 해제되어 있는지 확인
 function checkCheck(e) {
@@ -117,19 +100,21 @@ function checkCheck(e) {
   );
 }
 
-//+버튼 누를 때
+//+누를 때
 function plusAmount(e) {
   if (!checkCheck(e)) {
     return alert("체크가 해제된 상품입니다.");
   }
 
-  const itemId = e.target.closest(".eachAmount").dataset.itemid;
+  const itemId = e.target.parentElement.id.split("_")[1];
+
   if (amount[itemId] === 5) {
     return alert("최대 5개까지 구매하실 수 있습니다.");
   } else {
     amount[itemId]++;
     state.productsPrice += items[itemId].price;
     state.productsCount++;
+    sessionStorage.setItem(itemId, amount[itemId]);
   }
 
   e.target.previousElementSibling.innerHTML = amount[itemId];
@@ -140,19 +125,21 @@ function plusAmount(e) {
   return;
 }
 
-//-버튼 누를 때
+//-누를 때
 function minusAmount(e) {
   if (!checkCheck(e)) {
     return alert("체크가 해제된 상품입니다.");
   }
 
-  const itemId = e.target.closest(".eachAmount").dataset.itemid;
+  const itemId = e.target.parentElement.id.split("_")[1];
+
   if (amount[itemId] === 1) {
     return alert("최소 수량입니다.");
   } else {
     amount[itemId]--;
     state.productsPrice -= items[itemId].price;
     state.productsCount--;
+    sessionStorage.setItem(itemId, amount[itemId]);
   }
 
   e.target.nextElementSibling.innerHTML = amount[itemId];
@@ -163,125 +150,125 @@ function minusAmount(e) {
   return;
 }
 
-//체크박스 누를 때
-function checkboxToggle(e) {
-  e.target.parentElement.classList.toggle("include");
-  const itemId = e.target.closest(".productElement").id.split("_")[1];
-
-  if (e.target.parentElement.classList.length === 1) {
-    state.productsCount -= amount[itemId];
-    state.productsPrice -= amount[itemId] * items[itemId].price;
-  } else {
-    state.productsCount += amount[itemId];
-    state.productsPrice += amount[itemId] * items[itemId].price;
-  }
-  allCancel();
-  settingInfo();
-  return;
-}
-
 //모든 체크 박스 해제된 것 확인
 function allCancel() {
   const includeList = document.querySelectorAll(".include");
+
   if (!includeList.length) {
     state.deliveryCharge = 0;
-    document.querySelector("#allCheckbox").firstElementChild.checked = false;
   } else {
     state.deliveryCharge = 3000;
   }
   return;
 }
 
-//전체선택 누를 때
-function allCheck() {
-  const cheked = document.querySelectorAll(".include");
-  const productElements = document.querySelectorAll(".productElement");
+//체크박스 누를 때
+function checkboxToggle(e) {
+  e.target.classList.toggle("include");
+  const itemId = e.target.parentElement.id.split("_")[1];
 
-  if (cheked.length === productElements.length) {
-    const checkbox = document.querySelectorAll("input");
-    checkbox.forEach((e) => {
-      e.checked = false;
-    });
-
-    state.productsCount = 0;
-    state.deliveryCharge = 0;
-    state.productsPrice = 0;
-    settingInfo();
-    return;
+  if (e.target.classList.length === 1) {
+    state.productsCount -= amount[itemId];
+    state.productsPrice -= amount[itemId] * items[itemId].price;
+    sessionStorage.removeItem(itemId);
+  } else {
+    state.productsCount += amount[itemId];
+    state.productsPrice += amount[itemId] * items[itemId].price;
+    sessionStorage.setItem(itemId, amount[itemId]);
   }
 
-  const checkList = document.querySelectorAll("label");
-  const cartListArray = Array.from(checkList);
-  cartListArray.shift();
-
-  cartListArray.forEach((e) => {
-    if (!e.classList.contains("include")) {
-      e.classList.add("include");
-      e.firstElementChild.checked = true;
-
-      const itemId = e.parentElement.id.split("_")[1];
-      state.productsCount += amount[itemId];
-      state.productsPrice += amount[itemId] * items[itemId].price;
-    }
-  });
-
+  allCancel();
   settingInfo();
   return;
 }
 
-//선택삭제 누를 때
-function deleteSelec() {
-  const cheked = document.querySelectorAll(".include");
+//전체선택 누를 때
+function allCheck() {
+  const productElements = document.querySelectorAll(".productElement");
+  const includeList = document.querySelectorAll(".include");
+  const checkbox = document.querySelectorAll("input");
 
-  if (!cheked.length) {
-    return;
-  } else {
-    cheked.forEach((e) => {
+  console.log(productElements);
+  console.log(includeList);
+  if (includeList.length === 0) {
+    checkbox.forEach((e) => {
+      e.checked = true;
+      e.classList.add("include");
       const itemId = e.parentElement.id.split("_")[1];
-      state.productsCount -= amount[itemId];
-      state.productsPrice -= amount[itemId] * items[itemId].price;
-      e.parentElement.remove();
+
+      state.productsCount += amount[itemId];
+      state.deliveryCharge = 3000;
+      state.productsPrice += Number(items[itemId].price) * amount[itemId];
+      sessionStorage.setItem(itemId, amount[itemId]);
+      settingInfo();
+    });
+  } else if (includeList.length === productElements.length) {
+    checkbox.forEach((e) => {
+      e.classList.remove("include");
+      e.checked = false;
+      const itemId = e.parentElement.id.split("_")[1];
+
+      state.productsCount = 0;
+      state.deliveryCharge = 0;
+      state.productsPrice = 0;
+      sessionStorage.removeItem(itemId);
+      settingInfo();
+    });
+  } else {
+    checkbox.forEach((e) => {
+      if (!e.checked) {
+        e.checked = true;
+        e.classList.add("include");
+        const itemId = e.parentElement.id.split("_")[1];
+
+        state.productsCount += amount[itemId];
+        state.deliveryCharge = 3000;
+        state.productsPrice += Number(items[itemId].price) * amount[itemId];
+        sessionStorage.setItem(itemId, amount[itemId]);
+        settingInfo();
+      }
     });
   }
   return;
 }
 
-//결제하기 버튼 눌렀을 때
+//선택 삭제 누를 때
+function delSelect() {
+  const checkbox = document.querySelectorAll(".include");
+
+  checkbox.forEach((e) => {
+    const itemId = e.parentElement.id.split("_")[1];
+    state.productsCount -= amount[itemId];
+    state.productsPrice -= amount[itemId] * items[itemId].price;
+    sessionStorage.removeItem(itemId);
+    e.parentElement.remove();
+  });
+
+  const resetChecked = document.querySelectorAll(".include");
+  if (resetChecked.length === 0) {
+    state.deliveryCharge = 0;
+  }
+  settingInfo();
+  return;
+}
+
+//결제하기
 function goToBuy() {
-  if (sessionStorage.getItem("userToken")) {
-    const cartList = document.querySelectorAll(".productElement");
-    const checkList = document.querySelectorAll(".include");
-
-    if (!cartList) {
-      return alert("장바구니에 담은 상품이 없습니다.");
-    }
-
-    if (!checkList.length) {
-      return alert("선택한 상품이 없습니다.");
-    }
-
-    checkList.forEach((e) => {
-      const itemId = e.parentElement.id.split("_")[1];
-      sessionStorage.setItem(items[itemId].name, amount[itemId]);
-    });
-    sessionStorage.setItem("count", state.productsCount);
-    sessionStorage.setItem("total", state.productsPrice + 3000);
-    window.location.href = "/order";
-  } else {
-    alert("로그인 페이지로 이동합니다.");
+  if (!sessionStorage.getItem("loginToken")) {
+    alert("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동합니다.");
     window.location.href = "/login";
+  } else {
+    window.location.href = "/order";
   }
 }
 
 const plusBtn = document.querySelectorAll(".plusBtn");
-plusBtn.forEach((e) => e.addEventListener("click", plusAmount));
-
 const minusBtn = document.querySelectorAll(".minusBtn");
-minusBtn.forEach((e) => e.addEventListener("click", minusAmount));
-
 const checkbox = document.querySelectorAll(".checkbox");
+plusBtn.forEach((e) => e.addEventListener("click", plusAmount));
+minusBtn.forEach((e) => e.addEventListener("click", minusAmount));
 checkbox.forEach((e) => e.addEventListener("click", checkboxToggle));
 
 document.querySelector("#selectAll").addEventListener("click", allCheck);
-document.querySelector("#deleteSelec").addEventListener("click", deleteSelec);
+document.querySelector("#delSelect").addEventListener("click", delSelect);
 document.querySelector("#goToBuy").addEventListener("click", goToBuy);
