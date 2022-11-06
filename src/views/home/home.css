@@ -102,7 +102,7 @@
   margin: 50px 0 30px 0;
 }
 
-.product-category h2 {
+#category-title {
   font-size: 20px;
   font-weight: 600;
 }
@@ -189,6 +189,36 @@
 
 .item-pricebox span {
   color: #ab3e55;
+}
+
+/* 탑 이동 스크롤 버튼 */
+#scroll-top-Btn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 100px; /* Place the button at the bottom of the page */
+  right: 80px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #51c498; /* Set a background color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  border-radius: 30px; /* Rounded corners */
+  box-shadow: 3px 3px 5px #4b4453;
+}
+
+#scroll-top-Btn > div {
+  width: 130px;
+  height: 100px;
+  line-height: 90px;
+  /* display: table-cell; */
+
+  font-size: 40px; /* Increase font size */
+  font-weight: 700;
+  color: white; /* Text color */
+}
+
+#scroll-top-Btn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
 }
 
 /* 푸터 영역 */

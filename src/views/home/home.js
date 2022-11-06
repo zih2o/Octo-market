@@ -33,6 +33,49 @@ if (!logoutBtn.classList.contains('active')) {
   sessionStorage.removeItem('loginToken');
 }
 
+// top 스크롤 버튼
+let topBtn = document.getElementById('scroll-top-Btn');
+topBtn.addEventListener('click', topFunction);
+
+// 스크롤 시 아래 함수 실행
+window.onscroll = function () {
+  scrollFunction();
+};
+
+// 현재 스크롤이 화면 상단에서 특정 거리 만큼 멀어져야만 버튼이 보이게 함
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    topBtn.style.display = 'block';
+  } else {
+    topBtn.style.display = 'none';
+  }
+}
+
+// 화면 최상단으로 스크롤 이동
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+const categoryTitle = document.querySelector('#category-title');
+let pathname = window.location.pathname;
+
+// 테스트용 더미 url
+pathname = 'http://localhost:5050/items/category/processed';
+
+// 아래 url의 endpoint 는 추후 카테고리 id 확인 후 수정
+const categoryOj = {
+  'http://localhost:5050/items/category/': '전체보기',
+  'http://localhost:5050/items/category/processed': '가공식품',
+  'http://localhost:5050/items/category/marine': '수산식품',
+  'http://localhost:5050/items/category/noodle': '면 · 튀김',
+  'http://localhost:5050/items/category/seasoning': '양념 · 조미료',
+  'http://localhost:5050/items/category/rice': '쌀 · 견과류',
+  'http://localhost:5050/items/category/can': '캔 · 통조림',
+};
+
+categoryTitle.innerHTML = categoryOj[pathname];
+console.log(categoryTitle.innerText);
 // fetch 사용 전 더미 데이터
 const dummys = {
   items: [
@@ -556,19 +599,18 @@ const callApi = async () => {
   // console.log(dummy);
 
   const targetUl = document.getElementsByClassName('product-ul')[0];
-  let ulInnerHTML = targetUl.innerHTML;
-  console.log('ulinnerHTML ==> ', ulInnerHTML);
 
   // 추가할 상품 데이터가 있다면
   if (dummy) {
     console.log('dummy =>>', dummy);
     console.log('이너 html ==> ', targetUl.innerHTML);
     // console.log(targetUl.innerHTML);
+    let insertBoxesTemplate = '';
     dummy.map(oj => {
       let ojbox = createProductBox(oj);
-      ulInnerHTML += ojbox;
+      insertBoxesTemplate += ojbox;
     });
-    targetUl.innerHTML = ulInnerHTML;
+    targetUl.insertAdjacentHTML('beforeend', insertBoxesTemplate);
 
     // 감지할 div 를 만들어 li의 맨 뒤에 추가해준다
     const lastLi = document.createElement('div');
