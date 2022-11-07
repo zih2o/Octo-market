@@ -26,6 +26,8 @@ async function addItemtoDB () {
     const src = prodSrc.value;
     const category = category.value
 
+    
+    
     const data = {
         name,
         brand,
