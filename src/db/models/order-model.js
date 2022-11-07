@@ -10,12 +10,12 @@ export class OrderModel {
     const orders = await Order.find({});
     return orders;
   }
-  async findByEmail(email) {
-    const orders = await Order.find({ email });
+  async findByUserId(userId) {
+    const orders = await Order.find({ userId });
     return orders;
   }
 
-  async findById(orderId) {
+  async findByOrderId(orderId) {
     const order = await Order.findOne({ _id: orderId });
     return order;
   }

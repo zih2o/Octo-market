@@ -33,8 +33,8 @@ const orderSchema = new Schema(
       type: Number,
       required: true,
     },
-    email: {
-      type: Schema.Types.String,
+    userId: {
+      type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
     },

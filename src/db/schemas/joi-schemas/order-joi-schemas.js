@@ -13,7 +13,7 @@ const createOrderJoiSchema = Joi.object({
     .required()
     .min(1),
   totalPrice: Joi.number().integer().required().min(1),
-  email: Joi.string().trim().email().required(),
+  userId: Joi.string().trim().required(),
   address: Joi.object({
     postalCode: Joi.string().trim().length(5).required().messages({
       'string.length': 'postalCode는 5글자입니다.',

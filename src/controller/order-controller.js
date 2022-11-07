@@ -10,14 +10,11 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getByEmail = async (req, res, next) => {
+const getOrdersByUserId = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const currentUserId = req.currentUserId;
-    const orders = await orderService.getUserOrderListById(
-      currentUserId,
-      userId,
-    );
+    const orders = await orderService.getOrdersByUserId(currentUserId, userId);
     return res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -85,4 +82,11 @@ const removeOrder = async (req, res, next) => {
   }
 };
 
-export { getAll, getByEmail, getById, createOrder, updateOrder, removeOrder };
+export {
+  getAll,
+  getOrdersByUserId,
+  getById,
+  createOrder,
+  updateOrder,
+  removeOrder,
+};

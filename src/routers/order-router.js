@@ -10,7 +10,11 @@ import {
 const orderRouter = Router();
 const validator = createValidator({});
 
-orderRouter.get('/personal/:userId', loginRequired, orderController.getByEmail);
+orderRouter.get(
+  '/personal/:userId',
+  loginRequired,
+  orderController.getOrdersByUserId,
+);
 orderRouter.get('/:orderId', loginRequired, orderController.getById);
 orderRouter.put(
   '/:orderId',
