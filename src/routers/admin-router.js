@@ -11,6 +11,7 @@ import {
 } from '../db/schemas/joi-schemas';
 import { categoryJoiSchema } from '../db/schemas/joi-schemas';
 import { updateOrderAdminJoiSchema } from '../db/schemas/joi-schemas';
+import { imgUpload } from '../middlewares/img-upload';
 
 const adminRouter = Router();
 const validator = createValidator({});
@@ -50,6 +51,14 @@ adminRouter.post(
   loginRequired,
   itemController.createItem,
 );
+
+adminRouter.post(
+  '/items/upload',
+  loginRequired,
+  imgUpload.single('image'),
+  itemController.uploadImg,
+);
+
 adminRouter.put(
   '/items/:itemId',
   validator.body(updateItemJoiSchema),
