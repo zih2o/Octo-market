@@ -22,6 +22,4 @@ export class AdminModel {
   }
 }
 
-const adminModel = new AdminModel();
-
-export { adminModel };
+export const adminModel = new AdminModel();

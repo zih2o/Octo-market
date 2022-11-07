@@ -58,6 +58,4 @@ export class ItemsModel {
   }
 }
 
-const itemsModel = new ItemsModel();
-
-export { itemsModel };
+export const itemsModel = new ItemsModel();
