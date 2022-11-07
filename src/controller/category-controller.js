@@ -15,8 +15,8 @@ const getCategories = async (req, res, next) => {
 
 const getCategory = async (req, res, next) => {
   try {
-    const { cat_id } = req.params;
-    const category = await categoryService.getCategory(cat_id);
+    const { catId } = req.params;
+    const category = await categoryService.getCategory(catId);
 
     res.status(200).json(category);
   } catch (err) {
@@ -27,9 +27,8 @@ const getCategory = async (req, res, next) => {
 // 카테고리 추가
 const createCategory = async (req, res, next) => {
   try {
-    const { name } = req.body;
+    const newCategoryInfo = req.body;
     const userType = req.userType;
-    const newCategoryInfo = { name };
     const newCategory = await categoryService.createCategory(
       userType,
       newCategoryInfo,
@@ -44,13 +43,13 @@ const createCategory = async (req, res, next) => {
 // 카테고리 업데이트
 const updateCategory = async (req, res, next) => {
   try {
-    const { cat_id } = req.params;
-    const { name } = req.body;
+    const { catId } = req.params;
+    const toUpdate = req.body;
     const userType = req.userType;
     const updatedCategory = await categoryService.updateCategory(
-      cat_id,
+      catId,
       userType,
-      name,
+      toUpdate,
     );
 
     return res.status(201).json(updatedCategory);
@@ -61,9 +60,9 @@ const updateCategory = async (req, res, next) => {
 
 const removeCategory = async (req, res, next) => {
   try {
-    const { cat_id } = req.params;
+    const { catId } = req.params;
     const userType = req.userType;
-    await categoryService.removeCategory(userType, cat_id);
+    await categoryService.removeCategory(userType, catId);
 
     return res.sendStatus(204);
   } catch (err) {
