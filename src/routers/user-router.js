@@ -24,16 +24,12 @@ usersRouter.post(
 );
 
 usersRouter.put(
-  '/updateInfo/:userId',
+  '/:userId',
   validator.body(updateJoiSchema),
   loginRequired,
   usersController.updateUser,
 );
 
-usersRouter.delete(
-  '/deleteuser/:userId',
-  loginRequired,
-  usersController.deleteUser,
-);
+usersRouter.delete('/:userId', loginRequired, usersController.deleteUser);
 
 export { usersRouter };

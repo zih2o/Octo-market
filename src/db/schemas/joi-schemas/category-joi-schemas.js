@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import Joi from 'joi';
 
 const categoryJoiSchema = Joi.object({
   name: Joi.string().trim().required().min(1).max(10).messages({

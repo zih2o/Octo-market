@@ -3,11 +3,9 @@ import { itemService } from '../services';
 // 전체 items 조회
 const getItems = async (req, res, next) => {
   try {
-    const sorting = req.query.sort;
-    const sortCondition = Number(req.query.sc);
     const count = Number(req.query.count || 1);
     const perCount = Number(req.query.perCount || 20);
-    const sortingInfo = { sorting, sortCondition, count, perCount };
+    const sortingInfo = { count, perCount };
     const items = await itemService.getAll(sortingInfo);
 
     res.status(200).json(items);
