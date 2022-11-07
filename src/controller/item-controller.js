@@ -69,6 +69,19 @@ const createItem = async (req, res, next) => {
   }
 };
 
+// img 등록
+const uploadImg = async (req, res, next) => {
+  try {
+    console.log(req.file);
+    console.log(req.file.location);
+    res.status(201).json({
+      imageUrl: req.file.location,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // item info 수정
 const updateItem = async (req, res, next) => {
   try {
@@ -124,6 +137,7 @@ export {
   getByCategoryID,
   getByItemID,
   createItem,
+  uploadImg,
   updateItem,
   deleteItem,
 };
