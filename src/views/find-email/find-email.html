@@ -20,46 +20,11 @@
   <!-- 헤더 -->
   <header>
 
-    <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand" id="nav-logobox">
-        <img id="nav-logo" src="../images/octo-logo.png" alt="">
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons" id="menu-box">
-              <a href="./login.html" class="button is-primary" id="login">
-                <strong>로그인</strong>
-              </a>
-              <div class="vertical-bar" id="vb-login-after"></div>
-              <a href="../home/home.html" class="button is-primary" id="logout">
-                <strong>로그아웃</strong>
-              </a>
-              <div class="vertical-bar" id="vb-logout-after"></div>
-              <a href="../join/register.html" class="button is-primary" id="join">
-                <strong>회원가입</strong>
-              </a>
-              <div class="vertical-bar" id="vb-join-after"></div>
-              <a href="../cart/cart.html" class="button is-primary" id="cart">
-                <strong>장바구니</strong>
-              </a>
-              <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="" class="button is-primary" id="mypage">
-                <strong>마이페이지</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div id="title-container">
-      <div id="title">
-        <img src="../images/octopus-title.png" alt="문어상점">
-      </div>
-    </div>
+    <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
 
   </header>
+
+  <!-- 카테고리 네비바. template 로 삽입 -->
 
 
   <!-- 메인 -->
@@ -85,49 +50,25 @@
         <button class="button is-primary is-fullwidth" id="submitButton">
           이메일 찾기
         </button>
-
-        <div class="control" id="resBox">
-          <label class="label" for="resEmail" id="largeReturnLabel">회원님의 아이디 찾기가 완료 되었습니다!</label>
-          <label class="label" for="resEmail" id="smallReturnLabel">문어 상점 아이디</label>
-          <input class="input" id="resEmail" type="text" placeholder="아이디" disabled>
+        <div id="res-container">
+          <div class="control" id="resBox">
+            <label class="label" for="resEmail" id="largeReturnLabel">회원님의 아이디 찾기가 완료 되었습니다!</label>
+            <label class="label" for="resEmail" id="smallReturnLabel">문어 상점 아이디</label>
+            <input class="input" id="resEmail" type="text" placeholder="아이디" disabled>
+          </div>
         </div>
       </form>
+
 
     </div>
 
   </main>
 
 
-  <!-- 푸터 -->
+  <!-- footer -->
   <footer class="footer">
 
-    <div id="footer-container">
-      <div id="footer-icons">
-        <a href="https://www.instagram.com/">
-          <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
-        </a>
-        <a href="https://ko-kr.facebook.com/">
-          <img src="../images/facebook-icon.png" alt="옥토 페이스북">
-        </a>
-        <a href="https://twitter.com/?lang=ko">
-          <img src="../images/twitter-icon.png" alt="옥토 트위터">
-        </a>
-      </div>
-      <div id="footer-textbox">
-        <div id="footer-info">
-          <a href="">Info</a>
-          <a href="">Support</a>
-          <a href="">Marketing</a>
-        </div>
-        <div id="footer-policy">
-          <a href="">Terms of Use</a>
-          <a href="">Private Policy</a>
-        </div>
-        <div id="footer-company">
-          <a href="">ⓒ 2022 OCTO infinite</a>
-        </div>
-      </div>
-    </div>
+    <!-- 푸터 콘텐츠. template 로 삽입 -->
 
   </footer>
 

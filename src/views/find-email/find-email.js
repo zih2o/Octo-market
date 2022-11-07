@@ -1,8 +1,21 @@
 import * as Api from '../api.js';
-import { validateEmail, drawNavbar } from '../useful-functions.js';
 
+// html 랜더링 함수 모음
+import {
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 푸터 랜더링
+  drawFooter,
+} from '../useful-functions.js';
+
+// html 랜더링 관련 함수들 실행
 drawNavbar();
+activeNavbar();
+drawFooter();
 
+const returnEmailForm = document.getElementById('res-container');
 // 요소(element), input 혹은 상수
 const nameInput = document.querySelector('#nameInput');
 const phoneNumInput = document.querySelector('#phoneNumInput');
@@ -39,15 +52,25 @@ async function handleSubmit(e) {
 
   // 로그인 api 요청
   try {
-    const data = { name, phoneNum };
+    const data = {
+      name: '토끼씨',
+      phoneNum: '01012341234'
+    };
 
     // fetch 사용 가능 시 주석 해제 예정
     // fetch 경로 추가 바람
     const result = await Api.post('http://localhost:5050/users/추가경로', data);
-    // const email = result.email;
+    const email = result.email;
+
     // 확인용 더미 email
-    let email = 'tkemk';
-    emailInput.value = email;
+    // let email = 'tkemk';
+    // emailInput.value = email;
+
+    // 이메일 값이 있으면 보이도록
+    if (email) {
+      returnEmailForm.style.display="block";
+    }
+
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

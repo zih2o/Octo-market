@@ -96,7 +96,8 @@ main {
 }
 
 #findForm > p {
-  font-size: 60px;
+  font-size: 40px;
+  margin-bottom: 60px;
 }
 
 #returnBox {
@@ -132,6 +133,11 @@ main {
 
 .box {
   box-shadow: none;
+}
+
+#res-container {
+  margin-top: 30px;
+  display: none;
 }
 
 /* 푸터 영역 */

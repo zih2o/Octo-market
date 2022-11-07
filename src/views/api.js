@@ -55,11 +55,7 @@ async function post(endpoint, data) {
 }
 
 // api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)
-<<<<<<< HEAD
-async function put(endpoint, params = '', data) {
-=======
 async function put(endpoint, params = "", data) {
->>>>>>> a9150d6da53afa8af145dff4fb6852d0d24fa9a7
   const apiUrl = `${endpoint}/${params}`;
 
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
@@ -69,11 +65,7 @@ async function put(endpoint, params = "", data) {
   console.log(`%cPATCH 요청 데이터: ${bodyData}`, 'color: #059c4b;');
 
   const res = await fetch(apiUrl, {
-<<<<<<< HEAD
-    method: 'PATCH',
-=======
     method: "PUT",
->>>>>>> a9150d6da53afa8af145dff4fb6852d0d24fa9a7
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
