@@ -94,7 +94,7 @@ async function handleSubmit(e) {
       type: "User",
     };
 
-    await Api.post("/signup", data);
+    await Api.post("http://localhost:5050/users/signup", data);
 
     alert(`정상적으로 회원가입되었습니다.`);
 

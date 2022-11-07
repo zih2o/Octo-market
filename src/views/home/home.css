@@ -81,6 +81,16 @@ main {
   display: none;
 }
 
+/*  카테고리바의 sticky 속성 적용에 필요한 스타일  */
+/* sticky 컴포넌트는 부모 태그 아래에 붙어서 화면에 남아 있는다 */
+#category-bar {
+  position: sticky;
+  z-index: 999;
+  top: 0;
+  padding: 10px 0 2px 0;
+  background-color: #ffffff;
+}
+
 /* 메인 콘텐츠 영역*/
 #carousel-top > p {
   color: white;

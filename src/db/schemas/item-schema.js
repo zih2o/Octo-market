@@ -11,7 +11,7 @@ const itemSchema = new Schema(
       required: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
     description: {
@@ -27,6 +27,9 @@ const itemSchema = new Schema(
       type: String,
       required: true,
     },
+    isRecommend: { type: Boolean },
+    isDiscount: { type: Boolean },
+    disPercent: { type: Number },
   },
   {
     collection: 'items',
