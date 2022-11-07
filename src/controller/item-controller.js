@@ -18,11 +18,25 @@ const getItems = async (req, res, next) => {
 const getByCategoryID = async (req, res, next) => {
   try {
     const { catId } = req.params;
-    const sorting = req.query.sort;
-    const sortCondition = Number(req.query.sc);
+    const sort = req.query.sort || 'createdAt';
+    const sortCondition = Number(req.query.sc || -1);
+    const re = req.query.re;
+    const isRecommend = req.query.isRe;
+    const dis = req.query.dis;
+    const isDiscount = req.query.isDis;
     const count = Number(req.query.count || 1);
     const perCount = Number(req.query.perCount || 20);
-    const sortingInfo = { sorting, sortCondition, count, perCount };
+    const sortingInfo = {
+      sort,
+      sortCondition,
+      re,
+      isRecommend,
+      dis,
+      isDiscount,
+      count,
+      perCount,
+    };
+    console.log(sortingInfo);
     const items = await itemService.getByCategoryId(catId, sortingInfo);
 
     res.status(200).json(items);
@@ -60,7 +74,16 @@ const updateItem = async (req, res, next) => {
   try {
     const { itemId } = req.params;
     const userType = req.userType;
-    const { name, brand, price, description, imageUrl } = req.body;
+    const {
+      name,
+      brand,
+      price,
+      description,
+      imageUrl,
+      isRecommend,
+      isDiscount,
+      disPercent,
+    } = req.body;
 
     const toUpdate = {
       ...(name && { name }),
@@ -68,7 +91,12 @@ const updateItem = async (req, res, next) => {
       ...(price && { price }),
       ...(description && { description }),
       ...(imageUrl && { imageUrl }),
+      ...(disPercent && { disPercent }),
+      isRecommend,
+      isDiscount,
     };
+
+    console.log(toUpdate);
 
     const updatedItemInfo = await itemService.updateItem(
       itemId,

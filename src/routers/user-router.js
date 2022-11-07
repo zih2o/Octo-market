@@ -10,7 +10,6 @@ import {
 
 const usersRouter = Router();
 const validator = createValidator();
-
 usersRouter.post(
   '/signup',
   validator.body(signUpJoiSchema),
@@ -22,6 +21,8 @@ usersRouter.post(
   validator.body(loginJoiSchema),
   usersController.login,
 );
+
+usersRouter.get('/:userId', loginRequired, usersController.getUser);
 
 usersRouter.put(
   '/:userId',
