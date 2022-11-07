@@ -30,14 +30,14 @@ adminRouter.post(
 );
 
 adminRouter.put(
-  '/categories/updateInfo/:cat_id',
+  '/categories/updateInfo/:catId',
   validator.body(categoryJoiSchema),
   loginRequired,
   categoryController.updateCategory,
 );
 
 adminRouter.delete(
-  '/categories/:cat_id',
+  '/categories/:catId',
   loginRequired,
   categoryController.removeCategory,
 );

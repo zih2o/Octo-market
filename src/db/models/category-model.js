@@ -11,13 +11,13 @@ export class CategoryModel {
     return categories;
   }
 
-  async findByName(cat_name) {
-    const category = await Category.findOne({ name: cat_name });
+  async findByName(name) {
+    const category = await Category.findOne({ name });
     return category;
   }
 
-  async findById(cat_id) {
-    const category = await Category.findOne({ _id: cat_id });
+  async findById(_id) {
+    const category = await Category.findOne({ _id });
     return category;
   }
 
@@ -26,22 +26,20 @@ export class CategoryModel {
     return newCategory;
   }
 
-  async updateCategory(cat_id, update) {
+  async updateCategory(_id, update) {
     const option = { returnOriginal: false };
     const updatedCategory = await Category.findOneAndUpdate(
-      { _id: cat_id },
+      { _id },
       update,
       option,
     );
     return updatedCategory;
   }
 
-  async removeCategory(cat_id) {
-    await Category.deleteOne({ _id: cat_id });
+  async removeCategory(_id) {
+    await Category.deleteOne({ _id });
     return;
   }
 }
 
-const categoryModel = new CategoryModel();
-
-export { categoryModel };
+export const categoryModel = new CategoryModel();
