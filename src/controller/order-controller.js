@@ -14,7 +14,10 @@ const getByEmail = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const currentUserId = req.currentUserId;
-    const orders = await orderService.getByEmail(currentUserId, userId);
+    const orders = await orderService.getUserOrderListById(
+      currentUserId,
+      userId,
+    );
     return res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -36,13 +39,12 @@ const createOrder = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const currentUserId = req.currentUserId;
-    const { orderInfo, totalPrice, email, address } = req.body;
-    const order = await orderService.createOrder(userId, currentUserId, {
-      orderInfo,
-      totalPrice,
-      email,
-      address,
-    });
+    const newOrderInfo = req.body;
+    const order = await orderService.createOrder(
+      userId,
+      currentUserId,
+      newOrderInfo,
+    );
     return res.status(201).json(order);
   } catch (err) {
     next(err);
@@ -54,13 +56,18 @@ const updateOrder = async (req, res, next) => {
     const { orderId } = req.params;
     const currentUserId = req.currentUserId;
     const { orderInfo, totalPrice, email, address, state } = req.body;
-    const order = await orderService.updateOrder(currentUserId, orderId, {
-      orderInfo,
-      totalPrice,
-      email,
-      address,
-      state,
-    });
+    const toUpdate = {
+      ...(orderInfo && { orderInfo }),
+      ...(totalPrice && { totalPrice }),
+      ...(email && { email }),
+      ...(address && { address }),
+      ...(state && { state }),
+    };
+    const order = await orderService.updateOrder(
+      currentUserId,
+      orderId,
+      toUpdate,
+    );
     return res.status(201).json(order);
   } catch (err) {
     next(err);

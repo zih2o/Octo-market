@@ -24,14 +24,14 @@ usersRouter.post(
 );
 
 usersRouter.put(
-  '/updateInfo/:user_id',
+  '/updateInfo/:userId',
   validator.body(updateJoiSchema),
   loginRequired,
   usersController.updateUser,
 );
 
 usersRouter.delete(
-  '/deleteuser/:user_id',
+  '/deleteuser/:userId',
   loginRequired,
   usersController.deleteUser,
 );

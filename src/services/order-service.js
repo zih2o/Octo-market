@@ -9,14 +9,15 @@ export class OrderService {
   }
   async getAll(currentUserId) {
     const admin = await adminModel.findById(currentUserId);
-    if (admin === null && userId !== currentUserId) {
+    if (admin === null) {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
     const orders = await orderModel.findAll();
     return orders;
   }
 
-  async getByEmail(currentUserId, userId) {
+  async getUserOrderListById(currentUserId, userId) {
+    // admin이 아니거나 접근한 user가 보려고 하는 페이지가 user의 페이지가 아닌 경우 권한 없음
     const admin = await adminModel.findById(currentUserId);
     if (admin === null && userId !== currentUserId) {
       throw new CustomError(403, '접근 권한이 없습니다.');
@@ -77,5 +78,4 @@ export class OrderService {
   }
 }
 
-const orderService = new OrderService();
-export { orderService };
+export const orderService = new OrderService();
