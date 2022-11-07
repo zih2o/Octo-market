@@ -57,5 +57,4 @@ class AdminService {
   }
 }
 
-const adminService = new AdminService(adminModel);
-export { adminService };
+export const adminService = new AdminService(adminModel);

@@ -51,12 +51,12 @@ adminRouter.post(
   itemController.createItem,
 );
 adminRouter.put(
-  '/items/:item_id',
+  '/items/:itemId',
   validator.body(updateItemJoiSchema),
   loginRequired,
   itemController.updateItem,
 );
-adminRouter.delete('/items/:item_id', loginRequired, itemController.deleteItem);
+adminRouter.delete('/items/:itemId', loginRequired, itemController.deleteItem);
 
 // Order admin
 

@@ -60,8 +60,8 @@ class UserService {
 
   // 회원정보수정
   async updateUser(userInfoRequired, toUpdate) {
-    const { user_id, currentPassword } = userInfoRequired;
-    const user = await this.userModel.findById(user_id);
+    const { userId, currentPassword } = userInfoRequired;
+    const user = await this.userModel.findById(userId);
     if (!user) {
       throw new CustomError(
         404,
@@ -89,7 +89,7 @@ class UserService {
       toUpdate.password = newPassword;
     }
     const updatedUser = await this.userModel.update({
-      user_id,
+      userId,
       update: toUpdate,
     });
     return updatedUser;
@@ -113,5 +113,4 @@ class UserService {
   }
 }
 
-const userService = new UserService(usersModel);
-export { userService };
+export const userService = new UserService(usersModel);
