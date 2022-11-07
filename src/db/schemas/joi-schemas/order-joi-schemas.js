@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import Joi from 'joi';
 
 const createOrderJoiSchema = Joi.object({
   orderInfo: Joi.array()

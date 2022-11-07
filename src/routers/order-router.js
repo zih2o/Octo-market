@@ -10,7 +10,7 @@ const validator = createValidator({});
 orderRouter.get('/personal/:userId', loginRequired, orderController.getByEmail);
 orderRouter.get('/:orderId', loginRequired, orderController.getById);
 orderRouter.post(
-  '/users/:userId',
+  '/personal/:userId',
   validator.body(createOrderJoiSchema),
   loginRequired,
   orderController.createOrder,

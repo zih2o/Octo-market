@@ -21,10 +21,10 @@ export class UsersModel {
     return createdNewUser;
   }
 
-  async update({ user_id, update }) {
+  async update({ userId, update }) {
     const option = { returnOriginal: false };
     const updatedUser = await User.findOneAndUpdate(
-      { _id: user_id },
+      { _id: userId },
       update,
       option,
     );
