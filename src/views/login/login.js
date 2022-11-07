@@ -41,7 +41,7 @@ async function handleSubmit(e) {
     const data = { email, password };
 
     // fetch 사용 가능 시 주석 해제 예정
-    // const result = await Api.post('http://localhost:5050/users/login', data);
+    const result = await Api.post('http://localhost:5050/users/login', data);
     const token = result.accessToken;
 
     // 로그인 성공, 토큰을 세션 스토리지에 저장

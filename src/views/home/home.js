@@ -1,7 +1,23 @@
-import { drawNavbar } from '../useful-functions.js';
+// html 랜더링 함수 모음
+import {
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 카테고리 바 랜더링
+  drawCategoryBar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 카테고리 목록을 api 에서 받아와 값 채워 넣기
+  fillCategoryBar,
+  // 푸터 랜더링
+  drawFooter,
+} from '../useful-functions.js';
 
-// 토큰 확인하여 네비바 구성
+// html 랜더링 관련 함수들 실행
 drawNavbar();
+activeNavbar();
+drawCategoryBar();
+fillCategoryBar();
+drawFooter();
 
 // top 스크롤 버튼
 let topBtn = document.getElementById('scroll-top-Btn');
@@ -544,6 +560,7 @@ let cnt = 1;
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
+  // 카테고리 조회해서 카테고리바 동적 구현
 });
 
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
