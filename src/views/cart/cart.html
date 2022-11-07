@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>문어상점</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="cart.css" />
+    <script src="cart copy.js" type="module" defer></script>
+  </head>
+
+  <body>
+    <!-- header 네비바(메뉴, 카테고리) -->
+    <header>
+      <nav
+        class="navbar"
+        id="nav-top"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand" id="nav-logobox">
+          <img id="nav-logo" src="../images/octo-logo.png" alt="" />
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons" id="menu-box">
+                <a class="button is-primary" id="menu-button">
+                  <strong>로그인</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>회원가입</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>장바구니</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>마이페이지</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="title-container">
+        <div id="title">
+          <img src="../images/octopus-title.png" alt="문어상점" />
+        </div>
+      </div>
+
+      <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
+      <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
+      <!-- <div class="tabs is-medium is-centered">
+        <ul>
+          <li>
+            <a><strong>전체보기</strong></a>
+          </li>
+          <li>
+            <a><strong>가공식품</strong></a>
+          </li>
+          <li>
+            <a><strong>수산식품</strong></a>
+          </li>
+          <li>
+            <a><strong>면, 식품</strong></a>
+          </li>
+          <li>
+            <a><strong>양념, 조미료</strong></a>
+          </li>
+          <li>
+            <a><strong>쌀, 견과류</strong></a>
+          </li>
+          <li>
+            <a><strong>캔, 통조림</strong></a>
+          </li>
+        </ul>
+      </div> -->
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <section>
+      <div class="container">
+        <div class="box is-size-5" id="cart">장바구니</div>
+        <div id="flexbox">
+          <div id="cartInfo">
+            <!--상품 목록 들어갈 박스-->
+            <div class="box" id="cartList">
+              <div id="checkBox">
+                <a id="selectAll">전체선택</a> |
+                <a id="delSelect">선택삭제</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="box is-4" id="payment">
+            <div class="info is-size-4 paymentInfo" id="paymentInfo">
+              결제 정보
+            </div>
+            <div class="info is-size-5 productsCount">
+              <p>상품 수</p>
+              <p id="productsCount">0개</p>
+            </div>
+            <div class="info is-size-5 productsPrice">
+              <div>상품 금액</div>
+              <div id="productsPrice">0원</div>
+            </div>
+            <div class="info is-size-5 deliveryCharge">
+              <div>배송비</div>
+              <div id="deliveryCharge">0원</div>
+            </div>
+            <div class="info is-size-4 totalPrice">
+              <div>총 결제 금액</div>
+              <div id="totalPrice">0원</div>
+            </div>
+
+            <button class="button is-primary" id="goToBuy">결제하기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div id="footer-container">
+        <div id="footer-icons">
+          <a href="https://www.instagram.com/">
+            <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램" />
+          </a>
+          <a href="https://ko-kr.facebook.com/">
+            <img src="../images/facebook-icon.png" alt="옥토 페이스북" />
+          </a>
+          <a href="https://twitter.com/?lang=ko">
+            <img src="../images/twitter-icon.png" alt="옥토 트위터" />
+          </a>
+        </div>
+        <div id="footer-textbox">
+          <div id="footer-info">
+            <a href="">Info</a>
+            <a href="">Support</a>
+            <a href="">Marketing</a>
+          </div>
+          <div id="footer-policy">
+            <a href="">Terms of Use</a>
+            <a href="">Private Policy</a>
+          </div>
+          <div id="footer-company">
+            <a href="">ⓒ 2022 OCTO infinite</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
