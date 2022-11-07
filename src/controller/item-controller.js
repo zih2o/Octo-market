@@ -91,9 +91,9 @@ const updateItem = async (req, res, next) => {
       ...(price && { price }),
       ...(description && { description }),
       ...(imageUrl && { imageUrl }),
-      ...(isRecommend && { isRecommend }),
-      ...(isDiscount && { isDiscount }),
       ...(disPercent && { disPercent }),
+      isRecommend,
+      isDiscount,
     };
 
     console.log(toUpdate);
