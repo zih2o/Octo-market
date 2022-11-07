@@ -23,10 +23,25 @@ export class ItemsModel {
   }
 
   async findByCategory(catId, sortingInfo) {
-    const { sorting, sortCondition, count, perCount } = sortingInfo;
+    const {
+      sort,
+      sortCondition,
+      re,
+      isRecommend,
+      dis,
+      isDiscount,
+      count,
+      perCount,
+    } = sortingInfo;
 
-    const items = await Item.find({ category: catId })
-      .sort({ [sorting]: sortCondition })
+    const items = await Item.find({
+      category: catId,
+      [re]: isRecommend,
+      [dis]: isDiscount,
+    })
+      .sort({
+        [sort]: sortCondition,
+      })
       .skip(perCount * (count - 1))
       .limit(perCount);
 
