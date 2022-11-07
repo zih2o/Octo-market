@@ -35,8 +35,9 @@ const loginRequired = async (req, res, next) => {
         message: '회원정보를 찾을 수 없습니다.',
       });
     }
-    req.currentUserId = user !== null ? user.id : admin.id; // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
-    req.userType = user !== null ? user.userType : admin.userType;
+
+    req.currentUserId = user != null ? user.id : admin.id; // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
+    req.userType = user != null ? user.userType : admin.userType;
     next();
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.

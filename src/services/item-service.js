@@ -83,5 +83,4 @@ class ItemService {
   }
 }
 
-const itemService = new ItemService(itemsModel);
-export { itemService };
+export const itemService = new ItemService(itemsModel);

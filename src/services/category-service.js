@@ -23,11 +23,11 @@ class CategoryService {
     return newCategory;
   }
 
-  async updateCategory(_id, userType, name) {
+  async updateCategory(catId, userType, name) {
     if (userType !== 'admin') {
       throw new CustomError(403, '접근권한이 없습니다.');
     }
-    const category = this.categoryModel.findById(_id);
+    const category = this.categoryModel.findById(catId);
     if (!category) {
       throw new CustomError(
         404,
@@ -39,12 +39,15 @@ class CategoryService {
       throw new CustomError(409, `${name}은 이미 존재하는 카테고리입니다.`);
     }
 
-    const updatedCategory = await this.categoryModel.updateCategory(_id, name);
+    const updatedCategory = await this.categoryModel.updateCategory(
+      catId,
+      name,
+    );
     return updatedCategory;
   }
 
-  async getCategory(_id) {
-    const category = this.categoryModel.findById(_id);
+  async getCategory(catId) {
+    const category = this.categoryModel.findById(catId);
     if (!category) {
       throw new CustomError(
         404,
@@ -59,8 +62,8 @@ class CategoryService {
     return categories;
   }
 
-  async removeCategory(userType, _id) {
-    const category = await this.categoryModel.findById(_id);
+  async removeCategory(userType, catId) {
+    const category = await this.categoryModel.findById(catId);
     if (!category) {
       throw new CustomError(
         404,
