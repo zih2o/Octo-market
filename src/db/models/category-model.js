@@ -16,8 +16,8 @@ export class CategoryModel {
     return category;
   }
 
-  async findById(_id) {
-    const category = await Category.findOne({ _id });
+  async findById(catId) {
+    const category = await Category.findOne({ _id: catId });
     return category;
   }
 
@@ -26,10 +26,10 @@ export class CategoryModel {
     return newCategory;
   }
 
-  async updateCategory(_id, update) {
+  async updateCategory(catId, update) {
     const option = { returnOriginal: false };
     const updatedCategory = await Category.findOneAndUpdate(
-      { _id },
+      { _id: catId },
       update,
       option,
     );

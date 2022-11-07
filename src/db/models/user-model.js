@@ -36,6 +36,4 @@ export class UsersModel {
   }
 }
 
-const usersModel = new UsersModel();
-
-export { usersModel };
+export const usersModel = new UsersModel();
