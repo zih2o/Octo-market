@@ -10,7 +10,7 @@ import {
   updateItemJoiSchema,
 } from '../db/schemas/joi-schemas';
 import { categoryJoiSchema } from '../db/schemas/joi-schemas';
-import { updateOrderJoiSchema } from '../db/schemas/joi-schemas';
+import { updateOrderAdminJoiSchema } from '../db/schemas/joi-schemas';
 
 const adminRouter = Router();
 const validator = createValidator({});
@@ -63,7 +63,7 @@ adminRouter.delete('/items/:itemId', loginRequired, itemController.deleteItem);
 adminRouter.get('/orders', loginRequired, orderController.getAll);
 adminRouter.put(
   '/orders/:orderId',
-  validator.body(updateOrderJoiSchema),
+  validator.body(updateOrderAdminJoiSchema),
   loginRequired,
   orderController.updateOrder,
 );

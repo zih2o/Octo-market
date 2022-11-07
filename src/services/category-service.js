@@ -10,6 +10,11 @@ class CategoryService {
     if (userType !== 'admin') {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
+    const count = await this.categoryModel.countCategory();
+    if (count == 8) {
+      throw new CustomError(409, 'Category 개수가 너무 많습니다.');
+    }
+
     const { name } = categoryInfo;
     const category = await this.categoryModel.findByName(name);
     if (category) {
