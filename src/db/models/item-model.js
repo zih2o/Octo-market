@@ -7,10 +7,10 @@ const Item = model('items', itemSchema);
 
 export class ItemsModel {
   async findAll(sortingInfo) {
-    const { sorting, sortCondition, count, perCount } = sortingInfo;
+    const { count, perCount } = sortingInfo;
 
     const items = await Item.find({})
-      .sort({ [sorting]: sortCondition })
+      .sort({ createdAt: -1 })
       .skip(perCount * (count - 1))
       .limit(perCount);
 

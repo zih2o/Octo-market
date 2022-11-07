@@ -30,7 +30,7 @@ adminRouter.post(
 );
 
 adminRouter.put(
-  '/categories/updateInfo/:catId',
+  '/categories/:catId',
   validator.body(categoryJoiSchema),
   loginRequired,
   categoryController.updateCategory,
