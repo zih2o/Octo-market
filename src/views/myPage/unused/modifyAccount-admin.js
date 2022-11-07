@@ -45,7 +45,7 @@ submitBtn.addEventListener("click", async (e)=>{
     };
 
     try {
-        const res = await Api.patch(`http://localhost:5050/users/updateinfo/${userId}`, data);
+        const res = await Api.post(`http://localhost:5050/users/updateinfo/${userId}`, data);
         if (res.status == 200) {
             alert("수정되었습니다.");
             return;
