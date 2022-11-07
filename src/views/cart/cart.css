@@ -81,7 +81,10 @@ header {
 
 #cartInfo {
   width: 70%;
-  box-shadow: none;
+}
+
+#cartList {
+  margin-right: 10px;
 }
 
 #checkBox {
@@ -145,14 +148,9 @@ header {
   width: 40%;
 }
 
-#spacing {
-  padding: 0;
-  width: 10px;
-  visibility: hidden;
-}
-
 #cart,
-#payment {
+#payment,
+#goToBuy {
   font-weight: bold;
 }
 
@@ -164,6 +162,7 @@ header {
   height: 40vh;
   width: 30%;
   background-color: #eefffd;
+  box-shadow: none;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-auto-columns: 1fr;
@@ -173,7 +172,6 @@ header {
 
 .paymentInfo {
   grid-area: 1 / 1 / 3 / 2;
-  border-bottom: solid 1px black;
   margin: auto 0;
 }
 
