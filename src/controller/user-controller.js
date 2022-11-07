@@ -1,5 +1,21 @@
 import { userService } from '../services';
 
+//
+const getUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const user = await userService.getUserInfo(userId);
+
+    res.status(200).json({
+      name: user.name,
+      address: user.address,
+      phoneNum: user.phoneNum,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // 회원가입
 const signup = async (req, res, next) => {
   try {
@@ -63,4 +79,4 @@ const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
-export { signup, login, updateUser, deleteUser };
+export { getUser, signup, login, updateUser, deleteUser };
