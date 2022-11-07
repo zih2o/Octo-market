@@ -29,7 +29,7 @@ const loginRequired = async (req, res, next) => {
     const user = await usersModel.findById(userId);
     const admin = await adminModel.findById(userId);
 
-    if (user === null && admin === null) {
+    if (user == null && admin == null) {
       return res.status(401).json({
         result: 'not found from users collection',
         message: '회원정보를 찾을 수 없습니다.',

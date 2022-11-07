@@ -26,6 +26,11 @@ export class CategoryModel {
     return newCategory;
   }
 
+  async countCategory() {
+    const count = await Category.countDocuments({});
+    return count;
+  }
+
   async updateCategory(catId, update) {
     const option = { returnOriginal: false };
     const updatedCategory = await Category.findOneAndUpdate(
