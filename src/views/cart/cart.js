@@ -241,6 +241,10 @@ function delSelect() {
     state.productsCount -= amount[itemId];
     state.productsPrice -= amount[itemId] * items[itemId].price;
     sessionStorage.removeItem(itemId);
+    sessionStorage.setItem(
+      "cart",
+      sessionStorage.getItem("cart").replace(itemId, "")
+    );
     e.parentElement.remove();
   });
 
