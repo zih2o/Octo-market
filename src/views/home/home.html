@@ -28,23 +28,23 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons" id="menu-box">
-              <a href="./login.html" class="button is-primary" id="login">
+              <a href="http://localhost:5050/users/login" class="button is-primary" id="login">
                 <strong>로그인</strong>
               </a>
               <div class="vertical-bar" id="vb-login-after"></div>
-              <a href="../home/home.html" class="button is-primary" id="logout">
+              <a href="http://localhost:5050/" class="button is-primary" id="logout">
                 <strong>로그아웃</strong>
               </a>
               <div class="vertical-bar" id="vb-logout-after"></div>
-              <a href="../join/register.html" class="button is-primary" id="join">
+              <a href="http://localhost:5050/users/signup" class="button is-primary" id="join">
                 <strong>회원가입</strong>
               </a>
               <div class="vertical-bar" id="vb-join-after"></div>
-              <a href="../cart/cart.html" class="button is-primary" id="cart">
+              <a href="http://localhost:5050/cart" class="button is-primary" id="cart">
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="" class="button is-primary" id="mypage">
+              <a href="http://localhost:5050/users/mypage" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>
@@ -55,14 +55,16 @@
 
     <div id="title-container">
       <div id="title">
-        <img src="../images/octopus-title.png" alt="문어상점">
+        <a href="http://localhost:5050/">
+          <img src="../images/octopus-title.png" alt="문어상점">
+        </a>
       </div>
     </div>
 
     <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
     <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
     <div class="tabs is-medium is-centered">
-      <ul>
+      <ul id="sticky">
 
         <li id="entire"><a href="http://localhost:5050/items"><strong>전체보기</strong></a></li>
         <li id="processed"><a href="http://localhost:5050/items/category/:cat_id"><strong>가공식품</strong></a></li>
@@ -181,7 +183,7 @@
           <a href="">Private Policy</a>
         </div>
         <div id="footer-company">
-          <a href="">ⓒ 2022 OCTO infinite</a>
+          <a href="http://localhost:5050/admin/login">ⓒ 2022 OCTO infinite</a>
         </div>
       </div>
     </div>
@@ -189,7 +191,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
-  <!-- <script src="~bulma-carousel/dist/js/bulma-carousel.min.js"></script> -->
   <script>
     bulmaCarousel.attach('#carousel-demo', {
       slidesToScroll: 1,

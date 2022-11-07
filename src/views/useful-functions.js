@@ -1,3 +1,5 @@
+import * from './api.js'
+
 // 문자열+숫자로 이루어진 랜덤 5글자 반환
 export const randomId = () => {
   return Math.random().toString(36).substring(2, 7);
@@ -33,10 +35,12 @@ export const hasWhiteSpace = s => {
   return s.indexOf(' ') >= 0;
 };
 
+// nav 바에 js 요소 적용
 export const drawNavbar = () => {
   const loginBtn = document.getElementById('login');
   const logoutBtn = document.getElementById('logout');
   const joinBtn = document.getElementById('join');
+  const mypageBtn = document.getElementById('mypage');
 
   const loginAfter = document.getElementById('vb-login-after');
   const logoutAfter = document.getElementById('vb-logout-after');
@@ -74,9 +78,21 @@ export const drawNavbar = () => {
     logoutAfter.classList.add('active');
   }
 
+  // 관리자 토큰 보유 시, 마이페이지 버튼 눌렀을때 관리자 마이페이지 로 이동하도록 경로 수정
+  if (sessionStorage.getItem('adminToken')) {
+    mypageBtn.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = 'http://localhost:5050/admin/mypage';
+    });
+  }
+
   // 로그아웃 시 세션스토리지 토큰 제거
   if (!logoutBtn.classList.contains('active')) {
     sessionStorage.removeItem('loginToken');
     sessionStorage.removeItem('userEmail');
   }
+};
+
+const drawCategory = async () => {
+  const res = await fet
 };

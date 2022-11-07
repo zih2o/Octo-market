@@ -544,6 +544,7 @@ let cnt = 1;
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
+  drawCategory();
 });
 
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
