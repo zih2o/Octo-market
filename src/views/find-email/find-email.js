@@ -53,18 +53,19 @@ async function handleSubmit(e) {
   // 로그인 api 요청
   try {
     const data = {
-      name: '토끼씨',
-      phoneNum: '01012341234'
+      name: name,
+      phoneNum: phoneNum
     };
 
     // fetch 사용 가능 시 주석 해제 예정
     // fetch 경로 추가 바람
-    const result = await Api.post('http://localhost:5050/users/추가경로', data);
+    const result = await Api.post('http://localhost:5050/users/findemail', data);
     const email = result.email;
 
     // 확인용 더미 email
     // let email = 'tkemk';
-    // emailInput.value = email;
+
+    emailInput.value = email;
 
     // 이메일 값이 있으면 보이도록
     if (email) {

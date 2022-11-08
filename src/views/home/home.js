@@ -557,6 +557,19 @@ let sc = 0;
 // 스크롤 페이지네이션 시 페이지 확인용 통신 횟수 카운트 변수
 let cnt = 1;
 
+const callRecommends = (cnt) => {
+  let url = '';
+
+  let params = {
+    count: '1',
+    perCount: '4',
+    isRecommend: true,
+    re: 'isRecommend',
+    isDiscount: false,
+    dis: 'isDiscount',
+  }
+}
+
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
