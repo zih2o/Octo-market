@@ -70,6 +70,7 @@ main {
   width: 100vw;
 }
 
+/*본문*/
 #detailContent {
   font-weight: bold;
   height: 60%;
@@ -81,7 +82,7 @@ main {
   width: 270px;
   height: 270px;
   background-color: lightgray;
-  image-rendering: auto;
+  border-radius: 10px;
 }
 
 #name {
@@ -93,10 +94,22 @@ main {
 #description {
   height: 50%;
   overflow: auto;
+  font-weight: normal;
 }
 
 #price {
   text-align: right;
+}
+
+.discount {
+  margin-right: 10px;
+  color: red;
+}
+
+.firstPrice {
+  margin-right: 10px;
+  color: #cfcfcf;
+  text-decoration: line-through;
 }
 
 .buttons {
