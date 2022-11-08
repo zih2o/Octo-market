@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { config } from '../../configuration/config';
 import { usersModel } from '../db';
 import { CustomError } from '../middlewares';
 
@@ -11,7 +12,7 @@ class UserService {
 
   async getUserInfo(userId) {
     const user = await this.userModel.findById(userId);
-    console.log(user);
+
     if (!user) {
       throw new CustomError(
         404,
@@ -34,7 +35,10 @@ class UserService {
       throw new CustomError(409, `${email}은 이미 가입 된 회원입니다.`);
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      config.bcrypt.saltRounds,
+    );
     const newUserInfo = {
       name,
       email,
@@ -66,10 +70,10 @@ class UserService {
       );
     }
 
-    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const accessToken = jwt.sign(
       { userId: user.id, role: user.userType },
-      secretKey,
+      config.jwt.accessSecret,
+      { expiresIn: config.jwt.accessExpiresIn },
     );
 
     return { accessToken, userId: user.id, userType: user.userType };
@@ -121,7 +125,7 @@ class UserService {
     const { password } = toUpdate;
 
     if (password) {
-      const newPassword = await bcrypt.hash(password, 10);
+      const newPassword = await bcrypt.hash(password, config.bcrypt.saltRounds);
       toUpdate.password = newPassword;
     }
     const updatedUser = await this.userModel.update({
