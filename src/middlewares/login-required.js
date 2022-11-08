@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { usersModel } from '../db';
 import { adminModel } from '../db';
+import { config } from '../../configuration/config';
 
 dotenv.config();
 
@@ -25,8 +26,7 @@ const loginRequired = async (req, res, next) => {
 
   // 해당 token 이 정상적인 token인지 확인
   try {
-    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const jwtDecoded = jwt.verify(userToken, config.jwt.accessSecret);
 
     const userId = jwtDecoded.userId;
     const user = await usersModel.findById(userId);
