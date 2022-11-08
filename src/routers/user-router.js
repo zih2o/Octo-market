@@ -6,10 +6,12 @@ import {
   signUpJoiSchema,
   loginJoiSchema,
   updateJoiSchema,
+  findEmailJoiSchema,
 } from '../db/schemas/joi-schemas';
 
 const usersRouter = Router();
 const validator = createValidator();
+
 usersRouter.post(
   '/signup',
   validator.body(signUpJoiSchema),
@@ -20,6 +22,12 @@ usersRouter.post(
   '/login',
   validator.body(loginJoiSchema),
   usersController.login,
+);
+
+usersRouter.post(
+  '/findemail',
+  validator.body(findEmailJoiSchema),
+  usersController.findEmail,
 );
 
 usersRouter.get('/:userId', loginRequired, usersController.getUser);

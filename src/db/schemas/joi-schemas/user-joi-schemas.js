@@ -53,6 +53,16 @@ const loginJoiSchema = Joi.object({
   }),
 });
 
+const findEmailJoiSchema = Joi.object({
+  name: Joi.string().trim().min(2).required().messages({
+    'any.required': 'name은 반드시 입력해야 합니다.',
+    'string.min': 'name은 최소 2글자 이상입니다.',
+  }),
+  phoneNum: Joi.string().trim().required().messages({
+    'any.required': 'phoneNum은 반드시 입력해야 합니다.',
+  }),
+});
+
 const updateJoiSchema = Joi.object({
   password: Joi.string().trim().min(8).max(20).required().messages({
     'any.required': 'password는 반드시 입력해야 합니다.',
@@ -79,4 +89,4 @@ const updateJoiSchema = Joi.object({
     .optional(),
   phoneNum: Joi.string().trim().required().allow(''),
 });
-export { signUpJoiSchema, loginJoiSchema, updateJoiSchema };
+export { signUpJoiSchema, loginJoiSchema, updateJoiSchema, findEmailJoiSchema };
