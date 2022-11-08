@@ -24,9 +24,10 @@ settingInfo();
 //총 결제 정보 html 입력
 function settingInfo() {
   productsCount.innerHTML = state.productsCount + "개";
-  productsPrice.innerHTML = state.productsPrice + "원";
-  deliveryCharge.innerHTML = state.deliveryCharge + "원";
-  totalPrice.innerHTML = state.productsPrice + state.deliveryCharge + "원";
+  productsPrice.innerHTML = addCommas(state.productsPrice) + "원";
+  deliveryCharge.innerHTML = addCommas(state.deliveryCharge) + "원";
+  totalPrice.innerHTML =
+    addCommas(state.productsPrice + state.deliveryCharge) + "원";
   return;
 }
 
@@ -55,10 +56,17 @@ async function makeProductList() {
 
         if (sessionStorage.getItem(itemId)) {
           items[itemId].name = item.name;
-          items[itemId].price = Number(item.price);
           amount[itemId] = Number(sessionStorage.getItem(itemId));
-          state.productsPrice += Number(item.price);
           state.productsCount += Number(sessionStorage.getItem(itemId));
+
+          if (item.isDiscount) {
+            items[itemId].price =
+              Number(item.price) * (1 - Number(item.disPercent) / 100);
+            state.productsPrice += items[itemId].price * amount[itemId];
+          } else {
+            items[itemId].price = Number(item.price);
+            state.productsPrice += Number(item.price) * amount[itemId];
+          }
 
           cartList.insertAdjacentHTML(
             "beforeend",
@@ -66,7 +74,9 @@ async function makeProductList() {
                 <input type="checkbox" class="checkbox include" autocomplete="off" />  
                 <div class="productimg"><img src=${item.imageUrl}/></div>
               <div class="productDescription">
-                <span class="productName is-size-5">${items[itemId].name}</span>
+                <span class="productName is-size-5"><span>${
+                  items[itemId].name
+                }</span><span class="is-size-7"></span></span>
                 <span class="eachPrice">${addCommas(
                   items[itemId].price
                 )}원</span>
@@ -76,12 +86,19 @@ async function makeProductList() {
                   <button class="plusBtn">+</button>
                 </nav>
                 <span class="eachTotalPrice" id="eachTotalPrice_${itemId}">${addCommas(
-              items[itemId].price
+              items[itemId].price * amount[itemId]
             )}원</span>
               </div>
             </div>`
           );
           state.deliveryCharge = 3000;
+          if (item.isDiscount) {
+            const discount = document.querySelector(".is-size-7");
+            discount.insertAdjacentHTML(
+              "beforeend",
+              `${item.disPercent}% 할인 적용`
+            );
+          }
         }
       } catch (err) {
         alert(
