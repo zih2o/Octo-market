@@ -117,15 +117,15 @@ async function allOrders()
 
 function checkStatus(strIn)
 {
-    if (strIn === "입금 대기")
+    if (strIn === "결제 완료")
         return 0;
-    else if (strIn === "결제 완료")
-        return 1;
     else if (strIn === "배송 준비")
-        return 2;
+        return 1;
     else if (strIn === "배송 중")
-        return 3;
+        return 2;
     else if (strIn === "배송 완료")
+        return 3;
+    else if (strIn === "주문 취소")
         return 4;
 }
 
