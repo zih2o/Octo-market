@@ -8,6 +8,7 @@ const getUser = async (req, res, next) => {
 
     res.status(200).json({
       name: user.name,
+      email: user.email,
       address: user.address,
       phoneNum: user.phoneNum,
     });
