@@ -1,5 +1,10 @@
 import * as Api from '../api.js';
-import { validateEmail, drawNavbar, activeNavbar , drawFooter } from '../useful-functions.js';
+import {
+  validateEmail,
+  drawNavbar,
+  activeNavbar,
+  drawFooter,
+} from '../useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
@@ -44,17 +49,19 @@ async function handleSubmit(e) {
     const data = { email, password };
 
     // fetch 사용 가능 시 주석 해제 예정
-    const result = await Api.post('http://localhost:5050/users/login', data);
+    const result = await Api.post('http://localhost:5050/admin/login', data);
     const token = result.accessToken;
-    const id = result.userId;
+    const adminId = result.adminId;
+    const adminType = result.userType;
 
     // 로그인 성공, 토큰을 세션 스토리지에 저장
     // 물론 다른 스토리지여도 됨
 
-    sessionStorage.setItem('userId', id);
+    sessionStorage.setItem('userId', adminId);
     sessionStorage.setItem('loginToken', token);
+    sessionStorage.setItem('adminToken', adminType);
 
-    alert(`정상적으로 로그인되었습니다.`);
+    alert(`관리자 계정으로 로그인되었습니다.`);
 
     // 로그인 성공
 
