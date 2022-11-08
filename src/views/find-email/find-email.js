@@ -64,7 +64,8 @@ async function handleSubmit(e) {
 
     // 확인용 더미 email
     // let email = 'tkemk';
-    // emailInput.value = email;
+
+    emailInput.value = email;
 
     // 이메일 값이 있으면 보이도록
     if (email) {

@@ -110,8 +110,13 @@ main {
   font-size: 20px;
   padding-top: 50px;
 }
+
 #smallReturnLabel {
   margin: 40px 0 20px 0;
+}
+
+#label-top {
+  margin-bottom: 40px;
 }
 
 .title {

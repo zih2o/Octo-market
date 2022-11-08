@@ -78,7 +78,8 @@ export const activeNavbar = () => {
   // 로그아웃 시 세션스토리지 토큰 제거
   if (!logoutBtn.classList.contains('active')) {
     sessionStorage.removeItem('loginToken');
-    sessionStorage.removeItem('userEmail');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('adminToken');
   }
 };
 
@@ -104,53 +105,6 @@ export const fillCategoryBar = async () => {
 };
 
 export const drawNavbar = () => {
-  const template = `
-    <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand" id="nav-logobox">
-        <img id="nav-logo" src="../images/octo-logo.png" alt="">
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons" id="menu-box">
-              <a href="http://localhost:5050/users/login" class="button is-primary" id="login">
-                <strong>로그인</strong>
-              </a>
-              <div class="vertical-bar" id="vb-login-after"></div>
-              <a href="http://localhost:5050/" class="button is-primary" id="logout">
-                <strong>로그아웃</strong>
-              </a>
-              <div class="vertical-bar" id="vb-logout-after"></div>
-              <a href="http://localhost:5050/users/signup" class="button is-primary" id="join">
-                <strong>회원가입</strong>
-              </a>
-              <div class="vertical-bar" id="vb-join-after"></div>
-              <a href="http://localhost:5050/cart" class="button is-primary" id="cart">
-                <strong>장바구니</strong>
-              </a>
-              <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="http://localhost:5050/users/mypage" class="button is-primary" id="mypage">
-                <strong>마이페이지</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div id="title-container">
-      <div id="title">
-        <a href="http://localhost:5050/">
-          <img src="../images/octopus-title.png" alt="문어상점">
-        </a>
-      </div>
-    </div>
-
-  `;
-  const headerTag = document.getElementsByTagName('header')[0];
-  headerTag.insertAdjacentHTML('afterbegin', template);
-};
-export const draw = () => {
   const template = `
     <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand" id="nav-logobox">
