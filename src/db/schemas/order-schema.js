@@ -53,7 +53,7 @@ const orderSchema = new Schema(
     },
     state: {
       type: String,
-      default: 'Payment Completed',
+      default: '결제 완료',
     },
   },
   {
