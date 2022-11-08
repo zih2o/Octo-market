@@ -16,7 +16,8 @@ import {
 drawNavbar();
 activeNavbar();
 drawCategoryBar();
-fillCategoryBar();
+// 카테고리 목록 반환받음
+const categoryList = fillCategoryBar();
 drawFooter();
 
 // top 스크롤 버튼
@@ -43,44 +44,292 @@ function topFunction() {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-const categoryTitle = document.querySelector('#category-title');
-let pathname = window.location.pathname;
+const categoryOj = {};
 
-// 테스트용 더미 url
-pathname = 'http://localhost:5050/items/category/processed';
+const mdCategoryUl = document.getElementsByClassName('md-category-ul')[0];
 
-// 아래 url의 endpoint 는 추후 카테고리 id 확인 후 수정
-const categoryOj = {
-  'http://localhost:5050/items/category/': '전체보기',
-  'http://localhost:5050/items/category/processed': '가공식품',
-  'http://localhost:5050/items/category/marine': '수산식품',
-  'http://localhost:5050/items/category/noodle': '면 · 튀김',
-  'http://localhost:5050/items/category/seasoning': '양념 · 조미료',
-  'http://localhost:5050/items/category/rice': '쌀 · 견과류',
-  'http://localhost:5050/items/category/can': '캔 · 통조림',
-};
+// 카테고리 목록 조회 이용하여 랜더링 부분
+categoryList.then(datas => {
+  let mdCategoryStr = '';
 
-// url queryparams 값으로 카테고리 타이틀 텍스트 설정
-categoryTitle.innerHTML = categoryOj[pathname];
-console.log(categoryTitle.innerText);
+  // li 생성 및 사용할 데이터 객체로 저장
+  datas.map(el => {
+    console.log('li템플릿 el => ',el)
+    const template = `
+        <li class="md-category-li">
+        <a class="md-category-button"" href="#" data-categoryid="${el._id}">
+        ${el.name}
+        </a>
+        </li>
+        `;
+    mdCategoryStr += template;
+    categoryOj[el._id] = el.name;
+  });
+  mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
+  // console.log('timing check')
 
-// fetch 사용 전 더미 데이터
-const dummys = {
-  items: [
-    {
-      _id: '63648af2f6cbdc57bcdd5345',
-      name: '고등어1',
-      brand: '청년수산',
-      price: '10000',
-      description: '맛있엉',
-      category: '63622c58942ce8e513937058',
-      imageUrl: 'http://ddd',
-      createdAt: '2022-11-04T03:45:54.191Z',
-      updatedAt: '2022-11-04T03:45:54.191Z',
-      __v: 0,
-      id: '63648af2f6cbdc57bcdd5345',
-    },
-    {
+  // url 로 현재 상품 리스트 타이틀 텍스트 설정하기
+  const categoryTitle = document.querySelector('#category-title');
+  let pathname = window.location.pathname;
+
+  const categoryTitleName = categoryOj[`http://localhost:5050/${pathname}`];
+  if (categoryTitleName) {
+    categoryTitle.innerText = categoryTitleName;
+  } else {
+    categoryTitle.innerText = '전체보기';
+  }
+  console.log(categoryTitle.innerText);
+
+
+  // md 카테고리 a 태그 연결 대신 해당 카테고리 데이터로 li들을 채움
+  const mdcategoryButtons = document.getElementsByClassName('md-category-button');
+  // foreach, map 은 안되고 for 만 가능
+  for (let i = 0; i < mdcategoryButtons.length; i++) {
+    // console.log('md카테 하나', mdcategoryButtons[i]);
+    mdcategoryButtons[i].addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log(e.target)
+      console.log('데이터 셋으로 가져온 데이터 =>', e.target.dataset.categoryid);
+      fillRecommend(e.target.dataset.categoryid);
+    })
+  }
+
+
+  // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수
+  // 카테고리 명을 categoryId 로 받는다
+  const fillRecommend = async (categoryId) => {
+    console.log('refill 카테고리 아이디 요청 ===>>> ', categoryId)
+    let url = 'http://localhost:5050/items/category/';
+    url += categoryId;
+
+    // console.log('md카테고리 콜 url =>', url);
+
+    let params = {
+      re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
+      isRecommend: true, // boolean 입력
+      count: 1, // 통신 횟수 count
+      perCount: 4,
+    };
+
+    url = `${url}?${new URLSearchParams(params).toString()}`;
+    // console.log('fet할 완성 url =>', url);
+
+    // 확인용 더미
+    const fetchedMdProducts = [
+      {
+        name: 'Apple AirPods Pro 1 ()',
+        brand: 'Apple',
+        price: 293000,
+        description: '음질 지리는 에어팟입니다.',
+        category: 'first',
+        imageUrl: 'https://pbs.twimg.com/media/EqEGWJ-VoAIAFj_.jpg',
+        isRecommend: true,
+        isDiscount: true,
+        disPercent: 30,
+        _id: '6369c1d05a1dbc3a930fec1e',
+        createdAt: '2022-11-08T02:41:20.810Z',
+        updatedAt: '2022-11-08T02:41:20.810Z',
+        __v: 0,
+        id: '6369c1d05a1dbc3a930fec1e',
+      },
+      {
+        name: 'Apple AirPods Pro 2 ()',
+        brand: 'Apple',
+        price: 293000,
+        description: '음질 지리는 에어팟입니다.',
+        category: 'second',
+        imageUrl:
+          'https://nateonweb.nate.com/imgbbs/1/20200411/_20200411130421_C675D78_AA40_4BD2_BA83_35A27E383F67.jpeg.8C675D78_AA40_4BD2_BA83_35A27E383F67.jpg',
+        isRecommend: true,
+        isDiscount: true,
+        disPercent: 30,
+        _id: '6369c1d05a1dbc3a930fec1e',
+        createdAt: '2022-11-08T02:41:20.810Z',
+        updatedAt: '2022-11-08T02:41:20.810Z',
+        __v: 0,
+        id: '6369c1d05a1dbc3a930fec1e',
+      },
+      {
+        name: 'Apple AirPods Pro 3 ()',
+        brand: 'Apple',
+        price: 293000,
+        description: '음질 지리는 에어팟입니다.',
+        category: 'third',
+        imageUrl: 'https://pbs.twimg.com/media/EqEGWJ-VoAIAFj_.jpg',
+        isRecommend: true,
+        isDiscount: true,
+        disPercent: 30,
+        _id: '6369c1d05a1dbc3a930fec1e',
+        createdAt: '2022-11-08T02:41:20.810Z',
+        updatedAt: '2022-11-08T02:41:20.810Z',
+        __v: 0,
+        id: '6369c1d05a1dbc3a930fec1e',
+      },
+      {
+        name: 'Apple AirPods Pro 4 ()',
+        brand: 'Apple',
+        price: 293000,
+        description: '음질 지리는 에어팟입니다.',
+        category: 'fourth',
+        imageUrl:
+          'https://nateonweb.nate.com/imgbbs/1/20200411/_20200411130421_C675D78_AA40_4BD2_BA83_35A27E383F67.jpeg.8C675D78_AA40_4BD2_BA83_35A27E383F67.jpg',
+        isRecommend: true,
+        isDiscount: true,
+        disPercent: 30,
+        _id: '6369c1d05a1dbc3a930fec1e',
+        createdAt: '2022-11-08T02:41:20.810Z',
+        updatedAt: '2022-11-08T02:41:20.810Z',
+        __v: 0,
+        id: '6369c1d05a1dbc3a930fec1e',
+      },
+    ];
+
+
+    // fetch 잠시 주석처리
+    // const res = await fetch(url);
+    // const fetchedMdProducts = res.json();
+    console.log('fetchedMdProducts =>> ', fetchedMdProducts);
+
+
+    // 빈 박스 요소 만들어 넣기
+    let sumTemplate = "";
+    const itemUrl = 'http://localhost:5050/items/';
+
+    const createMdCategoryBox = num => {
+      const productId = fetchedMdProducts[num]._id;
+      const productImg = fetchedMdProducts[num].imageUrl;
+      const productName = fetchedMdProducts[num].name;
+      const productPrice = fetchedMdProducts[num].price;
+
+      const product = `
+      <li class="product-item md-box" style="width:25%;">
+                <div class="item-container">
+                  <div class="item-photobox">
+                    <a id="md${num + 1}-a" href="${itemUrl}${
+        productId
+      }">
+                      <img id="md${num + 1}-img" src="${
+        productImg
+      }" alt="" loading="lazy">
+                    </a>
+                  </div>
+                  <div class="item-info-container">
+                    <div class="item-namebox">
+                      <strong><span id="md${num + 1}-name">${productName}</span></strong>
+                    </div>
+                    <div class="item-pricebox">
+                      <strong><span id="md${num + 1}-price">${productPrice}</span></strong>
+                    </div>
+                  </div>
+                </div>
+              </li>
+                    `;
+      return product;
+    };
+    // 4개의 추천 상품
+    for (let i = 0; i < 4; i++) {
+      sumTemplate += createMdCategoryBox(i);
+    }
+
+    const mdProductUl = document.getElementsByClassName('md-product-ul')[0];
+    mdProductUl.innerHTML = sumTemplate;
+
+
+
+    // fetch 로 받은 데이터를 박스에 넣기
+
+    // 카테고리 클릭 시 마다 dom 의 reflow(재배치)를 최소화 하기 위해서 요소 삽입, 삭제는 피했다
+    // 박스의 수가 정해진 소수이니 api로 값만 타겟하고 변경하여 클라이언트의 연산을 줄였다
+    // 단 하나씩 연결해주어야 하므로 노가다에 코드 라인이 많아지고 지저분해 보이는 단점이 있다
+
+    // const md1a = document.getElementById('md1-a');
+    // const md1img = document.getElementById('md1-img')
+    // const md1name = document.getElementById('md1-name')
+    // const md1price = document.getElementById('md1-price')
+    // const md2a = document.getElementById('md2-a');
+    // const md2img = document.getElementById('md2-img')
+    // const md2name = document.getElementById('md2-name')
+    // const md2price = document.getElementById('md2-price')
+    // const md3a = document.getElementById('md3-a');
+    // const md3img = document.getElementById('md3-img')
+    // const md3name = document.getElementById('md3-name')
+    // const md3price = document.getElementById('md3-price')
+    // const md4a = document.getElementById('md4-a');
+    // const md4img = document.getElementById('md4-img')
+    // const md4name = document.getElementById('md4-name')
+    // const md4price = document.getElementById('md4-price')
+
+
+    // md1a.href = `${itemUrl}${fetchedMdProducts[0]._id}`;
+    // md2a.href = `${itemUrl}${fetchedMdProducts[1]._id}`;
+    // md3a.href = `${itemUrl}${fetchedMdProducts[2]._id}`;
+    // md4a.href = `${itemUrl}${fetchedMdProducts[3]._id}`;
+
+    // md1img.src = fetchedMdProducts[0].imageUrl;
+    // md2img.src = fetchedMdProducts[1].imageUrl;
+    // md3img.src = fetchedMdProducts[2].imageUrl;
+    // md4img.src = fetchedMdProducts[3].imageUrl;
+
+    // md1name.innerText = fetchedMdProducts[0].name;
+    // md2name.innerText = fetchedMdProducts[1].name;
+    // md3name.innerText = fetchedMdProducts[2].name;
+    // md4name.innerText = fetchedMdProducts[3].name;
+
+    // md1price.innerText = fetchedMdProducts[0].price;
+    // md2price.innerText = fetchedMdProducts[1].price;
+    // md3price.innerText = fetchedMdProducts[2].price;
+    // md4price.innerText = fetchedMdProducts[3].price;
+  };
+
+  // 추후 md카테고리 클릭 이벤트 시, 값 변경 예정
+  let mdCategoryId = Object.keys(categoryOj)[0];
+
+  fillRecommend(mdCategoryId);
+
+  // 아래에 카테고리 클릭 이벤트 추가 필요
+
+
+
+  // 예시
+
+  //       const callApi = async () => {
+  // let url = 'http://localhost:5050/items';
+
+  // let params = {
+  //   cnt: `${cnt}`,
+  //   per: '20',
+  //   sort: `${sortType}`,
+  //   sc: `${sc}`,
+  // };
+
+  // url = `${url}?${new URLSearchParams(params).toString()}`;
+  // console.log('url => ', url);
+
+  // // 서버 연결 시 사용할 fetch문
+  // const res = await fetch(url);
+  // const fetchedProducts = await res.json();
+  // console.log('fetchedProducts: ', fetchedProducts);
+})
+        console.log('categoryoj===.>> ',categoryOj);
+
+
+        // fetch 사용 전 더미 데이터
+        const dummys = {
+          items: [
+            {
+              _id: '63648af2f6cbdc57bcdd5345',
+              name: '고등어1',
+              brand: '청년수산',
+              price: '10000',
+              description: '맛있엉',
+              category: '63622c58942ce8e513937058',
+              imageUrl: 'http://ddd',
+              createdAt: '2022-11-04T03:45:54.191Z',
+              updatedAt: '2022-11-04T03:45:54.191Z',
+              __v: 0,
+              id: '63648af2f6cbdc57bcdd5345',
+            },
+            {
       _id: '6364887e39e4d0963d6ed1de',
       name: '청어1',
       brand: '청년수산',
@@ -557,8 +806,11 @@ let sc = 0;
 // 스크롤 페이지네이션 시 페이지 확인용 통신 횟수 카운트 변수
 let cnt = 1;
 
+
+console.log('카테고리 목룍 ==>>> ', categoryList)
+
 const callRecommends = (cnt) => {
-  let url = '';
+  let url = 'http://localhost:5050/items/category/';
 
   let params = {
     count: '1',
@@ -568,6 +820,20 @@ const callRecommends = (cnt) => {
     isDiscount: false,
     dis: 'isDiscount',
   }
+  // categoryList // 조회한 카테고리 목록
+
+  // 추천 섹션의 카테고리 목록
+
+  const template = `
+    <li>
+      <a href="http://localhost:5050/items">
+        <strong>전체보기</strong>
+      </a>
+    </li>
+  `;
+  const headerTag = document.getElementsByTagName('header')[0];
+  headerTag.insertAdjacentHTML('afterend', template);
+
 }
 
 // 페이지 첫 돔 로딩시, callApi 호출
@@ -592,9 +858,9 @@ const callApi = async () => {
   console.log('url => ', url);
 
   // 서버 연결 시 사용할 fetch문
-  // const res = await fetch(url);
-  // const fetchedProducts = await res.json();
-  // console.log('fetchedProducts: ', fetchedProducts);
+  const res = await fetch(url);
+  const fetchedProducts = await res.json();
+  console.log('fetchedProducts: ', fetchedProducts);
 
   // const dummy = dummys[cnt - 1];
   let dummy = sliceChunkDataArr(dummys.items, 8)[cnt - 1];
