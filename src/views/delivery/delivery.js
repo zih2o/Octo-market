@@ -1,6 +1,6 @@
 import * as Api from '../api.js';
 
-//This page is rendered when URI is given as http://localhost:5050/orders/users/
+//This page is rendered when URI is given as /orders/users/
 
 const orderList = document.querySelector('#orderList');
 
@@ -80,7 +80,7 @@ async function allOrders()
     var deliStatus = [0, 0, 0, 0, 0];
     try 
     {
-        const res = await Api.get(`http://localhost:5050/orders/users/${userId}`);
+        const res = await Api.get(`/orders/users/${userId}`);
         const orders = JSON.parse(res.body);
         if (res.status == 401 || res.status == 403)
             return alert(orders.message)
