@@ -16,6 +16,11 @@ export class UsersModel {
     return user;
   }
 
+  async findByNamePhone(name, phoneNum) {
+    const user = await User.findOne({ name, phoneNum });
+    return user;
+  }
+
   async createUser(userInfo) {
     const createdNewUser = await new User(userInfo).save();
     return createdNewUser;

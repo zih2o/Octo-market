@@ -75,6 +75,25 @@ class UserService {
     return { accessToken, userId: user.id, userType: user.userType };
   }
 
+  // Email 찾기
+  async findEmail(userInfo) {
+    const { name, phoneNum } = userInfo;
+
+    const user = await this.userModel.findByNamePhone(name, phoneNum);
+    if (!user) {
+      throw new CustomError(
+        404,
+        '가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
+      );
+    }
+
+    if (user.name !== name && user.phoneNum !== phoneNum) {
+      throw new CustomError(403, '접근 권한이 없습니다.');
+    }
+
+    return user;
+  }
+
   // 회원정보수정
   async updateUser(userInfoRequired, toUpdate) {
     const { userId, currentPassword } = userInfoRequired;

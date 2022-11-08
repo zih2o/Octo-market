@@ -40,6 +40,18 @@ const login = async (req, res, next) => {
   }
 };
 
+// email 찾기
+const findEmail = async (req, res, next) => {
+  try {
+    const userInfo = req.body;
+    const user = await userService.findEmail(userInfo);
+
+    res.status(200).json({ email: user.email });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // 회원정보수정
 const updateUser = async (req, res, next) => {
   try {
@@ -79,4 +91,4 @@ const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
-export { getUser, signup, login, updateUser, deleteUser };
+export { getUser, signup, login, findEmail, updateUser, deleteUser };
