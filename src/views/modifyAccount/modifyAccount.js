@@ -65,10 +65,10 @@ async function handleSubmit(e) {
         alert("전화번호가 공란입니다.")
         return;
     }
-    // if (!/^\d+$/.test(phoneNum)){
-    //     alert("전화번호는 숫자만 입력해 주세요.")
-    //     return;
-    // }
+    if (!/^[\d]$/.test(phoneNum)){
+        alert("전화번호는 숫자만 입력해 주세요.")
+        return;
+    }
 
     const data = {
         password,
