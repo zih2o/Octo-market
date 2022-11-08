@@ -5,21 +5,21 @@ import * as Api from '../api.js';
 const emailIn = document.querySelector("#emailIn");
 const oldpwIn = document.querySelector("#oldpwIn");
 const newpwIn = document.querySelector("#newpwIn");
-const postcode= document.querySelector("#search_postcode");
+const postcode= document.querySelector("#sample6_postcode");
 const addrIn1 = document.querySelector("#sample6_address");
 const addrIn2 = document.querySelector("#sample6_detailAddress");
 const phone = document.querySelector("#phoneNum");
 const submitBtn = document.querySelector("#submitBtn");
 
-// sessionStorage.setItem('loginToken', JSON.stringify({
-//     accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY0OWI5ZDgwYTMzZTUwMWNlNWY5NDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2NzUzODI5OX0.38U02nnJHS_UaEdR5weEll3wKzLE1zS-_f6FTIkdB10",
-//     userId: "63649b9d80a33e501ce5f946",
-//     userType: "user"
-// }))
-// sessionStorage.setItem('userEmail', 'semin0706@naver.com')
+const {accessToken, userId, userType} = {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY5Y2FjZjg4M2Y0Njg2YmNkYWViNWUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2Nzg3NzcxM30.-wwMXn85_1UFtDrKX8itCngS1r56vQowwgp3v5hUtdY",
+    "userId": "6369cacf883f4686bcdaeb5e",
+    "userType": "user"
+};
+sessionStorage.setItem('token', accessToken)
 
-const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
-const emailToken = sessionStorage.getItem('userEmail')
+// const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
+// const emailToken = sessionStorage.getItem('userEmail')
 
 addAllElements()
 addAllEvents()
@@ -35,7 +35,7 @@ function addAllEvents() {
 
 
 function emailAttach () {
-    emailIn.placeholder = emailToken;
+    emailIn.placeholder = "이메일은 변경할 수 없습니다";
 }
 
 async function handleSubmit(e) {
@@ -49,9 +49,9 @@ async function handleSubmit(e) {
     }
     
     const address = {
-        postalcode: postcode.value,
-        address1: addrIn1.value,
-        address2: addrIn2.value,
+        "postalCode": postcode.value,
+        "address1": addrIn1.value,
+        "address2": addrIn2.value,
     };
 
     if (address === ' '){
@@ -65,36 +65,26 @@ async function handleSubmit(e) {
         alert("전화번호가 공란입니다.")
         return;
     }
-    if (!/^\d+$/.test(phoneNum)){
-        alert("전화번호는 숫자만 입력해 주세요.")
-        return;
-    }
+    // if (!/^\d+$/.test(phoneNum)){
+    //     alert("전화번호는 숫자만 입력해 주세요.")
+    //     return;
+    // }
 
     const data = {
         password,
         currentPassword,
-        address,
+        address,    
         phoneNum,
     };
 
     try {
+        console.log(data)
         const res = await Api.put(`/users/${userId}`, data);
-        //const res = 200
-        if (res.status == 200) {
-            alert("수정되었습니다.");
-            return;
-        }
-        else if (res.status == 403)
-        {
-            alert("비밀번호가 일치하지 않습니다.")
-            return;
-        }
-        else if (res.status == 404)
-        {
-            alert("해당하는 유저가 없습니다.")
-            return;
-        }
-        window.location.href = window.location.href
+
+        if (res.statusCode === 200)
+            return alert("정상적으로 수정되었습니다.")
+        else
+            return alert(res.reason)
     }
     catch (err)
     {
