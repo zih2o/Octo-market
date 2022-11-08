@@ -92,20 +92,21 @@
     <!--상세페이지 본문 영역-->
     <main>
       <div class="tile is-parent" id="detailContent">
-        <div class="tile is-4 is-child" id="image">사진</div>
+        <img class="tile is-4 is-child" id="image" alt="상품 이미지"></img>
         <div id="spacing" style="width: 20px; height: 100%"></div>
         <div class="tile is-child" id="detail">
           <div class="box is-size-5" id="name">
             <div id="productName">상품명</div>
             <div id="brand">브랜드</div>
           </div>
-          <div class="box" id="description">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error
-            quidem possimus mollitia eaque ipsum necessitatibus voluptatem
-            laboriosam blanditiis laborum cum, distinctio dignissimos! Quod
-            iusto dicta at tempore non delectus. Soluta?
+          <div class="box is-size-5" id="description">
+            상품 설명
           </div>
-          <div class="box is-size-5" id="price">금액</div>
+          <div class="box is-size-5" id="price">
+            <span class="discount"></span>
+            <span class="firstPrice"></span>
+            <span class="finalPrice"></span>
+          </div>
           <div class="buttons">
             <button class="button is-primary" id="addToCart">
               장바구니에 추가
