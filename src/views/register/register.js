@@ -84,14 +84,15 @@ async function handleSubmit(e) {
   //회원가입 api 요청
   try {
     const data = {
-      fullName,
+      name: fullName,
       email,
       password,
-      phone,
-      postCode,
-      adress1: adress,
-      adress2: detailAdress,
-      type: "User",
+      phoneNum: phone,
+      address: {
+        postalCode: postCode,
+        address1: adress,
+        address2: detailAdress,
+      },
     };
 
     await Api.post("http://localhost:5050/users/signup", data);
