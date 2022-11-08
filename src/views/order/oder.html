@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <!--bulma-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="order.css" />
+    <script src="order.js" type="module" defer></script>
+
+    <title>문어상점</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <!-- header 네비바(메뉴, 카테고리) -->
+    <header>
+      <nav
+        class="navbar"
+        id="nav-top"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand" id="nav-logobox">
+          <img id="nav-logo" src="../images/octo-logo.png" alt="" />
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons" id="menu-box">
+                <a class="button is-primary" id="menu-button">
+                  <strong>로그인</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>회원가입</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>장바구니</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>마이페이지</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="title-container">
+        <div id="title">
+          <img src="../images/octopus-title.png" alt="문어상점" />
+        </div>
+      </div>
+
+      <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
+      <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
+      <!-- <div class="tabs is-medium is-centered">
+        <ul>
+          <li>
+            <a><strong>전체보기</strong></a>
+          </li>
+          <li>
+            <a><strong>가공식품</strong></a>
+          </li>
+          <li>
+            <a><strong>수산식품</strong></a>
+          </li>
+          <li>
+            <a><strong>면, 식품</strong></a>
+          </li>
+          <li>
+            <a><strong>양념, 조미료</strong></a>
+          </li>
+          <li>
+            <a><strong>쌀, 견과류</strong></a>
+          </li>
+          <li>
+            <a><strong>캔, 통조림</strong></a>
+          </li>
+        </ul>
+      </div> -->
+    </header>
+
+    <!-- 본문 -->
+
+    <section>
+      <div class="container">
+        <div class="box is-size-5" id="order">주문하기</div>
+        <div class="box" id="userInfo">
+          <table id="userTable">
+            <tbody>
+              <tr><th id="zeroColumn"></th><th id="firstColumn">이름</th><td id="secondColumn">홍길동</td><th id="thirdColumn">주소</th><td id="postCode">10888</td></tr>
+              <tr><th></th><th>이메일</th><td id="email">ddd@naver.com</td><th></th><td id="adress1">서울시 ㅇㅇ로 ㅇㅇㅇ</td></tr>
+              <tr><th></th><th>전화번호</th><td id="phone">010000000</td><th></th><td id="adress2">ㅇㅇㅇ동 ㅇㅇㅇ호</td></tr>
+            </tbody>
+          </table>
+          <button class="button is-primary" id="correct">회원정보 수정</button>
+        </div>
+        <div class="box" id="productsInfo">
+          <table id="productsTable">
+            <thead>
+              <tr>
+                <th></th><th class="productName">상품명</th><th class="eachPrice">가격</th><th class="eachCount">수량</th><th class="productPrice">금액</th>
+              </tr>
+            </thead>
+            <tbody id="productList">
+              <!--상품목록 들어갈 위치-->
+            </tbody>
+          </table>
+        </div>
+        <div class="box" id="buyInfo">
+          <table>
+            <tbody>
+              <tr>
+                <td>상품 금액</td><td></td><td>배송비</td><td></td><td>총 결제 금액</td>
+              </tr>
+              <tr class="is-size-5">
+                <th id="productsPrice">상품 금액</th><th>+</th><th>3000원</th><th>=</th><th id="totalPrice">총 결제 금액</th>
+              </tr>
+            </tbody>
+          </table>
+          <button class="button is-primary" id="buy">주문하기</button>
+        </div>
+        
+        </div>
+      </div>
+    </section>
+
+    <!--footer-->
+    <footer class="footer">
+      <div id="footer-container">
+        <div id="footer-icons">
+          <a href="https://www.instagram.com/">
+            <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램" />
+          </a>
+          <a href="https://ko-kr.facebook.com/">
+            <img src="../images/facebook-icon.png" alt="옥토 페이스북" />
+          </a>
+          <a href="https://twitter.com/?lang=ko">
+            <img src="../images/twitter-icon.png" alt="옥토 트위터" />
+          </a>
+        </div>
+        <div id="footer-textbox">
+          <div id="footer-info">
+            <a href="">Info</a>
+            <a href="">Support</a>
+            <a href="">Marketing</a>
+          </div>
+          <div id="footer-policy">
+            <a href="">Terms of Use</a>
+            <a href="">Private Policy</a>
+          </div>
+          <div id="footer-company">
+            <a href="">ⓒ 2022 OCTO infinite</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
