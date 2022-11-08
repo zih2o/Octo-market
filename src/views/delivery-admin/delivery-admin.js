@@ -1,6 +1,6 @@
 import * as Api from '../api.js';
 
-//This page is rendered when URI is given as http://localhost:5050/admin/orders/
+//This page is rendered when URI is given as /admin/orders/
 const orderList = document.querySelector('#orderList');
 
 // Data mocked
@@ -82,7 +82,7 @@ async function allOrdersAdmin()
 
     try 
     {
-        const res = await Api.get(`http://localhost:5050/admin/orders`);
+        const res = await Api.get(`/admin/orders`);
         const orders = JSON.parse(res.body);
         if (res.status == 403)
             return alert(orders.message)
@@ -101,7 +101,6 @@ async function allOrdersAdmin()
             let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`;
             retHtml += (tableContent + userEmail + orderDate + userAddr + orderName + price + stateDef + buttons);
         }
-
         orderList.insertAdjacentHTML("beforeend", retHtml);
     }
     catch(err)
@@ -110,6 +109,7 @@ async function allOrdersAdmin()
         alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
 }
+
 
 function isLoggedIn() 
 {
