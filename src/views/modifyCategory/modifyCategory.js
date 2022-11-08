@@ -1,34 +1,33 @@
 import * as Api from '../api.js';
 
-const modify = document.querySelector("#selectCategory");
 const catchselect = document.querySelector("#category");
 const selectBox = document.querySelector("#selectBox");
 const submitBtn = document.querySelector("#btnSubmit");
 
 // Data mocked
-sessionStorage.setItem('loginToken', JSON.stringify({
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY0OWI5ZDgwYTMzZTUwMWNlNWY5NDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2NzUzODI5OX0.38U02nnJHS_UaEdR5weEll3wKzLE1zS-_f6FTIkdB10",
-    userId: "63649b9d80a33e501ce5f946",
-    userType: "admin",
-}))
-sessionStorage.setItem('userEmail', 'semin0706@naver.com')
+const {accessToken, userId, userType} = {
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzU1MTh9.jaHZAFtGgXdvUWw_QoQyWztNjIQGCCyOZZd_mWlTbuU",
+  "userId": "6368bdf749dfe808988ea212",
+  "userType": "admin"
+};
+sessionStorage.setItem('token', accessToken)
 
-//const categories = getCategory()
-const categories = [`
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-`, 7, [1,2,3,4,5,6,7,8]]
-
-
+var categories = await getCategory();
+// const categories = [`
+// <option>1</option>
+// <option>2</option>
+// <option>3</option>
+// <option>4</option>
+// <option>5</option>
+// <option>6</option>
+// <option>7</option>
+// `, 7, [1,2,3,4,5,6,7]]
 
 
-const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
-const emailToken = sessionStorage.getItem('userEmail')
+
+
+// const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
+// const emailToken = sessionStorage.getItem('userEmail')
 
 addAllElements();
 addAllEvents();
@@ -42,7 +41,13 @@ function addAllElements() {
 function addAllEvents() {
   catchselect.addEventListener('change', categoryModify)
   submitBtn.addEventListener('click', submitModify)
+  submitBtn.addEventListener('click', updateCategory)
 }
+
+async function updateCategory () {
+  categories = await getCategory();
+}
+
 
 
 async function categoryModify () {
@@ -61,10 +66,20 @@ async function submitModify () {
   // post
   if (selectedAction === 0)
   {
-    const data = {
-      name : document.querySelector('.input').value,
+    if (categories[1] > 7){
+      alert ("카테고리를 더 추가할 수 없습니다.")
+      catchselect.value = "생성"
+      return
     }
-    const res = API.post('/admin/categories', data)
+    const name = document.querySelector('.input').value;
+    if (name.length > 6)
+      return alert ("카테고리 이름은 여섯 글자 이하입니다.")
+
+    const data = {
+      name,
+    }
+    const res = await Api.post('/admin/categories', data)
+    categories = await getCategory();
     if (res.statusCode)
       return alert(res.reason);
     else
@@ -78,7 +93,9 @@ async function submitModify () {
       name : document.querySelector('.input').value,
     }
     const catId = categories[2][categoryInd];
-    const res = API.put(`/admin/categories/${catId}`, data)
+    const res = await Api.put(`/admin/categories/${catId}`, data)
+    categories = await getCategory();
+    console.log("modify response : ",res)
     if (res.statusCode)
       return alert(res.reason);
     else
@@ -89,11 +106,13 @@ async function submitModify () {
   {
     const categoryInd = document.querySelectorAll('select')[1].selectedIndex;
     const catId = categories[2][categoryInd];
-    const res = API.delete(`/admin/categories/${catId}`, data)
-    if (res.statusCode)
-      return alert(res.reason);
+    const res = await Api.delete(`/admin/categories/${catId}`)
+    categories = await getCategory();
+    console.log("delete Response : ",res);
+    if (res.success)
+      return alert("성공적으로 삭제되었습니다.");
     else
-      return alert("성공적으로 삭제되었습니다.")
+      return alert(res.reason)
   }
 }
 
@@ -139,11 +158,11 @@ function template(option) {
 
 async function getCategory() {
   // const category = resCate.categories;
-  const res = await API.get('/categories');
-  const category = res.categories;
+  try{
+  const category = await Api.get('/categories');
   var retHTML = ``;
   var categoryId = [];
-  if (res.status === 200){
+  
       for (let i=0; i<category.length;i++)
       {
           retHTML += `<option>${category[i].name}</option>`
@@ -151,8 +170,11 @@ async function getCategory() {
         }
       return [retHTML, category.length, categoryId]
   }
-  else
-    return alert("카테고리 조회에 실패하였습니다")
+  catch (e)
+  {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
 }
 
 function initializeForm(numCategory)
