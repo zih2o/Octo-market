@@ -1,15 +1,15 @@
 import * as Api from '../api.js';
 
-//This page is rendered when URI is given as http://localhost:5050/users/${userId}
+//This page is rendered when URI is given as /users/${userId}
 
-const emailIn = document.querySelector("#emailIn")
-const oldpwIn = document.querySelector("#oldpwIn")
-const newpwIn = document.querySelector("#newpwIn")
-const postcode= document.querySelector("#search_postcode")
-const addrIn1 = document.querySelector("#sample6_address")
-const addrIn2 = document.querySelector("#sample6_detailAddress")
-const phone = document.querySelector("#phoneNum")
-const submitBtn = document.querySelector("#submitBtn")
+const emailIn = document.querySelector("#emailIn");
+const oldpwIn = document.querySelector("#oldpwIn");
+const newpwIn = document.querySelector("#newpwIn");
+const postcode= document.querySelector("#search_postcode");
+const addrIn1 = document.querySelector("#sample6_address");
+const addrIn2 = document.querySelector("#sample6_detailAddress");
+const phone = document.querySelector("#phoneNum");
+const submitBtn = document.querySelector("#submitBtn");
 
 // sessionStorage.setItem('loginToken', JSON.stringify({
 //     accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY0OWI5ZDgwYTMzZTUwMWNlNWY5NDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2NzUzODI5OX0.38U02nnJHS_UaEdR5weEll3wKzLE1zS-_f6FTIkdB10",
@@ -78,7 +78,7 @@ async function handleSubmit(e) {
     };
 
     try {
-        const res = await Api.put(`http://localhost:5050/users/${userId}`, data);
+        const res = await Api.put(`/users/${userId}`, data);
         //const res = 200
         if (res.status == 200) {
             alert("수정되었습니다.");

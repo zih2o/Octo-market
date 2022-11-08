@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href=".">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="modifyCategory.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="modifyCategory.js" defer></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <header class="nav-bar">
+    <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand" id="nav-logobox">
+        <img id="nav-logo" src="../images/octo-logo.png" alt="">
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons" id="menu-box">
+              <a class="button is-primary" id="menu-button">
+                <strong>로그인</strong>
+              </a>
+              <a class="button is-primary" id="menu-button">
+                <strong>회원가입</strong>
+              </a>
+              <a class="button is-primary" id="menu-button">
+                <strong>장바구니</strong>
+              </a>
+              <a class="button is-primary" id="menu-button">
+                <strong>마이페이지</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="title-container">
+      <div id="title">
+        <img src="../images/octopus-title.png" alt="문어상점">
+      </div>
+    </div>
+
+    <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
+    <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
+    <div class="tabs is-medium is-centered" id="menustick">
+      <ul>
+
+        <li><a><strong>전체보기</strong></a></li>
+        <li><a><strong>가공식품</strong></a></li>
+        <li><a><strong>수산식품</strong></a></li>
+        <li><a><strong>면 · 튀김</strong></a></li>
+        <li><a><strong>양념 · 조미료</strong></a></li>
+        <li><a><strong>쌀 · 견과류</strong></a></li>
+        <li><a><strong>캔 · 통조림</strong></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="" id="menu">
+      <ul class="menu-list">
+        <li>
+          <span>사용자 정보</span>
+          <ul>
+            <li><a>주문 확인/취소</a></li>
+            <li><a>회원 정보 수정</a></li>
+          </ul>
+        </li>
+        <li>
+          <span>관리자 메뉴</span>
+          <ul>
+            <li><a>상품 추가/삭제</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="" id="content">
+      <div class="data">
+        <div class="field" id="selectCategory">
+          <label class="label">카테고리 관리</label>
+          <div class="control">
+            <div class="select is-primary">
+              <select id="category">
+                <option>생성</option>
+                <option>수정</option>
+                <option>삭제</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field" id="selectBox">
+
+        </div>
+        <div class="field">
+          <button class="button is-primary is-fullwidth" id="btnSubmit">
+            확인
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div id="footer-container">
+      <div id="footer-icons">
+        <a href="https://www.instagram.com/">
+          <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
+        </a>
+        <a href="https://ko-kr.facebook.com/">
+          <img src="../images/facebook-icon.png" alt="옥토 페이스북">
+        </a>
+        <a href="https://twitter.com/?lang=ko">
+          <img src="../images/twitter-icon.png" alt="옥토 트위터">
+        </a>
+      </div>
+      <div id="footer-textbox">
+        <div id="footer-info">
+          <a href="">Info</a>
+          <a href="">Support</a>
+          <a href="">Marketing</a>
+        </div>
+        <div id="footer-policy">
+          <a href="">Terms of Use</a>
+          <a href="">Private Policy</a>
+        </div>
+        <div id="footer-company">
+          <a href="">ⓒ 2022 OCTO infinite</a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+</body>
+
+</html>

@@ -1,15 +1,14 @@
 import * as API from '../api.js';
 
-//This page is rendered when URI is given as http://localhost:5050/admin/items
+//This page is rendered when URI is given as /admin/items
 
-const prodName = document.querySelector('#productName')
-const prodBrand= document.querySelector('#productBrand')
-const prodCate = document.querySelector('#productCategory')
-const prodDesc = document.querySelector('#productDesc')
-const prodSrc  = document.querySelector('#productSrc')
-const prodPrice= document.querySelector('#productPrice')
-const btnSubmit= document.querySelector
-('#btnSubmit')
+const prodName = document.querySelector('#productName');
+const prodBrand= document.querySelector('#productBrand');
+const prodCate = document.querySelector('#productCategory');
+const prodDesc = document.querySelector('#productDesc');
+const prodSrc  = document.querySelector('#productSrc');
+const prodPrice= document.querySelector('#productPrice');
+const btnSubmit= document.querySelector('#btnSubmit');
 
 // Data mocked
 // sessionStorage.setItem('loginToken', JSON.stringify({
@@ -55,12 +54,15 @@ function addAllEvents() {
 
 
 async function getCategory() {
-    const category = resCate.categories;
-    // const res = await API.get('http://localhost:5050/categories');
-    // const category = JSON.parse(res.body).categories;
-    
-    for (let i=0; i<category.length;i++)
-        prodCate.insertAdjacentHTML("beforeend", `<option>${category[i].name}</option>`)
+    // const category = resCate.categories;
+    const res = await API.get('/categories');
+    const category = res.categories;
+    if (res.status === 200){
+        for (let i=0; i<category.length;i++)
+            prodCate.insertAdjacentHTML("beforeend", `<option>${category[i].name}</option>`)
+    }
+    else
+        return alert("카테고리 조회에 실패하였습니다")
 }
 
 
@@ -81,7 +83,7 @@ async function addItemtoDB () {
         category,
     }
     try {
-        const res = await API.post(`http://localhost:5050/admin/items`, data);
+        const res = await API.post(`/admin/items`, data);
         // const res = JSON.stringify({
         //     status : 403, 
         //     body : {
