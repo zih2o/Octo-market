@@ -118,7 +118,14 @@ header {
 }
 
 .productName {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
+}
+
+.is-size-7 {
+  align-self: flex-end;
+  color: red;
 }
 
 .eachPrice {
