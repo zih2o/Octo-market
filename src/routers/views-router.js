@@ -20,6 +20,7 @@ viewsRouter.use('/items/:itemId', serveStatic('product-detail'));
 
 //order
 viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/orders', serveStatic('order'));
 
 //admin
 viewsRouter.use('/admin/login', serveStatic('login-admin'));
