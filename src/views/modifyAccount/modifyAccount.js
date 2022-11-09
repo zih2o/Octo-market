@@ -34,8 +34,9 @@ function addAllEvents() {
 
 
 
-function emailAttach () {
-    emailIn.placeholder = "이메일은 변경할 수 없습니다";
+async function emailAttach () {
+    const userInfo = await Api.get('/users', userId);
+    emailIn.placeholder = `${userInfo.email}`;
 }
 
 async function handleSubmit(e) {
