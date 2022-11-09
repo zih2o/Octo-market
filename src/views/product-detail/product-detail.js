@@ -1,6 +1,23 @@
-// 에디터 사용하여 마크업 덩어리로 데이터 받을 경우 id="detailContent" 박스 안을 모두 비우고 받기
-// 아래는 요소 개별 선택하여 각각 데이터 넣어 주는 형식으로 작성함
-import { addCommas } from "../useful-functions.js";
+import {
+  addCommas,
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 카테고리 바 랜더링
+  drawCategoryBar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 카테고리 목록을 api 에서 받아와 값 채워 넣기
+  fillCategoryBar,
+  // 푸터 랜더링
+  drawFooter,
+} from "../useful-functions.js";
+
+// html 랜더링 관련 함수들 실행
+drawNavbar();
+activeNavbar();
+drawCategoryBar();
+fillCategoryBar();
+drawFooter();
 
 // 요소 선택
 const image = document.querySelector("#image");
