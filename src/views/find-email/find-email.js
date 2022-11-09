@@ -59,7 +59,7 @@ async function handleSubmit(e) {
 
     // fetch 사용 가능 시 주석 해제 예정
     // fetch 경로 추가 바람
-    const result = await Api.post('http://localhost:5050/users/findemail', data);
+    const result = await Api.post('/users/findemail', data);
     const email = result.email;
 
     // 확인용 더미 email

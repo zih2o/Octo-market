@@ -68,7 +68,7 @@ categoryList.then(datas => {
         </li>
         `;
     mdCategoryStr += template;
-    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
+    const path = `/items/category/${el._id}`;
     categoryOj[path] = el.name;
   });
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
@@ -101,7 +101,7 @@ categoryList.then(datas => {
   const fillRecommend = async (categoryId) => {
     console.log('refill 카테고리 아이디 요청 ===>>> ', categoryId)
 
-    let url = 'http://localhost:5050/items/category/';
+    let url = '/items/category/';
     url += categoryId;
 
     console.log('md카테고리 콜 url =>', url);
@@ -125,7 +125,7 @@ categoryList.then(datas => {
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
-    const itemUrl = 'http://localhost:5050/items/';
+    const itemUrl = '/items/';
 
     const createMdCategoryBox = num => {
       const productId = fetchedMdProducts[num]._id;
@@ -230,7 +230,7 @@ const createProductBox = data => {
   <li class="product-item" style="width:25%;">
   <div class="item-container">
   <div class="item-photobox">
-                <a href="http://localhost:5050/items/${
+                <a href="/items/${
                   data._id
                 }">
                     <img src="${'../images/dummy.png'}" alt="${
@@ -267,7 +267,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 const callApi = async () => {
-  let url = 'http://localhost:5050/items';
+  let url = '/items';
 
   let params = {
     cnt: `${cnt}`,
@@ -417,7 +417,7 @@ async function getDiscountItem() {
     const urlParams = new URLSearchParams(params).toString();
 
     const res = await fetch(
-      `http://localhost:5050/items?${urlParams}`,
+      `/items?${urlParams}`,
     );
     const items = await res.json();
 
