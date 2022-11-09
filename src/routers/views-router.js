@@ -9,7 +9,7 @@ const viewsRouter = express.Router();
 
 viewsRouter.use('/', serveStatic('home'));
 //users
-viewsRouter.use('/users/signup', serveStatic('join'));
+viewsRouter.use('/users/signup', serveStatic('register'));
 viewsRouter.use('/users/login', serveStatic('login'));
 viewsRouter.use('/users/:userId', serveStatic('delivery'));
 viewsRouter.use('/users/findemail', serveStatic('find-email'));

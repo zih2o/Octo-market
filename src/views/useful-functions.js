@@ -72,7 +72,7 @@ export const activeNavbar = () => {
     mypageBtn.addEventListener('click', e => {
       e.preventDefault();
       window.location.href =
-        'http://kdt-sw3-team08.elicecoding.com/admin/mypage';
+        '/admin/mypage';
     });
   }
 
@@ -88,14 +88,14 @@ export const activeNavbar = () => {
 export const fillCategoryBar = async () => {
   const categoryUl = document.getElementById('category-ul');
   // console.log('카테고리바 요소 => ', categoryBar);
-  const res = await fetch('http://kdt-sw3-team08.elicecoding.com/categories');
+  const res = await fetch('/categories');
   const categorys = await res.json();
   let categorylist = '';
 
   categorys.map(el => {
     const template = `
       <li>
-        <a href="http://kdt-sw3-team08.elicecoding.com/${el._id}">
+        <a href="/items/category/${el._id}">
           <strong>${el.name}</strong>
         </a>
       </li>
@@ -116,23 +116,23 @@ export const drawNavbar = () => {
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons" id="menu-box">
-              <a href="http://kdt-sw3-team08.elicecoding.com/users/login" class="button is-primary" id="login">
+              <a href="/users/login/" class="button is-primary" id="login">
                 <strong>로그인</strong>
               </a>
               <div class="vertical-bar" id="vb-login-after"></div>
-              <a href="http://kdt-sw3-team08.elicecoding.com/" class="button is-primary" id="logout">
+              <a href="/" class="button is-primary" id="logout">
                 <strong>로그아웃</strong>
               </a>
               <div class="vertical-bar" id="vb-logout-after"></div>
-              <a href="http://kdt-sw3-team08.elicecoding.com/users/signup" class="button is-primary" id="join">
+              <a href="/users/signup/" class="button is-primary" id="join">
                 <strong>회원가입</strong>
               </a>
               <div class="vertical-bar" id="vb-join-after"></div>
-              <a href="http://kdt-sw3-team08.elicecoding.com/cart" class="button is-primary" id="cart">
+              <a href="/cart/" class="button is-primary" id="cart">
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="http://kdt-sw3-team08.elicecoding.com/users/mypage" class="button is-primary" id="mypage">
+              <a href="/users/" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>
@@ -158,7 +158,7 @@ export const drawCategoryBar = () => {
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a href="http://kdt-sw3-team08.elicecoding.com/items"><strong>전체보기</strong></a></li>
+        <li id="entire"><a href="http://kdt-sw3-team08.elicecoding.com/items/category/"><strong>전체보기</strong></a></li>
 
       </ul>
     </div>
