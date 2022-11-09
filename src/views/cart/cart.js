@@ -64,7 +64,7 @@ async function makeProductList() {
     itemList.forEach(async (itemId) => {
       items[itemId] = {};
       try {
-        const res = await fetch(`http://localhost:5050/items/${itemId}`);
+        const res = await fetch(`/items/${itemId}`);
         const item = await res.json();
 
         if (sessionStorage.getItem(itemId)) {
@@ -74,7 +74,7 @@ async function makeProductList() {
 
           if (item.isDiscount) {
             items[itemId].price =
-              Number(item.price) * (1 - Number(item.disPercent) / 100);
+              Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100));
             state.productsPrice += items[itemId].price * amount[itemId];
           } else {
             items[itemId].price = Number(item.price);
