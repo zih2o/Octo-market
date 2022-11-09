@@ -1,5 +1,18 @@
 import * as Api from "../api.js";
-import { addCommas } from "../useful-functions.js";
+import {
+  addCommas,
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 푸터 랜더링
+  drawFooter,
+} from "../useful-functions.js";
+
+// html 랜더링 관련 함수들 실행
+drawNavbar();
+activeNavbar();
+drawFooter();
 
 const productPriceEl = document.querySelector("#productsPrice");
 const totalPrice = document.querySelector("#totalPrice");
