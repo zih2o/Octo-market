@@ -19,6 +19,13 @@ main {
   flex: 1;
 }
 
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
+}
+
 /* 헤더 영역 */
 #nav-top {
   position: relative;
@@ -354,6 +361,7 @@ main {
 
 .item-info-container {
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .item-namebox,

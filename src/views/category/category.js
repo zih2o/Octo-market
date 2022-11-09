@@ -51,8 +51,11 @@ const categoryOj = {};
 // 카테고리 목록 조회 이용하여 md랜더링 부분
 categoryList.then(datas => {
 
+  // console.log('카테고리 목록 조회 datas ', datas)
+
   datas.map(el => {
-    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
+    const path = `http://localhost:5050//items/category/${el._id}`;
+    console.log('카테고리 목록 조회 name ', el.name)
     categoryOj[path] = el.name;
   });
 
@@ -63,8 +66,8 @@ categoryList.then(datas => {
   let pathname = window.location.pathname;
 
   console.log('pathname => ', pathname)
-  const categoryTitleName =
-    categoryOj[`http://kdt-sw3-team08.elicecoding.com/${pathname}`];
+  const categoryTitleName = categoryOj[`http://localhost:5050/${pathname}`];
+  console.log('완성 url =>>>', `http://localhost:5050/${pathname}`);
   categoryTitle.innerText = categoryTitleName;
 
 });
@@ -111,7 +114,6 @@ let cnt = 1;
 console.log('카테고리 목룍 ==>>> ', categoryList);
 
 
-
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
@@ -120,7 +122,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 const callApi = async () => {
-  let url = 'http://kdt-sw3-team08.elicecoding.com/items/';
+  let url = 'http://localhost:5050/items/category/';
 
   let params = {
     cnt: `${cnt}`,
@@ -191,3 +193,4 @@ const intersaction = () => {
   const observer = new IntersectionObserver(callback, options);
   observer.observe(document.querySelector('#intersaction')); // 감시 대상 설정
 };
+
