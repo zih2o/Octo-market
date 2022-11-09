@@ -8,7 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="addItem.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <script src="addItem.js" defer></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <script type="module" src="addItem.js" defer></script>
   <title>Document</title>
 </head>
 
@@ -90,13 +92,13 @@
           </div>
         </div>
         <div class="field" id="productClassify">
-          <div class="field" id="Brand">
+          <div>
             <label class="label">상품 브랜드</label>
             <div class="control">
               <input class="input" id="productBrand" type="text" placeholder="브랜드를 적어주세요">
             </div>
           </div>
-          <div class="field" id="Category">
+          <div id="Category">
             <label class="label">상품 카테고리</label>
             <div class="control">
               <div class="select is-primary">
@@ -109,19 +111,58 @@
         <div class="field">
           <label class="label">상품 상세 설명</label>
           <div class="control">
-            <textarea class="textarea" id="productDesc" placeholder="살명을 적어 주세요"></textarea>
+            <textarea class="textarea" id="productDesc" placeholder="상품명을 적어주세요"></textarea>
           </div>
         </div>
         <div class="field">
           <label class="label">상품 사진</label>
-          <div class="control">
-            <input class="input" type="address" id="productSrc" placeholder="상품 사진의 URL을 입력해 주세요">
+          <div>
+            <label class="filebox">
+              <span class="file-cta">
+                <input class="file-input" type="file" name="resume" accept="image/*">
+                <span class=" file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  파일을 선택하세요
+                </span>
+              </span>
+              <span class="file-name">
+                파일의 이름이 표시됩니다
+              </span>
+            </label>
           </div>
         </div>
-        <div class="field">
-          <label class="label">금액</label>
-          <div class="control">
-            <input class="input" type="price" id="productPrice" placeholder="금액을 입력해 주세요">
+        <div class="field" id="costModifier">
+          <div>
+            <label class="label">상품 가격</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="가격을 적어주세요">
+            </div>
+          </div>
+          <div id="event">
+            <div class="check">
+              <label class="label">추천 상품</label>
+              <div class="control">
+                <label class="checkbox label">
+                  <input type="checkbox">
+                </label>
+              </div>
+            </div>
+            <div class="check">
+              <label class="label">할인 상품</label>
+              <div class="control">
+                <label class="checkbox label">
+                  <input type="checkbox">
+                </label>
+              </div>
+            </div>
+            <div class="check">
+              <label class="label">할인률</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="-" disabled>
+              </div>
+            </div>
           </div>
         </div>
         <div class="field">
@@ -130,6 +171,8 @@
           </button>
         </div>
       </div>
+
+    </div>
     </div>
   </main>
 
