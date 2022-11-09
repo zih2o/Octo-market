@@ -110,7 +110,6 @@ const createProductBox = data => {
 // 상품 정렬 쿼리 데이터
 // 낮은 가격순 lowPrice, 높은 가격순 HighPrice, 최근 등록순 createdAt
 // 내림차순 sc: -1 / 오름차순 sc: 1
-let sortType = 'createdAt';
 
 // 스크롤 페이지네이션 시 페이지 확인용 통신 횟수 카운트 변수
 let cnt = 1;
@@ -120,21 +119,39 @@ console.log('카테고리 목룍 ==>>> ', categoryList);
 
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
-  callApi();
+  callApi(1);
 });
+
 
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
-const callApi = async () => {
+const callApi = async (number) => {
   let url = 'http://localhost:5050/items/category/';
 
-  let params = {
-    cnt: `${cnt}`,
-    per: '20',
-    sort: `${sortType}`,
-    // sc: `${sc}`,
-  };
-
+  let params = {};
+  if (number === 2) {
+    params = {
+      cnt: `${cnt}`,
+      per: '20',
+      sort: 'price',
+      sc: 1,
+    };
+  } else if (number === 3) {
+    params = {
+      cnt: `${cnt}`,
+      per: '20',
+      sort: 'price',
+      sc: -1,
+    };
+  } else {
+    params = {
+      cnt: `${cnt}`,
+      per: '20',
+      sort: 'createdAt',
+      // sc: `${sc}`,
+    };
+  }
+  console.log(params.sort);
   url = `${url}?${new URLSearchParams(params).toString()}`;
   console.log('url => ', url);
 
@@ -198,3 +215,11 @@ const intersaction = () => {
   observer.observe(document.querySelector('#intersaction')); // 감시 대상 설정
 };
 
+
+//상품 정렬 버튼
+const lowPriceBtn = document.querySelector('.lowPrice');
+lowPriceBtn.addEventListener('click', callApi(2));
+const highPriceBtn = document.querySelector('.lowPrice');
+highPriceBtn.addEventListener('click', callApi(3));
+const createdAtBtn = document.querySelector('createdAtBtn');
+createdAtBtn.addEventListener('click', callApi(1));
