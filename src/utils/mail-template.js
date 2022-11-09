@@ -126,7 +126,7 @@ text-decoration: none !important
 <!--<![endif]-->
 <!--[if mso]><td style="background-color:#F8F8F8;overflow:hidden;width:600px;padding:0 30px 40px 30px;"><![endif]-->
 <table role=presentation width=100% cellpadding=0 cellspacing=0><tr><td>
-<table class=t158 role=presentation cellpadding=0 cellspacing=0 align=left><tr><td class=t159 style="overflow:hidden;width:80px;padding:50px 0 50px 0;"><div style="font-size:0px;"><img class=t165 style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width=130 src=https://creazilla-store.fra1.digitaloceanspaces.com/emojis/47298/check-mark-button-emoji-clipart-md.png /></div></td>
+<table class=t158 role=presentation cellpadding=0 cellspacing=0 align=left><tr><td class=t159 style="overflow:hidden;width:80px;padding:50px 0 50px 0;"><div style="font-size:0px;"><img class=t165 style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width=130 src=https://octomaket.s3.ap-northeast-2.amazonaws.com/1667976727144_check-mark-button-emoji-clipart-md.png /></div></td>
 </tr></table>
 </td></tr><tr><td>
 <table class=t26 role=presentation cellpadding=0 cellspacing=0 align=center><tr><td class=t27 style="overflow:hidden;width:600px;padding:0 0 20px 0;"><h1 class=t33 style="font-family:BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Albert Sans';line-height:28px;font-weight:800;font-style:normal;font-size:26px;text-decoration:none;text-transform:none;letter-spacing:-1.04px;direction:ltr;color:#747474;text-align:left;mso-line-height-rule:exactly;mso-text-raise:1px;">결제가 완료되었습니다.</h1></td>
@@ -139,7 +139,7 @@ text-decoration: none !important
 </td>
 </tr></table>
 </td></tr><tr><td>
-<table class=t14 role=presentation cellpadding=0 cellspacing=0 align=left><tr><td class=t15 style="background-color:#6fbf73;overflow:hidden;width:353px;text-align:center;line-height:44px;mso-line-height-rule:exactly;mso-text-raise:10px;border-radius:44px 44px 44px 44px;"><span class=t21 style="display:block;font-family:BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Albert Sans';line-height:44px;font-weight:800;font-style:normal;font-size:12px;text-decoration:none;text-transform:uppercase;letter-spacing:2.4px;direction:ltr;color:#f8f8f8;text-align:center;mso-line-height-rule:exactly;mso-text-raise:10px;" target=_blank>SEND US A MESSAGE</span></td>
+<table class=t14 role=presentation cellpadding=0 cellspacing=0 align=left><tr><td class=t15 style="background-color:#6fbf73;overflow:hidden;width:353px;text-align:center;line-height:44px;mso-line-height-rule:exactly;mso-text-raise:10px;border-radius:44px 44px 44px 44px;"><a class=t21 style="display:block;font-family:BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif, 'Albert Sans';line-height:44px;font-weight:800;font-style:normal;font-size:12px;text-decoration:none;text-transform:uppercase;letter-spacing:2.4px;direction:ltr;color:#f8f8f8;text-align:center;mso-line-height-rule:exactly;mso-text-raise:10px;" target=_blank href=http://kdt-sw3-team08.elicecoding.com>Visit us here</span></td>
 </tr></table>
 </td></tr></table></td>
 </tr></table>
