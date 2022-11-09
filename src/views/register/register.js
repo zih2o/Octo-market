@@ -1,5 +1,19 @@
 import * as Api from "../api.js";
-import { validateEmail, hasWhiteSpace } from "../useful-functions.js";
+import {
+  validateEmail,
+  hasWhiteSpace,
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 푸터 랜더링
+  drawFooter,
+} from "/useful-functions.js";
+
+// html 랜더링 관련 함수들 실행
+drawNavbar();
+activeNavbar();
+drawFooter();
 
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector("#fullNameInput");
@@ -84,14 +98,15 @@ async function handleSubmit(e) {
   //회원가입 api 요청
   try {
     const data = {
-      fullName,
+      name: fullName,
       email,
       password,
-      phone,
-      postCode,
-      adress1: adress,
-      adress2: detailAdress,
-      type: "User",
+      phoneNum: phone,
+      address: {
+        postalCode: postCode,
+        address1: adress,
+        address2: detailAdress,
+      },
     };
 
     await Api.post("http://localhost:5050/users/signup", data);
