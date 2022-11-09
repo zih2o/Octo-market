@@ -1,10 +1,19 @@
-/* 헤더 영역 */
-
-header {
-  width: 100%;
-  background-color: white;
+/* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
+html,
+body {
+  height: 100%;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* 헤더 영역 */
 #nav-top {
   position: relative;
 }
@@ -20,14 +29,14 @@ header {
   margin-left: 180px;
 }
 
-.buttons {
+#menu-box {
   padding-right: 30px;
 }
 
-#menu-button {
+#menu-box a,
+#sort-box > div {
   color: #4b4453;
   background-color: white;
-  border-color: #4b4453;
   padding: 10px 20px;
   margin: 0;
 }
@@ -36,7 +45,8 @@ header {
   margin: 30px 20px 0 0;
 }
 
-#menu-box a {
+#menu-box a,
+#sort-box > div {
   position: relative;
   font-size: 1.25em;
   font-weight: 600;
@@ -44,11 +54,7 @@ header {
   border: none;
 }
 
-#menu-box a:nth-child(n + 2)::after {
-  position: absolute;
-  left: 0;
-  top: 20px;
-  content: "";
+.vertical-bar {
   width: 1px;
   height: 15px;
   background-color: #4b4453;
@@ -65,9 +71,18 @@ header {
   z-index: 99;
 }
 
-main {
-  height: 100vh;
-  width: 100vw;
+.active {
+  display: none;
+}
+
+/*  카테고리바의 sticky 속성 적용에 필요한 스타일  */
+/* sticky 컴포넌트는 부모 태그 아래에 붙어서 화면에 남아 있는다 */
+#category-bar {
+  position: sticky;
+  z-index: 999;
+  top: 0;
+  padding: 10px 0 2px 0;
+  background-color: #ffffff;
 }
 
 /*본문*/
@@ -79,8 +94,7 @@ main {
 }
 
 #image {
-  width: 270px;
-  height: 270px;
+  width: 40%;
   background-color: lightgray;
   border-radius: 10px;
 }
@@ -120,4 +134,39 @@ main {
 
 .button {
   font-weight: bold;
+}
+
+/* 푸터 영역 */
+
+#footer-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#footer-icons img {
+  padding: 0 20px;
+}
+
+#footer-textbox {
+  margin: 50px 0 0 0;
+}
+
+#footer-textbox > div {
+  display: flex;
+  justify-content: center;
+}
+
+#footer-textbox a {
+  color: #4b4453;
+  margin: 5px 10px;
+}
+
+#footer-company a {
+  color: gray;
+}
+
+#footer-ul a {
+  background-color: hsl(0, 0%, 98%);
+  color: #b0a8b9;
 }
