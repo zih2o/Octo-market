@@ -68,7 +68,7 @@ categoryList.then(datas => {
         </li>
         `;
     mdCategoryStr += template;
-    const path = `http://localhost:5050/items/category/${el._id}`;
+    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
     categoryOj[path] = el.name;
   });
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);

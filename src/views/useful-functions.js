@@ -72,7 +72,7 @@ export const activeNavbar = () => {
     mypageBtn.addEventListener('click', e => {
       e.preventDefault();
       window.location.href =
-        'http://localhost:5050/admin/mypage';
+        'http://kdt-sw3-team08.elicecoding.com/admin/mypage';
     });
   }
 
@@ -88,14 +88,14 @@ export const activeNavbar = () => {
 export const fillCategoryBar = async () => {
   const categoryUl = document.getElementById('category-ul');
   // console.log('카테고리바 요소 => ', categoryBar);
-  const res = await fetch('http://localhost:5050/categories');
+  const res = await fetch('http://kdt-sw3-team08.elicecoding.com/categories');
   const categorys = await res.json();
   let categorylist = '';
 
   categorys.map(el => {
     const template = `
       <li>
-        <a href="http://localhost:5050/items/category/${el._id}">
+        <a href="http://kdt-sw3-team08.elicecoding.com/${el._id}">
           <strong>${el.name}</strong>
         </a>
       </li>
@@ -116,23 +116,23 @@ export const drawNavbar = () => {
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons" id="menu-box">
-              <a href="http://localhost:5050/users/login" class="button is-primary" id="login">
+              <a href="http://kdt-sw3-team08.elicecoding.com/users/login" class="button is-primary" id="login">
                 <strong>로그인</strong>
               </a>
               <div class="vertical-bar" id="vb-login-after"></div>
-              <a href="http://localhost:5050/" class="button is-primary" id="logout">
+              <a href="http://kdt-sw3-team08.elicecoding.com/" class="button is-primary" id="logout">
                 <strong>로그아웃</strong>
               </a>
               <div class="vertical-bar" id="vb-logout-after"></div>
-              <a href="http://localhost:5050/users/signup" class="button is-primary" id="join">
+              <a href="http://kdt-sw3-team08.elicecoding.com/users/signup" class="button is-primary" id="join">
                 <strong>회원가입</strong>
               </a>
               <div class="vertical-bar" id="vb-join-after"></div>
-              <a href="http://localhost:5050/cart" class="button is-primary" id="cart">
+              <a href="http://kdt-sw3-team08.elicecoding.com/cart" class="button is-primary" id="cart">
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="http://localhost:5050/users/mypage" class="button is-primary" id="mypage">
+              <a href="http://kdt-sw3-team08.elicecoding.com/users/mypage" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>
@@ -143,7 +143,7 @@ export const drawNavbar = () => {
 
     <div id="title-container">
       <div id="title">
-        <a href="http://localhost:5050/">
+        <a href="http://kdt-sw3-team08.elicecoding.com/">
           <img src="../images/octopus-title.png" alt="문어상점">
         </a>
       </div>
@@ -158,7 +158,7 @@ export const drawCategoryBar = () => {
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a href="http://localhost:5050/items"><strong>전체보기</strong></a></li>
+        <li id="entire"><a href="http://kdt-sw3-team08.elicecoding.com/items"><strong>전체보기</strong></a></li>
 
       </ul>
     </div>
@@ -193,7 +193,7 @@ export const drawFooter = () => {
           <a href="">Private Policy</a>
         </div>
         <div id="footer-company">
-          <a href="http://localhost:5050/admin/login">ⓒ 2022 OCTO infinite</a>
+          <a href="http://kdt-sw3-team08.elicecoding.com/admin/login">ⓒ 2022 OCTO infinite</a>
         </div>
       </div>
     </div>
@@ -205,7 +205,7 @@ export const drawFooter = () => {
 
 export const drawAdminLink = () => {
   const template = `
-    <a id="admin-login" href="http://localhost:5050/admin/login"></a>
+    <a id="admin-login" href="http://kdt-sw3-team08.elicecoding.com/admin/login"></a>
   `;
   const bodyEl = document.querySelector('body');
   bodyEl.insertAdjacentHTML('afterbegin', template);
