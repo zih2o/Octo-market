@@ -113,6 +113,7 @@ main {
   height: 15px;
   margin: 10px;
   background-color: #c4fcef;
+  pointer-events: none;
 }
 
 .slider-pagination .slider-page.is-active {
