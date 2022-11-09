@@ -1,35 +1,28 @@
 import * as Api from '../api.js';
 
-const modify = document.querySelector("#selectCategory");
 const catchselect = document.querySelector("#category");
 const selectBox = document.querySelector("#selectBox");
 const submitBtn = document.querySelector("#btnSubmit");
 
 // Data mocked
-sessionStorage.setItem('loginToken', JSON.stringify({
-    accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY0OWI5ZDgwYTMzZTUwMWNlNWY5NDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2NzUzODI5OX0.38U02nnJHS_UaEdR5weEll3wKzLE1zS-_f6FTIkdB10",
-    userId: "63649b9d80a33e501ce5f946",
-    userType: "admin",
-}))
-sessionStorage.setItem('userEmail', 'semin0706@naver.com')
-
-//const categories = getCategory()
-const categories = [`
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-`, 7, [1,2,3,4,5,6,7,8]]
+// const {accessToken, userId, userType} = {
+//   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4OTk2NTYsImV4cCI6MTY2Nzk4NjA1Nn0.A62VUIXHdHdJocM-ws40oEeq4ppj9N3sf6tfP33WWmI",
+//   "userId": "6368bdf749dfe808988ea212",
+//   "userType": "admin"
+// }
+// sessionStorage.setItem('token', accessToken)
+// const categories = [`
+// <option>1</option>
+// <option>2</option>
+// <option>3</option>
+// <option>4</option>
+// <option>5</option>
+// <option>6</option>
+// <option>7</option>
+// `, 7, [1,2,3,4,5,6,7]]
 
 
-
-
-const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
-const emailToken = sessionStorage.getItem('userEmail')
-
+var categories = await getCategory();
 addAllElements();
 addAllEvents();
 
@@ -46,13 +39,18 @@ function addAllEvents() {
 
 
 async function categoryModify () {
-  const numCategory = categories[1];
-  if (numCategory > 7 & catchselect.value === "생성")
-    return alert("카테고리는 8개 이하만 생성해 주세요.")
-  else
-  {
-    selectBox.innerHTML = template(catchselect.value);  
+  if (categories[1] > 7 & catchselect.value === "생성"){
+    catchselect.value = "수정"
+    alert("카테고리는 8개 이하만 생성해 주세요.")
   }
+  else if (categories[1] === 0 & catchselect.value === "삭제"){
+    catchselect.value = "수정"
+    alert("삭제할 카테고리가 없습니다.")
+  }
+  let updateCategory = await getCategory();
+  console.log(updateCategory);
+  selectBox.innerHTML = template(catchselect.value, updateCategory[0]);
+  return updateCategory;
 }
 
 async function submitModify () {
@@ -61,44 +59,74 @@ async function submitModify () {
   // post
   if (selectedAction === 0)
   {
-    const data = {
-      name : document.querySelector('.input').value,
+    if (categories[1] > 7){
+      alert ("카테고리를 더 추가할 수 없습니다.")
+      return
     }
-    const res = API.post('/admin/categories', data)
+
+    const name = document.querySelector('.input').value;
+    if (name.length > 6)
+      return alert ("카테고리 이름은 여섯 글자 이하입니다.")
+
+    const data = {
+      name,
+    }
+
+    const res = await Api.post('/admin/categories', data)
     if (res.statusCode)
       return alert(res.reason);
-    else
+    else{
+      categories = await categoryModify();
       return alert("성공적으로 등록되었습니다.")
+    }
   }
   // put
   else if (selectedAction === 1)
   {
     const categoryInd = document.querySelectorAll('select')[1].selectedIndex;
+    const name = document.querySelector('.input').value;
+    if (name.length > 6)
+      return alert ("카테고리 이름은 여섯 글자 이하입니다.")
+    
     const data = {
-      name : document.querySelector('.input').value,
+      name,
     }
+
     const catId = categories[2][categoryInd];
-    const res = API.put(`/admin/categories/${catId}`, data)
+    const res = await Api.put(`/admin/categories/${catId}`, data)
+
     if (res.statusCode)
       return alert(res.reason);
-    else
+    else{
+      categories = await categoryModify();
       return alert("성공적으로 수정되었습니다.")
+    }
   }
   // delete
   else if (selectedAction === 2)
   {
+    if (categories[1] < 1){
+      alert ("카테고리를 더 삭제할 수 없습니다.")
+      return
+    }
+
     const categoryInd = document.querySelectorAll('select')[1].selectedIndex;
     const catId = categories[2][categoryInd];
-    const res = API.delete(`/admin/categories/${catId}`, data)
-    if (res.statusCode)
-      return alert(res.reason);
+    const res = await Api.delete(`/admin/categories/${catId}`)
+
+    if (res.success){
+      categories = await categoryModify();
+      return alert("성공적으로 삭제되었습니다.");
+    }
     else
-      return alert("성공적으로 삭제되었습니다.")
+      return alert(res.reason)
   }
 }
 
 
-function template(option) {
+// Below are helper functions
+
+function template(option, categoryInfo) {
   if (option === "생성")
     return `<div class="field">
     <label class="label">카테고리 생성</label>
@@ -112,7 +140,7 @@ function template(option) {
     <div class="control">
       <div class="select is-primary">
         <select>
-          ${categories}
+          ${categoryInfo}
         </select>
       </div>
     </div>
@@ -129,7 +157,7 @@ function template(option) {
     <div class="control">
       <div class="select is-primary">
         <select>
-          ${categories}
+          ${categoryInfo}
         </select>
       </div>
     </div>
@@ -139,11 +167,11 @@ function template(option) {
 
 async function getCategory() {
   // const category = resCate.categories;
-  const res = await API.get('/categories');
-  const category = res.categories;
+  try{
+  const category = await Api.get('/categories');
   var retHTML = ``;
   var categoryId = [];
-  if (res.status === 200){
+  
       for (let i=0; i<category.length;i++)
       {
           retHTML += `<option>${category[i].name}</option>`
@@ -151,8 +179,11 @@ async function getCategory() {
         }
       return [retHTML, category.length, categoryId]
   }
-  else
-    return alert("카테고리 조회에 실패하였습니다")
+  catch (e)
+  {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
 }
 
 function initializeForm(numCategory)
@@ -160,12 +191,12 @@ function initializeForm(numCategory)
   if (numCategory > 7)
   {
     catchselect.value = "수정"
-    selectBox.innerHTML = template("수정")
+    selectBox.innerHTML = template("수정", categories[0])
   }
   else
   {
     catchselect.value = "생성"
-    selectBox.innerHTML = template("생성")
+    selectBox.innerHTML = template("생성", categories[0])
   }
 }
 

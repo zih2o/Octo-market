@@ -59,8 +59,12 @@ const orderList = document.querySelector('#orderList');
 // ]
 
 
-const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
-const emailToken = sessionStorage.getItem('userEmail')
+// const {accessToken, userId, userType} = {
+//     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY5Y2FjZjg4M2Y0Njg2YmNkYWViNWUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2Nzg3NzcxM30.-wwMXn85_1UFtDrKX8itCngS1r56vQowwgp3v5hUtdY",
+//     "userId": "6369cacf883f4686bcdaeb5e",
+//     "userType": "user"
+// };
+// sessionStorage.setItem('token', accessToken)
 
 addAllElements()
 addAllEvents()
@@ -80,28 +84,29 @@ async function allOrders()
     var deliStatus = [0, 0, 0, 0, 0];
     try 
     {
-        const res = await Api.get(`/orders/users/${userId}`);
-        const orders = JSON.parse(res.body);
-        if (res.status == 401 || res.status == 403)
-            return alert(orders.message)
+        const res = await Api.get(`/orders/personal/${userId}`);
+        console.log(res)
 
-        var count = 1;
-        
-        for (let order of orders){
-            const {_id, orderInfo, totalPrice, email, address, state, createdAt, updatedAt} = order
+        if (res.message)
+            return alert(res.message)
+        else if (res.length > 0) {
+            var count = 1;
+            
+            for (let order of orders){
+                const {_id, orderInfo, totalPrice, email, address, state, createdAt, updatedAt} = order
 
-            deliStatus[checkStatus(state)] += 1
-            //let tableContent = `<tr><th>${String(count++).padStart(6, '0')}</th>`;
-            let tableContent = `<tr><th>${_id}</th>`;
-            let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
-            let stateDef = `<td>${state}</td>`;
-            let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`
-            retHtml += (tableContent + orderName + stateDef + buttons);
+                deliStatus[checkStatus(state)] += 1
+                //let tableContent = `<tr><th>${String(count++).padStart(6, '0')}</th>`;
+                let tableContent = `<tr><th>${_id}</th>`;
+                let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
+                let stateDef = `<td>${state}</td>`;
+                let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`
+                retHtml += (tableContent + orderName + stateDef + buttons);
+            }
+
+            orderList.insertAdjacentHTML("beforeend", retHtml);
+            updateDeliveryStatus(deliStatus);
         }
-
-        orderList.insertAdjacentHTML("beforeend", retHtml);
-        updateDeliveryStatus(deliStatus);
-
     }
     catch(err)
     {
@@ -112,15 +117,15 @@ async function allOrders()
 
 function checkStatus(strIn)
 {
-    if (strIn === "입금 대기")
+    if (strIn === "결제 완료")
         return 0;
-    else if (strIn === "결제 완료")
-        return 1;
     else if (strIn === "배송 준비")
-        return 2;
+        return 1;
     else if (strIn === "배송 중")
-        return 3;
+        return 2;
     else if (strIn === "배송 완료")
+        return 3;
+    else if (strIn === "주문 취소")
         return 4;
 }
 

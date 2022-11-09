@@ -4,11 +4,12 @@ import * as Api from '../api.js';
 const orderList = document.querySelector('#orderList');
 
 // Data mocked
-// sessionStorage.setItem('loginToken', JSON.stringify({
-//     accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY0OWI5ZDgwYTMzZTUwMWNlNWY5NDYiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2NzUzODI5OX0.38U02nnJHS_UaEdR5weEll3wKzLE1zS-_f6FTIkdB10",
-//     userId: "63649b9d80a33e501ce5f946",
-//     userType: "admin",
-// }))
+sessionStorage.setItem('loginToken', JSON.stringify({
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzE3Mzd9.AW1x6uJ2itKC8oMFXdL0CjFzaA2cisATQE263fzqF9Q",
+    "userId": "6368bdf749dfe808988ea212",
+    "userType": "admin"
+}
+))
 // sessionStorage.setItem('userEmail', 'semin0706@naver.com')
 
 
@@ -58,8 +59,13 @@ const orderList = document.querySelector('#orderList');
 // ])
 
 
-const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
-const emailToken = sessionStorage.getItem('userEmail')
+const {accessToken, userId, userType} = {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzU1MTh9.jaHZAFtGgXdvUWw_QoQyWztNjIQGCCyOZZd_mWlTbuU",
+    "userId": "6368bdf749dfe808988ea212",
+    "userType": "admin"
+};
+sessionStorage.setItem('token', accessToken)
+//const emailToken = sessionStorage.getItem('userEmail')
 
 addAllElements();
 addAllEvents();
@@ -83,23 +89,23 @@ async function allOrdersAdmin()
     try 
     {
         const res = await Api.get(`/admin/orders`);
-        const orders = JSON.parse(res.body);
-        if (res.status == 403)
+        const orders = res;
+        if (res.status === 403)
             return alert(orders.message)
         
         var count = 1;
         for (let order of orders){
-            const {_id, orderInfo, totalPrice, email, address, state, createdAt, updatedAt} = order;
-            console.log(_id, orderInfo, totalPrice, email, address, state, createdAt, updatedAt)
-            let tableContent = `<tr><th>${_id}</th>`;
-            let userEmail = `<td>${email}</td>`;
+            const {id, orderInfo, totalPrice, userId, address, state, createdAt, updatedAt} = order;
+            console.log(order)
+            let tableContent = `<tr><th>${id}</th>`;
+            let user = `<td>${userId}</td>`;
             let orderDate = `<td>${createdAt}</td>`
             let userAddr = `<td>${address.address1+' '+address.address2}</td>`
             let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
             let price = `<td>${totalPrice}</td>`;
             let stateDef = `<td>${state}</td>`;
             let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`;
-            retHtml += (tableContent + userEmail + orderDate + userAddr + orderName + price + stateDef + buttons);
+            retHtml += (tableContent + user + orderDate + userAddr + orderName + price + stateDef + buttons);
         }
         orderList.insertAdjacentHTML("beforeend", retHtml);
     }
@@ -113,7 +119,7 @@ async function allOrdersAdmin()
 
 function isLoggedIn() 
 {
-    if (!accessToken){
+    if (!sessionStorage.getItem('token')){
         alert("로그인 후 이용해 주세요.");
         window.location.href = "/login";
     } 

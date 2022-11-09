@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { config } from '../../configuration/config';
 import { adminModel } from '../db';
 import { CustomError } from '../middlewares';
 
@@ -17,7 +18,10 @@ class AdminService {
       throw new CustomError(409, `${email}은 이미 가입 된 관리자입니다.`);
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      config.bcrypt.saltRounds,
+    );
     const newAdminInfo = {
       name,
       email,
@@ -47,10 +51,10 @@ class AdminService {
       );
     }
 
-    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const accessToken = jwt.sign(
       { userId: admin.id, role: admin.userType },
-      secretKey,
+      config.jwt.accessSecret,
+      { expiresIn: config.jwt.accessExpiresIn },
     );
 
     return { accessToken, userId: admin.id, userType: admin.userType };

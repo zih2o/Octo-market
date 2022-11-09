@@ -30,13 +30,7 @@ const createOrderJoiSchema = Joi.object({
 const updateOrderAdminJoiSchema = Joi.object({
   state: Joi.string()
     .required()
-    .valid(
-      'Payment Completed',
-      'Before Delivery',
-      'Delivery in Progress',
-      'Delivery Completed',
-      'Canceled',
-    ),
+    .valid('결제 완료', '배송 준비', '배송 중', '배송 완료', '주문 취소'),
 });
 
 const updateOrderUserJoiSchema = Joi.object({

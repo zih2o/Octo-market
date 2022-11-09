@@ -1,11 +1,12 @@
-import { orderModel } from '../db';
-import { adminModel } from '../db';
+import { orderModel, adminModel, usersModel } from '../db';
 import { CustomError } from '../middlewares';
+import { sendMail } from '../utils/mail';
 
 export class OrderService {
   constructor(orderModel, adminModel) {
     this.orderModel = orderModel;
     this.adminModel = adminModel;
+    this.usersModel = usersModel;
   }
   async getAll(currentUserId) {
     const admin = await this.adminModel.findById(currentUserId);
@@ -45,6 +46,9 @@ export class OrderService {
     }
 
     const order = await this.orderModel.createOrder(orderInfo);
+    //메일발송
+    const user = await this.usersModel.findById(order.userId);
+    sendMail(user.email);
     return order;
   }
 
@@ -59,10 +63,7 @@ export class OrderService {
     }
     // User가 주문 수정 요청 시 주문 상태가 배송 전 일때만 배송 수정 가능
     if (order.userId == currentUserId) {
-      if (
-        order.state !== 'Payment Completed' &&
-        order.state !== 'Before Delivery'
-      ) {
+      if (order.state !== '결제 완료' && order.state !== '배송 준비') {
         throw new CustomError(
           409,
           '배송이 시작되어 주문을 변경할 수 없습니다.',
@@ -83,4 +84,8 @@ export class OrderService {
   }
 }
 
-export const orderService = new OrderService(orderModel, adminModel);
+export const orderService = new OrderService(
+  orderModel,
+  adminModel,
+  usersModel,
+);

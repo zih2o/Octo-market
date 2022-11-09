@@ -8,6 +8,7 @@ const getUser = async (req, res, next) => {
 
     res.status(200).json({
       name: user.name,
+      email: user.email,
       address: user.address,
       phoneNum: user.phoneNum,
     });
@@ -63,8 +64,7 @@ const updateUser = async (req, res, next) => {
     }
 
     const userInfoRequired = { userId, currentPassword };
-    // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-    // 보내주었다면, 업데이트용 객체에 삽입함.
+
     const toUpdate = {
       ...(password && { password }),
       ...(address && { address }),

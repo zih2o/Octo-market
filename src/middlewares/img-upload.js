@@ -2,19 +2,20 @@ import AWS from 'aws-sdk';
 import multer from 'multer';
 import multerS3 from 'multer-s3';
 import dotenv from 'dotenv';
+import { config } from '../../configuration/config';
 
 dotenv.config();
 
 AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_ACCESS_KEY,
-  region: 'ap-northeast-2',
+  accessKeyId: config.awsS3.accessKeyId,
+  secretAccessKey: config.awsS3.accessKey,
+  region: config.awsS3.accessRegion,
 });
 
 export const imgUpload = multer({
   storage: multerS3({
     s3: new AWS.S3(),
-    bucket: 'octomaket',
+    bucket: config.awsS3.accessBucket,
     key(req, file, cb) {
       const extension = file.mimetype.split('/')[1];
       if (!['png', 'jpg', 'jpeg', 'gif', 'bmp'].includes(extension)) {

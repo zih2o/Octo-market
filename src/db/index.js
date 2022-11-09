@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { config } from '../../configuration/config';
 
 const DB_URL =
-  process.env.MONGODB_URL ||
+  config.db.host ||
   'MongoDB 서버 주소가 설정되지 않았습니다.\n./db/index.ts 파일을 확인해 주세요. \n.env 파일도 필요합니다.\n';
 
 mongoose.connect(DB_URL);

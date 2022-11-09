@@ -1,11 +1,13 @@
-* {
-  margin: 0;
-  padding: 0;
-  color: #4b4453;
-}
-
+/* * {
+  border: 1px solid black;
+} */
 
 /* 헤더 영역 */
+header {
+  width: 100%;
+  background-color: white;
+}
+
 #nav-top {
   position: relative;
 }
@@ -66,102 +68,81 @@
   z-index: 99;
 }
 
+/* 메인 콘텐츠 영역*/
 .container {
-  display: flex;
+  padding: 30px;
 }
 
+#order {
+  font-weight: bold;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid #d5d5d0;
+}
 
-/* main 영역 */
-#menu {
+#userInfo {
   display: flex;
-  justify-content: center;
+  flex-wrap: nowrap;
+  height: 20vh;
+}
 
-  margin-top: 30px;
+table {
+  width: 100%;
+  border: none;
+}
+
+#zeroColumn {
+  width: 10%;
+}
+
+#firstColumn {
+  width: 15%;
+}
+
+#secondColumn {
   width: 20%;
-  min-width: 170px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-decoration: none;
 }
 
-#content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  height: 100vh;
-  border-color: lightgray white white lightgray;
-  border-style: solid;
-  border-width: 1px 0px 0px 1px;
-}
-
-.data {
-  margin-top: 100px;
-}
-
-.field {
-  width: 50vw;
-}
-
-#productClassify {
-  display: flex;
-  justify-content: space-around;
-}
-
-#productClassify>div {
-  width: 49%;
-}
-
-.filebox {
-  display: flex;
-  align-items: stretch;
-}
-
-.filebox>.file-name {
-  margin-left: 2px;
-  color: lightgrey;
-
-}
-
-
-#costModifier {
-  display: flex;
-  justify-content: space-around;
-}
-
-#costModifier>div {
-  width: 49%;
-}
-
-#event {
-  display: flex;
-  justify-content: flex-start;
-}
-
-#event>.check {
-  width: 33%;
+#thirdColumn {
+  width: 15%;
   text-align: center;
 }
 
-#event>.check>.control {
+#correct,
+#buy {
+  align-self: flex-end;
+  width: 140px;
+  padding: 0;
+}
+
+table > tbody > tr > td > img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+
+#productsInfo > table * {
+  text-align: center;
+  line-height: 60px;
+}
+
+#productsInfo > table > thead {
+  border-bottom: 1.5px solid rgb(167, 167, 167);
+}
+
+#productsInfo > table > * > tr {
   height: 40px;
-  align-items: center;
 }
 
-#event>.check>.control>input {
-  width: 60%;
+#buyInfo {
+  display: flex;
+  flex-wrap: nowrap;
   text-align: center;
-}
-
-
-label>input {
-  margin-top: 7px;
-  width: 25px;
-  height: 25px;
-  clip-path: circle(70% at 50% 50%);
 }
 
 /* 푸터 영역 */
+
 #footer-icons {
   margin-top: 20px;
   display: flex;
@@ -176,7 +157,7 @@ label>input {
   margin: 50px 0 0 0;
 }
 
-#footer-textbox>div {
+#footer-textbox > div {
   display: flex;
   justify-content: center;
 }
