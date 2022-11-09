@@ -49,7 +49,7 @@ async function handleSubmit(e) {
     const data = { email, password };
 
     // fetch 사용 가능 시 주석 해제 예정
-    const result = await Api.post('http://localhost:5050/admin/login', data);
+    const result = await Api.post('/admin/login', data);
     const token = result.accessToken;
     const adminId = result.adminId;
     const adminType = result.userType;
