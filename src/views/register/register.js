@@ -8,7 +8,7 @@ import {
   activeNavbar,
   // 푸터 랜더링
   drawFooter,
-} from "/useful-functions.js";
+} from "../useful-functions.js";
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
@@ -109,12 +109,12 @@ async function handleSubmit(e) {
       },
     };
 
-    await Api.post("http://localhost:5050/users/signup", data);
+    await Api.post("/users/signup", data);
 
     alert(`정상적으로 회원가입되었습니다.`);
 
     // 로그인 페이지 이동
-    window.location.href = "/login";
+    window.location.href = "users/login";
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
