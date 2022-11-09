@@ -33,7 +33,7 @@ const postData = {
 //주문하기 버튼 누를 때 서버에 정보 보내서 검증하기
 async function buy() {
   try {
-    await Api.post(`http://localhost:5050/orders/personal/${userId}`, postData);
+    await Api.post(`/orders/personal/${userId}`, postData);
 
     alert(`주문이 완료되었습니다.`);
 
@@ -48,7 +48,7 @@ async function buy() {
 //회원정보 받아오는 함수
 async function userInfo() {
   try {
-    const userInfo = await Api.post(`http://localhost:5050/users/${userId}`);
+    const userInfo = await Api.post(`/users/${userId}`);
     postData.address = userInfo.address;
 
     const name = document.querySelector("#secondColumn");
@@ -81,7 +81,14 @@ async function buyNow() {
     try {
       //상품 정보 받아서 html 구성
       const itemId = sessionStorage.getItem("buyNow");
-      const item = await Api.get("http://localhost:5050/items", itemId);
+      const item = await Api.get("/items", itemId);
+
+      let price = 0;
+      if (item.isDiscount) {
+        price = Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100));
+      } else {
+        price = Number(item.price);
+      }
 
       const productList = document.querySelector("#productList");
       productList.insertAdjacentHTML(
@@ -89,13 +96,13 @@ async function buyNow() {
         `<tr>
         <td><img src="${item.imageUrl}"></td>
       <td class="productName">${item.name}</td>
-      <td class="eachPrice">${addCommas(item.price)}원</td>
+      <td class="eachPrice">${addCommas(price)}원</td>
       <td class="eachCount">1개</td>
-      <td class="productPrice">${addCommas(item.price)}원</td>
+      <td class="productPrice">${addCommas(price)}원</td>
     </tr>`
       );
-      productPriceEl.innerHTML = `${addCommas(item.price)}원`;
-      totalPrice.innerHTML = `${addCommas(Number(item.price) + 3000)}원`;
+      productPriceEl.innerHTML = `${addCommas(price)}원`;
+      totalPrice.innerHTML = `${addCommas(price + 3000)}원`;
       sessionStorage.removeItem("buyNow");
 
       //서버에 전송할 데이터 따로 저장
@@ -122,8 +129,15 @@ async function buyNow() {
         if (sessionStorage.getItem(itemId)) {
           const item = await Api.get("/items", itemId);
 
+          let price = 0;
+          if (item.isDiscount) {
+            price = Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100));
+          } else {
+            price = Number(item.price);
+          }
+
           const sum =
-            Number(sessionStorage.getItem(itemId)) * Number(item.price);
+            Number(sessionStorage.getItem(itemId)) * price;
 
           const productList = document.querySelector("#productList");
           productList.insertAdjacentHTML(
@@ -131,7 +145,7 @@ async function buyNow() {
             `<tr>
             <td><img src="${item.imageUrl}"></td>
           <td class="productName">${item.name}</td>
-          <td class="eachPrice">${addCommas(item.price)}원</td>
+          <td class="eachPrice">${addCommas(price)}원</td>
           <td class="eachCount">${sessionStorage.getItem(itemId)}개</td>
           <td class="productPrice">${addCommas(sum)}원</td>
         </tr>`
@@ -143,7 +157,7 @@ async function buyNow() {
             itemId: itemId,
             name: item.name,
             amount: 1,
-            price: Number(item.price),
+            price: price,
           });
         }
       } catch (err) {
@@ -161,7 +175,7 @@ async function buyNow() {
 
 updateInfoBtn.addEventListener("click", () => {
   alert("회원 정보 수정 페이지로 이동합니다.");
-  window.location.href = `/updateinfo/${userId}`;
+  window.location.href = `/updateInfo/${userId}`; 
 });
 
 buyBtn.addEventListener("click", buy);
