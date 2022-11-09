@@ -21,7 +21,7 @@ export async function sendMail(userMail) {
 
     //#3. 메일 전송, 결과는 info 변수에 담아 집니다.
     let info = await transporter.sendMail({
-      from: `"ActoMarket" <${mailAddress}>`,
+      from: `"OctoMarket" <${mailAddress}>`,
       to: userMail,
       subject: '결제가 완료되었습니다',
       html: template,
