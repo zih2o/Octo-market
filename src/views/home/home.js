@@ -12,6 +12,8 @@ import {
   drawFooter,
   //숫자 자리수마다 , 찍기
   addCommas,
+  // 관리자 로그인 그리기
+  drawAdminLink,
 } from '../useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
@@ -21,6 +23,7 @@ drawCategoryBar();
 // 카테고리 목록 반환받음
 const categoryList = fillCategoryBar();
 drawFooter();
+drawAdminLink();
 
 // top 스크롤 버튼
 let topBtn = document.getElementById('scroll-top-Btn');
@@ -59,13 +62,13 @@ categoryList.then(datas => {
   datas.map(el => {
     const template = `
         <li class="md-category-li">
-        <a class="md-category-button"" href="#" data-categoryid="${el._id}">
+        <a class="md-category-button"" href="#" data-id="${el._id}">
         ${el.name}
         </a>
         </li>
         `;
     mdCategoryStr += template;
-    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
+    const path = `http://localhost:5050/items/category/${el._id}`;
     categoryOj[path] = el.name;
   });
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
@@ -73,11 +76,9 @@ categoryList.then(datas => {
 
   // url 로 현재 상품 리스트 타이틀 텍스트 설정하기
   const categoryTitle = document.querySelector('#category-title');
-  let pathname = window.location.pathname;
 
-  const categoryTitleName =
-    categoryOj[`http://kdt-sw3-team08.elicecoding.com/${pathname}`];
-  categoryTitle.innerText = categoryTitleName;
+
+  categoryTitle.innerText = '전체보기';
 
 
 
@@ -99,10 +100,11 @@ categoryList.then(datas => {
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
     console.log('refill 카테고리 아이디 요청 ===>>> ', categoryId)
-    let url = 'http://kdt-sw3-team08.elicecoding.com/items/category/';
+
+    let url = 'http://localhost:5050/items/category/';
     url += categoryId;
 
-    // console.log('md카테고리 콜 url =>', url);
+    console.log('md카테고리 콜 url =>', url);
 
     let params = {
       re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
@@ -112,77 +114,7 @@ categoryList.then(datas => {
     };
 
     url = `${url}?${new URLSearchParams(params).toString()}`;
-    // console.log('fet할 완성 url =>', url);
-
-    // 확인용 더미
-    // const fetchedMdProducts = [
-    //   {
-    //     name: 'Apple AirPods Pro 1 ()',
-    //     brand: 'Apple',
-    //     price: 293000,
-    //     description: '음질 지리는 에어팟입니다.',
-    //     category: 'first',
-    //     imageUrl: 'https://pbs.twimg.com/media/EqEGWJ-VoAIAFj_.jpg',
-    //     isRecommend: true,
-    //     isDiscount: true,
-    //     disPercent: 30,
-    //     _id: '6369c1d05a1dbc3a930fec1e',
-    //     createdAt: '2022-11-08T02:41:20.810Z',
-    //     updatedAt: '2022-11-08T02:41:20.810Z',
-    //     __v: 0,
-    //     id: '6369c1d05a1dbc3a930fec1e',
-    //   },
-    //   {
-    //     name: 'Apple AirPods Pro 2 ()',
-    //     brand: 'Apple',
-    //     price: 293000,
-    //     description: '음질 지리는 에어팟입니다.',
-    //     category: 'second',
-    //     imageUrl:
-    //       'https://nateonweb.nate.com/imgbbs/1/20200411/_20200411130421_C675D78_AA40_4BD2_BA83_35A27E383F67.jpeg.8C675D78_AA40_4BD2_BA83_35A27E383F67.jpg',
-    //     isRecommend: true,
-    //     isDiscount: true,
-    //     disPercent: 30,
-    //     _id: '6369c1d05a1dbc3a930fec1e',
-    //     createdAt: '2022-11-08T02:41:20.810Z',
-    //     updatedAt: '2022-11-08T02:41:20.810Z',
-    //     __v: 0,
-    //     id: '6369c1d05a1dbc3a930fec1e',
-    //   },
-    //   {
-    //     name: 'Apple AirPods Pro 3 ()',
-    //     brand: 'Apple',
-    //     price: 293000,
-    //     description: '음질 지리는 에어팟입니다.',
-    //     category: 'third',
-    //     imageUrl: 'https://pbs.twimg.com/media/EqEGWJ-VoAIAFj_.jpg',
-    //     isRecommend: true,
-    //     isDiscount: true,
-    //     disPercent: 30,
-    //     _id: '6369c1d05a1dbc3a930fec1e',
-    //     createdAt: '2022-11-08T02:41:20.810Z',
-    //     updatedAt: '2022-11-08T02:41:20.810Z',
-    //     __v: 0,
-    //     id: '6369c1d05a1dbc3a930fec1e',
-    //   },
-    //   {
-    //     name: 'Apple AirPods Pro 4 ()',
-    //     brand: 'Apple',
-    //     price: 293000,
-    //     description: '음질 지리는 에어팟입니다.',
-    //     category: 'fourth',
-    //     imageUrl:
-    //       'https://nateonweb.nate.com/imgbbs/1/20200411/_20200411130421_C675D78_AA40_4BD2_BA83_35A27E383F67.jpeg.8C675D78_AA40_4BD2_BA83_35A27E383F67.jpg',
-    //     isRecommend: true,
-    //     isDiscount: true,
-    //     disPercent: 30,
-    //     _id: '6369c1d05a1dbc3a930fec1e',
-    //     createdAt: '2022-11-08T02:41:20.810Z',
-    //     updatedAt: '2022-11-08T02:41:20.810Z',
-    //     __v: 0,
-    //     id: '6369c1d05a1dbc3a930fec1e',
-    //   },
-    // ];
+    console.log('fet할 완성 url =>', url);
 
 
     // fetch 잠시 주석처리
@@ -193,7 +125,7 @@ categoryList.then(datas => {
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
-    const itemUrl = 'http://kdt-sw3-team08.elicecoding.com/items/';
+    const itemUrl = 'http://localhost:5050/items/';
 
     const createMdCategoryBox = num => {
       const productId = fetchedMdProducts[num]._id;
@@ -298,7 +230,7 @@ const createProductBox = data => {
   <li class="product-item" style="width:25%;">
   <div class="item-container">
   <div class="item-photobox">
-                <a href="http://kdt-sw3-team08.elicecoding.com/items/${
+                <a href="http://localhost:5050/items/${
                   data._id
                 }">
                     <img src="${'../images/dummy.png'}" alt="${
@@ -335,7 +267,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 const callApi = async () => {
-  let url = 'http://kdt-sw3-team08.elicecoding.com/items';
+  let url = 'http://localhost:5050/items';
 
   let params = {
     cnt: `${cnt}`,
@@ -485,7 +417,7 @@ async function getDiscountItem() {
     const urlParams = new URLSearchParams(params).toString();
 
     const res = await fetch(
-      `http://kdt-sw3-team08.elicecoding.com/items?${urlParams}`,
+      `http://localhost:5050/items?${urlParams}`,
     );
     const items = await res.json();
 
@@ -533,7 +465,7 @@ function itemRender(items, number) {
   disPercent.innerHTML = `${item.disPercent}%`;
   firstPrice.innerHTML = `${addCommas(item.price)}원`;
   finalPrice.innerHTML = `${addCommas(
-    Number(item.price) * (1 - Number(item.disPercent) / 100),
+    Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100)),
   )}원`;
   discountImg.setAttribute('src', item.imageUrl);
   discountLink.setAttribute('href', `/items/${item._id}`);
