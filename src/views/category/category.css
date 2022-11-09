@@ -113,19 +113,159 @@ main {
   transform: scale(1.8);
 }
 
+/*할인 상품 섹션 */
+.discountSection {
+  width: 100%;
+  background-color: rgb(246, 253, 248);
+}
+
+.discount {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  grid-template-rows: 0.3fr 1.7fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'discountName itemPhoto'
+    'discountInfo itemPhoto';
+  width: 60%;
+  height: 450px;
+  margin: 100px auto 0 auto;
+  font-weight: bold;
+}
+
+.itemPhoto {
+  grid-area: itemPhoto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.itemPhoto > a > img {
+  display: block;
+  margin: auto auto;
+  height: 100%;
+  object-fit: cover;
+  transition: all 1s ease;
+  border-radius: 20px;
+}
+
+.itemPhoto img:hover {
+  transform: scale(1.2);
+}
+
+.discountTitle {
+  grid-area: discountName;
+  margin-top: 20px;
+}
+
+.discountTitle .is-size-4 {
+  border-bottom: #555 solid 1px;
+}
+
+.discountTitle .ment {
+  margin-top: 20px;
+  color: #b0a8b9;
+  font-size: 0.9em;
+}
+
+.discountInfo {
+  grid-area: discountInfo;
+}
+
+.countDown {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.countDown > * {
+  margin-right: 5px;
+}
+
+.countDown > img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.sec {
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+}
+
+@keyframes blink {
+  0% {
+    color: white;
+  }
+
+  50% {
+    color: #4b4453;
+  }
+
+  100% {
+    color: black;
+  }
+}
+
+.discountDetail {
+  margin-top: 30px;
+  border-radius: 15px;
+}
+
+.discountDetail > * {
+  margin-top: 10px;
+}
+
+.discountProductDescription {
+  font-weight: normal;
+}
+
+.discountPrice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  text-align: right;
+  margin-top: 30px;
+}
+
+.disPercent {
+  width: 70%;
+  color: red;
+}
+
+.firstPrice {
+  width: 30%;
+  text-decoration: line-through;
+  color: #b0a8b9;
+}
+
+.finalPrice {
+  width: 100%;
+}
+/*여기까지 할인 상품 섹션 css입니다~~!!*/
+
 /* 상품 리스트 */
 .product-section {
   width: 100%;
 }
 
+.md-title,
 .product-category {
   text-align: center;
   margin: 50px 0 30px 0;
 }
 
+.md-title > h2,
 #category-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
+}
+
+.md-btn {
+  margin: 15px 30px;
 }
 
 .product-sortbox {
@@ -154,13 +294,19 @@ main {
 .product-container {
   width: 1200px;
   margin: 0 auto;
-  padding-top: 60px;
+  padding: 60px 0;
   border-top: 1px solid #e1e1e1;
 }
 
+.md-product-ul,
+.md-category-ul,
 .product-ul {
   display: flex;
   flex-wrap: wrap;
+}
+
+.md-category-ul {
+  justify-content: space-around;
 }
 
 .product-item {
@@ -168,7 +314,24 @@ main {
   justify-content: center;
 }
 
-.item-container {
+.md-category-li {
+  padding: 10px 20px;
+  background-color: #51c498;
+  border-radius: 25px;
+}
+
+.md-category-li:active,
+.md-category-li:hover {
+  background-color: #9986f1;
+}
+
+.md-category-button {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.md .item-container {
   display: flex;
   /* justify-content: center; */
   justify-content: center;
@@ -223,7 +386,7 @@ main {
   outline: none; /* Remove outline */
   background-color: #51c498; /* Set a background color */
   cursor: pointer; /* Add a mouse pointer on hover */
-  border-radius: 30px; /* Rounded corners */
+  border-radius: 80px; /* Rounded corners */
   box-shadow: 3px 3px 5px #4b4453;
 }
 
