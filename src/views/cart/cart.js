@@ -64,7 +64,7 @@ async function makeProductList() {
     itemList.forEach(async (itemId) => {
       items[itemId] = {};
       try {
-        const res = await fetch(`http://localhost:5050/items/${itemId}`);
+        const res = await fetch(`/items/${itemId}`);
         const item = await res.json();
 
         if (sessionStorage.getItem(itemId)) {
@@ -74,7 +74,7 @@ async function makeProductList() {
 
           if (item.isDiscount) {
             items[itemId].price =
-              Number(item.price) * (1 - Number(item.disPercent) / 100);
+              Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100));
             state.productsPrice += items[itemId].price * amount[itemId];
           } else {
             items[itemId].price = Number(item.price);
@@ -290,9 +290,9 @@ function delSelect() {
 function goToBuy() {
   if (!sessionStorage.getItem("loginToken")) {
     alert("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동합니다.");
-    window.location.href = "/login";
+    window.location.href = "users/login";
   } else {
-    window.location.href = "/order";
+    window.location.href = `orders/personal/${sessionStorage.getItem('userId')}`;
   }
 }
 

@@ -36,7 +36,7 @@ const itemId = window.location.pathname.slice(1);
 //서버에서 데이터 받아 각 요소에 넣어주는 함수
 async function makeProductDetail() {
   try {
-    const res = await fetch(`http://localhost:5050/items${itemId}`);
+    const res = await fetch(`/items/${itemId}`);
     const item = await res.json();
 
     image.setAttribute("src", item.imageUrl);
@@ -48,7 +48,7 @@ async function makeProductDetail() {
       firstPrice.innerHTML = `${addCommas(item.price)}원`;
       discount.innerHTML = `${item.disPercent}%`;
       finalPrice.innerHTML = `${addCommas(
-        Number(item.price) * (1 - Number(item.disPercent) / 100)
+        Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100))
       )} 원`;
     }
     finalPrice.innerHTML = `${addCommas(item.price)} 원`;
@@ -84,10 +84,10 @@ function buyNow() {
   //비회원은 로그인 페이지로, 회원은 장바구니로
   if (!token) {
     alert("로그인 후 이용해 주세요.");
-    window.location.href = "/login";
+    window.location.href = "/users/login";
   } else {
     sessionStorage.setItem("buyNow", itemId);
-    window.location.href = "/order";
+    window.location.href = `/orders/personal/${sessionStorage.getItem('userId')}`;
   }
   return;
 }
