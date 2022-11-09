@@ -21,21 +21,16 @@ sessionStorage.setItem('token', accessToken)
 // const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
 // const emailToken = sessionStorage.getItem('userEmail')
 
-addAllElements()
-addAllEvents()
+addAllEvents();
+emailAttach();
 
-// Event grouper
-function addAllElements() {
-    emailAttach();
-}
 function addAllEvents() {
-    submitBtn.addEventListener("click", handleSubmit)
+  submitBtn.addEventListener('click', handleSubmit);
 }
 
-
-
-function emailAttach () {
-    emailIn.placeholder = "이메일은 변경할 수 없습니다";
+async function emailAttach() {
+  const userInfo = await Api.get('http://localhost:5050/users/', userId);
+  emailIn.placeholder = `${userInfo.email}`;
 }
 
 async function handleSubmit(e) {
