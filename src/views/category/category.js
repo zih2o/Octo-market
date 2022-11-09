@@ -54,7 +54,7 @@ categoryList.then(datas => {
   // console.log('카테고리 목록 조회 datas ', datas)
 
   datas.map(el => {
-    const path = `http://localhost:5050//items/category/${el._id}`;
+    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
     console.log('카테고리 목록 조회 name ', el.name)
     categoryOj[path] = el.name;
   });
@@ -66,8 +66,12 @@ categoryList.then(datas => {
   let pathname = window.location.pathname;
 
   console.log('pathname => ', pathname)
-  const categoryTitleName = categoryOj[`http://localhost:5050/${pathname}`];
-  console.log('완성 url =>>>', `http://localhost:5050/${pathname}`);
+  const categoryTitleName =
+    categoryOj[`http://kdt-sw3-team08.elicecoding.com/${pathname}`];
+  console.log(
+    '완성 url =>>>',
+    `http://kdt-sw3-team08.elicecoding.com//${pathname}`,
+  );
   categoryTitle.innerText = categoryTitleName;
 
 });
