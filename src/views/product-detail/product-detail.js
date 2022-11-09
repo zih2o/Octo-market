@@ -1,13 +1,32 @@
-// 에디터 사용하여 마크업 덩어리로 데이터 받을 경우 id="detailContent" 박스 안을 모두 비우고 받기
-// 아래는 요소 개별 선택하여 각각 데이터 넣어 주는 형식으로 작성함
-import { addCommas } from "../useful-functions.js";
+import {
+  addCommas,
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 카테고리 바 랜더링
+  drawCategoryBar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 카테고리 목록을 api 에서 받아와 값 채워 넣기
+  fillCategoryBar,
+  // 푸터 랜더링
+  drawFooter,
+} from "../useful-functions.js";
+
+// html 랜더링 관련 함수들 실행
+drawNavbar();
+activeNavbar();
+drawCategoryBar();
+fillCategoryBar();
+drawFooter();
 
 // 요소 선택
 const image = document.querySelector("#image");
 const productName = document.querySelector("#productName");
 const brand = document.querySelector("#brand");
 const description = document.querySelector("#description");
-const price = document.querySelector("#price");
+const discount = document.querySelector(".discount");
+const firstPrice = document.querySelector(".firstPrice");
+const finalPrice = document.querySelector(".finalPrice");
 const addToCartBtn = document.querySelector("#addToCart");
 const buyNowBtn = document.querySelector("#buyNow");
 
@@ -18,13 +37,21 @@ const itemId = window.location.pathname.slice(1);
 async function makeProductDetail() {
   try {
     const res = await fetch(`http://localhost:5050/items${itemId}`);
-    const data = await res.json();
+    const item = await res.json();
 
-    image.setAttribute("src", data.imageUrl);
-    productName.innerHTML = data.name;
-    brand.innerHTML = data.brand;
-    description.innerHTML = data.description;
-    price.innerHTML = `${addCommas(data.price)} 원`;
+    image.setAttribute("src", item.imageUrl);
+    productName.innerHTML = item.name;
+    brand.innerHTML = item.brand;
+    description.innerHTML = item.description;
+
+    if (item.isDiscount) {
+      firstPrice.innerHTML = `${addCommas(item.price)}원`;
+      discount.innerHTML = `${item.disPercent}%`;
+      finalPrice.innerHTML = `${addCommas(
+        Number(item.price) * (1 - Number(item.disPercent) / 100)
+      )} 원`;
+    }
+    finalPrice.innerHTML = `${addCommas(item.price)} 원`;
   } catch (err) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
@@ -52,7 +79,7 @@ function addToCart() {
 
 //바로 결제
 function buyNow() {
-  const token = sessionStorage.getItem("userEmail");
+  const token = sessionStorage.getItem("loginToken");
 
   //비회원은 로그인 페이지로, 회원은 장바구니로
   if (!token) {
