@@ -65,7 +65,7 @@ categoryList.then(datas => {
         </li>
         `;
     mdCategoryStr += template;
-    const path = `http://localhost:5050/items/category/${el._id}`;
+    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
     categoryOj[path] = el.name;
   });
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
@@ -75,7 +75,8 @@ categoryList.then(datas => {
   const categoryTitle = document.querySelector('#category-title');
   let pathname = window.location.pathname;
 
-  const categoryTitleName = categoryOj[`http://localhost:5050/${pathname}`];
+  const categoryTitleName =
+    categoryOj[`http://kdt-sw3-team08.elicecoding.com/${pathname}`];
   categoryTitle.innerText = categoryTitleName;
 
 
@@ -98,7 +99,7 @@ categoryList.then(datas => {
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
     console.log('refill 카테고리 아이디 요청 ===>>> ', categoryId)
-    let url = 'http://localhost:5050/items/category/';
+    let url = 'http://kdt-sw3-team08.elicecoding.com/items/category/';
     url += categoryId;
 
     // console.log('md카테고리 콜 url =>', url);
@@ -192,7 +193,7 @@ categoryList.then(datas => {
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
-    const itemUrl = 'http://localhost:5050/items/';
+    const itemUrl = 'http://kdt-sw3-team08.elicecoding.com/items/';
 
     const createMdCategoryBox = num => {
       const productId = fetchedMdProducts[num]._id;
@@ -297,7 +298,9 @@ const createProductBox = data => {
   <li class="product-item" style="width:25%;">
   <div class="item-container">
   <div class="item-photobox">
-                <a href="http://localhost:5050/items/${data._id}">
+                <a href="http://kdt-sw3-team08.elicecoding.com/items/${
+                  data._id
+                }">
                     <img src="${'../images/dummy.png'}" alt="${
     data.name
   }" loading="lazy">
@@ -324,33 +327,6 @@ let cnt = 1;
 
 console.log('카테고리 목룍 ==>>> ', categoryList)
 
-// const callRecommends = (cnt) => {
-//   let url = 'http://localhost:5050/items/category/';
-
-//   let params = {
-//     count: '1',
-//     perCount: '4',
-//     isRecommend: true,
-//     re: 'isRecommend',
-//     isDiscount: false,
-//     dis: 'isDiscount',
-//   }
-//   // categoryList // 조회한 카테고리 목록
-
-//   // 추천 섹션의 카테고리 목록
-
-//   const template = `
-//     <li>
-//       <a href="http://localhost:5050/items">
-//         <strong>전체보기</strong>
-//       </a>
-//     </li>
-//   `;
-//   const headerTag = document.getElementsByTagName('header')[0];
-//   headerTag.insertAdjacentHTML('afterend', template);
-
-// }
-
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
@@ -359,7 +335,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 const callApi = async () => {
-  let url = 'http://localhost:5050/items';
+  let url = 'http://kdt-sw3-team08.elicecoding.com/items';
 
   let params = {
     cnt: `${cnt}`,
@@ -508,7 +484,9 @@ async function getDiscountItem() {
 
     const urlParams = new URLSearchParams(params).toString();
 
-    const res = await fetch(`http://localhost:5050/items?${urlParams}`);
+    const res = await fetch(
+      `http://kdt-sw3-team08.elicecoding.com/items?${urlParams}`,
+    );
     const items = await res.json();
 
     if (!localStorage.getItem('discount')) {
