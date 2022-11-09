@@ -52,7 +52,7 @@ const categoryOj = {};
 categoryList.then(datas => {
 
   datas.map(el => {
-    const path = `http://localhost:5050/items/category/${el._id}`;
+    const path = `http://kdt-sw3-team08.elicecoding.com/items/category/${el._id}`;
     categoryOj[path] = el.name;
   });
 
@@ -63,7 +63,8 @@ categoryList.then(datas => {
   let pathname = window.location.pathname;
 
   console.log('pathname => ', pathname)
-  const categoryTitleName = categoryOj[`http://localhost:5050/${pathname}`];
+  const categoryTitleName =
+    categoryOj[`http://kdt-sw3-team08.elicecoding.com/${pathname}`];
   categoryTitle.innerText = categoryTitleName;
 
 });
@@ -83,7 +84,7 @@ const createProductBox = data => {
   <li class="product-item" style="width:25%;">
   <div class="item-container">
   <div class="item-photobox">
-                <a href="http://localhost:5050/items/${data._id}">
+                <a href="http://kdt-sw3-team08.elicecoding.com/${data._id}">
                     <img src="${'../images/dummy.png'}" alt="${
     data.name
   }" loading="lazy">
@@ -119,7 +120,7 @@ window.addEventListener('DOMContentLoaded', function () {
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 const callApi = async () => {
-  let url = 'http://localhost:5050/items';
+  let url = 'http://kdt-sw3-team08.elicecoding.com/items/';
 
   let params = {
     cnt: `${cnt}`,
