@@ -13,6 +13,7 @@ viewsRouter.use('/users/signup', serveStatic('join'));
 viewsRouter.use('/users/login', serveStatic('login'));
 viewsRouter.use('/users/:userId', serveStatic('delivery'));
 viewsRouter.use('/users/findemail', serveStatic('find-email'));
+viewsRouter.use('/users/updateInfo', serveStatic('modifyAccount'));
 
 //items
 viewsRouter.use('/items/category/:catId', serveStatic('category'));
@@ -20,6 +21,7 @@ viewsRouter.use('/items/:itemId', serveStatic('product-detail'));
 
 //order
 viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/orders', serveStatic('order'));
 
 //admin
 viewsRouter.use('/admin/login', serveStatic('login-admin'));
