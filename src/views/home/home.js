@@ -10,6 +10,8 @@ import {
   fillCategoryBar,
   // 푸터 랜더링
   drawFooter,
+  //숫자 자리수마다 , 찍기
+  addCommas,
 } from '../useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
@@ -38,6 +40,7 @@ function scrollFunction() {
   }
 }
 
+
 // 화면 최상단으로 스크롤 이동
 function topFunction() {
   document.body.scrollTop = 0; // For Safari
@@ -54,7 +57,6 @@ categoryList.then(datas => {
 
   // li 생성 및 사용할 데이터 객체로 저장
   datas.map(el => {
-    console.log('li템플릿 el => ',el)
     const template = `
         <li class="md-category-li">
         <a class="md-category-button"" href="#" data-categoryid="${el._id}">
@@ -63,7 +65,8 @@ categoryList.then(datas => {
         </li>
         `;
     mdCategoryStr += template;
-    categoryOj[el._id] = el.name;
+    const path = `http://localhost:5050/items/category/${el._id}`;
+    categoryOj[path] = el.name;
   });
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
   // console.log('timing check')
@@ -73,12 +76,8 @@ categoryList.then(datas => {
   let pathname = window.location.pathname;
 
   const categoryTitleName = categoryOj[`http://localhost:5050/${pathname}`];
-  if (categoryTitleName) {
-    categoryTitle.innerText = categoryTitleName;
-  } else {
-    categoryTitle.innerText = '전체보기';
-  }
-  console.log(categoryTitle.innerText);
+  categoryTitle.innerText = categoryTitleName;
+
 
 
   // md 카테고리 a 태그 연결 대신 해당 카테고리 데이터로 li들을 채움
@@ -200,6 +199,7 @@ categoryList.then(datas => {
       const productImg = fetchedMdProducts[num].imageUrl;
       const productName = fetchedMdProducts[num].name;
       const productPrice = fetchedMdProducts[num].price;
+      const calcPrice = addCommas(productPrice);
 
       const product = `
       <li class="product-item md-box" style="width:25%;">
@@ -218,7 +218,7 @@ categoryList.then(datas => {
                       <strong><span id="md${num + 1}-name">${productName}</span></strong>
                     </div>
                     <div class="item-pricebox">
-                      <strong><span id="md${num + 1}-price">${productPrice}</span></strong>
+                      <strong><span id="md${num + 1}-price">${calcPrice}</span></strong>
                     </div>
                   </div>
                 </div>
@@ -234,13 +234,6 @@ categoryList.then(datas => {
     const mdProductUl = document.getElementsByClassName('md-product-ul')[0];
     mdProductUl.innerHTML = sumTemplate;
 
-
-
-    // fetch 로 받은 데이터를 박스에 넣기(노가다 비효율)
-
-    // 카테고리 클릭 시 마다 dom 의 reflow(재배치)를 최소화 하기 위해서 요소 삽입, 삭제는 피했다
-    // 박스의 수가 정해진 소수이니 api로 값만 타겟하고 변경하여 클라이언트의 연산을 줄였다
-    // 단 하나씩 연결해주어야 하므로 노가다에 코드 라인이 많아지고 지저분해 보이는 단점이 있다
 
     // const md1a = document.getElementById('md1-a');
     // const md1img = document.getElementById('md1-img')
@@ -289,466 +282,17 @@ categoryList.then(datas => {
         console.log('categoryoj===.>> ',categoryOj);
 
 
-        // fetch 사용 전 더미 데이터
-//         const dummys = {
-//           items: [
-//             {
-//               _id: '63648af2f6cbdc57bcdd5345',
-//               name: '고등어1',
-//               brand: '청년수산',
-//               price: '10000',
-//               description: '맛있엉',
-//               category: '63622c58942ce8e513937058',
-//               imageUrl: 'http://ddd',
-//               createdAt: '2022-11-04T03:45:54.191Z',
-//               updatedAt: '2022-11-04T03:45:54.191Z',
-//               __v: 0,
-//               id: '63648af2f6cbdc57bcdd5345',
-//             },
-//             {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어1',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어2',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어2',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어3',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어3',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어4',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어4',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어5',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어5',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어6',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어6',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어7',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어7',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어8',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어8',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어9',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어9',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어10',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어10',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어11',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어11',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어12',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어12',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어13',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어13',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어14',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어14',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어15',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어15',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어16',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어16',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//     {
-//       _id: '63648af2f6cbdc57bcdd5345',
-//       name: '고등어17',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:45:54.191Z',
-//       updatedAt: '2022-11-04T03:45:54.191Z',
-//       __v: 0,
-//       id: '63648af2f6cbdc57bcdd5345',
-//     },
-//     {
-//       _id: '6364887e39e4d0963d6ed1de',
-//       name: '청어17',
-//       brand: '청년수산',
-//       price: '10000',
-//       description: '맛있엉',
-//       category: '63622c58942ce8e513937058',
-//       imageUrl: 'http://ddd',
-//       createdAt: '2022-11-04T03:35:26.431Z',
-//       updatedAt: '2022-11-04T03:41:31.051Z',
-//       __v: 0,
-//       id: '6364887e39e4d0963d6ed1de',
-//     },
-//   ],
-// };
-
-// 상품 객체 배열을 size개씩 배열로 나눠 담은 배열로 리턴해주는 함수
-// function sliceChunkDataArr(arr, size) {
-//   let slicedDataArr = [];
-//   for (let i = 0; i < arr.length; i += size) {
-//     slicedDataArr.push(arr.slice(i, i + size));
-//   }
-//   return slicedDataArr;
-// }
-// console.log(sliceChunkDataArr(dummys.items, 3));
 
 // 데이터 객체로 html화 하여 상품을 만들고 문자열로 만드는 함수
 const createProductBox = data => {
+  const calcPrice = addCommas(data.price);
+  console.log(calcPrice)
+  let name = '';
+  if (data.name.length >= 10) {
+    name = data.name.slice(0, 20) + '...';
+  } else {
+    name = data.name;
+  }
   const product = `
   <li class="product-item" style="width:25%;">
   <div class="item-container">
@@ -760,12 +304,8 @@ const createProductBox = data => {
                     </a>
                     </div>
                     <div class="item-info-container">
-                    <div class="item-namebox"><strong><span>${
-                      data.name
-                    }</span></strong></div>
-                    <div class="item-pricebox"><strong><span>${
-                      data.price
-                    }</span></strong></div>
+                    <div class="item-namebox"><strong><span>${name}</span></strong></div>
+                    <div class="item-pricebox"><strong><span>${calcPrice}</span></strong></div>
                     </div>
                     </div>
                     </li>
@@ -814,7 +354,6 @@ console.log('카테고리 목룍 ==>>> ', categoryList)
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
-  // 카테고리 조회해서 카테고리바 동적 구현
 });
 
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
