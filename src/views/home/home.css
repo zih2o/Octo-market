@@ -113,6 +113,140 @@ main {
   transform: scale(1.8);
 }
 
+/*할인 상품 섹션 */
+.discountSection {
+  width: 100%;
+  background-color: rgb(246, 253, 248);
+}
+
+.discount {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  grid-template-rows: 0.3fr 1.7fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'discountName itemPhoto'
+    'discountInfo itemPhoto';
+  width: 60%;
+  height: 450px;
+  margin: 100px auto 0 auto;
+  font-weight: bold;
+}
+
+.itemPhoto {
+  grid-area: itemPhoto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.itemPhoto > a > img {
+  display: block;
+  margin: auto auto;
+  height: 100%;
+  object-fit: cover;
+  transition: all 1s ease;
+  border-radius: 20px;
+}
+
+.itemPhoto img:hover {
+  transform: scale(1.2);
+}
+
+.discountTitle {
+  grid-area: discountName;
+  margin-top: 20px;
+}
+
+.discountTitle .is-size-4 {
+  border-bottom: #555 solid 1px;
+}
+
+.discountTitle .ment {
+  margin-top: 20px;
+  color: #b0a8b9;
+  font-size: 0.9em;
+}
+
+.discountInfo {
+  grid-area: discountInfo;
+}
+
+.countDown {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.countDown > * {
+  margin-right: 5px;
+}
+
+.countDown > img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.sec {
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+}
+
+@keyframes blink {
+  0% {
+    color: white;
+  }
+
+  50% {
+    color: #4b4453;
+  }
+
+  100% {
+    color: black;
+  }
+}
+
+.discountDetail {
+  margin-top: 30px;
+  border-radius: 15px;
+}
+
+.discountDetail > * {
+  margin-top: 10px;
+}
+
+.discountProductDescription {
+  font-weight: normal;
+}
+
+.discountPrice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  text-align: right;
+  margin-top: 30px;
+}
+
+.disPercent {
+  width: 70%;
+  color: red;
+}
+
+.firstPrice {
+  width: 30%;
+  text-decoration: line-through;
+  color: #b0a8b9;
+}
+
+.finalPrice {
+  width: 100%;
+}
+/*여기까지 할인 상품 섹션 css입니다~~!!*/
+
 /* 상품 리스트 */
 .product-section {
   width: 100%;
