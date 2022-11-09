@@ -90,6 +90,7 @@ async function allOrders()
         if (res.message)
             return alert(res.message)
         else if (res.length > 0) {
+            const orders = res;
             var count = 1;
             
             for (let order of orders){
