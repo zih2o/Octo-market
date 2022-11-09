@@ -175,7 +175,7 @@ async function buyNow() {
 
 updateInfoBtn.addEventListener("click", () => {
   alert("회원 정보 수정 페이지로 이동합니다.");
-  window.location.href = `/updateInfo/${userId}`; 
+  window.location.href = "/updateInfo"; 
 });
 
 buyBtn.addEventListener("click", buy);
