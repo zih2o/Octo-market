@@ -20,7 +20,6 @@
   <!-- sticky 속성을 위한 wrapper -->
   <div class="wrapper">
 
-    <!-- header 네비바(메뉴, 카테고리) -->
     <header>
 
       <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
@@ -86,6 +85,41 @@
       <!-- End Carousel -->
 
 
+      <!--할인 상품 섹션-->
+      <section class="discountSection">
+        <div class="discount">
+          <div class="itemPhoto">
+            <a class="discountLink"><img class="discountImg" src="일단 비우기" alt="상품 이미지" /></a>
+          </div>
+          <div class="discountTitle">
+            <p class="is-size-4">오늘의 특가</p>
+            <p class="ment">망설이면 늦어요!</p>
+          </div>
+          <div class="discountInfo">
+            <div class="countDown is-size-3">
+              <img src="clock.png" />
+              <span class="hour"></span>
+              <span>:</span>
+              <span class="min"></span>
+              <span>:</span>
+              <span class="sec"></span>
+            </div>
+
+            <div class="box discountDetail">
+              <div class="is-size-4 discountName">상품명</div>
+              <div class="discountProductDescription">
+                세상에서 제일 달고 잘나가는 딸기
+              </div>
+              <div class="discountPrice">
+                <span class="is-size-5 disPercent">할인율</span><span class="is-size-5 firstPrice">원가</span>
+                <div class="is-size-5 finalPrice">최종 금액</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <!-- 상품 목록 섹션 -->
       <section class="product-section">
 
@@ -94,13 +128,15 @@
         <!-- 카테고리별 추천 상품 영역 -->
         <div class="md-recommend">
           <div class="md-title">
-            <span>MD 추천 상품</span>
+            <h2>MD 추천 상품</h2>
           </div>
-          <ul id="md-category">
+          <div class="product-container">
+            <ul class="md-category-ul">
 
-          </ul>
-          <div>
-            <ul id="md-product">
+            </ul>
+          </div>
+          <div class="product-container">
+            <ul class="md-product-ul">
 
             </ul>
           </div>

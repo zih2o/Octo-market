@@ -83,7 +83,7 @@ export const activeNavbar = () => {
   }
 };
 
-// 카테고리 데이터 조회하여 동적으로 카테고리 바 구현
+// 카테고리 데이터 조회하여 동적으로 카테고리 바 구현 + 카테고리 목록 리턴
 export const fillCategoryBar = async () => {
   const categoryUl = document.getElementById('category-ul');
   // console.log('카테고리바 요소 => ', categoryBar);
@@ -93,7 +93,7 @@ export const fillCategoryBar = async () => {
 
   categorys.map(el => {
     const template = `
-      <li id="processed">
+      <li>
         <a href="http://localhost:5050/items/category/${el._id}">
           <strong>${el.name}</strong>
         </a>
@@ -102,6 +102,7 @@ export const fillCategoryBar = async () => {
     categorylist += template;
   });
   categoryUl.insertAdjacentHTML('beforeend', categorylist);
+  return categorys;
 };
 
 export const drawNavbar = () => {
