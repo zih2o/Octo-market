@@ -172,7 +172,6 @@ categoryList.then(datas => {
 // 데이터 객체로 html화 하여 상품을 만들고 문자열로 만드는 함수
 const createProductBox = data => {
   const calcPrice = addCommas(data.price);
-  console.log(calcPrice)
   let name = '';
   if (data.name.length >= 10) {
     name = data.name.slice(0, 20) + '...';
