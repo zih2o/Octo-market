@@ -167,44 +167,6 @@ categoryList.then(datas => {
     const mdProductUl = document.getElementsByClassName('md-product-ul')[0];
     mdProductUl.innerHTML = sumTemplate;
 
-
-    // const md1a = document.getElementById('md1-a');
-    // const md1img = document.getElementById('md1-img')
-    // const md1name = document.getElementById('md1-name')
-    // const md1price = document.getElementById('md1-price')
-    // const md2a = document.getElementById('md2-a');
-    // const md2img = document.getElementById('md2-img')
-    // const md2name = document.getElementById('md2-name')
-    // const md2price = document.getElementById('md2-price')
-    // const md3a = document.getElementById('md3-a');
-    // const md3img = document.getElementById('md3-img')
-    // const md3name = document.getElementById('md3-name')
-    // const md3price = document.getElementById('md3-price')
-    // const md4a = document.getElementById('md4-a');
-    // const md4img = document.getElementById('md4-img')
-    // const md4name = document.getElementById('md4-name')
-    // const md4price = document.getElementById('md4-price')
-
-
-    // md1a.href = `${itemUrl}${fetchedMdProducts[0]._id}`;
-    // md2a.href = `${itemUrl}${fetchedMdProducts[1]._id}`;
-    // md3a.href = `${itemUrl}${fetchedMdProducts[2]._id}`;
-    // md4a.href = `${itemUrl}${fetchedMdProducts[3]._id}`;
-
-    // md1img.src = fetchedMdProducts[0].imageUrl;
-    // md2img.src = fetchedMdProducts[1].imageUrl;
-    // md3img.src = fetchedMdProducts[2].imageUrl;
-    // md4img.src = fetchedMdProducts[3].imageUrl;
-
-    // md1name.innerText = fetchedMdProducts[0].name;
-    // md2name.innerText = fetchedMdProducts[1].name;
-    // md3name.innerText = fetchedMdProducts[2].name;
-    // md4name.innerText = fetchedMdProducts[3].name;
-
-    // md1price.innerText = fetchedMdProducts[0].price;
-    // md2price.innerText = fetchedMdProducts[1].price;
-    // md3price.innerText = fetchedMdProducts[2].price;
-    // md4price.innerText = fetchedMdProducts[3].price;
   };
 
   // 추후 md카테고리 클릭 이벤트 시, 값 변경 예정
@@ -486,3 +448,4 @@ countDown();
 getDiscountItem();
 
 //여기까지가 특가 상품 함수입니닷
+
