@@ -31,7 +31,7 @@ const addToCartBtn = document.querySelector("#addToCart");
 const buyNowBtn = document.querySelector("#buyNow");
 
 //아이템아이디
-const itemId = window.location.pathname.slice(1);
+const itemId = window.location.pathname.split('/')[2];
 
 //서버에서 데이터 받아 각 요소에 넣어주는 함수
 async function makeProductDetail() {
@@ -80,7 +80,7 @@ function addToCart() {
 //바로 결제
 function buyNow() {
   const token = sessionStorage.getItem("loginToken");
-
+  
   //비회원은 로그인 페이지로, 회원은 장바구니로
   if (!token) {
     alert("로그인 후 이용해 주세요.");
