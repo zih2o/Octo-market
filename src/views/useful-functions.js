@@ -56,6 +56,11 @@ export const activeNavbar = () => {
     joinAfter.classList.add('active');
     logoutBtn.classList.remove('active');
     logoutAfter.classList.remove('active');
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('loginToken');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('adminToken');
+    });
   } else {
     // 토큰이 없다면
     console.log('로그인 확인 토큰 없음');
@@ -65,11 +70,7 @@ export const activeNavbar = () => {
     joinAfter.classList.remove('active');
     logoutBtn.classList.add('active');
     logoutAfter.classList.add('active');
-    logoutBtn.addEventListener('click', () => {
-      sessionStorage.removeItem('loginToken');
-      sessionStorage.removeItem('userId');
-      sessionStorage.removeItem('adminToken');
-    });
+    
     mypageBtn.addEventListener('click', () => {
       alert('로그인 후 이용 가능합니다.');
     });
