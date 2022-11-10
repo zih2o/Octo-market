@@ -1,4 +1,15 @@
 import * as Api from '../api.js';
+import {
+  drawNavbar,
+  activeNavbar,
+  drawFooter,
+} from '../../useful-functions.js';
+
+// html 랜더링 관련 함수들 실행
+drawNavbar();
+activeNavbar();
+drawFooter();
+
 
 //This page is rendered when URI is given as /admin/orders/
 const orderList = document.querySelector('#orderList');
@@ -85,13 +96,13 @@ async function allOrdersAdmin()
 {
     /* Read and Add rows to table if get request is successful */
     var retHtml = "";
-    try 
+    try
     {
         const res = await Api.get(`/admin/orders`);
         const orders = res;
         if (res.status === 403)
             return alert(orders.message)
-        
+
         var count = 1;
         for (let order of orders){
             const {id, orderInfo, totalPrice, userId, address, state, createdAt, updatedAt} = order;
@@ -106,7 +117,7 @@ async function allOrdersAdmin()
             retHtml += (tableContent + user + orderDate + userAddr + orderName + price + stateDef + buttons);
         }
         orderList.insertAdjacentHTML('beforeend', retHtml)
-        
+
     }
     catch(err)
     {
@@ -119,7 +130,7 @@ async function deleteUpdate(event)
 {
     const btnTouched = event.target
     if (!btnTouched.classList.contains('button')){
-        return  
+        return
     }
     const table = btnTouched.closest("table")
     const currRow = btnTouched.closest("tr")
@@ -140,12 +151,12 @@ async function deleteUpdate(event)
 }
 
 
-function isLoggedIn() 
+function isLoggedIn()
 {
     if (!accessToken){
         alert("로그인 후 이용해 주세요.");
         window.location.href = "/users/login";
-    } 
+    }
 }
 
 function isAdmin()

@@ -169,7 +169,7 @@ export const drawCategoryBar = () => {
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a href=".product-category"><strong>전체보기</strong></a></li>
+        <li id="entire"><a href="/"><strong>전체보기</strong></a></li>
 
       </ul>
     </div>
