@@ -110,7 +110,7 @@ export const drawNavbar = () => {
   const template = `
     <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand" id="nav-logobox">
-        <img id="nav-logo" src="../images/octo-logo.png" alt="">
+        <img id="nav-logo" src="/images/octo-logo.png" alt="">
       </div>
       <div class="navbar-menu">
         <div class="navbar-end">
@@ -144,7 +144,7 @@ export const drawNavbar = () => {
     <div id="title-container">
       <div id="title">
         <a href="http://kdt-sw3-team08.elicecoding.com/">
-          <img src="../images/octopus-title.png" alt="문어상점">
+          <img src="/images/octopus-title.png" alt="문어상점">
         </a>
       </div>
     </div>
@@ -173,13 +173,13 @@ export const drawFooter = () => {
     <div id="footer-container">
       <div id="footer-icons">
         <a href="https://www.instagram.com/">
-          <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
+          <img src="/images/instagram-icon.jpg" alt="옥토 인스타그램">
         </a>
         <a href="https://ko-kr.facebook.com/">
-          <img src="../images/facebook-icon.png" alt="옥토 페이스북">
+          <img src="/images/facebook-icon.png" alt="옥토 페이스북">
         </a>
         <a href="https://twitter.com/?lang=ko">
-          <img src="../images/twitter-icon.png" alt="옥토 트위터">
+          <img src="/images/twitter-icon.png" alt="옥토 트위터">
         </a>
       </div>
       <div id="footer-textbox">
