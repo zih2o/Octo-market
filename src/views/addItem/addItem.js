@@ -1,4 +1,21 @@
 import * as Api from '../../api.js';
+import {
+    // 회원가입 등 네비바 랜더링
+    drawNavbar,
+    // 토큰 보유에 따라 네비바 변화
+    activeNavbar,
+    // 푸터 랜더링
+    drawFooter,
+    // 관리자 로그인 그리기
+    drawAdminLink,
+  } from '../../useful-functions.js';
+  
+  // html 랜더링 관련 함수들 실행
+  drawNavbar();
+  activeNavbar();
+  drawFooter();
+  drawAdminLink();
+  
 
 //This page is rendered when URI is given as /admin/items
 
@@ -114,7 +131,7 @@ async function getCategory() {
         prodCate.insertAdjacentHTML("beforeend", retHTML);
         return [retHTML, category.length, categoryId]
     }
-    catch (e)
+    catch (err)
     {
       console.error(err.stack);
       alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
