@@ -1,8 +1,13 @@
-import * as Api from '../api.js';
+import * as Api from '../../api.js';
 
 const catchselect = document.querySelector("#category");
 const selectBox = document.querySelector("#selectBox");
 const submitBtn = document.querySelector("#btnSubmit");
+
+
+const accessToken = sessionStorage.getItem("loginToken")
+const userId = sessionStorage.getItem("userId")
+const userType = sessionStorage.getItem("adminToken")
 
 // Data mocked
 // const {accessToken, userId, userType} = {
@@ -77,7 +82,13 @@ async function submitModify () {
       return alert(res.reason);
     else{
       categories = await categoryModify();
-      return alert("성공적으로 등록되었습니다.")
+      console.log(categories[1])
+      alert("성공적으로 등록되었습니다.")
+      // if (categories[1] === 8){
+      //   catchselect.value = "수정";
+      //   catchselect.dispatchEvent('change');
+      // }
+      return;
     }
   }
   // put

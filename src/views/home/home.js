@@ -313,13 +313,24 @@ const countDown = () => {
   ).getTime();
 
   function timePart(val, text) {
-    if (text === 'hour') {
-      document.querySelector('.hour').innerHTML = val;
-    } else if (text === 'min') {
-      document.querySelector('.min').innerHTML = val;
+    if (val < 10) {
+      if (text === 'hour') {
+        document.querySelector('.hour').innerHTML = `0${val}`;
+      } else if (text === 'min') {
+        document.querySelector('.min').innerHTML = `0${val}`;
+      } else {
+        document.querySelector('.sec').innerHTML = `0${val}`;
+      }
     } else {
-      document.querySelector('.sec').innerHTML = val;
+      if (text === 'hour') {
+        document.querySelector('.hour').innerHTML = val;
+      } else if (text === 'min') {
+        document.querySelector('.min').innerHTML = val;
+      } else {
+        document.querySelector('.sec').innerHTML = val;
+      }
     }
+
     return;
   }
 
@@ -437,4 +448,5 @@ countDown();
 getDiscountItem();
 
 //여기까지가 특가 상품 함수입니닷
+
 

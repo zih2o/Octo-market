@@ -51,13 +51,13 @@ async function handleSubmit(e) {
     // fetch 사용 가능 시 주석 해제 예정
     const result = await Api.post('/admin/login', data);
     const token = result.accessToken;
-    const adminId = result.adminId;
+    const userId = result.userId;
     const adminType = result.userType;
 
     // 로그인 성공, 토큰을 세션 스토리지에 저장
     // 물론 다른 스토리지여도 됨
 
-    sessionStorage.setItem('userId', adminId);
+    sessionStorage.setItem('userId', userId);
     sessionStorage.setItem('loginToken', token);
     sessionStorage.setItem('adminToken', adminType);
 

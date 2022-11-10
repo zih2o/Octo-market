@@ -65,6 +65,14 @@ export const activeNavbar = () => {
     joinAfter.classList.remove('active');
     logoutBtn.classList.add('active');
     logoutAfter.classList.add('active');
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('loginToken');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('adminToken');
+    });
+    mypageBtn.addEventListener('click', () => {
+      alert('로그인 후 이용 가능합니다.');
+    });
   }
 
   // 관리자 토큰 보유 시, 마이페이지 버튼 눌렀을때 관리자 마이페이지 로 이동하도록 경로 수정
@@ -72,17 +80,18 @@ export const activeNavbar = () => {
     mypageBtn.addEventListener('click', e => {
       e.preventDefault();
       window.location.href =
-        '/admin/mypage';
+        '/admin';
     });
   }
 
   // 로그아웃 시 세션스토리지 토큰 제거
-  if (!logoutBtn.classList.contains('active')) {
-    sessionStorage.removeItem('loginToken');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('adminToken');
-  }
+  // if (logoutBtn.classList.contains('active')) {
+  //   sessionStorage.removeItem('loginToken');
+  //   sessionStorage.removeItem('userId');
+  //   sessionStorage.removeItem('adminToken');
+  // }
 };
+
 
 // 카테고리 데이터 조회하여 동적으로 카테고리 바 구현 + 카테고리 목록 리턴
 export const fillCategoryBar = async () => {
@@ -107,6 +116,13 @@ export const fillCategoryBar = async () => {
 };
 
 export const drawNavbar = () => {
+  let userId = '';
+  if (sessionStorage.getItem('userId')) {
+    userId = sessionStorage.getItem('userId');
+  } else {
+    userId = 'login';
+  }
+
   const template = `
     <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
       <div class="navbar-menu">
@@ -136,7 +152,7 @@ export const drawNavbar = () => {
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="/users/" class="button is-primary" id="mypage">
+              <a href="/users/${userId}" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>
@@ -144,6 +160,15 @@ export const drawNavbar = () => {
         </div>
       </div>
     </nav>
+
+    <div id="title-container">
+      <div id="title">
+        <a href="/">
+          <img src="/images/octopus-title.png" alt="문어상점">
+        </a>
+      </div>
+    </div>
+
   `;
   const headerTag = document.getElementsByTagName('header')[0];
   headerTag.insertAdjacentHTML('afterbegin', template);
@@ -153,7 +178,7 @@ export const drawCategoryBar = () => {
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a href="http://kdt-sw3-team08.elicecoding.com/items/category/"><strong>전체보기</strong></a></li>
+        <li id="entire"><a href=".product-category"><strong>전체보기</strong></a></li>
 
       </ul>
     </div>
@@ -168,13 +193,13 @@ export const drawFooter = () => {
     <div id="footer-container">
       <div id="footer-icons">
         <a href="https://www.instagram.com/">
-          <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
+          <img src="/images/instagram-icon.jpg" alt="옥토 인스타그램">
         </a>
         <a href="https://ko-kr.facebook.com/">
-          <img src="../images/facebook-icon.png" alt="옥토 페이스북">
+          <img src="/images/facebook-icon.png" alt="옥토 페이스북">
         </a>
         <a href="https://twitter.com/?lang=ko">
-          <img src="../images/twitter-icon.png" alt="옥토 트위터">
+          <img src="/images/twitter-icon.png" alt="옥토 트위터">
         </a>
       </div>
       <div id="footer-textbox">
@@ -188,7 +213,7 @@ export const drawFooter = () => {
           <a href="">Private Policy</a>
         </div>
         <div id="footer-company">
-          <a href="http://kdt-sw3-team08.elicecoding.com/admin/login">ⓒ 2022 OCTO infinite</a>
+          <a href="/admin/login">ⓒ 2022 OCTO infinite</a>
         </div>
       </div>
     </div>
@@ -200,7 +225,7 @@ export const drawFooter = () => {
 
 export const drawAdminLink = () => {
   const template = `
-    <a id="admin-login" href="http://kdt-sw3-team08.elicecoding.com/admin/login"></a>
+    <a id="admin-login" href="/admin/login"></a>
   `;
   const bodyEl = document.querySelector('body');
   bodyEl.insertAdjacentHTML('afterbegin', template);

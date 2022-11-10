@@ -1,16 +1,16 @@
 import * as Api from '../api.js';
 
 //This page is rendered when URI is given as /admin/orders/
-//const orderList = document.querySelector('#orderList');
-const orderList = document.getElementById('orderList');
+const orderList = document.querySelector('#orderList');
+// const orderList = document.getElementById('orderList');
 
 // Data mocked
-sessionStorage.setItem('loginToken', JSON.stringify({
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzE3Mzd9.AW1x6uJ2itKC8oMFXdL0CjFzaA2cisATQE263fzqF9Q",
-    "userId": "6368bdf749dfe808988ea212",
-    "userType": "admin"
-}
-))
+// sessionStorage.setItem('loginToken', JSON.stringify({
+//     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzE3Mzd9.AW1x6uJ2itKC8oMFXdL0CjFzaA2cisATQE263fzqF9Q",
+//     "userId": "6368bdf749dfe808988ea212",
+//     "userType": "admin"
+// }
+// ))
 // sessionStorage.setItem('userEmail', 'semin0706@naver.com')
 
 
@@ -59,13 +59,10 @@ sessionStorage.setItem('loginToken', JSON.stringify({
 //     },
 // ])
 
+const accessToken = sessionStorage.getItem("loginToken")
+const userId = sessionStorage.getItem("userId")
+const userType = sessionStorage.getItem("adminToken")
 
-const {accessToken, userId, userType} = {
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc5NTgwNDcsImV4cCI6MTY2ODA0NDQ0N30.bKydZmT31mbbjY9plc-IUncAcAiIDrggyXf3jPwzDnA",
-    "userId": "6368bdf749dfe808988ea212",
-    "userType": "admin"
-}
-sessionStorage.setItem('token', accessToken)
 //const emailToken = sessionStorage.getItem('userEmail')
 
 addAllElements();
@@ -80,7 +77,7 @@ function addAllElements() {
 
 function addAllEvents() {
     // Add row delete and call delivery cancel api
-
+    orderList.addEventListener("click", e => deleteUpdate(e))
 }
 
 
@@ -88,8 +85,6 @@ async function allOrdersAdmin()
 {
     /* Read and Add rows to table if get request is successful */
     var retHtml = "";
-    var newRow;
-
     try 
     {
         const res = await Api.get(`/admin/orders`);
@@ -100,58 +95,17 @@ async function allOrdersAdmin()
         var count = 1;
         for (let order of orders){
             const {id, orderInfo, totalPrice, userId, address, state, createdAt, updatedAt} = order;
-            // let tableContent = `<tr><th>${id}</th>`;
-            // let user = `<td>${userId}</td>`;
-            // let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
-            // let userAddr = `<td>${address.address1+' '+address.address2}</td>`
-            // let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
-            // let price = `<td>${totalPrice}</td>`;
-            // let stateDef = `<td>${state}</td>`;
-            // let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`;
-            // retHtml += (tableContent + user + orderDate + userAddr + orderName + price + stateDef + buttons);
-            newRow = document.createElement('tr');
-            
-            let tableId = document.createElement('th');
-            tableId.textContent = id;
-
-            let user = document.createElement('td');
-            user.textContent = userId
-            
-            let orderDate = document.createElement('td');
-            orderDate.textContent = createdAt.split('T')[0].replaceAll('-', '.')
-            
-            let userAddr = document.createElement('td')
-            userAddr.textContent = address.address1+' '+address.address2
-
-            let orderName = document.createElement('td')
-            orderName.textContent = `${orderInfo[0].name} 등 ${orderInfo.length}개`
-            
-            let price = document.createElement('td')
-            price.textContent = totalPrice
-
-            let stateDef = document.createElement('td')
-            stateDef.textContent = state
-
-            let modify = document.createElement('td')
-            let button = document.createElement('btn')
-            button.textContent = "취소"
-            button.classList.add('button')
-            button.classList.add('is-small')
-            button.classList.add('is-danger')
-            button.classList.add('is-outlined')
-            button.onclick = (e) => deleteUpdate(e)
-            modify.appendChild(button)
-            
-            newRow.appendChild(tableId)
-            newRow.appendChild(user)
-            newRow.appendChild(orderDate)
-            newRow.appendChild(userAddr)
-            newRow.appendChild(orderName)
-            newRow.appendChild(price)
-            newRow.appendChild(stateDef)
-            newRow.appendChild(modify)
-            orderList.appendChild(newRow)
+            let tableContent = `<tr><th>${id}</th>`;
+            let user = `<td>${userId}</td>`;
+            let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
+            let userAddr = `<td>${address.address1+' '+address.address2}</td>`
+            let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
+            let price = `<td>${totalPrice}</td>`;
+            let stateDef = `<td>${state}</td>`;
+            let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`;
+            retHtml += (tableContent + user + orderDate + userAddr + orderName + price + stateDef + buttons);
         }
+        orderList.insertAdjacentHTML('beforeend', retHtml)
         
     }
     catch(err)
@@ -164,6 +118,9 @@ async function allOrdersAdmin()
 async function deleteUpdate(event)
 {
     const btnTouched = event.target
+    if (!btnTouched.classList.contains('button')){
+        return  
+    }
     const table = btnTouched.closest("table")
     const currRow = btnTouched.closest("tr")
     const orderId = currRow.cells[0].innerHTML
@@ -185,9 +142,9 @@ async function deleteUpdate(event)
 
 function isLoggedIn() 
 {
-    if (!sessionStorage.getItem('token')){
+    if (!accessToken){
         alert("로그인 후 이용해 주세요.");
-        window.location.href = "/login";
+        window.location.href = "/users/login";
     } 
 }
 
@@ -195,6 +152,6 @@ function isAdmin()
 {
     if (userType !== "admin"){
         alert("관리자가 아닙니다")
-        window.location.href = "/login";
+        window.location.href = "/users/login";
     }
 }
