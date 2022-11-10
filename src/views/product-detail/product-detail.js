@@ -45,6 +45,7 @@ async function makeProductDetail() {
     productName.innerHTML = item.name;
     brand.innerHTML = item.brand;
     description.innerHTML = item.description;
+    finalPrice.innerHTML = `${addCommas(item.price)} 원`;
 
     if (item.isDiscount) {
       firstPrice.innerHTML = `${addCommas(item.price)}원`;
@@ -53,7 +54,6 @@ async function makeProductDetail() {
         Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100))
       )} 원`;
     }
-    finalPrice.innerHTML = `${addCommas(item.price)} 원`;
   } catch (err) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }

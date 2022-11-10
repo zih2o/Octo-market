@@ -22,9 +22,6 @@ const updateInfoBtn = document.querySelector("#correct");
 const buyBtn = document.querySelector("#buy");
 const userId = sessionStorage.getItem("userId");
 
-userInfo();
-buyNow();
-
 const postData = {
   orderInfo: [],
   totalPrice: 0,
@@ -32,13 +29,25 @@ const postData = {
   address: {},
 };
 
+userInfo();
+buyNow();
+
 //주문하기 버튼 누를 때 서버에 정보 보내서 검증하기
 async function buy() {
   try {
     await Api.post(`/orders/personal/${userId}`, postData);
 
-    alert(`주문이 완료되었습니다.`);
+    const itemsId = sessionStorage.getItem("order");
+    const itemIdArray = itemsId.split(",").filter((e) => e !== "");
+    itemIdArray.forEach(e => {
+      if (sessionStorage.getItem(e)) {
+        sessionStorage.removeItem(e);
+        sessionStorage.setItem('cart', sessionStorage.getItem('cart').replace(e, ''));
+      }
+    })
 
+    alert(`주문이 완료되었습니다.`);
+    sessionStorage.removeItem('order');
     // 홈페이지로 이동
     window.location.href = "/";
   } catch (err) {
@@ -50,27 +59,28 @@ async function buy() {
 //회원정보 받아오는 함수
 async function userInfo() {
   try {
-    const userInfo = await Api.post(`/users/${userId}`);
+    const userInfo = await Api.get(`/users/${userId}`);
+
     postData.address = userInfo.address;
 
     const name = document.querySelector("#secondColumn");
     const email = document.querySelector("#email");
     const phone = document.querySelector("#phone");
     const postalCode = document.querySelector("#postCode");
-    const adress1 = document.querySelector("#adress1");
-    const adress2 = document.querySelector("#adress2");
+    const address1 = document.querySelector("#address1");
+    const address2 = document.querySelector("#address2");
 
     name.innerHTML = userInfo.name;
     email.innerHTML = userInfo.email;
     phone.innerHTML = userInfo.phoneNum;
-    postalCode.innerHTML = userInfo.adress.postalCode;
-    adress1.innerHTML = userInfo.adress.adress1;
-    adress2.innerHTML = userInfo.adress.adress2;
+    postalCode.innerHTML = userInfo.address.postalCode;
+    address1.innerHTML = userInfo.address.address1;
+    address2.innerHTML = userInfo.address.address2;
 
     //서버에 전송할 데이터 따로 저장
-    postData.address.postalCode = userInfo.adress.postalCode;
-    postData.address.adress1 = userInfo.adress.adress1;
-    postData.address.adress2 = userInfo.adress.adress2;
+    postData.address.postalCode = userInfo.address.postalCode;
+    postData.address.address1 = userInfo.address.address1;
+    postData.address.address2 = userInfo.address.address2;
   } catch (err) {}
 }
 
@@ -122,7 +132,7 @@ async function buyNow() {
       );
     }
   } else {
-    const itemsId = sessionStorage.getItem("cart");
+    const itemsId = sessionStorage.getItem("order");
     const itemIdArray = itemsId.split(",").filter((e) => e !== "");
     let productsPrice = 0;
     //장바구니 기반 상품 정보 받아서 html 구성
@@ -162,16 +172,17 @@ async function buyNow() {
             price: price,
           });
         }
+        postData.totalPrice = productsPrice + 3000;
+        postData.userId = userId;
+        productPriceEl.innerHTML = `${addCommas(productsPrice)}원`;
+        totalPrice.innerHTML = `${addCommas(productsPrice + 3000)}원`;
       } catch (err) {
         alert(
           `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`
         );
       }
     });
-    postData.totalPrice = productsPrice + 3000;
-    postData.userId = userId;
-    productPriceEl.innerHTML = `${addCommas(productsPrice)}원`;
-    totalPrice.innerHTML = `${addCommas(productsPrice + 3000)}원`;
+    
   }
 }
 
