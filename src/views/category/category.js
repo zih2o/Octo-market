@@ -133,22 +133,22 @@ const callApi = async (number) => {
   let params = {};
   if (number === 2) {
     params = {
-      cnt: `${cnt}`,
-      per: '20',
+      count: `${cnt}`,
+      perCount: '20',
       sort: 'price',
       sc: 1,
     };
   } else if (number === 3) {
     params = {
-      cnt: `${cnt}`,
-      per: '20',
+      count: `${cnt}`,
+      perCount: '20',
       sort: 'price',
       sc: -1,
     };
   } else {
     params = {
-      cnt: `${cnt}`,
-      per: '20',
+      count: `${cnt}`,
+      perCount: '20',
       sort: 'createdAt',
       // sc: `${sc}`,
     };
