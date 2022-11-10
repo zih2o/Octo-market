@@ -374,7 +374,7 @@ async function getDiscountItem() {
   try {
     const params = {
       dis: 'isDiscount',
-      isDiscount: true,
+      isDis: true,
       count: 1,
       perCount: 4,
     };
