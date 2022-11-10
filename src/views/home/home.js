@@ -229,7 +229,7 @@ const callApi = async () => {
   let url = '/items';
 
   let params = {
-    cnt: `${cnt}`,
+    count: `${cnt}`,
     per: '20',
     sort: `${sortType}`,
     // sc: `${sc}`,
