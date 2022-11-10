@@ -99,13 +99,7 @@ categoryList.then(datas => {
   // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
-    console.log('refill 카테고리 아이디 요청 ===>>> ', categoryId)
-
-    let url = '/items/category/';
-    url += categoryId;
-
-    console.log('md카테고리 콜 url =>', url);
-
+    url = categoryId;
     let params = {
       re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
       isRecommend: true, // boolean 입력
@@ -114,14 +108,11 @@ categoryList.then(datas => {
     };
 
     url = `${url}?${new URLSearchParams(params).toString()}`;
-    console.log('fet할 완성 url =>', url);
 
 
     // fetch 잠시 주석처리
     const res = await fetch(url);
     const fetchedMdProducts = res.json();
-    console.log('fetchedMdProducts =>> ', fetchedMdProducts);
-
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
@@ -174,7 +165,6 @@ categoryList.then(datas => {
 
   fillRecommend(mdCategoryId);
 })
-        console.log('categoryoj===.>> ',categoryOj);
 
 
 
@@ -218,9 +208,6 @@ let sortType = 'createdAt';
 // 스크롤 페이지네이션 시 페이지 확인용 통신 횟수 카운트 변수
 let cnt = 1;
 
-
-console.log('카테고리 목룍 ==>>> ', categoryList)
-
 // 페이지 첫 돔 로딩시, callApi 호출
 window.addEventListener('DOMContentLoaded', function () {
   callApi();
@@ -239,12 +226,9 @@ const callApi = async () => {
   };
 
   url = `${url}?${new URLSearchParams(params).toString()}`;
-  console.log('url => ', url);
-
   // 서버 연결 시 사용할 fetch문
   const res = await fetch(url);
   const fetchedProducts = await res.json();
-  console.log('fetchedProducts: ', fetchedProducts);
 
   // const dummy = dummys[cnt - 1];
   // let dummy = sliceChunkDataArr(dummys.items, 8)[cnt - 1];

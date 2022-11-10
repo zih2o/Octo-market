@@ -160,7 +160,11 @@ async function addItemtoDB () {
     try {
         const res = await Api.post(`/admin/items`, data);
         if (res.id)
-            return alert("상품이 정상적으로 추가되었습니다");
+        {
+            alert("상품이 정상적으로 추가되었습니다");
+            window.location.href = "/admin"
+        }
+        
     }
     catch(e)
     {

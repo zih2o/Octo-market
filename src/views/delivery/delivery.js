@@ -1,4 +1,4 @@
-import * as Api from '../api.js';
+import * as Api from '../../api.js';
 
 //This page is rendered when URI is given as /orders/users/
 
@@ -66,6 +66,9 @@ const orderList = document.querySelector('#orderList');
 // };
 // sessionStorage.setItem('token', accessToken)
 
+const token = sessionStorage.getItem('loginToken')
+const userId = sessionStorage.getItem('userId')
+
 addAllElements()
 addAllEvents()
 
@@ -75,6 +78,7 @@ function addAllElements() {
     allOrders();
 }
 function addAllEvents() {
+    orderList.addEventListener("click", e=>deleteUpdate(e))
 }
 
 
@@ -101,7 +105,7 @@ async function allOrders()
                 let tableContent = `<tr><th>${_id}</th>`;
                 let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
                 let stateDef = `<td>${state}</td>`;
-                let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`
+                let buttons = `<td><btn class="button  is-small is-warning is-outlined" data-target="modal-js-example">수정</btn></td></tr>`
                 retHtml += (tableContent + orderName + stateDef + buttons);
             }
 
@@ -114,6 +118,32 @@ async function allOrders()
         console.error(err.stack);
         alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
+}
+
+async function deleteUpdate(event)
+{
+    const btnTouched = event.target
+    console.log(btnTouched)
+    if (btnTouched.classList.contains('button')){
+        alert("Button function not implemented")
+        return
+    }
+    // const table = btnTouched.closest("table")
+    // const currRow = btnTouched.closest("tr")
+    // const orderId = currRow.cells[0].innerHTML
+    // const userId = currRow.cells[1]
+
+    // //delete Row
+    // table.deleteRow(currRow.rowIndex)
+
+    // //Update on DB
+    // const res = await Api.delete(`/admin/orders/${orderId}`)
+
+    // if (res.success) {
+    //     return alert("성공적으로 취소되었습니다")
+    // }
+    // else
+    //     return alert(res.reason);
 }
 
 function checkStatus(strIn)
@@ -138,8 +168,8 @@ function updateDeliveryStatus(arrIn)
 
 function isLoggedIn() 
 {
-    if (!sessionStorage.getItem("loginToken")){
+    if (!token){
         alert("로그인 후 이용해 주세요.");
-        window.location.href = "/login";
+        window.location.href = "/users/login";
     } 
 }
