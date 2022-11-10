@@ -170,6 +170,20 @@ export const drawNavbar = () => {
   headerTag.insertAdjacentHTML('afterbegin', template);
 };
 
+export const drawCategoryBar = () => {
+  const template = `
+    <div class="tabs is-medium is-centered position-sticky" id="category-bar">
+      <ul id="category-ul">
+        <li id="entire"><a href=".product-category"><strong>전체보기</strong></a></li>
+
+      </ul>
+    </div>
+
+  `;
+  const headerTag = document.getElementsByTagName('header')[0];
+  headerTag.insertAdjacentHTML('afterend', template);
+};
+
 export const drawFooter = () => {
   const template = `
     <div id="footer-container">
