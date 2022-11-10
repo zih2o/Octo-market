@@ -1,10 +1,11 @@
 import * as Api from '../../api.js';
-import { validateEmail, drawNavbar, activeNavbar , drawFooter } from '../../useful-functions.js';
+import { validateEmail, drawNavbar, activeNavbar , drawFooter, drawAdminLink } from '../../useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
 activeNavbar();
 drawFooter();
+drawAdminLink();
 
 // 요소(element), input 혹은 상수
 const emailInput = document.querySelector('#emailInput');
