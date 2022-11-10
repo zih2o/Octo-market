@@ -11,7 +11,7 @@ import {
   // 푸터 랜더링
   drawFooter,
   drawAdminLink
-} from "../../useful-functions.js";
+} from "../../../useful-functions.js";
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
@@ -33,7 +33,7 @@ const addToCartBtn = document.querySelector("#addToCart");
 const buyNowBtn = document.querySelector("#buyNow");
 
 //아이템아이디
-const itemId = window.location.pathname.split('/')[2];
+const itemId = window.location.pathname.split('/')[3];
 
 //서버에서 데이터 받아 각 요소에 넣어주는 함수
 async function makeProductDetail() {

@@ -68,7 +68,7 @@ categoryList.then(datas => {
         </li>
         `;
     mdCategoryStr += template;
-    const path = `/items/category/${el._id}`;
+    const path = `/items/category/categorylist/${el._id}`;
     categoryOj[path] = el.name;
   });
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
@@ -103,14 +103,14 @@ categoryList.then(datas => {
   // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
-    let url = categoryId;
+    let url = '/items/category/' + categoryId.split('/')[4];
     let params = {
       re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
-      isRecommend: true, // boolean 입력
+      isRe: true, // boolean 입력
       count: 1, // 통신 횟수 count
       perCount: 4,
     };
-
+    
     url = `${url}?${new URLSearchParams(params).toString()}`;
     console.log('세민님이 말한 fetch의  url ', url);
 
@@ -121,7 +121,7 @@ categoryList.then(datas => {
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
-    const itemUrl = '/items/';
+    const itemUrl = '/items/itemlist';
 
     const createMdCategoryBox = num => {
       const productId = fetchedMdProducts[num]._id;
@@ -190,10 +190,10 @@ const createProductBox = data => {
   <li class="product-item" style="width:25%;">
   <div class="item-container">
   <div class="item-photobox">
-                <a href="/items/${
+                <a href="items/itemlist/${
                   data._id
                 }">
-                    <img src="${'../images/dummy.png'}" alt="${
+                    <img src="${data.imageUrl}" alt="${
     data.name
   }" loading="lazy">
                     </a>
@@ -433,7 +433,7 @@ function itemRender(items, number) {
     Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100)),
   )}원`;
   discountImg.setAttribute('src', item.imageUrl);
-  discountLink.setAttribute('href', `/items/${item._id}`);
+  discountLink.setAttribute('href', `/items/itemlist/${item._id}`);
 }
 
 countDown();
