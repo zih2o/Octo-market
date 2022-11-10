@@ -160,15 +160,6 @@ export const drawNavbar = () => {
         </div>
       </div>
     </nav>
-
-    <div id="title-container">
-      <div id="title">
-        <a href="/">
-          <img src="/images/octopus-title.png" alt="문어상점">
-        </a>
-      </div>
-    </div>
-
   `;
   const headerTag = document.getElementsByTagName('header')[0];
   headerTag.insertAdjacentHTML('afterbegin', template);

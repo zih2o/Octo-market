@@ -18,6 +18,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -27,6 +28,13 @@ body {
 
 main {
   flex: 1;
+}
+
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
 }
 
 /* 헤더 영역 */
