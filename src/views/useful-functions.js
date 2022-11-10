@@ -104,7 +104,7 @@ export const fillCategoryBar = async () => {
   categorys.map(el => {
     const template = `
       <li>
-        <a href="/items/category/${el._id}">
+        <a href="/items/category/categorylist/${el._id}">
           <strong>${el.name}</strong>
         </a>
       </li>
@@ -128,7 +128,7 @@ export const drawNavbar = () => {
       <div class="navbar-menu">
         <div id="title-container">
           <div id="title">
-            <a href="http://kdt-sw3-team08.elicecoding.com/">
+            <a href="/">
               <img id="title-img" src="/images/octo_market.png" alt="문어상점">
             </a>
           </div>
@@ -152,7 +152,7 @@ export const drawNavbar = () => {
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="/users/${userId}" class="button is-primary" id="mypage">
+              <a href="/users/userlist/${userId}" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>

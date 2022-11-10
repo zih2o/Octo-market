@@ -91,7 +91,7 @@ categoryList.then(datas => {
       e.preventDefault();
       console.log(e.target)
       console.log('데이터 셋으로 가져온 데이터 =>', e.target.dataset.id);
-      fillRecommend(e.target.dataset.id);
+      fillRecommend(`/items/category/categorylist/${e.target.dataset.id}`);
        console.log(
          '카테고리 타겟팅',
          e.target.dataset.id,
@@ -121,8 +121,8 @@ categoryList.then(datas => {
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
-    const itemUrl = '/items/itemlist';
-
+    const itemUrl = '/items/itemlist/';
+    
     const createMdCategoryBox = num => {
       const productId = fetchedMdProducts[num]._id;
       const productImg = fetchedMdProducts[num].imageUrl;
