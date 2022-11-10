@@ -65,6 +65,11 @@ export const activeNavbar = () => {
     joinAfter.classList.remove('active');
     logoutBtn.classList.add('active');
     logoutAfter.classList.add('active');
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('loginToken');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('adminToken');
+    })
   }
 
   // 관리자 토큰 보유 시, 마이페이지 버튼 눌렀을때 관리자 마이페이지 로 이동하도록 경로 수정
@@ -77,21 +82,11 @@ export const activeNavbar = () => {
   }
 
   // 로그아웃 시 세션스토리지 토큰 제거
-  if (logoutBtn.classList.contains('active')) {
-    sessionStorage.removeItem('loginToken');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('adminToken');
-  }
-
-
-  function logout(e) {
-    e.targer.classList.add('active');
-    sessionStorage.removeItem('loginToken');
-      sessionStorage.removeItem('userId');
-      sessionStorage.removeItem('adminToken');
-  }
-  
-  logoutBtn.addEventListener('click', logout);
+  // if (logoutBtn.classList.contains('active')) {
+  //   sessionStorage.removeItem('loginToken');
+  //   sessionStorage.removeItem('userId');
+  //   sessionStorage.removeItem('adminToken');
+  // }
 };
 
 
