@@ -72,7 +72,6 @@ export const activeNavbar = () => {
     });
     mypageBtn.addEventListener('click', () => {
       alert('로그인 후 이용 가능합니다.');
-      window.location.href = '/login';
     });
   }
 
@@ -117,6 +116,13 @@ export const fillCategoryBar = async () => {
 };
 
 export const drawNavbar = () => {
+  let userId = '';
+  if (sessionStorage.getItem('userId')) {
+    userId = sessionStorage.getItem('userId');
+  } else {
+    userId = 'login';
+  }
+
   const template = `
     <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand" id="nav-logobox">
@@ -142,7 +148,7 @@ export const drawNavbar = () => {
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="/users/" class="button is-primary" id="mypage">
+              <a href="/users/${userId}" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>
@@ -162,20 +168,6 @@ export const drawNavbar = () => {
   `;
   const headerTag = document.getElementsByTagName('header')[0];
   headerTag.insertAdjacentHTML('afterbegin', template);
-};
-
-export const drawCategoryBar = () => {
-  const template = `
-    <div class="tabs is-medium is-centered position-sticky" id="category-bar">
-      <ul id="category-ul">
-        <li id="entire"><a href="/items/category/"><strong>전체보기</strong></a></li>
-
-      </ul>
-    </div>
-
-  `;
-  const headerTag = document.getElementsByTagName('header')[0];
-  headerTag.insertAdjacentHTML('afterend', template);
 };
 
 export const drawFooter = () => {
