@@ -76,13 +76,24 @@ export const activeNavbar = () => {
     });
   }
 
-  // 로그아웃 시 세션스토리지 토큰 제거
-  if (!logoutBtn.classList.contains('active')) {
+  / 로그아웃 시 세션스토리지 토큰 제거
+  if (logoutBtn.classList.contains('active')) {
     sessionStorage.removeItem('loginToken');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('adminToken');
   }
+
+
+  function logout(e) {
+    e.targer.classList.add('active');
+    sessionStorage.removeItem('loginToken');
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('adminToken');
+  }
+  
+  logoutBtn.addEventListener('click', logout);
 };
+
 
 // 카테고리 데이터 조회하여 동적으로 카테고리 바 구현 + 카테고리 목록 리턴
 export const fillCategoryBar = async () => {
