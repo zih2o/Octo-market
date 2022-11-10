@@ -62,7 +62,7 @@ categoryList.then(datas => {
   datas.map(el => {
     const template = `
         <li class="md-category-li">
-        <a class="md-category-button"" href="#" data-id="${el._id}">
+        <a class="md-category-button" href="#" data-id="${el._id}">
         ${el.name}
         </a>
         </li>
@@ -99,7 +99,7 @@ categoryList.then(datas => {
   // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
-    url = categoryId;
+    let url = categoryId;
     let params = {
       re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
       isRecommend: true, // boolean 입력
@@ -109,10 +109,10 @@ categoryList.then(datas => {
 
     url = `${url}?${new URLSearchParams(params).toString()}`;
 
-
     // fetch 잠시 주석처리
     const res = await fetch(url);
-    const fetchedMdProducts = res.json();
+    const fetchedMdProducts = await res.json();
+    console.log(fetchedMdProducts)
 
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
@@ -164,6 +164,7 @@ categoryList.then(datas => {
   let mdCategoryId = Object.keys(categoryOj)[0];
 
   fillRecommend(mdCategoryId);
+  console.log(mdCategoryId)
 })
 
 
