@@ -330,7 +330,7 @@ const countDown = () => {
         document.querySelector('.sec').innerHTML = val;
       }
     }
-    
+
     return;
   }
 
