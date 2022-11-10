@@ -13,10 +13,10 @@ const createItemJoiSchema = Joi.object({
   price: Joi.number().min(1).required().messages({
     'any.required': 'price 반드시 입력해야 합니다.',
   }),
-  description: Joi.string().trim().min(10).max(200).required().messages({
+  description: Joi.string().trim().min(10).max(1000).required().messages({
     'any.required': 'description 반드시 입력해야 합니다.',
     'string.min': 'description 최소 1글자 이상입니다.',
-    'string.max': 'description 최대 200글자 이하입니다.',
+    'string.max': 'description 최대 1000글자 이하입니다.',
   }),
   category: Joi.string().hex().length(24).required().messages({
     'any.required': 'category는 반드시 입력해야 합니다.',
@@ -28,7 +28,7 @@ const createItemJoiSchema = Joi.object({
   }),
   isRecommend: Joi.boolean(),
   isDiscount: Joi.boolean(),
-  disPercent: Joi.number().min(1),
+  disPercent: Joi.number(),
 });
 
 const updateItemJoiSchema = Joi.object({
@@ -44,20 +44,20 @@ const updateItemJoiSchema = Joi.object({
   }),
   description: Joi.string()
     .trim()
-    .min(1)
-    .max(200)
+    .min(10)
+    .max(1000)
     .allow('')
     .required()
     .messages({
       'string.min': 'description 최소 1글자 이상입니다.',
-      'string.max': 'description 최대 200글자 이하입니다.',
+      'string.max': 'description 최대 1000글자 이하입니다.',
     }),
   imageUrl: Joi.string().uri().allow('').required().messages({
     'string.uri': 'imageUrl의 형식이 잘못되었습니다.',
   }),
   isRecommend: Joi.boolean().required().allow(''),
   isDiscount: Joi.boolean().required().allow(''),
-  disPercent: Joi.number().min(1).allow(''),
+  disPercent: Joi.number().allow(''),
 });
 
 export { createItemJoiSchema, updateItemJoiSchema };
