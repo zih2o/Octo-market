@@ -92,13 +92,15 @@ async function fileHandler(e) {
 
     const {imageUrl} = await res.json()
     filename.innerHTML = e.target.files[0].name
+    console.log("[temp] 사진의 이름 : ", filename)
+    console.log("[temp] 사진의 소스 : ", imageUrl)
     fileSrc = imageUrl;
 }
 
 
 
 async function getCategory() {
-    // const category = resCate.categories;
+    // const category = resCate.categories;gi
     try{
     const category = await Api.get('/categories');
     var retHTML = ``;
