@@ -110,9 +110,11 @@ categoryList.then(datas => {
       count: 1, // 통신 횟수 count
       perCount: 4,
     };
-    
+
     url = `${url}?${new URLSearchParams(params).toString()}`;
     console.log('세민님이 말한 fetch의  url ', url);
+
+
 
     // fetch 잠시 주석처리
     const res = await fetch(url);
@@ -227,7 +229,7 @@ const callApi = async () => {
   let url = '/items';
 
   let params = {
-    cnt: `${cnt}`,
+    count: `${cnt}`,
     per: '20',
     sort: `${sortType}`,
     // sc: `${sc}`,
