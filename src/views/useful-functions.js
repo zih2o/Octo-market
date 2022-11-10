@@ -72,7 +72,7 @@ export const activeNavbar = () => {
     mypageBtn.addEventListener('click', e => {
       e.preventDefault();
       window.location.href =
-        '/admin/mypage';
+        '/admin';
     });
   }
 
