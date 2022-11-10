@@ -1,17 +1,16 @@
 @font-face {
-  font-family: "S-CoreDream-3Light";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
-    format("woff");
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
-
 
 * {
   margin: 0;
   padding: 0;
   color: #4b4453;
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
 }
 
 /* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
@@ -89,7 +88,6 @@ main {
 }
 
 #title-img {
-  display: inline-block;
   margin-left: 160px;
   z-index: 99;
 }
@@ -97,27 +95,26 @@ main {
 .active {
   display: none;
 }
-  
 
 /* main 영역 */
 #menu {
   display: flex;
   justify-content: center;
-  
+
   margin-top: 30px;
-  width:20%;
+  width: 20%;
   min-width: 170px;
 }
 
 #content {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width:80vw;
-  height:100vh;
-  border-color:lightgray white white lightgray;
+  width: 80vw;
+  height: 100vh;
+  border-color: lightgray white white lightgray;
   border-style: solid;
-  border-width:1px 0px 0px 1px;
+  border-width: 1px 0px 0px 1px;
 }
 
 .data {
@@ -125,7 +122,7 @@ main {
 }
 
 .field {
-  width : 400px;
+  width: 400px;
 }
 
 #addressField {
@@ -134,19 +131,18 @@ main {
 }
 
 #sample6_postcode {
-  width:60%;
+  width: 60%;
   margin-bottom: 3px;
 }
 
 #search_postcode {
-  margin-left:10px;
+  margin-left: 10px;
   flex-grow: 1;
 }
 
 #sample6_address {
   margin-bottom: 3px;
 }
-
 
 /* 푸터 영역 */
 #footer-icons {
