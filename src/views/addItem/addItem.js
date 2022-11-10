@@ -174,19 +174,24 @@ async function addItemtoDB () {
         isDiscount,
         disPercent,
     }
-    try {
-        const res = await Api.post(`/admin/items`, data);
-        if (res.id)
-        {
-            alert("상품이 정상적으로 추가되었습니다");
-            window.location.href = "/admin"
-        }
-        
-    }
-    catch(e)
+
+    const res = await fetch(`/admin/items`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem('loginToken')}`,
+        },
+        body: JSON.stringify(data),
+    });
+    console.log(res.status)
+    if (res.status === 201)
     {
-        console.error(e.stack);
-        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${e.message}`);
+        return alert("상품이 정상적으로 추가되었습니다");
+    }
+    else
+    {
+        let err = await res.text()
+        return alert(err)
     }
 }
 
