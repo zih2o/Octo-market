@@ -90,8 +90,12 @@ categoryList.then(datas => {
     mdcategoryButtons[i].addEventListener('click', (e) => {
       e.preventDefault();
       console.log(e.target)
-      console.log('데이터 셋으로 가져온 데이터 =>', e.target.dataset.categoryid);
-      fillRecommend(e.target.dataset.categoryid);
+      console.log('데이터 셋으로 가져온 데이터 =>', e.target.dataset.id);
+      fillRecommend(e.target.dataset.id);
+       console.log(
+         '카테고리 타겟팅',
+         e.target.dataset.id,
+       );
     })
   }
 
@@ -99,7 +103,7 @@ categoryList.then(datas => {
   // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
-    let url = categoryId;
+    let url = '/items/category/'+categoryId;
     let params = {
       re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
       isRecommend: true, // boolean 입력
@@ -108,6 +112,7 @@ categoryList.then(datas => {
     };
 
     url = `${url}?${new URLSearchParams(params).toString()}`;
+    console.log('세민님이 말한 fetch의  url ', url);
 
     // fetch 잠시 주석처리
     const res = await fetch(url);
@@ -162,9 +167,12 @@ categoryList.then(datas => {
 
   // 추후 md카테고리 클릭 이벤트 시, 값 변경 예정
   let mdCategoryId = Object.keys(categoryOj)[0];
+  console.log('md카테고리 아이디', mdCategoryId);
 
   fillRecommend(mdCategoryId);
   console.log(mdCategoryId)
+}).catch(function(err) {
+  console.log('then 내부 에러는! ',err);
 })
 
 
