@@ -8,6 +8,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -17,6 +18,12 @@ body {
 
 main {
   flex: 1;
+}
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
 }
 
 /* 헤더 영역 */
@@ -66,14 +73,13 @@ main {
   background-color: #4b4453;
 }
 
-#title-container {
-  display: flex;
-  justify-content: center;
+#title {
+  margin-top: 40px;
 }
 
-#title {
-  margin-top: -40px;
-  margin-bottom: 30px;
+#title-img {
+  display: inline-block;
+  margin-left: 160px;
   z-index: 99;
 }
 
@@ -95,10 +101,11 @@ main {
 
 /*상품 정렬 버튼*/
 .categoryBtn {
-  width: 70%;
+  text-align: end;
+  width: 1200px;
   margin: 50px auto 0 auto;
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex;
+  justify-content: flex-end; */
 }
 
 .categoryBtn > div:nth-child(2n + 1) {

@@ -109,10 +109,14 @@ export const fillCategoryBar = async () => {
 export const drawNavbar = () => {
   const template = `
     <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand" id="nav-logobox">
-        <img id="nav-logo" src="../images/octo-logo.png" alt="">
-      </div>
       <div class="navbar-menu">
+        <div id="title-container">
+          <div id="title">
+            <a href="http://kdt-sw3-team08.elicecoding.com/">
+              <img id="title-img" src="../images/octo_market.png" alt="문어상점">
+            </a>
+          </div>
+        </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons" id="menu-box">
@@ -140,15 +144,6 @@ export const drawNavbar = () => {
         </div>
       </div>
     </nav>
-
-    <div id="title-container">
-      <div id="title">
-        <a href="http://kdt-sw3-team08.elicecoding.com/">
-          <img src="../images/octopus-title.png" alt="문어상점">
-        </a>
-      </div>
-    </div>
-
   `;
   const headerTag = document.getElementsByTagName('header')[0];
   headerTag.insertAdjacentHTML('afterbegin', template);
