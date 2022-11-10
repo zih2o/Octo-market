@@ -112,8 +112,14 @@ async function allOrdersAdmin()
         var count = 1;
         for (let order of orders){
             const {id, orderInfo, totalPrice, userId, address, state, createdAt, updatedAt} = order;
+            let res2 = await fetch(`/users/${userId}`, {
+                headers: {
+                Authorization: `Bearer ${accessToken}`,
+                },
+            })
+            let {name} = await res2.json()
             let tableContent = `<tr><th>${id}</th>`;
-            let user = `<td>${userId}</td>`;
+            let user = `<td>${name}</td>`;
             let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
             let userAddr = `<td>${address.address1+' '+address.address2}</td>`
             let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
