@@ -30,4 +30,8 @@ export const config = {
     accessRegion: required('AWS_ACCESS_REGION'),
     accessBucket: required('AWS_ACCESS_BUCKET'),
   },
+  mail: {
+    mailAddress: required('MAIL_ADDRESS'),
+    mailPassword: required('MAIL_PASSWORD'),
+  },
 };

@@ -1,6 +1,7 @@
 import * as nodemailer from 'nodemailer';
+import { config } from '../../configuration/config';
 import { template } from './mail-template';
-const mailAddress = process.env.MAIL_ADDRESS;
+
 const mailPassword = process.env.MAIL_PASSWORD;
 
 // smtpPool는 smtp서버를 사용하기 위한 모듈로
@@ -14,8 +15,8 @@ export async function sendMail(userMail) {
       port: 587,
       service: 'naver',
       auth: {
-        user: mailAddress,
-        pass: mailPassword,
+        user: config.mail.mailAddress,
+        pass: config.mail.mailPassword,
       },
     });
 
