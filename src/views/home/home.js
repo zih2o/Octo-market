@@ -124,7 +124,7 @@ categoryList.then(datas => {
     // 빈 박스 요소 만들어 넣기
     let sumTemplate = "";
     const itemUrl = '/items/itemlist/';
-    
+
     const createMdCategoryBox = num => {
       const productId = fetchedMdProducts[num]._id;
       const productImg = fetchedMdProducts[num].imageUrl;
@@ -230,7 +230,7 @@ const callApi = async () => {
 
   let params = {
     count: `${cnt}`,
-    per: '20',
+    perCount: '20',
     sort: `${sortType}`,
     // sc: `${sc}`,
   };
