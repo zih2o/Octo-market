@@ -25,7 +25,7 @@ viewsRouter.use('/orders', serveStatic('order'));
 
 //admin
 viewsRouter.use('/admin/login', serveStatic('login-admin'));
-viewsRouter.use('/admin/categories', serveStatic('modifyCategories'));
+viewsRouter.use('/admin/categories', serveStatic('modifyCategory'));
 viewsRouter.use('/admin', serveStatic('delivery-admin'));
 viewsRouter.use('/admin/items', serveStatic('addItem'));
 
