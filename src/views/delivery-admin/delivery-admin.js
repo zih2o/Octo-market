@@ -130,7 +130,7 @@ async function deleteUpdate(event)
     table.deleteRow(currRow.rowIndex)
 
     //Update on DB
-    const res = await Api.delete(`http://localhost:5050/admin/orders/${orderId}`)
+    const res = await Api.delete(`/admin/orders/${orderId}`)
 
     if (res.success) {
         return alert("성공적으로 취소되었습니다")
