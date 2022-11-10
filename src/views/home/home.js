@@ -353,11 +353,11 @@ const countDown = () => {
   function timePart(val, text) {
     if (val < 10) {
       if (text === 'hour') {
-        document.querySelector('.hour').innerHTML = `0 + ${val}`;
+        document.querySelector('.hour').innerHTML = `0${val}`;
       } else if (text === 'min') {
-        document.querySelector('.min').innerHTML = `0 + ${val}`;
+        document.querySelector('.min').innerHTML = `0${val}`;
       } else {
-        document.querySelector('.sec').innerHTML = `0 + ${val}`;
+        document.querySelector('.sec').innerHTML = `0${val}`;
       }
     } else {
       if (text === 'hour') {
