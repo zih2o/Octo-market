@@ -12,6 +12,7 @@ import {
   drawFooter,
   //숫자 자리수마다 , 찍기
   addCommas,
+  drawAdminLink,
 } from '../useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
@@ -21,6 +22,7 @@ drawCategoryBar();
 // 카테고리 목록 반환받음
 const categoryList = fillCategoryBar();
 drawFooter();
+drawAdminLink();
 
 // top 스크롤 버튼
 let topBtn = document.getElementById('scroll-top-Btn');
