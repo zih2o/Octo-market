@@ -8,12 +8,14 @@ import {
   activeNavbar,
   // 푸터 랜더링
   drawFooter,
+  drawAdminLink
 } from "../../useful-functions.js";
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
 activeNavbar();
 drawFooter();
+drawAdminLink();
 
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector("#fullNameInput");
