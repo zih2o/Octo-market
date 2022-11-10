@@ -72,11 +72,11 @@ export const activeNavbar = () => {
     mypageBtn.addEventListener('click', e => {
       e.preventDefault();
       window.location.href =
-        '/admin/mypage';
+        '/admin';
     });
   }
 
-  / 로그아웃 시 세션스토리지 토큰 제거
+  // 로그아웃 시 세션스토리지 토큰 제거
   if (logoutBtn.classList.contains('active')) {
     sessionStorage.removeItem('loginToken');
     sessionStorage.removeItem('userId');
@@ -154,7 +154,7 @@ export const drawNavbar = () => {
 
     <div id="title-container">
       <div id="title">
-        <a href="http://kdt-sw3-team08.elicecoding.com/">
+        <a href="/">
           <img src="/images/octopus-title.png" alt="문어상점">
         </a>
       </div>
@@ -169,7 +169,7 @@ export const drawCategoryBar = () => {
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a href="http://kdt-sw3-team08.elicecoding.com/items/category/"><strong>전체보기</strong></a></li>
+        <li id="entire"><a href="/items/category/"><strong>전체보기</strong></a></li>
 
       </ul>
     </div>
@@ -204,7 +204,7 @@ export const drawFooter = () => {
           <a href="">Private Policy</a>
         </div>
         <div id="footer-company">
-          <a href="http://kdt-sw3-team08.elicecoding.com/admin/login">ⓒ 2022 OCTO infinite</a>
+          <a href="/admin/login">ⓒ 2022 OCTO infinite</a>
         </div>
       </div>
     </div>
@@ -216,7 +216,7 @@ export const drawFooter = () => {
 
 export const drawAdminLink = () => {
   const template = `
-    <a id="admin-login" href="http://kdt-sw3-team08.elicecoding.com/admin/login"></a>
+    <a id="admin-login" href="/admin/login"></a>
   `;
   const bodyEl = document.querySelector('body');
   bodyEl.insertAdjacentHTML('afterbegin', template);

@@ -1,4 +1,4 @@
-import * as Api from '../api.js';
+import * as Api from '../../api.js';
 
 //This page is rendered when URI is given as /admin/items
 
@@ -45,6 +45,9 @@ const filename = document.querySelector(".file-name");
 //     "userType": "admin"
 // }
 // sessionStorage.setItem('token', accessToken)
+const accessToken = sessionStorage.getItem("loginToken")
+const userId = sessionStorage.getItem("userId")
+const userType = sessionStorage.getItem("adminToken")
 
 var fileSrc= "";
 var categories = await getCategory();
