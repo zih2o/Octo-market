@@ -129,7 +129,7 @@ export const drawNavbar = () => {
         <div id="title-container">
           <div id="title">
             <a href="http://kdt-sw3-team08.elicecoding.com/">
-              <img id="title-img" src="../images/octo_market.png" alt="문어상점">
+              <img id="title-img" src="/images/octo_market.png" alt="문어상점">
             </a>
           </div>
         </div>
