@@ -6,7 +6,7 @@ async function get(endpoint, params = '') {
   const res = await fetch(apiUrl, {
     // JWT 토큰을 헤더에 담아 백엔드 서버에 보냄.
     headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem('loginToken')}`,
     },
   });
 
@@ -36,7 +36,7 @@ async function post(endpoint, data) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem('loginToken')}`,
     },
     body: bodyData,
   });
@@ -68,7 +68,7 @@ async function put(endpoint, data) {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem('loginToken')}`,
     },
     body: bodyData,
   });
@@ -99,7 +99,7 @@ async function del(endpoint, data = {}) {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      Authorization: `Bearer ${sessionStorage.getItem('loginToken')}`,
     },
     body: bodyData,
   });

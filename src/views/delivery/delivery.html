@@ -1,133 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <base href=".">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <base href="." />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="delivery.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <script type="module" src="delivery.js" defer></script>
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header class="nav-bar">
-        <nav class="navbar" id="nav-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand" id="nav-logobox">
-                <img id="nav-logo" src="../images/octo-logo.png" alt="">
-            </div>
-            <div class="navbar-menu">
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons" id="menu-box">
-                            <a class="button is-primary" id="menu-button">
-                                <strong>로그인</strong>
-                            </a>
-                            <a class="button is-primary" id="menu-button">
-                                <strong>회원가입</strong>
-                            </a>
-                            <a class="button is-primary" id="menu-button">
-                                <strong>장바구니</strong>
-                            </a>
-                            <a class="button is-primary" id="menu-button">
-                                <strong>마이페이지</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div id="title-container">
-            <div id="title">
-                <img src="../images/octopus-title.png" alt="문어상점">
-            </div>
+      <nav
+        class="navbar"
+        id="nav-top"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand" id="nav-logobox">
+          <img id="nav-logo" src="../images/octo-logo.png" alt="" />
         </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons" id="menu-box">
+                <a class="button is-primary" id="menu-button">
+                  <strong>로그인</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>회원가입</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>장바구니</strong>
+                </a>
+                <a class="button is-primary" id="menu-button">
+                  <strong>마이페이지</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="title-container">
+        <div id="title">
+          <img src="/images/octopus-title.png" alt="문어상점" />
+        </div>
+      </div>
 
-        <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
-        <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
-        <div class="tabs is-medium is-centered">
-            <ul>
-                <li><a><strong>전체보기</strong></a></li>
-                <li><a><strong>가공식품</strong></a></li>
-                <li><a><strong>수산식품</strong></a></li>
-                <li><a><strong>면 · 튀김</strong></a></li>
-                <li><a><strong>양념 · 조미료</strong></a></li>
-                <li><a><strong>쌀 · 견과류</strong></a></li>
-                <li><a><strong>캔 · 통조림</strong></a></li>
-            </ul>
-        </div>
+      <!-- 카테고리 네비바. 페이지에 따라 주석처리가능 -->
+      <!-- 활성화 페이지일 시, 해당 li에 class="is-active" 추가할것-->
+      <div class="tabs is-medium is-centered">
+        <ul>
+          <li>
+            <a><strong>전체보기</strong></a>
+          </li>
+          <li>
+            <a><strong>가공식품</strong></a>
+          </li>
+          <li>
+            <a><strong>수산식품</strong></a>
+          </li>
+          <li>
+            <a><strong>면 · 튀김</strong></a>
+          </li>
+          <li>
+            <a><strong>양념 · 조미료</strong></a>
+          </li>
+          <li>
+            <a><strong>쌀 · 견과류</strong></a>
+          </li>
+          <li>
+            <a><strong>캔 · 통조림</strong></a>
+          </li>
+        </ul>
+      </div>
     </header>
 
     <main class="container">
-        <div class="" id="menu">
-            <ul class="menu-list">
-                <li>
-                    <span>사용자 정보</span>
-                    <ul>
-                        <li><a>주문 확인/취소</a></li>
-                        <li><a>회원 정보 수정</a></li>
-                    </ul>
-                </li>
-                <li id="is-admin">
-                </li>
+      <div class="" id="menu">
+        <ul class="menu-list">
+          <li>
+            <span>사용자 정보</span>
+            <ul>
+              <li><a>주문 확인/취소</a></li>
+              <li><a>회원 정보 수정</a></li>
             </ul>
-        </div>
+          </li>
+          <li id="is-admin"></li>
+        </ul>
+      </div>
 
-        <div class="" id="content">
-            <div class="data">
-                <h2 class="subtitle is-3" id="notifier">배송 현황</h2>
-                <div class="" id="progress">
-                    <div class="block">
-                        <p>결제 완료</p>
-                        <figure class="image is-96x96">
-                            <img src="../images/myPage-moneyChecked.png">
-                        </figure>
-                        <p id="deliveryStatus-0">0</p>
-                    </div>
-                    <div class="block">
-                        <p>배송 준비</p>
-                        <figure class="image is-96x96">
-                            <img src="../images/myPage-preparingItem.png">
-                        </figure>
-                        <p id="deliveryStatus-1">0</p>
-                    </div>
-                    <div class="block">
-                        <p>배송 중</p>
-                        <figure class="image is-96x96">
-                            <img src="../images/myPage-onDelivery.png">
-                        </figure>
-                        <p id="deliveryStatus-2">0</p>
-                    </div>
-                    <div class="block">
-                        <p>배송 완료</p>
-                        <figure class="image is-96x96">
-                            <img src="../images/myPage-completeDelivery.png">
-                        </figure>
-                        <p id="deliveryStatus-3">0</p>
-                    </div>
-                    <div class="block" style="margin-bottom:24px;">
-                        <p>배송 취소</p>
-                        <figure class="image is-96x96">
-                            <img src="../images/myPage-deliveryCancel.png">
-                        </figure>
-                        <p id="deliveryStatus-4">0</p>
-                    </div>
-                </div>
-                <h2 class="subtitle is-3" id="notifier">주문 정보</h2>
-                <table class="table is-striped is-hoverable" id="itemTable">
-                    <thead>
-                        <tr>
-                            <th class="orderId">주문 번호</th>
-                            <th class="orderSummary">주문 상세</th>
-                            <th class="orderStatus">주문 상태</th>
-                            <th class="orderModify">주문 변경</th>
-                        </tr>
-                    </thead>
-                    <tbody class="order" id="orderList">
-                        <!-- <tr>
+      <div class="" id="content">
+        <div class="data">
+          <h2 class="subtitle is-3" id="notifier">배송 현황</h2>
+          <div class="" id="progress">
+            <div class="block">
+              <p>결제 완료</p>
+              <figure class="image is-96x96">
+                <img src="/images/myPage-moneyChecked.png" />
+              </figure>
+              <p id="deliveryStatus-0">0</p>
+            </div>
+            <div class="block">
+              <p>배송 준비</p>
+              <figure class="image is-96x96">
+                <img src="/images/myPage-preparingItem.png" />
+              </figure>
+              <p id="deliveryStatus-1">0</p>
+            </div>
+            <div class="block">
+              <p>배송 중</p>
+              <figure class="image is-96x96">
+                <img src="/images/myPage-onDelivery.png" />
+              </figure>
+              <p id="deliveryStatus-2">0</p>
+            </div>
+            <div class="block">
+              <p>배송 완료</p>
+              <figure class="image is-96x96">
+                <img src="/images/myPage-completeDelivery.png" />
+              </figure>
+              <p id="deliveryStatus-3">0</p>
+            </div>
+            <div class="block" style="margin-bottom: 24px">
+              <p>배송 취소</p>
+              <figure class="image is-96x96">
+                <img src="/images/myPage-deliveryCancel.png" />
+              </figure>
+              <p id="deliveryStatus-4">0</p>
+            </div>
+          </div>
+          <h2 class="subtitle is-3" id="notifier">주문 정보</h2>
+          <table class="table is-striped is-hoverable" id="itemTable">
+            <thead>
+              <tr>
+                <th class="orderId">주문 번호</th>
+                <th class="orderSummary">주문 상세</th>
+                <th class="orderStatus">주문 상태</th>
+                <th class="orderModify">주문 변경</th>
+              </tr>
+            </thead>
+            <tbody class="order" id="orderList">
+              <!-- <tr>
                             <th>00001</th>
                             <td>냐쵸 외 5건</td>
                             <td>배송 준비</td>
@@ -159,43 +178,40 @@
                                 <btn class="button is-small is-danger is-outlined">환불</btn>
                             </td>
                         </tr> -->
-                    </tbody>
-                </table>
-            </div>
+            </tbody>
+          </table>
         </div>
+      </div>
     </main>
 
     <footer class="footer">
-        <div id="footer-container">
-            <div id="footer-icons">
-                <a href="https://www.instagram.com/">
-                    <img src="../images/instagram-icon.jpg" alt="옥토 인스타그램">
-                </a>
-                <a href="https://ko-kr.facebook.com/">
-                    <img src="../images/facebook-icon.png" alt="옥토 페이스북">
-                </a>
-                <a href="https://twitter.com/?lang=ko">
-                    <img src="../images/twitter-icon.png" alt="옥토 트위터">
-                </a>
-            </div>
-            <div id="footer-textbox">
-                <div id="footer-info">
-                    <a href="">Info</a>
-                    <a href="">Support</a>
-                    <a href="">Marketing</a>
-                </div>
-                <div id="footer-policy">
-                    <a href="">Terms of Use</a>
-                    <a href="">Private Policy</a>
-                </div>
-                <div id="footer-company">
-                    <a href="">ⓒ 2022 OCTO infinite</a>
-                </div>
-            </div>
+      <div id="footer-container">
+        <div id="footer-icons">
+          <a href="https://www.instagram.com/">
+            <img src="/images/instagram-icon.jpg" alt="옥토 인스타그램" />
+          </a>
+          <a href="https://ko-kr.facebook.com/">
+            <img src="/images/facebook-icon.png" alt="옥토 페이스북" />
+          </a>
+          <a href="https://twitter.com/?lang=ko">
+            <img src="/images/twitter-icon.png" alt="옥토 트위터" />
+          </a>
         </div>
-
+        <div id="footer-textbox">
+          <div id="footer-info">
+            <a href="">Info</a>
+            <a href="">Support</a>
+            <a href="">Marketing</a>
+          </div>
+          <div id="footer-policy">
+            <a href="">Terms of Use</a>
+            <a href="">Private Policy</a>
+          </div>
+          <div id="footer-company">
+            <a href="">ⓒ 2022 OCTO infinite</a>
+          </div>
+        </div>
+      </div>
     </footer>
-
-</body>
-
+  </body>
 </html>

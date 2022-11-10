@@ -1,6 +1,6 @@
 import { orderModel, adminModel, usersModel } from '../db';
 import { CustomError } from '../middlewares';
-import { sendMail } from '../utils/mail';
+import { sendMail } from '../utils/mail.js';
 
 export class OrderService {
   constructor(orderModel, adminModel) {

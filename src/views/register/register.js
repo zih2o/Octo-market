@@ -1,4 +1,4 @@
-import * as Api from "../api.js";
+import * as Api from "../../api.js";
 import {
   validateEmail,
   hasWhiteSpace,
@@ -8,7 +8,7 @@ import {
   activeNavbar,
   // 푸터 랜더링
   drawFooter,
-} from "../useful-functions.js";
+} from "../../useful-functions.js";
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
