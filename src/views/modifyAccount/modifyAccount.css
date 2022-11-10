@@ -6,11 +6,35 @@
   font-style: normal;
 }
 
+
 * {
   margin: 0;
   padding: 0;
   color: #4b4453;
   font-family: "S-CoreDream-3Light";
+}
+
+/* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
 }
 
 /* 헤더 영역 */
@@ -29,14 +53,14 @@
   margin-left: 180px;
 }
 
-.buttons {
+#menu-box {
   padding-right: 30px;
 }
 
-#menu-button {
+#menu-box a,
+#sort-box > div {
   color: #4b4453;
   background-color: white;
-  border-color: #4b4453;
   padding: 10px 20px;
   margin: 0;
 }
@@ -45,7 +69,8 @@
   margin: 30px 20px 0 0;
 }
 
-#menu-box a {
+#menu-box a,
+#sort-box > div {
   position: relative;
   font-size: 1.25em;
   font-weight: 600;
@@ -53,28 +78,24 @@
   border: none;
 }
 
-#menu-box a:nth-child(n + 2)::after {
-  position: absolute;
-  left: 0;
-  top: 20px;
-  content: "";
+.vertical-bar {
   width: 1px;
   height: 15px;
   background-color: #4b4453;
 }
 
-#title-container {
-  display: flex;
-  justify-content: center;
+#title {
+  margin-top: 40px;
 }
 
-#title {
-  margin-top: -40px;
-  margin-bottom: 30px;
+#title-img {
+  display: inline-block;
+  margin-left: 160px;
   z-index: 99;
 }
-.container {
-  display: flex;
+
+.active {
+  display: none;
 }
   
 
