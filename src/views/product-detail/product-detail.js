@@ -89,7 +89,7 @@ function buyNow() {
     window.location.href = "/users/login";
   } else {
     sessionStorage.setItem("buyNow", itemId);
-    window.location.href = `/orders/personal/${sessionStorage.getItem('userId')}`;
+    window.location.href = `/orders/${sessionStorage.getItem('userId')}`;
   }
   return;
 }
