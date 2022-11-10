@@ -17,27 +17,26 @@ drawFooter();
 drawAdminLink();
   
 
-
 //기본 데이터 셋팅
-//모든 상품 목록
-const items = {};
-//개별 상품 개수
-const amount = {};
 //총 결제 정보
 const state = {
   productsCount: 0,
   deliveryCharge: 0,
   productsPrice: 0,
 };
+//개별 상품 개수
+const amount = {};
+//모든 상품 목록
+const items = {};
+
 
 const productsCount = document.querySelector("#productsCount");
 const productsPrice = document.querySelector("#productsPrice");
 const deliveryCharge = document.querySelector("#deliveryCharge");
 const totalPrice = document.querySelector("#totalPrice");
+const cartList = document.querySelector('#cartList');
 
-makeProductList();
-firstView();
-settingInfo();
+getProductList();
 
 //총 결제 정보 html 입력
 function settingInfo() {
@@ -57,8 +56,54 @@ function firstView() {
   });
 }
 
-//세션스토리지 값 받아서 item 목록 구성
-async function makeProductList() {
+
+function makeProductList(itemId) {
+  if (items[itemId].isDiscount) {
+    cartList.insertAdjacentHTML('beforeend', `<div class="productElement" id="check_${itemId}">
+              <input type="checkbox" class="checkbox include" autocomplete="off" />
+              <div class="productimg"><img src=${items[itemId].imageUrl}></div>
+            <div class="productDescription">
+              <span class="productName is-size-5"><span>${
+                items[itemId].name
+              }</span><span class="is-size-7" id="discount_${itemId}">${items[itemId].disPercent}% 할인 적용</span></span>
+              <span class="eachPrice">${addCommas(
+                items[itemId].price
+              )}원</span>
+              <nav class="eachAmount" id="nav_${itemId}">
+                <button class="minusBtn">-</button>
+                <span>${sessionStorage.getItem(itemId)}</span>
+                <button class="plusBtn">+</button>
+              </nav>
+              <span class="eachTotalPrice" id="eachTotalPrice_${itemId}">${addCommas(
+            items[itemId].price * amount[itemId]
+          )}원</span>
+            </div>
+          </div>`)
+  } else {
+    cartList.insertAdjacentHTML('beforeend', `<div class="productElement" id="check_${itemId}">
+              <input type="checkbox" class="checkbox include" autocomplete="off" />
+              <div class="productimg"><img src=${items[itemId].imageUrl}></div>
+            <div class="productDescription">
+              <span class="productName is-size-5"><span>${
+                items[itemId].name
+              }</span><span class="is-size-7" id="discount_${itemId}"></span></span>
+              <span class="eachPrice">${addCommas(
+                items[itemId].price
+              )}원</span>
+              <nav class="eachAmount" id="nav_${itemId}">
+                <button class="minusBtn">-</button>
+                <span>${sessionStorage.getItem(itemId)}</span>
+                <button class="plusBtn">+</button>
+              </nav>
+              <span class="eachTotalPrice" id="eachTotalPrice_${itemId}">${addCommas(
+            items[itemId].price * amount[itemId]
+          )}원</span>
+            </div>
+          </div>`)
+  }
+}
+
+async function getProductList() {
   if (!sessionStorage.getItem("cart")) {
     return;
   } else {
@@ -66,67 +111,53 @@ async function makeProductList() {
       .getItem("cart")
       .split(",")
       .filter((e) => e !== "");
-    itemList.forEach(async (itemId) => {
-      items[itemId] = {};
+
+    for (const itemId of itemList) {
       try {
         const res = await fetch(`/items/${itemId}`);
         const item = await res.json();
 
         if (sessionStorage.getItem(itemId)) {
+          items[itemId] = {};
           items[itemId].name = item.name;
+          items[itemId].price = item.price;
+          items[itemId].imageUrl = item.imageUrl;
+          items[itemId].isDiscount = item.isDiscount;
+          items[itemId].disPercent = item.disPercent;
           amount[itemId] = Number(sessionStorage.getItem(itemId));
           state.productsCount += Number(sessionStorage.getItem(itemId));
 
-          if (item.isDiscount) {
+          if (items[itemId].isDiscount) {
             items[itemId].price =
-              Math.floor(Number(item.price) * (1 - Number(item.disPercent) / 100));
+              Math.floor(Number(items[itemId].price) * (1 - Number(items[itemId].disPercent) / 100));
             state.productsPrice += items[itemId].price * amount[itemId];
           } else {
-            items[itemId].price = Number(item.price);
-            state.productsPrice += Number(item.price) * amount[itemId];
+            state.productsPrice += Number(items[itemId].price) * amount[itemId];
           }
-
-          cartList.insertAdjacentHTML(
-            "beforeend",
-            ` <div class="productElement" id="check_${itemId}">
-                <input type="checkbox" class="checkbox include" autocomplete="off" />
-                <div class="productimg"><img src=${item.imageUrl}></div>
-              <div class="productDescription">
-                <span class="productName is-size-5"><span>${
-                  items[itemId].name
-                }</span><span class="is-size-7"></span></span>
-                <span class="eachPrice">${addCommas(
-                  items[itemId].price
-                )}원</span>
-                <nav class="eachAmount" id="nav_${itemId}">
-                  <button class="minusBtn">-</button>
-                  <span>${sessionStorage.getItem(itemId)}</span>
-                  <button class="plusBtn">+</button>
-                </nav>
-                <span class="eachTotalPrice" id="eachTotalPrice_${itemId}">${addCommas(
-              items[itemId].price * amount[itemId]
-            )}원</span>
-              </div>
-            </div>`
-          );
           state.deliveryCharge = 3000;
-          if (item.isDiscount) {
-            const discount = document.querySelector(".is-size-7");
-            discount.insertAdjacentHTML(
-              "beforeend",
-              `${item.disPercent}% 할인 적용`
-            );
-          }
-        }
+          settingInfo();
+        } 
+        makeProductList(itemId);
+        const plusBtn = document.querySelectorAll(".plusBtn");
+        const minusBtn = document.querySelectorAll(".minusBtn");
+        const checkbox = document.querySelectorAll(".checkbox");
+
+        plusBtn.forEach((e) => e.addEventListener("click", plusAmount));
+        minusBtn.forEach((e) => e.addEventListener("click", minusAmount));
+        checkbox.forEach((e) => e.addEventListener("click", checkboxToggle));
+        firstView();
+        settingInfo();
       } catch (err) {
+        console.log(err);
         alert(
           `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`
         );
       }
-    });
-  }
+    }
+  } 
   return;
 }
+
 
 //+,- 누를 때 체크 해제되어 있는지 확인
 function checkCheck(e) {
@@ -148,6 +179,7 @@ function plusAmount(e) {
   } else {
     amount[itemId]++;
     state.productsPrice += items[itemId].price;
+    
     state.productsCount++;
     sessionStorage.setItem(itemId, amount[itemId]);
   }
@@ -223,8 +255,6 @@ function allCheck() {
   const includeList = document.querySelectorAll(".include");
   const checkbox = document.querySelectorAll("input");
 
-  console.log(productElements);
-  console.log(includeList);
   if (includeList.length === 0) {
     checkbox.forEach((e) => {
       e.checked = true;
@@ -293,20 +323,28 @@ function delSelect() {
 
 //결제하기
 function goToBuy() {
+  sessionStorage.setItem('order', ',');
+  const cartList = sessionStorage.getItem('cart');
+  const itemList = sessionStorage
+      .getItem("cart")
+      .split(",")
+      .filter((e) => e !== "");
+  itemList.forEach(itemId => {
+    if (sessionStorage.getItem(itemId)) {
+      sessionStorage.setItem('order', sessionStorage.getItem('order') + ',' + itemId);
+    } else {
+      sessionStorage.setItem(itemId, amount[itemId]);
+    }
+  })
+
   if (!sessionStorage.getItem("loginToken")) {
     alert("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동합니다.");
     window.location.href = "/users/login";
   } else {
-    window.location.href = `/orders/${sessionStorage.getItem('userId')}`;
+    window.location.href = "/orders";
   }
 }
 
-const plusBtn = document.querySelectorAll(".plusBtn");
-const minusBtn = document.querySelectorAll(".minusBtn");
-const checkbox = document.querySelectorAll(".checkbox");
-plusBtn.forEach((e) => e.addEventListener("click", plusAmount));
-minusBtn.forEach((e) => e.addEventListener("click", minusAmount));
-checkbox.forEach((e) => e.addEventListener("click", checkboxToggle));
 
 document.querySelector("#selectAll").addEventListener("click", allCheck);
 document.querySelector("#delSelect").addEventListener("click", delSelect);
