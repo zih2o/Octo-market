@@ -86,7 +86,8 @@ async function submitModify () {
       alert("성공적으로 등록되었습니다.")
       // if (categories[1] === 8){
       //   catchselect.value = "수정";
-      //   catchselect.dispatchEvent('change');
+      //   let changeEvent = new Event('change')
+      //   catchselect.dispatchEvent(changeEvent);
       // }
       return;
     }
