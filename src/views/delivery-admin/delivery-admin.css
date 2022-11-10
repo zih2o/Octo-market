@@ -1,17 +1,16 @@
 @font-face {
-  font-family: "S-CoreDream-3Light";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
-    format("woff");
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
-
 
 * {
   margin: 0;
   padding: 0;
   color: #4b4453;
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
 }
 
 /* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
@@ -89,7 +88,6 @@ main {
 }
 
 #title-img {
-  display: inline-block;
   margin-left: 160px;
   z-index: 99;
 }
@@ -98,11 +96,9 @@ main {
   display: none;
 }
 
-
 /* main 영역 */
 .container {
   display: flex;
-
 }
 
 #menu {
@@ -120,7 +116,6 @@ main {
   align-items: center;
   width: 80vw;
   height: 100vh;
-
 
   border-color: lightgray white white lightgray;
   border-style: solid;
@@ -145,7 +140,6 @@ main {
   margin: 10px 10px 10px 40px;
 }
 
-
 #progress {
   display: flex;
   height: 40%;
@@ -155,8 +149,7 @@ main {
   align-items: center;
 }
 
-
-#progress>div>p {
+#progress > div > p {
   font-weight: 600;
   letter-spacing: -0.3px;
   width: 96px;
@@ -171,7 +164,6 @@ main {
   overflow-y: scroll;
   margin-bottom: 20px;
 }
-
 
 /* 푸터 영역 */
 #footer-icons {
@@ -188,7 +180,7 @@ main {
   margin: 50px 0 0 0;
 }
 
-#footer-textbox>div {
+#footer-textbox > div {
   display: flex;
   justify-content: center;
 }
