@@ -69,7 +69,11 @@ export const activeNavbar = () => {
       sessionStorage.removeItem('loginToken');
       sessionStorage.removeItem('userId');
       sessionStorage.removeItem('adminToken');
-    })
+    });
+    mypageBtn.addEventListener('click', () => {
+      alert('로그인 후 이용 가능합니다.');
+      window.location.href = '/login';
+    });
   }
 
   // 관리자 토큰 보유 시, 마이페이지 버튼 눌렀을때 관리자 마이페이지 로 이동하도록 경로 수정
