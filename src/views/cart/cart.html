@@ -1,88 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>문어상점</title>
-    <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../elice-rabbit-favicon.png"
-    />
-    <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/9daa42bcef.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="cart.css" />
-    <script src="cart.js" type="module" defer></script>
-  </head>
 
-  <body>
-    <!-- sticky 속성을 위한 wrapper -->
-    <div class="wrapper">
-      <!-- header 네비바(메뉴, 카테고리) -->
-      <header>
-        <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
-      </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>문어상점</title>
+  <!-- 아이콘 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
 
-      <!-- 카테고리 네비바. template 로 삽입 -->
+  <!-- bulma css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <!-- 폰트 어썸: 아이콘 -->
+  <script defer src="https://kit.fontawesome.com/9daa42bcef.js" crossorigin="anonymous"></script>
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="cart.css" />
+  <script src="cart.js" type="module" defer></script>
+</head>
 
-      <!-- 메인 콘텐츠 -->
-      <section>
-        <div class="container">
-          <div class="box is-size-5" id="cart">장바구니</div>
-          <div id="flexbox">
-            <div id="cartInfo">
-              <!--상품 목록 들어갈 박스-->
-              <div class="box" id="cartList">
-                <div id="checkBox">
-                  <a id="selectAll">전체선택</a> |
-                  <a id="delSelect">선택삭제</a>
-                </div>
-              </div>
-            </div>
+<body>
+  <!-- sticky 속성을 위한 wrapper -->
+  <div class="wrapper">
+    <!-- header 네비바(메뉴, 카테고리) -->
+    <header>
+      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+    </header>
 
-            <div class="box is-4" id="payment">
-              <div class="info is-size-4 paymentInfo" id="paymentInfo">
-                결제 정보
-              </div>
-              <div class="info is-size-5 productsCount">
-                <p>상품 수</p>
-                <p id="productsCount">0개</p>
-              </div>
-              <div class="info is-size-5 productsPrice">
-                <div>상품 금액</div>
-                <div id="productsPrice">0원</div>
-              </div>
-              <div class="info is-size-5 deliveryCharge">
-                <div>배송비</div>
-                <div id="deliveryCharge">0원</div>
-              </div>
-              <div class="info is-size-4 totalPrice">
-                <div>총 결제 금액</div>
-                <div id="totalPrice">0원</div>
-              </div>
+    <!-- 카테고리 네비바. template 로 삽입 -->
 
-              <button class="button is-primary" id="goToBuy">결제하기</button>
+    <!-- 메인 콘텐츠 -->
+    <section>
+      <div class="container">
+        <div class="box is-size-5" id="cart">장바구니</div>
+        <div id="flexbox">
+          <div id="cartInfo">
+            <!--상품 목록 들어갈 박스-->
+            <div class="box" id="cartList">
+              <div id="checkBox">
+                <a id="selectAll">전체선택</a> |
+                <a id="delSelect">선택삭제</a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- footer -->
-      <footer class="footer">
-        <!-- 푸터 콘텐츠. template 로 삽입 -->
-      </footer>
-    </div>
-  </body>
+          <div class="box is-4" id="payment">
+            <div class="info is-size-4 paymentInfo" id="paymentInfo">
+              결제 정보
+            </div>
+            <div class="info is-size-5 productsCount">
+              <p>상품 수</p>
+              <p id="productsCount">0개</p>
+            </div>
+            <div class="info is-size-5 productsPrice">
+              <div>상품 금액</div>
+              <div id="productsPrice">0원</div>
+            </div>
+            <div class="info is-size-5 deliveryCharge">
+              <div>배송비</div>
+              <div id="deliveryCharge">0원</div>
+            </div>
+            <div class="info is-size-4 totalPrice">
+              <div>총 결제 금액</div>
+              <div id="totalPrice">0원</div>
+            </div>
+
+            <button class="button is-primary" id="goToBuy">결제하기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+      <!-- 푸터 콘텐츠. template 로 삽입 -->
+    </footer>
+  </div>
+</body>
+
 </html>
