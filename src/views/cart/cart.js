@@ -1,17 +1,22 @@
 import {
   addCommas,
-  // 회원가입 등 네비바 랜더링
-  drawNavbar,
-  // 토큰 보유에 따라 네비바 변화
-  activeNavbar,
-  // 푸터 랜더링
-  drawFooter,
-} from "../useful-functions.js";
-
+    // 회원가입 등 네비바 랜더링
+    drawNavbar,
+    // 토큰 보유에 따라 네비바 변화
+    activeNavbar,
+    // 푸터 랜더링
+    drawFooter,
+    // 관리자 로그인 그리기
+    drawAdminLink,
+  } from '../useful-functions.js';
+  
 // html 랜더링 관련 함수들 실행
 drawNavbar();
 activeNavbar();
 drawFooter();
+drawAdminLink();
+  
+
 
 //기본 데이터 셋팅
 //모든 상품 목록
@@ -290,9 +295,9 @@ function delSelect() {
 function goToBuy() {
   if (!sessionStorage.getItem("loginToken")) {
     alert("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동합니다.");
-    window.location.href = "users/login";
+    window.location.href = "/users/login";
   } else {
-    window.location.href = `orders/personal/${sessionStorage.getItem('userId')}`;
+    window.location.href = `/orders/personal/${sessionStorage.getItem('userId')}`;
   }
 }
 

@@ -10,6 +10,7 @@ import {
   fillCategoryBar,
   // 푸터 랜더링
   drawFooter,
+  drawAdminLink
 } from "../../useful-functions.js";
 
 // html 랜더링 관련 함수들 실행
@@ -18,6 +19,7 @@ activeNavbar();
 drawCategoryBar();
 fillCategoryBar();
 drawFooter();
+drawAdminLink();
 
 // 요소 선택
 const image = document.querySelector("#image");
