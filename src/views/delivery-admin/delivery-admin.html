@@ -6,6 +6,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
   <link rel="stylesheet" href="delivery-admin.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <script type="module" src="delivery-admin.js" defer></script>
@@ -13,90 +14,90 @@
 </head>
 
 <body>
-<!-- sticky 속성을 위한 wrapper -->
-    <div class="wrapper">
-  <header>
+  <!-- sticky 속성을 위한 wrapper -->
+  <div class="wrapper">
+    <header>
 
-    <!-- nav 바 -->
+      <!-- nav 바 -->
 
-  </header>
+    </header>
 
-  <!-- 메인 -->
+    <!-- 메인 -->
 
-  <main class="container">
-    <div class="" id="menu">
-      <ul class="menu-list">
-        <li>
-          <span>사용자 정보</span>
-          <ul>
-            <li><a href="/admin">주문 확인/취소</a></li>
-          </ul>
-        </li>
-        <li>
-          <span>관리자 메뉴</span>
-          <ul>
-            <li><a href="/admin/items">상품 추가/삭제</a></li>
-            <li><a href="/admin/categories">카테고리 변경</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div class="" id="content">
-      <div class="data">
-        <h2 class="subtitle is-3" id="notifier">주문 정보</h2>
-        <table class="table is-striped is-hoverable" id="itemTable">
-          <!-- 주문번호 / 주문자 / 주문 일자 / 배송지 / 주문상품 / 구매가격 / 상품상태(배송상태 변경용) -->
-          <thead>
-            <tr>
-              <th class="orderId">주문 번호</th>
-              <th class="orderUser">주문자</th>
-              <th class="orderDate">접수 일자</th>
-              <th class="orderDest">배송지</th>
-              <th class="orderComp">상품 구성</th>
-              <th class="orderSum">구매 가격</th>
-              <th class="orderStatus">배송 상태</th>
-              <th class="orderModify">주문 변경</th>
-            </tr>
-          </thead>
-          <tbody class="order" id="orderList">
-          </tbody>
-        </table>
+    <main class="container">
+      <div class="" id="menu">
+        <ul class="menu-list">
+          <li>
+            <span>사용자 정보</span>
+            <ul>
+              <li><a href="/admin">주문 확인/취소</a></li>
+            </ul>
+          </li>
+          <li>
+            <span>관리자 메뉴</span>
+            <ul>
+              <li><a href="/admin/items">상품 추가/삭제</a></li>
+              <li><a href="/admin/categories">카테고리 변경</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-    </div>
-  </main>
 
-  <footer class="footer">
-    <div id="footer-container">
-      <div id="footer-icons">
-        <a href="https://www.instagram.com/">
-          <img src="/images/instagram-icon.jpg" alt="옥토 인스타그램" />
-        </a>
-        <a href="https://ko-kr.facebook.com/">
-          <img src="/images/facebook-icon.png" alt="옥토 페이스북" />
-        </a>
-        <a href="https://twitter.com/?lang=ko">
-          <img src="/images/twitter-icon.png" alt="옥토 트위터" />
-        </a>
-      </div>
-      <div id="footer-textbox">
-        <div id="footer-info">
-          <a href="">Info</a>
-          <a href="">Support</a>
-          <a href="">Marketing</a>
-        </div>
-        <div id="footer-policy">
-          <a href="">Terms of Use</a>
-          <a href="">Private Policy</a>
-        </div>
-        <div id="footer-company">
-          <a href="">ⓒ 2022 OCTO infinite</a>
+      <div class="" id="content">
+        <div class="data">
+          <h2 class="subtitle is-3" id="notifier">주문 정보</h2>
+          <table class="table is-striped is-hoverable" id="itemTable">
+            <!-- 주문번호 / 주문자 / 주문 일자 / 배송지 / 주문상품 / 구매가격 / 상품상태(배송상태 변경용) -->
+            <thead>
+              <tr>
+                <th class="orderId">주문 번호</th>
+                <th class="orderUser">주문자</th>
+                <th class="orderDate">접수 일자</th>
+                <th class="orderDest">배송지</th>
+                <th class="orderComp">상품 구성</th>
+                <th class="orderSum">구매 가격</th>
+                <th class="orderStatus">배송 상태</th>
+                <th class="orderModify">주문 변경</th>
+              </tr>
+            </thead>
+            <tbody class="order" id="orderList">
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
-  </footer>
+    </main>
 
-  <!-- <div id="modal-js-example" class="modal">
+    <footer class="footer">
+      <div id="footer-container">
+        <div id="footer-icons">
+          <a href="https://www.instagram.com/">
+            <img src="/images/instagram-icon.jpg" alt="옥토 인스타그램" />
+          </a>
+          <a href="https://ko-kr.facebook.com/">
+            <img src="/images/facebook-icon.png" alt="옥토 페이스북" />
+          </a>
+          <a href="https://twitter.com/?lang=ko">
+            <img src="/images/twitter-icon.png" alt="옥토 트위터" />
+          </a>
+        </div>
+        <div id="footer-textbox">
+          <div id="footer-info">
+            <a href="">Info</a>
+            <a href="">Support</a>
+            <a href="">Marketing</a>
+          </div>
+          <div id="footer-policy">
+            <a href="">Terms of Use</a>
+            <a href="">Private Policy</a>
+          </div>
+          <div id="footer-company">
+            <a href="">ⓒ 2022 OCTO infinite</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- <div id="modal-js-example" class="modal">
     <div class="modal-background"></div>
 
     <div class="modal-content">

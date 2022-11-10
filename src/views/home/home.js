@@ -103,16 +103,18 @@ categoryList.then(datas => {
   // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수
   // 카테고리 명을 categoryId 로 받는다
   const fillRecommend = async (categoryId) => {
-    let url = '/items/category/'+categoryId;
+    let url = '/items/category'+categoryId;
     let params = {
       re: 'isRecommend', // 추천상품인지 확인을 위한 쿼리
-      isRecommend: true, // boolean 입력
+      isRe: true, // boolean 입력
       count: 1, // 통신 횟수 count
       perCount: 4,
     };
 
     url = `${url}?${new URLSearchParams(params).toString()}`;
     console.log('세민님이 말한 fetch의  url ', url);
+
+
 
     // fetch 잠시 주석처리
     const res = await fetch(url);

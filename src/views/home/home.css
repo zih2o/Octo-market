@@ -408,8 +408,8 @@ main {
 }
 
 #scroll-top-Btn > div {
-  width: 130px;
-  height: 100px;
+  width: 100px;
+  height: 80px;
   line-height: 90px;
   /* display: table-cell; */
 
