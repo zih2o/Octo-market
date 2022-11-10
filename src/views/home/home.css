@@ -1,17 +1,16 @@
 @font-face {
-  font-family: "S-CoreDream-3Light";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
-    format("woff");
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
-
 
 * {
   margin: 0;
   padding: 0;
   color: #4b4453;
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
 }
 
 /* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
@@ -89,7 +88,6 @@ main {
 }
 
 #title-img {
-  display: inline-block;
   margin-left: 160px;
   z-index: 99;
 }
