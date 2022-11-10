@@ -90,7 +90,7 @@ async function makeProductList() {
             "beforeend",
             ` <div class="productElement" id="check_${itemId}">
                 <input type="checkbox" class="checkbox include" autocomplete="off" />
-                <div class="productimg"><img src=${item.imageUrl}/></div>
+                <div class="productimg"><img src=${item.imageUrl}></div>
               <div class="productDescription">
                 <span class="productName is-size-5"><span>${
                   items[itemId].name
