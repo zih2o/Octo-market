@@ -21,67 +21,13 @@ import {
 const orderList = document.querySelector('#orderList');
 // const orderList = document.getElementById('orderList');
 
-// Data mocked
-// sessionStorage.setItem('loginToken', JSON.stringify({
-//     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzE3Mzd9.AW1x6uJ2itKC8oMFXdL0CjFzaA2cisATQE263fzqF9Q",
-//     "userId": "6368bdf749dfe808988ea212",
-//     "userType": "admin"
-// }
-// ))
-// sessionStorage.setItem('userEmail', 'semin0706@naver.com')
-
-
-// var orders = JSON.stringify([
-//     {
-//         "_id": "555555",
-//         "orderInfo": [
-//             {
-//                 "item_id": "666666",
-//                 "name": "아이팟",
-//                 "amount": 10000,
-//                 "price": 10,
-//             },
-// 				],
-// 		"totalPrice": 10000,
-//         "email": "semin0706@naver.com",
-//         "address": {
-//             "postalCode": 1111,
-//             "address1": "경기도 안양시 비산동 KFC",
-//             "address2": "3333",
-// 		        },
-//         "state": "배송 준비",
-//         "createdAt": "2022-11-06",
-//         "updatedAt": "2022-11-07",
-//         },
-//     {
-//         "_id": "66666",
-//         "orderInfo": [
-//             {
-//                 "item_id": "77777",
-//                 "name": "갤럭시",
-//                 "amount": 10000,
-//                 "price": 10,
-//             },
-//                 ],
-//                 "totalPrice": 10000,
-//         "email": "semin0706@naver.com",
-//         "address": {
-//             "postalCode": 1111,
-//             "address1": "경기도 안양시 동안구 평촌동",
-//             "address2": "3333",
-//                 },
-//         "state": "배송 준비",
-//         "createdAt": "2022-11-06",
-//         "updatedAt": "2022-11-07",
-//     },
-// ])
-
 const accessToken = sessionStorage.getItem("loginToken")
 const userId = sessionStorage.getItem("userId")
 const userType = sessionStorage.getItem("adminToken")
 
 //const emailToken = sessionStorage.getItem('userEmail')
 
+var idArray = [];
 addAllElements();
 addAllEvents();
 
@@ -113,22 +59,26 @@ async function allOrdersAdmin()
             recur = true
         else
             recur = false
+        
         var count = 1;
-
         for (let item of items){
-            const {name, brand, price, createdAt, category, description, isRecommend, isDiscount} = item;
-            let tableContent = `<tr><th>${name}</th>`;
+            const {name, brand, price, createdAt, category, description, isRecommend, isDiscount, id} = item;
+            let tableContent = `<tr><th>${String(count++).padStart(5, '0')}</th>`;
+            idArray.push(id)
+            let itemName = `<td>${name}</td>`;
             let brandName = `<td>${brand}</td>`;
             let categoryName = `<td>${matchCategory(category, categorylist)}</td>`
             let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
             let itemprice = `<td>${price}</td>`;
             let state = ''
             let stateDef = `<td>${state}</td>`;
-            let buttons = `<td><btn class="button is-small is-danger is-outlined" id="delete">취소</btn></td></tr>`;
-            retHtml += (tableContent + brandName + categoryName +  orderDate + itemprice + buttons);
+            let buttons = `<td>
+            <btn class="button is-small is-info is-outlined" id="modify">수정</btn>
+            <btn class="button is-small is-danger is-outlined" id="delete">삭제</btn></td></tr>`;
+            retHtml += (tableContent + itemName + brandName + categoryName +  orderDate + itemprice + buttons);
         }
         orderList.insertAdjacentHTML('beforeend', retHtml)
-
+        console.log(idArray)
     }
     catch(err)
     {
@@ -150,17 +100,16 @@ async function deleteUpdate(event)
     }
     const table = btnTouched.closest("table")
     const currRow = btnTouched.closest("tr")
-    const orderId = currRow.cells[0].innerHTML
-    const userId = currRow.cells[1]
-
+    const itemId = idArray[Number(currRow.cells[0].innerHTML) - 1]
+    console.log(itemId)
     //delete Row
     table.deleteRow(currRow.rowIndex)
 
     //Update on DB
-    //const res = await Api.delete(`/admin/orders/${orderId}`)
+    const res = await Api.delete(`/admin/items/{itemId}`)
 
     if (res.success) {
-        return alert("성공적으로 취소되었습니다")
+        return alert("성공적으로 삭제되었습니다")
     }
     else
         return alert(res.reason);

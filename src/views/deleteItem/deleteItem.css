@@ -134,6 +134,10 @@ main {
   margin-bottom: 20px;
 }
 
+.itemCount {
+  width: 10%;
+}
+
 .itemId {
   width: 30%;
 }
@@ -155,7 +159,7 @@ main {
 }
 
 .itemModify {
-  width: 30%;
+  width: 20%;
 }
 
 #notifier {
