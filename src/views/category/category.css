@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'S-CoreDream-3Light';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -56,7 +57,7 @@ main {
 }
 
 #menu-box a,
-#sort-box>div {
+#sort-box > div {
   color: #4b4453;
   background-color: white;
   padding: 10px 20px;
@@ -68,7 +69,7 @@ main {
 }
 
 #menu-box a,
-#sort-box>div {
+#sort-box > div {
   position: relative;
   font-size: 1.25em;
   font-weight: 600;
@@ -120,12 +121,14 @@ main {
   text-align: end;
   width: 1200px;
   margin: 50px auto 0 auto;
-  /* display: flex;
-  justify-content: flex-end; */
 }
 
-.categoryBtn>div:nth-child(2n + 1) {
+.categoryBtn > span:nth-child(2n + 1) {
   cursor: pointer;
+}
+
+.categoryBtn > span:nth-child(2n) {
+  cursor: none;
 }
 
 .space {
@@ -143,7 +146,7 @@ main {
   margin: 50px 0 30px 0;
 }
 
-.md-title>h2,
+.md-title > h2,
 #category-title {
   font-size: 24px;
   font-weight: 600;
@@ -166,7 +169,7 @@ main {
   font-size: 1.1em;
 }
 
-#sort-box>div:nth-child(n + 2)::after {
+#sort-box > div:nth-child(n + 2)::after {
   position: absolute;
   left: 0;
   top: 17px;
@@ -286,7 +289,7 @@ main {
   box-shadow: 3px 3px 5px #4b4453;
 }
 
-#scroll-top-Btn>div {
+#scroll-top-Btn > div {
   width: 130px;
   height: 100px;
   line-height: 90px;
@@ -320,7 +323,7 @@ main {
   margin: 50px 0 0 0;
 }
 
-#footer-textbox>div {
+#footer-textbox > div {
   display: flex;
   justify-content: center;
 }

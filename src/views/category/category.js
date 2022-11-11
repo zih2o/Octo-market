@@ -125,21 +125,21 @@ const callApi = async (number) => {
       count: `${cnt}`,
       perCount: '20',
       sort: 'price',
-      sc: 1,
+      sc : 1,
     };
   } else if (number === 3) {
     params = {
       count: `${cnt}`,
       perCount: '20',
       sort: 'price',
-      sc: -1,
+      sc : -1,
     };
   } else {
     params = {
       count: `${cnt}`,
       perCount: '20',
       sort: 'createdAt',
-      sc: -1,
+      sc : -1,
     };
   }
   
@@ -165,7 +165,8 @@ const callApi = async (number) => {
       let ojbox = createProductBox(oj);
       insertBoxesTemplate += ojbox;
     });
-    targetUl.insertAdjacentHTML('beforeend', insertBoxesTemplate);
+    // targetUl.insertAdjacentHTML('beforeend', insertBoxesTemplate);
+    targetUl.innerHTML = insertBoxesTemplate;
 
     // 감지할 div 를 만들어 li의 맨 뒤에 추가해준다
     const lastLi = document.createElement('div');
@@ -212,6 +213,10 @@ const intersaction = () => {
 };
 
 //상품 정렬 버튼
+const createdAtBtn = document.querySelector('.createdAt');
+createdAtBtn.addEventListener('click', ()=>{
+  callApi(1)
+});
 const lowPriceBtn = document.querySelector('.lowPrice');
 lowPriceBtn.addEventListener('click', () =>{
   callApi(2)
@@ -219,9 +224,4 @@ lowPriceBtn.addEventListener('click', () =>{
 const highPriceBtn = document.querySelector('.highPrice');
 highPriceBtn.addEventListener('click', ()=>{
   callApi(3)
-});
-const createdAtBtn = document.querySelector('.createdAt');
-createdAtBtn.addEventListener('click', ()=>{
-  console.log("createdAt btn")
-  callApi(1)
 });
