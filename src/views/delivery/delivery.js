@@ -95,6 +95,7 @@ async function deleteUpdate(event)
     const orderId = currRow.cells[0].innerHTML
 // 주문 취소 버튼인 경우
     if (btnTouched.classList.contains('cancel-btn')){
+        currRow.cells[2].innerHTML = "주문 취소"
         const res = await Api.put(`/orders/${orderId}`, {
             state:"주문 취소"})
         if (res.success) {
