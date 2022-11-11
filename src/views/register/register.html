@@ -1,178 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <!--bulma-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-    <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="register.css" />
-    <script src="register.js" type="module" defer></script>
 
-    <title>Document</title>
-  </head>
-  <body>
-    <!-- sticky 속성을 위한 wrapper -->
-    <div class="wrapper">
-      <!-- header 네비바(메뉴, 카테고리) -->
-      <header>
-        <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
+  <!--bulma-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" href="register.css" />
+  <script src="register.js" type="module" defer></script>
 
-      <!-- 카테고리 네비바. template 로 삽입 -->
+  <title>문어상점</title>
+</head>
 
-      <!-- 회원가입 폼(Form) -->
-      <div class="box is-size-5" id="register">회원가입</div>
-      <div class="register-user-form-container">
-        <form id="registerUserForm">
-          <div class="field">
-            <label class="label" for="fullNameInput">이름</label>
-            <div class="control">
-              <input
-                class="input"
-                id="fullNameInput"
-                type="text"
-                placeholder="홍길동"
-                autocomplete="on"
-              />
-            </div>
+<body>
+  <!-- sticky 속성을 위한 wrapper -->
+  <div class="wrapper">
+    <!-- header 네비바(메뉴, 카테고리) -->
+    <header>
+      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+    </header>
+
+    <!-- 카테고리 네비바. template 로 삽입 -->
+
+    <!-- 회원가입 폼(Form) -->
+    <div class="box is-size-5" id="register">회원가입</div>
+    <div class="register-user-form-container">
+      <form id="registerUserForm">
+        <div class="field">
+          <label class="label" for="fullNameInput">이름</label>
+          <div class="control">
+            <input class="input" id="fullNameInput" type="text" placeholder="홍길동" autocomplete="on" />
           </div>
+        </div>
 
-          <div class="field">
-            <label class="label" for="emailInput">이메일</label>
-            <div class="control" id="emailfield">
-              <input
-                class="input"
-                id="emailInput"
-                type="email"
-                placeholder="abc@example.com"
-                autocomplete="on"
-              />
-            </div>
+        <div class="field">
+          <label class="label" for="emailInput">이메일</label>
+          <div class="control" id="emailfield">
+            <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
           </div>
+        </div>
 
-          <div class="field">
-            <label class="label" for="passwordInput">비밀번호</label>
-            <div class="control">
-              <input
-                class="input"
-                id="passwordInput"
-                type="password"
-                placeholder="********"
-                autocomplete="off"
-              />
-            </div>
+        <div class="field">
+          <label class="label" for="passwordInput">비밀번호</label>
+          <div class="control">
+            <input class="input" id="passwordInput" type="password" placeholder="********" autocomplete="off" />
           </div>
+        </div>
 
-          <div class="field mb-5">
-            <label class="label" for="passwordConfirmInput"
-              >비밀번호 확인</label
-            >
-            <div class="control">
-              <input
-                class="input"
-                id="passwordConfirmInput"
-                type="password"
-                placeholder="********"
-                autocomplete="off"
-              />
-            </div>
+        <div class="field mb-5">
+          <label class="label" for="passwordConfirmInput">비밀번호 확인</label>
+          <div class="control">
+            <input class="input" id="passwordConfirmInput" type="password" placeholder="********" autocomplete="off" />
           </div>
+        </div>
 
-          <div class="field mb-5">
-            <label class="label" for="numberInput">전화번호</label>
-            <div class="control">
-              <input
-                class="input"
-                id="numberInput"
-                type="tel"
-                placeholder="- 없이 입력해 주세요."
-                autocomplete="off"
-              />
-            </div>
+        <div class="field mb-5">
+          <label class="label" for="numberInput">전화번호</label>
+          <div class="control">
+            <input class="input" id="numberInput" type="tel" placeholder="- 없이 입력해 주세요." autocomplete="off" />
           </div>
+        </div>
 
-          <div class="field mb-5">
-            <label class="label" for="adressInput">주소</label>
-            <div class="control">
-              <div id="postCode">
-                <input
-                  class="Disabled input"
-                  type="text"
-                  id="sample6_postcode"
-                  placeholder="우편번호"
-                  disabled
-                />
-                <input
-                  type="button"
-                  class="button is-primary"
-                  id="sample6_postcodeBtn"
-                  onclick="sample6_execDaumPostcode()"
-                  value="우편번호 찾기"
-                />
-              </div>
-              <input
-                class="Disabled input"
-                type="text"
-                id="sample6_address"
-                placeholder="주소"
-                disabled
-              />
-              <input
-                class="input"
-                type="text"
-                id="sample6_detailAddress"
-                placeholder="상세주소"
-              />
+        <div class="field mb-5">
+          <label class="label" for="adressInput">주소</label>
+          <div class="control">
+            <div id="postCode">
+              <input class="Disabled input" type="text" id="sample6_postcode" placeholder="우편번호" disabled />
+              <input type="button" class="button is-primary" id="sample6_postcodeBtn"
+                onclick="sample6_execDaumPostcode()" value="우편번호 찾기" />
             </div>
+            <input class="Disabled input" type="text" id="sample6_address" placeholder="주소" disabled />
+            <input class="input" type="text" id="sample6_detailAddress" placeholder="상세주소" />
           </div>
+        </div>
 
-          <button class="button is-primary is-fullwidth" id="submitButton">
-            회원가입하기
-          </button>
-        </form>
-      </div>
-
-      <!-- footer -->
-      <footer class="footer">
-        <!-- 푸터 콘텐츠. template 로 삽입 -->
-      </footer>
+        <button class="button is-primary is-fullwidth" id="submitButton">
+          회원가입하기
+        </button>
+      </form>
     </div>
-  </body>
 
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script>
-    function sample6_execDaumPostcode() {
-      new daum.Postcode({
-        oncomplete: function (data) {
-          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+    <!-- footer -->
+    <footer class="footer">
+      <!-- 푸터 콘텐츠. template 로 삽입 -->
+    </footer>
+  </div>
+</body>
 
-          var addr = ""; // 주소 변수
-          var extraAddr = ""; // 참고항목 변수
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+  function sample6_execDaumPostcode() {
+    new daum.Postcode({
+      oncomplete: function (data) {
+        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-          //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-          if (data.userSelectedType === "R") {
-            // 사용자가 도로명 주소를 선택했을 경우
-            addr = data.roadAddress;
-          } else {
-            // 사용자가 지번 주소를 선택했을 경우(J)
-            addr = data.jibunAddress;
-          }
+        var addr = ""; // 주소 변수
+        var extraAddr = ""; // 참고항목 변수
 
-          // 우편번호와 주소 정보를 해당 필드에 넣는다.
-          document.getElementById("sample6_postcode").value = data.zonecode;
-          document.getElementById("sample6_address").value = addr;
-          // 커서를 상세주소 필드로 이동한다.
-          document.getElementById("sample6_detailAddress").focus();
-          console.log(data);
-        },
-      }).open();
-    }
-  </script>
+        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+        if (data.userSelectedType === "R") {
+          // 사용자가 도로명 주소를 선택했을 경우
+          addr = data.roadAddress;
+        } else {
+          // 사용자가 지번 주소를 선택했을 경우(J)
+          addr = data.jibunAddress;
+        }
+
+        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+        document.getElementById("sample6_postcode").value = data.zonecode;
+        document.getElementById("sample6_address").value = addr;
+        // 커서를 상세주소 필드로 이동한다.
+        document.getElementById("sample6_detailAddress").focus();
+        console.log(data);
+      },
+    }).open();
+  }
+</script>
+
 </html>
