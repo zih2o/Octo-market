@@ -37,10 +37,10 @@ const updateOrderUserJoiSchema = Joi.object({
   orderInfo: Joi.array()
     .items(
       Joi.object({
-        itemId: Joi.string().trim().required(),
-        name: Joi.string().trim().required().min(1).max(30).allow(''),
-        amount: Joi.number().integer().required().min(1).max(100),
-        price: Joi.number().integer().required().min(1),
+        itemId: Joi.string().trim(),
+        name: Joi.string().trim().min(1).max(30).allow(''),
+        amount: Joi.number().integer().min(1).max(100),
+        price: Joi.number().integer().min(1),
       }),
     )
     .min(1),
@@ -56,6 +56,7 @@ const updateOrderUserJoiSchema = Joi.object({
       'string.min': 'address2은 최소 1글자입니다.',
     }),
   }),
+  state: Joi.string().valid('주문 취소'),
 });
 
 export {

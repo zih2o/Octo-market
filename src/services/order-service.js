@@ -63,11 +63,13 @@ export class OrderService {
     }
     // User가 주문 수정 요청 시 주문 상태가 배송 전 일때만 배송 수정 가능
     if (order.userId == currentUserId) {
-      if (order.state !== '결제 완료' && order.state !== '배송 준비') {
+      if (order.state == '배송 중' && order.state == '배송 완료') {
         throw new CustomError(
           409,
           '배송이 시작되어 주문을 변경할 수 없습니다.',
         );
+      } else if (order.state == '주문 취소') {
+        throw new CustomError(409, '이미 취소된 주문입니다.');
       }
     }
     const updatedOrder = await this.orderModel.updateOrder(orderId, toUpdate);

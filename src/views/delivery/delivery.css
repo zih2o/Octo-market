@@ -184,6 +184,48 @@ main {
 .button {
   color: #4b4453;
 }
+/* 모달 */
+
+.custom-modal {
+  display: block;
+  padding: 10px;
+  color: #222;
+  border: 0px;
+  opacity: 0;
+  border-radius: 0.25rem;
+  transition: all 0.45s ease-in;
+}
+
+.custom-modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.custom-modal-body {
+  width: 600px;
+  height: 400px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-modal[open] {
+  opacity: 1;
+}
+
+.custom-modal[close] {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.modal-form {
+  width: 500px;
+  height: 300px;
+}
 
 /* 푸터 영역 */
 #footer-icons {
