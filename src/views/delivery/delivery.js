@@ -123,7 +123,7 @@ async function allOrders()
                 let tableContent = `<tr><th>${_id}</th>`;
                 let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
                 let stateDef = `<td>${state}</td>`;
-                let buttons = `<td><btn class="button  is-small is-warning is-outlined" data-target="modal-js-example">수정</btn></td></tr>`
+                let buttons = `<td><btn class="button is-small is-outlined" data-target="modal-js-example">수정</btn></td></tr>`
                 retHtml += (tableContent + orderName + stateDef + buttons);
             }
 
