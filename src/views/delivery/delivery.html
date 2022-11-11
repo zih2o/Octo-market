@@ -1,134 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="." />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="delivery.css" />
+    <script type="module" src="delivery.js" defer></script>
+    <title>문어상점</title>
+  </head>
 
-<head>
-  <base href="." />
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="delivery.css" />
-  <script type="module" src="delivery.js" defer></script>
-  <title>Document</title>
-</head>
+  <body>
+    <!-- sticky 속성을 위한 wrapper -->
+    <div class="wrapper">
+      <header>
+        <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+      </header>
 
-<body>
-  <!-- sticky 속성을 위한 wrapper -->
-  <div class="wrapper">
-    <header>
-      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
-    </header>
-
-    <main class="container">
-      <div class="" id="menu">
-        <ul class="menu-list">
-          <li>
-            <span>사용자 정보</span>
-            <ul>
-              <li><a>주문 확인/취소</a></li>
-              <li><a href="/users/updateInfo">회원 정보 수정</a></li>
+      <main class="container">
+        <div class="" id="content">
+          <div class="" id="menu">
+            <ul class="menu-list">
+              <li>
+                <span>사용자 정보</span>
+                <ul>
+                  <li><a>주문 확인/취소</a></li>
+                  <li><a href="/users/updateInfo">회원 정보 수정</a></li>
+                </ul>
+              </li>
+              <li id="is-admin"></li>
             </ul>
-          </li>
-          <li id="is-admin"></li>
-        </ul>
-      </div>
-
-      <div class="" id="content">
-        <div class="data">
-          <h2 class="subtitle is-3" id="notifier">배송 현황</h2>
-          <div class="" id="progress">
-            <div class="block">
-              <p>결제 완료</p>
-              <figure class="image is-96x96">
-                <img src="/images/myPage-moneyChecked.png" />
-              </figure>
-              <p id="deliveryStatus-0">0</p>
-            </div>
-            <div class="block">
-              <p>배송 준비</p>
-              <figure class="image is-96x96">
-                <img src="/images/myPage-preparingItem.png" />
-              </figure>
-              <p id="deliveryStatus-1">0</p>
-            </div>
-            <div class="block">
-              <p>배송 중</p>
-              <figure class="image is-96x96">
-                <img src="/images/myPage-onDelivery.png" />
-              </figure>
-              <p id="deliveryStatus-2">0</p>
-            </div>
-            <div class="block">
-              <p>배송 완료</p>
-              <figure class="image is-96x96">
-                <img src="/images/myPage-completeDelivery.png" />
-              </figure>
-              <p id="deliveryStatus-3">0</p>
-            </div>
-            <div class="block" style="margin-bottom: 24px">
-              <p>배송 취소</p>
-              <figure class="image is-96x96">
-                <img src="/images/myPage-deliveryCancel.png" />
-              </figure>
-              <p id="deliveryStatus-4">0</p>
-            </div>
           </div>
-          <h2 class="subtitle is-3" id="notifier">주문 정보</h2>
-          <table class="table is-striped is-hoverable" id="itemTable">
-            <thead>
-              <tr>
-                <th class="orderId">주문 번호</th>
-                <th class="orderSummary">주문 상세</th>
-                <th class="orderStatus">주문 상태</th>
-                <th class="orderModify">주문 변경</th>
-              </tr>
-            </thead>
-            <tbody class="order" id="orderList">
-            </tbody>
-          </table>
+          <div class="data">
+            <h2 class="subtitle is-3" id="notifier">배송 현황</h2>
+            <div class="" id="progress">
+              <div class="block">
+                <p>결제 완료</p>
+                <figure class="image is-96x96">
+                  <img src="/images/myPage-moneyChecked.png" />
+                </figure>
+                <p id="deliveryStatus-0">0</p>
+              </div>
+              <div class="block">
+                <p>배송 준비</p>
+                <figure class="image is-96x96">
+                  <img src="/images/myPage-preparingItem.png" />
+                </figure>
+                <p id="deliveryStatus-1">0</p>
+              </div>
+              <div class="block">
+                <p>배송 중</p>
+                <figure class="image is-96x96">
+                  <img src="/images/myPage-onDelivery.png" />
+                </figure>
+                <p id="deliveryStatus-2">0</p>
+              </div>
+              <div class="block">
+                <p>배송 완료</p>
+                <figure class="image is-96x96">
+                  <img src="/images/myPage-completeDelivery.png" />
+                </figure>
+                <p id="deliveryStatus-3">0</p>
+              </div>
+              <div class="block" style="margin-bottom: 24px">
+                <p>배송 취소</p>
+                <figure class="image is-96x96">
+                  <img src="/images/myPage-deliveryCancel.png" />
+                </figure>
+                <p id="deliveryStatus-4">0</p>
+              </div>
+            </div>
+            <h2 class="subtitle is-3" id="notifier">주문 정보</h2>
+            <table class="table is-striped is-hoverable" id="itemTable">
+              <thead>
+                <tr>
+                  <th class="orderId">주문 번호</th>
+                  <th class="orderSummary">주문 상세</th>
+                  <th class="orderStatus">주문 상태</th>
+                  <th class="orderModify">주문 변경</th>
+                </tr>
+              </thead>
+              <tbody class="order" id="orderList"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <!-- footer -->
+      <footer class="footer">
+        <!-- 푸터 콘텐츠. template 로 삽입 -->
+      </footer>
+
+      <div class="modal" id="modal1">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">GeeksforGeeks</p>
+
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <h1>Hey Geek!</h1>
+
+            <p>
+              Learn all CS fundamentals, do programming, participate in
+              contests, an many more.
+            </p>
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-danger">Cancel</button>
+          </footer>
         </div>
       </div>
-    </main>
-
-    <!-- footer -->
-    <footer class="footer">
-      <!-- 푸터 콘텐츠. template 로 삽입 -->
-    </footer>
-
-    <div class="modal" id="modal1">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">
-            GeeksforGeeks
-          </p>
-
-
-
-          <button class="delete" aria-label="close">
-          </button>
-        </header>
-        <section class="modal-card-body">
-          <h1>Hey Geek!</h1>
-
-
-          <p>
-            Learn all CS fundamentals, do
-            programming, participate in
-            contests, an many more.
-          </p>
-
-
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-danger">
-            Cancel
-          </button>
-        </footer>
-      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

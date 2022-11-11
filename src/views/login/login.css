@@ -101,9 +101,17 @@ main {
 /* 메인 컨텐츠 영역 */
 .login-form-container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin: 60px 0;
+}
+
+#findEmail {
+  width: 100%;
+  text-align: right;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 #loginForm {
@@ -116,10 +124,15 @@ main {
 
 .title {
   text-align: center;
+  color: #80bd7a;
 }
 
 .button {
   font-weight: bold;
+}
+
+#submitButton {
+  background-color: #80bd7a;
 }
 
 .input:focus {
