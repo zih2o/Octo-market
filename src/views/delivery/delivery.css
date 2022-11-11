@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'S-CoreDream-3Light';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
-    format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -57,7 +56,7 @@ main {
 }
 
 #menu-box a,
-#sort-box > div {
+#sort-box>div {
   color: #4b4453;
   background-color: white;
   padding: 10px 20px;
@@ -69,7 +68,7 @@ main {
 }
 
 #menu-box a,
-#sort-box > div {
+#sort-box>div {
   position: relative;
   font-size: 1.25em;
   font-weight: 600;
@@ -148,7 +147,7 @@ main {
   align-items: center;
 }
 
-#progress > div > p {
+#progress>div>p {
   font-weight: 600;
   letter-spacing: -0.3px;
   width: 96px;
@@ -168,15 +167,22 @@ main {
   width: 15%;
   text-align: center;
 }
+
 .orderSummary {
   width: 45%;
   text-align: left;
 }
+
 .orderStatus {
   width: 20%;
 }
+
 .orderModify {
   width: 20%;
+}
+
+.button {
+  color: #4b4453;
 }
 
 /* 푸터 영역 */
@@ -194,7 +200,7 @@ main {
   margin: 50px 0 0 0;
 }
 
-#footer-textbox > div {
+#footer-textbox>div {
   display: flex;
   justify-content: center;
 }
