@@ -132,6 +132,7 @@ main {
 
 #label-top {
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .title {
@@ -158,6 +159,11 @@ main {
 #res-container {
   margin-top: 30px;
   display: none;
+}
+
+#largeReturnLabel {
+  text-align: center;
+  color: #80bd7a;
 }
 
 /* 푸터 영역 */

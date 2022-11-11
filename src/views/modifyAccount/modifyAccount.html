@@ -1,121 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <base href="." />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.png"
+    />
 
-<head>
-  <base href="." />
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="modifyAccount.css" />
+    <script type="module" src="modifyAccount.js" defer></script>
+    <title>문어상점</title>
+  </head>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="modifyAccount.css" />
-  <script type="module" src="modifyAccount.js" defer></script>
-  <title>문어상점</title>
-</head>
+  <body>
+    <!-- sticky 속성을 위한 wrapper -->
+    <div class="wrapper">
+      <header>
+        <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+      </header>
 
-<body>
-  <!-- sticky 속성을 위한 wrapper -->
-  <div class="wrapper">
-    <header>
-      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
-    </header>
-
-    <main class="container">
-      <div class="" id="menu">
-        <ul class="menu-list">
-          <li>
-            <span>사용자 정보</span>
-            <ul>
-              <li><a>주문 확인/취소</a></li>
-              <li><a href="/users/updateInfo">회원 정보 수정</a></li>
+      <main class="container">
+        <div class="" id="content">
+          <div class="" id="menu">
+            <ul class="menu-list">
+              <li>
+                <span>사용자 정보</span>
+                <ul>
+                  <li><a>주문 확인/취소</a></li>
+                  <li><a href="/users/updateInfo">회원 정보 수정</a></li>
+                </ul>
+              </li>
+              <li id="is-admin"></li>
             </ul>
-          </li>
-          <li id="is-admin"></li>
-        </ul>
-      </div>
-
-      <div class="" id="content">
-        <div class="data">
-          <div class="field">
-            <label class="label">이메일</label>
-            <div class="control">
-              <input class="input" type="text" id="emailIn" placeholder="이메일은 변경할 수 없습니다" disabled />
-            </div>
           </div>
-
-          <div class="field">
-            <label class="label">현재 비밀번호</label>
-            <div class="control">
-              <input class="input" type="password" id="oldpwIn" placeholder="현재 비밀번호" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">새 비밀번호</label>
-            <div class="control">
-              <input class="input" type="password" id="newpwIn" placeholder="새 비밀번호" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">주소</label>
-            <div class="control">
-              <div id="addressField">
-                <input class="Disabled input" type="text" id="sample6_postcode" placeholder="우편번호" disabled />
-                <input type="button" class="button is-success" id="search_postcode" onclick="sample6_execDaumPostcode()"
-                  value="우편번호 찾기" />
+          <div class="data">
+            <div class="field">
+              <label class="label">이메일</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  id="emailIn"
+                  placeholder="이메일은 변경할 수 없습니다"
+                  disabled
+                />
               </div>
-              <input class="Disabled input" type="text" id="sample6_address" placeholder="주소" disabled />
-              <input class="input" type="text" id="sample6_detailAddress" placeholder="상세주소" />
             </div>
-          </div>
-          <div class="field">
-            <label class="label">전화번호</label>
-            <div class="control">
-              <input class="input" type="number" id="phoneNum" placeholder="01011112222" />
+
+            <div class="field">
+              <label class="label">현재 비밀번호</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  id="oldpwIn"
+                  placeholder="현재 비밀번호"
+                />
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <button class="button is-success is-fullwidth" id="submitBtn">
-              확인
-            </button>
+            <div class="field">
+              <label class="label">새 비밀번호</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  id="newpwIn"
+                  placeholder="새 비밀번호"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">주소</label>
+              <div class="control">
+                <div id="addressField">
+                  <input
+                    class="Disabled input"
+                    type="text"
+                    id="sample6_postcode"
+                    placeholder="우편번호"
+                    disabled
+                  />
+                  <input
+                    type="button"
+                    class="button is-success"
+                    id="search_postcode"
+                    onclick="sample6_execDaumPostcode()"
+                    value="우편번호 찾기"
+                  />
+                </div>
+                <input
+                  class="Disabled input"
+                  type="text"
+                  id="sample6_address"
+                  placeholder="주소"
+                  disabled
+                />
+                <input
+                  class="input"
+                  type="text"
+                  id="sample6_detailAddress"
+                  placeholder="상세주소"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">전화번호</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="number"
+                  id="phoneNum"
+                  placeholder="01011112222"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <button class="button is-success is-fullwidth" id="submitBtn">
+                확인
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer class="footer">
-      <!-- 푸터 콘텐츠. template 로 삽입 -->
-    </footer>
-  </div>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script>
-    function sample6_execDaumPostcode() {
-      new daum.Postcode({
-        oncomplete: function (data) {
-          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+      <footer class="footer">
+        <!-- 푸터 콘텐츠. template 로 삽입 -->
+      </footer>
+    </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      function sample6_execDaumPostcode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-          var addr = ''; // 주소 변수
-          var extraAddr = ''; // 참고항목 변수
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
 
-          //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-          if (data.userSelectedType === 'R') {
-            // 사용자가 도로명 주소를 선택했을 경우
-            addr = data.roadAddress;
-          } else {
-            // 사용자가 지번 주소를 선택했을 경우(J)
-            addr = data.jibunAddress;
-          }
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') {
+              // 사용자가 도로명 주소를 선택했을 경우
+              addr = data.roadAddress;
+            } else {
+              // 사용자가 지번 주소를 선택했을 경우(J)
+              addr = data.jibunAddress;
+            }
 
-          // 우편번호와 주소 정보를 해당 필드에 넣는다.
-          document.getElementById('sample6_postcode').value = data.zonecode;
-          document.getElementById('sample6_address').value = addr;
-          // 커서를 상세주소 필드로 이동한다.
-          document.getElementById('sample6_detailAddress').focus();
-          console.log(data);
-        },
-      }).open();
-    }
-  </script>
-</body>
-
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample6_postcode').value = data.zonecode;
+            document.getElementById('sample6_address').value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('sample6_detailAddress').focus();
+            console.log(data);
+          },
+        }).open();
+      }
+    </script>
+  </body>
 </html>

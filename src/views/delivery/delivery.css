@@ -99,24 +99,25 @@ main {
 /* main 영역 */
 .container {
   display: flex;
+  margin-bottom: 200px;
 }
 
 #menu {
   display: flex;
   justify-content: center;
-
   margin-top: 30px;
   width: 20%;
   min-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #content {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 80vw;
   height: 100vh;
-
+  padding: 20px;
   border-color: lightgray white white lightgray;
   border-style: solid;
   border-width: 1px 0px 0px 1px;
@@ -127,7 +128,8 @@ main {
   flex-direction: column;
   justify-content: left;
   height: 100%;
-  width: 100%;
+  width: 60vw;
+  overflow-y: scroll;
 }
 
 #notifier {
@@ -141,9 +143,7 @@ main {
 
 #progress {
   display: flex;
-  height: 40%;
   width: 100%;
-  overflow-x: hidden;
   justify-content: space-around;
   align-items: center;
 }

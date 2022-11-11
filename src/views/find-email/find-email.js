@@ -1,4 +1,4 @@
-import * as Api from '../api.js';
+import * as Api from '../../api.js';
 
 import {
     // 회원가입 등 네비바 랜더링
@@ -9,7 +9,7 @@ import {
     drawFooter,
     // 관리자 로그인 그리기
     drawAdminLink,
-  } from '../useful-functions.js';
+  } from '../../useful-functions.js';
   
   // html 랜더링 관련 함수들 실행
   drawNavbar();
@@ -43,12 +43,12 @@ async function handleSubmit(e) {
   // 유효성 검사 방법은 추후 논의 후 변경 가능
   const isNameValid = name.length >= 2;
   console.log('이름 체크?', isNameValid);
-  const isPhoneNumValid = !Number.isNaN(phoneNum) && phoneNum.length >= 11;
+  const isPhoneNumValid = !Number.isNaN(phoneNum) && phoneNum.length >= 10;
   console.log('번호 체크?', isPhoneNumValid);
 
   if (!isNameValid || !isPhoneNumValid) {
     return alert(
-      '입력하신 이름이 2글자 이상인지, 휴대폰 번호는 - 를 뺀 11개 이상의 수 인지 확인바랍니다.',
+      '입력하신 이름이 2글자 이상인지, 휴대폰 번호는 -를 뺀 11개 이상의 수 인지 확인바랍니다.',
     );
   }
 
@@ -61,6 +61,7 @@ async function handleSubmit(e) {
 
     // fetch 사용 가능 시 주석 해제 예정
     // fetch 경로 추가 바람
+    console.log(data)
     const result = await Api.post('/users/findemail', data);
     const email = result.email;
 
