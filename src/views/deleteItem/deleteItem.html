@@ -12,6 +12,39 @@
   <link rel="stylesheet" href="deleteItem.css" />
   <script type="module" src="deleteItem.js" defer></script>
   <title>Document</title>
+  <style>
+      .custom-modal {
+          display: block;
+          padding: 10px;
+          color: #222;
+          border: 0;
+          opacity: 0;
+          border-radius: 0.25rem;
+          transition: all 0.45s ease-in;
+      }
+
+      .custom-modal::backdrop {
+          background: rgba(0, 0, 0, 0.5);
+      }
+
+      .custom-modal-body {
+          max-width: 500px;
+          background: #fff;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+      }
+
+      .custom-modal[open] {
+          opacity: 1;
+      }
+
+      .custom-modal[close] {
+          pointer-events: none;
+          opacity: 0;
+      }
+  </style>
 </head>
 
 <body>
@@ -67,18 +100,14 @@
 
     <footer class="footer"></footer>
 
-    <div id="modal-js-example" class="modal">
-      <div class="modal-background"></div>
-
-      <div class="modal-content">
-        <div class="box">
-          <p>Modal JS example</p>
-          content location
-        </div>
+    <dialog class="custom-modal" id="modal">
+      <div class='custom-modal-body'>
+      <h2>An interesting title</h2>
+      <p>반가웡 반가웡</p>
+      <p>나는야 다이아로그</p>
+      <button class="button close-button">close modal</button>
       </div>
-
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+    </dialog>
   </div>
 </body>
 
