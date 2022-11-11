@@ -180,10 +180,17 @@ export const drawNavbar = () => {
 };
 
 export const drawCategoryBar = () => {
+  const path = window.location.pathname;
+  let link = '';
+  if (path.length === 1) {
+    link = '#category-title';
+  } else {
+    link = '/';
+  }
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a id="category-name" href="/"><strong>전체보기</strong></a></li>
+        <li id="entire"><a id="category-name" href=${link}><strong>전체보기</strong></a></li>
 
       </ul>
     </div>
