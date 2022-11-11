@@ -118,10 +118,15 @@ export const fillCategoryBar = async () => {
 
 export const drawNavbar = () => {
   let userId = '';
-  if (sessionStorage.getItem('userId')) {
-    userId = sessionStorage.getItem('userId');
-  } else {
-    userId = 'login';
+  if (sessionStorage.getItem('userId') && sessionStorage.getItem('adminToken'))
+  {
+    userId = `/admin/`
+  }
+  else if (sessionStorage.getItem('userId')) {
+    userId = `/users/userlist/${sessionStorage.getItem('userId')}`;
+  }
+  else {
+    userId = `/users/login`;
   }
 
   const template = `
@@ -153,7 +158,7 @@ export const drawNavbar = () => {
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
-              <a href="/users/userlist/${userId}" class="button is-primary" id="mypage">
+              <a href="${userId}" class="button is-primary" id="mypage">
                 <strong>마이페이지</strong>
               </a>
             </div>
