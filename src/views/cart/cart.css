@@ -1,0 +1,291 @@
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: #4b4453;
+  font-family: 'S-CoreDream-3Light';
+}
+
+/* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
+}
+
+/* 헤더 영역 */
+#nav-top {
+  position: relative;
+}
+
+#nav-logobox {
+  position: absolute;
+}
+
+#nav-logo {
+  width: 130px;
+  height: 130px;
+  margin-top: 50px;
+  margin-left: 180px;
+}
+
+#menu-box {
+  padding-right: 30px;
+}
+
+#menu-box a,
+#sort-box > div {
+  color: #4b4453;
+  background-color: white;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+#menu-box {
+  margin: 30px 20px 0 0;
+}
+
+#menu-box a,
+#sort-box > div {
+  position: relative;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #4b4453;
+  border: none;
+}
+
+.vertical-bar {
+  width: 1px;
+  height: 15px;
+  background-color: #4b4453;
+}
+
+#title {
+  margin-top: 40px;
+}
+
+#title-img {
+  margin-left: 160px;
+  z-index: 99;
+}
+
+.active {
+  display: none;
+}
+
+/*  카테고리바의 sticky 속성 적용에 필요한 스타일  */
+/* sticky 컴포넌트는 부모 태그 아래에 붙어서 화면에 남아 있는다 */
+#category-bar {
+  position: sticky;
+  z-index: 999;
+  top: 0;
+  padding: 10px 0 2px 0;
+  background-color: #ffffff;
+}
+
+/* 메인 콘텐츠 영역*/
+.container {
+  padding: 50px;
+  margin-bottom: 60px;
+}
+
+#cart {
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid #d5d5d0;
+}
+
+#flexbox {
+  display: flex;
+}
+
+#cartInfo {
+  width: 70%;
+}
+
+#cartList {
+  margin-right: 10px;
+}
+
+#checkBox {
+  padding: 5px 0;
+  border-bottom: 1px solid black;
+}
+
+.productElement {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #b0a8b9;
+}
+
+#checkProduct {
+  margin-right: 5px;
+}
+
+.productimg > img {
+  width: 120px;
+  height: 120px;
+  object-fit: scale-down;
+  background-color: #d5d5d0;
+}
+
+.productDescription {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 10px;
+}
+
+.productName {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.is-size-7 {
+  align-self: flex-end;
+  color: red;
+}
+
+.eachPrice {
+  width: 40%;
+}
+
+.eachAmount {
+  width: 30%;
+}
+
+.eachAmount {
+  display: flex;
+  justify-content: center;
+}
+
+.eachAmount > span {
+  width: 30px;
+  text-align: center;
+}
+
+.eachTotalPrice {
+  width: 30%;
+  text-align: right;
+}
+
+.amount > .eachTotalPrice {
+  width: 40%;
+}
+
+#cart,
+#payment,
+#goToBuy {
+  font-weight: bold;
+}
+
+#payment button {
+  width: 100%;
+  background-color: #80bd7a;
+}
+
+#payment {
+  height: 40vh;
+  width: 30%;
+  background-color: #effaee;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+}
+
+.paymentInfo {
+  grid-area: 1 / 1 / 3 / 2;
+  margin: auto 0;
+}
+
+.productsCount {
+  grid-area: 3 / 1 / 5 / 2;
+}
+
+.productsPrice {
+  grid-area: 5 / 1 / 7 / 2;
+}
+
+.deliveryCharge {
+  grid-area: 7 / 1 / 9 / 2;
+}
+
+.totalPrice {
+  grid-area: 9 / 1 / 12 / 2;
+}
+
+#payment > div {
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info > * {
+  margin: auto 0;
+}
+
+/* 푸터 영역 */
+
+#footer-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#footer-icons img {
+  padding: 0 20px;
+}
+
+#footer-textbox {
+  margin: 50px 0 0 0;
+}
+
+#footer-textbox > div {
+  display: flex;
+  justify-content: center;
+}
+
+#footer-textbox a {
+  color: #4b4453;
+  margin: 5px 10px;
+}
+
+#footer-company a {
+  color: gray;
+}
+
+#footer-ul a {
+  background-color: hsl(0, 0%, 98%);
+  color: #b0a8b9;
+}

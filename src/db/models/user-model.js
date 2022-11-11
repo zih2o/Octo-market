@@ -16,15 +16,20 @@ export class UsersModel {
     return user;
   }
 
+  async findByNamePhone(name, phoneNum) {
+    const user = await User.findOne({ name, phoneNum });
+    return user;
+  }
+
   async createUser(userInfo) {
     const createdNewUser = await new User(userInfo).save();
     return createdNewUser;
   }
 
-  async update({ user_id, update }) {
+  async update({ userId, update }) {
     const option = { returnOriginal: false };
     const updatedUser = await User.findOneAndUpdate(
-      { _id: user_id },
+      { _id: userId },
       update,
       option,
     );
@@ -36,6 +41,4 @@ export class UsersModel {
   }
 }
 
-const usersModel = new UsersModel();
-
-export { usersModel };
+export const usersModel = new UsersModel();

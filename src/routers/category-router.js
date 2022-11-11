@@ -4,6 +4,6 @@ import * as categoryController from '../controller/category-controller';
 const categoriesRouter = Router();
 
 categoriesRouter.get('/', categoryController.getCategories);
-categoriesRouter.get('/:cat_id', categoryController.getCategory);
+categoriesRouter.get('/:catId', categoryController.getCategory);
 
 export { categoriesRouter };

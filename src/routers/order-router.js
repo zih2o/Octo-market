@@ -2,15 +2,28 @@ import { Router } from 'express';
 import { loginRequired } from '../middlewares';
 import * as orderController from '../controller/order-controller';
 import { createValidator } from 'express-joi-validation';
-import { createOrderJoiSchema } from '../db/schemas/joi-schemas';
+import {
+  createOrderJoiSchema,
+  updateOrderUserJoiSchema,
+} from '../db/schemas/joi-schemas';
 
 const orderRouter = Router();
 const validator = createValidator({});
 
-orderRouter.get('/users/:userId', loginRequired, orderController.getByEmail);
+orderRouter.get(
+  '/personal/:userId',
+  loginRequired,
+  orderController.getOrdersByUserId,
+);
 orderRouter.get('/:orderId', loginRequired, orderController.getById);
+orderRouter.put(
+  '/:orderId',
+  validator.body(updateOrderUserJoiSchema),
+  loginRequired,
+  orderController.updateOrder,
+);
 orderRouter.post(
-  '/users/:userId',
+  '/personal/:userId',
   validator.body(createOrderJoiSchema),
   loginRequired,
   orderController.createOrder,

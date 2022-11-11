@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { usersModel } from '../db';
 import { adminModel } from '../db';
+import { config } from '../../configuration/config';
+
+dotenv.config();
 
 const loginRequired = async (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -22,24 +26,23 @@ const loginRequired = async (req, res, next) => {
 
   // 해당 token 이 정상적인 token인지 확인
   try {
-    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const jwtDecoded = jwt.verify(userToken, config.jwt.accessSecret);
 
     const userId = jwtDecoded.userId;
     const user = await usersModel.findById(userId);
     const admin = await adminModel.findById(userId);
 
-    if (user === null && admin === null) {
+    if (user == null && admin == null) {
       return res.status(401).json({
         result: 'not found from users collection',
         message: '회원정보를 찾을 수 없습니다.',
       });
     }
-    req.currentUserId = user !== null ? user.id : admin.id; // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
-    req.userType = user !== null ? user.userType : admin.userType;
+
+    req.currentUserId = user != null ? user.id : admin.id;
+    req.userType = user != null ? user.userType : admin.userType;
     next();
   } catch (error) {
-    // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
     return res.status(403).json({
       result: 'forbidden-approach',
       reason: '정상적인 토큰이 아닙니다.',

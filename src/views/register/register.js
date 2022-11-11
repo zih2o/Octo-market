@@ -1,5 +1,21 @@
-import * as Api from "../api.js";
-import { validateEmail, hasWhiteSpace } from "../useful-functions.js";
+import * as Api from "../../api.js";
+import {
+  validateEmail,
+  hasWhiteSpace,
+  // 회원가입 등 네비바 랜더링
+  drawNavbar,
+  // 토큰 보유에 따라 네비바 변화
+  activeNavbar,
+  // 푸터 랜더링
+  drawFooter,
+  drawAdminLink
+} from "../../useful-functions.js";
+
+// html 랜더링 관련 함수들 실행
+drawNavbar();
+activeNavbar();
+drawFooter();
+drawAdminLink();
 
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector("#fullNameInput");
@@ -84,22 +100,24 @@ async function handleSubmit(e) {
   //회원가입 api 요청
   try {
     const data = {
-      fullName,
+      name: fullName,
       email,
       password,
-      phone,
-      postCode,
-      adress1: adress,
-      adress2: detailAdress,
-      type: "User",
+      phoneNum: phone,
+      address: {
+        postalCode: postCode,
+        address1: adress,
+        address2: detailAdress,
+      },
+      userType: "user"
     };
 
-    await Api.post("/signup", data);
+    await Api.post("/users/signup", data);
 
     alert(`정상적으로 회원가입되었습니다.`);
 
     // 로그인 페이지 이동
-    window.location.href = "/login";
+    window.location.href = "/users/login";
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

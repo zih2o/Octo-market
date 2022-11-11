@@ -30,7 +30,17 @@ class ItemService {
 
   // item 등록
   async createItem(itemInfo, userType) {
-    const { name, brand, price, description, category, imageUrl } = itemInfo;
+    const {
+      name,
+      brand,
+      price,
+      description,
+      category,
+      imageUrl,
+      isRecommend,
+      isDiscount,
+      disPercent,
+    } = itemInfo;
 
     const item = await itemsModel.findByName(name);
     if (item) {
@@ -41,7 +51,17 @@ class ItemService {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
 
-    const newItemInfo = { name, brand, price, description, category, imageUrl };
+    const newItemInfo = {
+      name,
+      brand,
+      price,
+      description,
+      category,
+      imageUrl,
+      isRecommend,
+      isDiscount,
+      disPercent,
+    };
     const newItem = await this.itemModel.create(newItemInfo);
     return newItem;
   }
@@ -83,5 +103,4 @@ class ItemService {
   }
 }
 
-const itemService = new ItemService(itemsModel);
-export { itemService };
+export const itemService = new ItemService(itemsModel);

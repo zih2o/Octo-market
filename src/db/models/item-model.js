@@ -7,10 +7,10 @@ const Item = model('items', itemSchema);
 
 export class ItemsModel {
   async findAll(sortingInfo) {
-    const { sorting, sortCondition, count, perCount } = sortingInfo;
-
-    const items = await Item.find({})
-      .sort({ [sorting]: sortCondition })
+    const { count, perCount, dis, isDiscount } = sortingInfo;
+    console.log(sortingInfo);
+    const items = await Item.find({ [dis]: isDiscount })
+      .sort({ createdAt: -1 })
       .skip(perCount * (count - 1))
       .limit(perCount);
 
@@ -23,10 +23,25 @@ export class ItemsModel {
   }
 
   async findByCategory(catId, sortingInfo) {
-    const { sorting, sortCondition, count, perCount } = sortingInfo;
+    const {
+      sort,
+      sortCondition,
+      re,
+      isRecommend,
+      dis,
+      isDiscount,
+      count,
+      perCount,
+    } = sortingInfo;
 
-    const items = await Item.find({ category: catId })
-      .sort({ [sorting]: sortCondition })
+    const items = await Item.find({
+      category: catId,
+      [re]: isRecommend,
+      [dis]: isDiscount,
+    })
+      .sort({
+        [sort]: sortCondition,
+      })
       .skip(perCount * (count - 1))
       .limit(perCount);
 
@@ -58,6 +73,4 @@ export class ItemsModel {
   }
 }
 
-const itemsModel = new ItemsModel();
-
-export { itemsModel };
+export const itemsModel = new ItemsModel();
