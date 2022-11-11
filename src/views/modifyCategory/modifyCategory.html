@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="." />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="modifyCategory.css" />
+  <script type="module" src="modifyCategory.js" defer></script>
+  <title>문어상점</title>
+</head>
+
+<body>
+  <!-- sticky 속성을 위한 wrapper -->
+  <div class="wrapper">
+    <header>
+      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+    </header>
+
+    <main class="container">
+      <div class="" id="content">
+        <div class="" id="menu">
+          <ul class="menu-list">
+            <li>
+              <span>사용자 정보</span>
+              <ul>
+                <li><a href="/admin">주문 확인/취소</a></li>
+              </ul>
+            </li>
+            <li>
+              <span>관리자 메뉴</span>
+              <ul>
+                <li><a href="/admin/items">상품 추가</a></li>
+                <li><a href="/admin/items/delete">상품 삭제</a></li>
+                <li><a href="/admin/categories">카테고리 변경</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="data">
+          <div class="field">
+            <label class="label">카테고리 관리</label>
+            <div class="control">
+              <div class="select is-primary">
+                <select id="category">
+                  <option>생성</option>
+                  <option>수정</option>
+                  <option>삭제</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field" id="selectBox"></div>
+          <div class="field">
+            <button class="button is-primary is-fullwidth" id="btnSubmit">
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+
+    </footer>
+  </div>
+</body>
+
+</html>

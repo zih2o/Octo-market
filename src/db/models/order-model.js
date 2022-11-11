@@ -10,20 +10,20 @@ export class OrderModel {
     const orders = await Order.find({});
     return orders;
   }
-  async findByEmail(email) {
-    const orders = await Order.find({ email });
+  async findByUserId(userId) {
+    const orders = await Order.find({ userId });
     return orders;
   }
 
-  async findById(_id) {
-    const order = await Order.findOne({ _id });
+  async findByOrderId(orderId) {
+    const order = await Order.findOne({ _id: orderId });
     return order;
   }
 
-  async updateOrder(_id, toUpdate) {
+  async updateOrder(orderId, toUpdate) {
     const option = { returnOriginal: false };
     const updatedOrder = await Order.findOneAndUpdate(
-      { _id },
+      { _id: orderId },
       toUpdate,
       option,
     );
@@ -35,12 +35,10 @@ export class OrderModel {
     return order;
   }
 
-  async removeOrder(_id) {
-    await Order.deleteOne({ _id });
+  async removeOrder(orderId) {
+    await Order.deleteOne({ _id: orderId });
     return;
   }
 }
 
-const orderModel = new OrderModel();
-
-export { orderModel };
+export const orderModel = new OrderModel();

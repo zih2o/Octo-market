@@ -10,7 +10,8 @@ import {
   updateItemJoiSchema,
 } from '../db/schemas/joi-schemas';
 import { categoryJoiSchema } from '../db/schemas/joi-schemas';
-import { updateOrderJoiSchema } from '../db/schemas/joi-schemas';
+import { updateOrderAdminJoiSchema } from '../db/schemas/joi-schemas';
+import { imgUpload } from '../middlewares/img-upload';
 
 const adminRouter = Router();
 const validator = createValidator({});
@@ -30,14 +31,14 @@ adminRouter.post(
 );
 
 adminRouter.put(
-  '/categories/updateInfo/:cat_id',
+  '/categories/:catId',
   validator.body(categoryJoiSchema),
   loginRequired,
   categoryController.updateCategory,
 );
 
 adminRouter.delete(
-  '/categories/:cat_id',
+  '/categories/:catId',
   loginRequired,
   categoryController.removeCategory,
 );
@@ -50,20 +51,28 @@ adminRouter.post(
   loginRequired,
   itemController.createItem,
 );
+
+adminRouter.post(
+  '/items/upload',
+  loginRequired,
+  imgUpload.single('image'),
+  itemController.uploadImg,
+);
+
 adminRouter.put(
-  '/items/:item_id',
+  '/items/:itemId',
   validator.body(updateItemJoiSchema),
   loginRequired,
   itemController.updateItem,
 );
-adminRouter.delete('/items/:item_id', loginRequired, itemController.deleteItem);
+adminRouter.delete('/items/:itemId', loginRequired, itemController.deleteItem);
 
 // Order admin
 
 adminRouter.get('/orders', loginRequired, orderController.getAll);
 adminRouter.put(
   '/orders/:orderId',
-  validator.body(updateOrderJoiSchema),
+  validator.body(updateOrderAdminJoiSchema),
   loginRequired,
   orderController.updateOrder,
 );

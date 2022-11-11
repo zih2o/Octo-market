@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="." />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+  <link rel="stylesheet" href="addItem.css" />
+  <script type="module" src="addItem.js" defer></script>
+  <title>문어상점</title>
+</head>
+
+<body>
+  <!-- sticky 속성을 위한 wrapper -->
+  <div class="wrapper">
+    <header>
+      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+    </header>
+    <main class="container">
+      <div class="" id="content">
+        <div class="" id="menu">
+          <ul class="menu-list">
+            <li>
+              <span>사용자 정보</span>
+              <ul>
+                <li><a href="/admin">주문 확인/취소</a></li>
+              </ul>
+            </li>
+            <li>
+              <span>관리자 메뉴</span>
+              <ul>
+                <li><a href="/admin/items">상품 추가</a></li>
+                <li><a href="/admin/items/delete">상품 삭제</a></li>
+                <li><a href="/admin/categories">카테고리 변경</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="data">
+          <div class="field">
+            <label class="label">상품명</label>
+            <div class="control">
+              <input class="input" id="productName" type="text" placeholder="상품명을 적어주세요" />
+            </div>
+          </div>
+          <div class="field" id="productClassify">
+            <div>
+              <label class="label">상품 브랜드</label>
+              <div class="control">
+                <input class="input" id="productBrand" type="text" placeholder="브랜드를 적어주세요" />
+              </div>
+            </div>
+            <div id="Category">
+              <label class="label">상품 카테고리</label>
+              <div class="control">
+                <div class="select is-primary">
+                  <select id="productCategory"></select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">상품 상세 설명</label>
+            <div class="control">
+              <textarea class="textarea" id="productDesc" placeholder="상품명을 적어주세요"></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">상품 사진</label>
+            <div>
+              <label class="filebox">
+                <span class="file-cta">
+                  <input class="file-input" type="file" name="resume" accept="image/*" />
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label"> 파일을 선택하세요 </span>
+                </span>
+                <span class="file-name"> 파일의 이름이 표시됩니다 </span>
+              </label>
+            </div>
+          </div>
+          <div class="field" id="costModifier">
+            <div>
+              <label class="label">상품 가격</label>
+              <div class="control">
+                <input class="input" type="text" id="productPrice" placeholder="가격을 적어주세요" />
+              </div>
+            </div>
+            <div id="event">
+              <div class="check">
+                <label class="label">추천 상품</label>
+                <div class="control">
+                  <label class="checkbox label">
+                    <input type="checkbox" id="isRecommend" />
+                  </label>
+                </div>
+              </div>
+              <div class="check">
+                <label class="label">할인 상품</label>
+                <div class="control">
+                  <label class="checkbox label">
+                    <input type="checkbox" id="isDiscount" />
+                  </label>
+                </div>
+              </div>
+              <div class="check">
+                <label class="label">할인률</label>
+                <div class="control">
+                  <input class="input" type="text" id="discountRate" placeholder="-" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <button class="button is-success is-fullwidth" id="btnSubmit">
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- footer -->
+    <footer class="footer">
+      <!-- 푸터 콘텐츠. template 로 삽입 -->
+    </footer>
+  </div>
+</body>
+
+</html>

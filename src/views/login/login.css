@@ -1,0 +1,184 @@
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: #4b4453;
+  font-family: 'S-CoreDream-3Light';
+}
+
+/* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
+}
+
+/* 헤더 영역 */
+#nav-top {
+  position: relative;
+}
+
+#nav-logobox {
+  position: absolute;
+}
+
+#nav-logo {
+  width: 130px;
+  height: 130px;
+  margin-top: 50px;
+  margin-left: 180px;
+}
+
+#menu-box {
+  padding-right: 30px;
+}
+
+#menu-box a,
+#sort-box > div {
+  color: #4b4453;
+  background-color: white;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+#menu-box {
+  margin: 30px 20px 0 0;
+}
+
+#menu-box a,
+#sort-box > div {
+  position: relative;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #4b4453;
+  border: none;
+}
+
+.vertical-bar {
+  width: 1px;
+  height: 15px;
+  background-color: #4b4453;
+}
+
+#title {
+  margin-top: 40px;
+}
+
+#title-img {
+  margin-left: 160px;
+  z-index: 99;
+}
+
+.active {
+  display: none;
+}
+
+/* 헤더 영역 end */
+
+/* 메인 컨텐츠 영역 */
+.login-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 60px 0;
+}
+
+#findEmail {
+  width: 100%;
+  text-align: right;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+#loginForm {
+  width: 30rem;
+}
+
+#loginForm > p {
+  font-size: 40px;
+}
+
+.title {
+  text-align: center;
+  color: #80bd7a;
+}
+
+.button {
+  font-weight: bold;
+}
+
+#submitButton {
+  background-color: #80bd7a;
+}
+
+.input:focus {
+  border-color: #00d1b2;
+  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+}
+
+.input {
+  margin-bottom: 5px;
+}
+
+.box {
+  box-shadow: none;
+}
+
+/* 푸터 영역 */
+
+#footer-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#footer-icons img {
+  padding: 0 20px;
+}
+
+#footer-textbox {
+  margin: 50px 0 0 0;
+}
+
+#footer-textbox > div {
+  display: flex;
+  justify-content: center;
+}
+
+#footer-textbox a {
+  color: #4b4453;
+  margin: 5px 10px;
+}
+
+#footer-company a {
+  color: gray;
+}
+
+#footer-ul a {
+  background-color: hsl(0, 0%, 98%);
+  color: #b0a8b9;
+}

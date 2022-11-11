@@ -45,7 +45,7 @@ submitBtn.addEventListener("click", async (e)=>{
     };
 
     try {
-        const res = await Api.patch(`http://localhost:5050/users/updateinfo/${userId}`, data);
+        const res = await Api.post(`http://localhost:5050/users/updateinfo/${userId}`, data);
         if (res.status == 200) {
             alert("수정되었습니다.");
             return;
@@ -64,7 +64,7 @@ submitBtn.addEventListener("click", async (e)=>{
     }
     catch (e)
     {
-        console.error(err.stack);
-        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+        console.error(e.stack);
+        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${e.message}`);
     }
 })

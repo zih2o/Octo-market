@@ -1,46 +1,40 @@
-import { orderModel } from '../db';
-import { usersModel } from '../db';
-import { adminModel } from '../db';
+import { orderModel, adminModel, usersModel } from '../db';
 import { CustomError } from '../middlewares';
+import { sendMail } from '../utils/mail.js';
 
 export class OrderService {
-  constructor(orderModel) {
+  constructor(orderModel, adminModel) {
     this.orderModel = orderModel;
+    this.adminModel = adminModel;
+    this.usersModel = usersModel;
   }
   async getAll(currentUserId) {
-    const admin = await adminModel.findById(currentUserId);
-    if (admin === null && userId !== currentUserId) {
+    const admin = await this.adminModel.findById(currentUserId);
+    if (!admin) {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
-    const orders = await orderModel.findAll();
+    const orders = await this.orderModel.findAll();
     return orders;
   }
 
-  async getByEmail(currentUserId, userId) {
-    const admin = await adminModel.findById(currentUserId);
-    if (admin === null && userId !== currentUserId) {
+  async getOrdersByUserId(currentUserId, userId) {
+    // admin이 아니거나 접근한 user가 보려고 하는 페이지가 user의 페이지가 아닌 경우 권한 없음
+    const admin = await this.adminModel.findById(currentUserId);
+    if (!admin && userId !== currentUserId) {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
-    const user = await usersModel.findById(userId);
-    if (!user) {
-      throw new CustomError(404, '사용자를 찾을 수 없습니다.');
-    }
-    const email = user.email;
-    const orders = await orderModel.findByEmail(email);
+
+    const orders = await this.orderModel.findByUserId(userId);
     return orders;
   }
 
   async getById(currentUserId, orderId) {
-    const order = await orderModel.findById(orderId);
-    if (!order || order === null) {
+    const order = await this.orderModel.findByOrderId(orderId);
+    if (!order) {
       throw new CustomError(404, '조회하신 주문이 존재하지 않습니다.');
     }
-    const userEmail = order.email;
-    console.log(userEmail);
-    const user = await usersModel.findByEmail(userEmail);
-    const admin = await adminModel.findById(currentUserId);
-
-    if (admin === null && user.id !== currentUserId) {
+    const admin = await this.adminModel.findById(currentUserId);
+    if (!admin && order.userId != currentUserId) {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
     return order;
@@ -51,31 +45,47 @@ export class OrderService {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
 
-    const order = await orderModel.createOrder(orderInfo);
+    const order = await this.orderModel.createOrder(orderInfo);
+    //메일발송
+    const user = await this.usersModel.findById(order.userId);
+    sendMail(user.email);
     return order;
   }
 
   async updateOrder(currentUserId, orderId, toUpdate) {
-    const admin = await adminModel.findById(currentUserId);
-    if (admin === null && userId !== currentUserId) {
-      throw new CustomError(403, '접근 권한이 없습니다.');
-    }
-    const updatedOrder = await orderModel.updateOrder(orderId, toUpdate);
-    if (updatedOrder === null) {
+    const order = await this.orderModel.findByOrderId(orderId);
+    if (!order) {
       throw new CustomError(404, '조회하신 주문이 존재하지 않습니다.');
     }
+    const admin = await this.adminModel.findById(currentUserId);
+    if (!admin && order.userId != currentUserId) {
+      throw new CustomError(403, '접근 권한이 없습니다.');
+    }
+    // User가 주문 수정 요청 시 주문 상태가 배송 전 일때만 배송 수정 가능
+    if (order.userId == currentUserId) {
+      if (order.state !== '결제 완료' && order.state !== '배송 준비') {
+        throw new CustomError(
+          409,
+          '배송이 시작되어 주문을 변경할 수 없습니다.',
+        );
+      }
+    }
+    const updatedOrder = await this.orderModel.updateOrder(orderId, toUpdate);
     return updatedOrder;
   }
 
   async removeOrder(currentUserId, orderId) {
-    const admin = await adminModel.findById(currentUserId);
-    if (admin === null && userId !== currentUserId) {
+    const admin = await this.adminModel.findById(currentUserId);
+    if (!admin) {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
-    await orderModel.removeOrder(orderId);
+    await this.orderModel.removeOrder(orderId);
     return;
   }
 }
 
-const orderService = new OrderService();
-export { orderService };
+export const orderService = new OrderService(
+  orderModel,
+  adminModel,
+  usersModel,
+);

@@ -6,6 +6,7 @@ import {
   signUpJoiSchema,
   loginJoiSchema,
   updateJoiSchema,
+  findEmailJoiSchema,
 } from '../db/schemas/joi-schemas';
 
 const usersRouter = Router();
@@ -23,17 +24,21 @@ usersRouter.post(
   usersController.login,
 );
 
+usersRouter.post(
+  '/findemail',
+  validator.body(findEmailJoiSchema),
+  usersController.findEmail,
+);
+
+usersRouter.get('/:userId', loginRequired, usersController.getUser);
+
 usersRouter.put(
-  '/updateInfo/:user_id',
+  '/:userId',
   validator.body(updateJoiSchema),
   loginRequired,
   usersController.updateUser,
 );
 
-usersRouter.delete(
-  '/deleteuser/:user_id',
-  loginRequired,
-  usersController.deleteUser,
-);
+usersRouter.delete('/:userId', loginRequired, usersController.deleteUser);
 
 export { usersRouter };

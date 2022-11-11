@@ -2,14 +2,9 @@ import { adminService } from '../services';
 
 // 회원가입
 const signup = async (req, res, next) => {
-  const { name, email, password, userType } = req.body;
+  const adminInfo = req.body;
   try {
-    const newAdmin = await adminService.createAdmin({
-      name,
-      email,
-      password,
-      userType,
-    });
+    const newAdmin = await adminService.createAdmin(adminInfo);
 
     res.status(201).json(newAdmin);
   } catch (error) {
@@ -19,8 +14,8 @@ const signup = async (req, res, next) => {
 // 로그인
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const adminInfo = await adminService.createAdminInfo({ email, password });
+    const loginInfo = req.body;
+    const adminInfo = await adminService.createAdminInfo(loginInfo);
 
     res.status(200).json(adminInfo);
   } catch (error) {

@@ -1,7 +1,39 @@
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   color: #4b4453;
+  font-family: 'S-CoreDream-3Light';
+}
+
+/* 푸터 영역을 화면 최하단에 붙여주기 위한 css 설정 */
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+#admin-login {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 99;
 }
 
 /* 헤더 영역 */
@@ -45,47 +77,54 @@
   border: none;
 }
 
-#menu-box a:nth-child(n + 2)::after {
-  position: absolute;
-  left: 0;
-  top: 20px;
-  content: '';
+.vertical-bar {
   width: 1px;
   height: 15px;
   background-color: #4b4453;
 }
 
-#title-container {
-  display: flex;
-  justify-content: center;
+#title {
+  margin-top: 40px;
 }
 
-#title {
-  margin-top: -40px;
-  margin-bottom: 30px;
+#title-img {
+  margin-left: 160px;
   z-index: 99;
 }
 
+.active {
+  display: none;
+}
+
+/*  카테고리바의 sticky 속성 적용에 필요한 스타일  */
+/* sticky 컴포넌트는 부모 태그 아래에 붙어서 화면에 남아 있는다 */
+#category-bar {
+  position: sticky;
+  z-index: 999;
+  top: 0;
+  padding: 10px 0 2px 0;
+  background-color: #ffffff;
+}
+
 /* 메인 콘텐츠 영역*/
-#carousel-top > p {
-  color: white;
+
+/*상품 정렬 버튼*/
+.categoryBtn {
+  text-align: end;
+  width: 1200px;
+  margin: 50px auto 0 auto;
 }
 
-/* 캐러셀 */
-.carousel-container {
-  overflow: hidden;
+.categoryBtn > span:nth-child(2n + 1) {
+  cursor: pointer;
 }
 
-.slider-pagination .slider-page {
-  width: 15px;
-  height: 15px;
-  margin: 10px;
-  background-color: #c4fcef;
+.categoryBtn > span:nth-child(2n) {
+  cursor: none;
 }
 
-.slider-pagination .slider-page.is-active {
-  background-color: #00c9a7;
-  transform: scale(1.8);
+.space {
+  margin: 0 10px;
 }
 
 /* 상품 리스트 */
@@ -93,14 +132,20 @@
   width: 100%;
 }
 
+.md-title,
 .product-category {
   text-align: center;
   margin: 50px 0 30px 0;
 }
 
-.product-category h2 {
-  font-size: 20px;
+.md-title > h2,
+#category-title {
+  font-size: 24px;
   font-weight: 600;
+}
+
+.md-btn {
+  margin: 15px 30px;
 }
 
 .product-sortbox {
@@ -129,13 +174,19 @@
 .product-container {
   width: 1200px;
   margin: 0 auto;
-  padding-top: 60px;
+  padding: 60px 0;
   border-top: 1px solid #e1e1e1;
 }
 
-#product-ul {
+.md-product-ul,
+.md-category-ul,
+.product-ul {
   display: flex;
   flex-wrap: wrap;
+}
+
+.md-category-ul {
+  justify-content: space-around;
 }
 
 .product-item {
@@ -143,7 +194,24 @@
   justify-content: center;
 }
 
-.item-container {
+.md-category-li {
+  padding: 10px 20px;
+  background-color: #51c498;
+  border-radius: 25px;
+}
+
+.md-category-li:active,
+.md-category-li:hover {
+  background-color: #9986f1;
+}
+
+.md-category-button {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.md .item-container {
   display: flex;
   /* justify-content: center; */
   justify-content: center;
@@ -166,6 +234,7 @@
 
 .item-info-container {
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .item-namebox,
@@ -185,6 +254,36 @@
 
 .item-pricebox span {
   color: #ab3e55;
+}
+
+/* 탑 이동 스크롤 버튼 */
+#scroll-top-Btn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 100px; /* Place the button at the bottom of the page */
+  right: 80px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #80bd7a;
+  cursor: pointer; /* Add a mouse pointer on hover */
+  border-radius: 80px; /* Rounded corners */
+  box-shadow: 3px 3px 5px #4b4453;
+}
+
+#scroll-top-Btn > div {
+  width: 80px;
+  height: 50px;
+  line-height: 47px;
+  /* display: table-cell; */
+
+  font-size: 30px; /* Increase font size */
+  font-weight: 700;
+  color: white; /* Text color */
+}
+
+#scroll-top-Btn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
 }
 
 /* 푸터 영역 */

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>문어상점</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.png"
+    />
+    <!-- bulma css 관련 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="login.css" />
+    <script src="login.js" type="module" defer></script>
+  </head>
+
+  <body>
+    <!-- sticky 속성을 위한 wrapper -->
+    <div class="wrapper">
+      <!-- 헤더 -->
+      <header>
+        <!-- nav 바 -->
+      </header>
+
+      <!-- 메인 -->
+      <main>
+        <div class="login-form-container">
+          <form class="box login-form-box" id="loginForm">
+            <p class="title is-5">로그인</p>
+            <div class="field">
+              <label class="label" for="emailInput">이메일</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="emailInput"
+                  type="email"
+                  placeholder="abc@example.com"
+                  autocomplete="on"
+                />
+              </div>
+            </div>
+
+            <div class="field mb-5">
+              <label class="label" for="passwordInput">비밀번호</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="passwordInput"
+                  type="password"
+                  placeholder="********"
+                  autocomplete="on"
+                />
+              </div>
+            </div>
+            <button class="button is-primary is-fullwidth" id="submitButton">
+              로그인
+            </button>
+            <div id="findEmail">이메일 찾기</div>
+          </form>
+        </div>
+      </main>
+
+      <!-- 푸터 -->
+      <footer class="footer"></footer>
+    </div>
+  </body>
+</html>

@@ -10,6 +10,11 @@ class CategoryService {
     if (userType !== 'admin') {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
+    const count = await this.categoryModel.countCategory();
+    if (count == 8) {
+      throw new CustomError(409, 'Category 개수가 너무 많습니다.');
+    }
+
     const { name } = categoryInfo;
     const category = await this.categoryModel.findByName(name);
     if (category) {
@@ -23,11 +28,11 @@ class CategoryService {
     return newCategory;
   }
 
-  async updateCategory(cat_id, userType, name) {
+  async updateCategory(catId, userType, name) {
     if (userType !== 'admin') {
       throw new CustomError(403, '접근권한이 없습니다.');
     }
-    const category = this.categoryModel.findById(cat_id);
+    const category = this.categoryModel.findById(catId);
     if (!category) {
       throw new CustomError(
         404,
@@ -40,14 +45,14 @@ class CategoryService {
     }
 
     const updatedCategory = await this.categoryModel.updateCategory(
-      cat_id,
+      catId,
       name,
     );
     return updatedCategory;
   }
 
-  async getCategory(cat_id) {
-    const category = this.categoryModel.findById(cat_id);
+  async getCategory(catId) {
+    const category = this.categoryModel.findById(catId);
     if (!category) {
       throw new CustomError(
         404,
@@ -62,8 +67,8 @@ class CategoryService {
     return categories;
   }
 
-  async removeCategory(userType, cat_id) {
-    const category = await this.categoryModel.findById(cat_id);
+  async removeCategory(userType, catId) {
+    const category = await this.categoryModel.findById(catId);
     if (!category) {
       throw new CustomError(
         404,
@@ -75,11 +80,9 @@ class CategoryService {
       throw new CustomError(403, '접근 권한이 없습니다.');
     }
 
-    await this.categoryModel.removeCategory(cat_id);
+    await this.categoryModel.removeCategory(catId);
     return;
   }
 }
 
-const categoryService = new CategoryService(categoryModel);
-
-export { categoryService };
+export const categoryService = new CategoryService(categoryModel);

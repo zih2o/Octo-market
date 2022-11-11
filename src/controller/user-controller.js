@@ -1,17 +1,27 @@
 import { userService } from '../services';
 
+//
+const getUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const user = await userService.getUserInfo(userId);
+
+    res.status(200).json({
+      name: user.name,
+      email: user.email,
+      address: user.address,
+      phoneNum: user.phoneNum,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // 회원가입
 const signup = async (req, res, next) => {
-  const { name, email, password, phoneNum, address, userType } = req.body;
   try {
-    const newUser = await userService.createUser({
-      name,
-      email,
-      password,
-      phoneNum,
-      address,
-      userType,
-    });
+    const newUserInfo = req.body;
+    const newUser = await userService.createUser(newUserInfo);
 
     res.status(201).json(newUser);
   } catch (error) {
@@ -22,10 +32,22 @@ const signup = async (req, res, next) => {
 // 로그인
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const userInfo = await userService.createUserInfo({ email, password });
+    const loginInfo = req.body;
+    const userInfo = await userService.createUserInfo(loginInfo);
 
     res.status(200).json(userInfo);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// email 찾기
+const findEmail = async (req, res, next) => {
+  try {
+    const userInfo = req.body;
+    const user = await userService.findEmail(userInfo);
+
+    res.status(200).json({ email: user.email });
   } catch (error) {
     next(error);
   }
@@ -34,16 +56,15 @@ const login = async (req, res, next) => {
 // 회원정보수정
 const updateUser = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
+    const { userId } = req.params;
     const { password, currentPassword, address, phoneNum } = req.body;
 
     if (!currentPassword) {
       throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
     }
 
-    const userInfoRequired = { user_id, currentPassword };
-    // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-    // 보내주었다면, 업데이트용 객체에 삽입함.
+    const userInfoRequired = { userId, currentPassword };
+
     const toUpdate = {
       ...(password && { password }),
       ...(address && { address }),
@@ -63,11 +84,11 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
-    await userService.removeUser(user_id);
+    const { userId } = req.params;
+    await userService.removeUser(userId);
     res.sendStatus(204);
   } catch (error) {
     next(error);
   }
 };
-export { signup, login, updateUser, deleteUser };
+export { getUser, signup, login, findEmail, updateUser, deleteUser };

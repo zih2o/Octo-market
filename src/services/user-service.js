@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { config } from '../../configuration/config';
 import { usersModel } from '../db';
 import { CustomError } from '../middlewares';
 
@@ -7,6 +8,23 @@ class UserService {
   // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
   constructor(userModel) {
     this.userModel = userModel;
+  }
+
+  async getUserInfo(userId) {
+    const user = await this.userModel.findById(userId);
+
+    if (!user) {
+      throw new CustomError(
+        404,
+        '가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
+      );
+    }
+
+    if (user.id !== userId) {
+      throw new CustomError(403, '접근 권한이 없습니다.');
+    }
+
+    return user;
   }
 
   // 회원가입
@@ -17,7 +35,10 @@ class UserService {
       throw new CustomError(409, `${email}은 이미 가입 된 회원입니다.`);
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      config.bcrypt.saltRounds,
+    );
     const newUserInfo = {
       name,
       email,
@@ -49,19 +70,38 @@ class UserService {
       );
     }
 
-    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const accessToken = jwt.sign(
       { userId: user.id, role: user.userType },
-      secretKey,
+      config.jwt.accessSecret,
+      { expiresIn: config.jwt.accessExpiresIn },
     );
 
     return { accessToken, userId: user.id, userType: user.userType };
   }
 
+  // Email 찾기
+  async findEmail(userInfo) {
+    const { name, phoneNum } = userInfo;
+
+    const user = await this.userModel.findByNamePhone(name, phoneNum);
+    if (!user) {
+      throw new CustomError(
+        404,
+        '가입 내역이 없습니다. 다시 한 번 확인해 주세요.',
+      );
+    }
+
+    if (user.name !== name && user.phoneNum !== phoneNum) {
+      throw new CustomError(403, '접근 권한이 없습니다.');
+    }
+
+    return user;
+  }
+
   // 회원정보수정
   async updateUser(userInfoRequired, toUpdate) {
-    const { user_id, currentPassword } = userInfoRequired;
-    const user = await this.userModel.findById(user_id);
+    const { userId, currentPassword } = userInfoRequired;
+    const user = await this.userModel.findById(userId);
     if (!user) {
       throw new CustomError(
         404,
@@ -85,11 +125,11 @@ class UserService {
     const { password } = toUpdate;
 
     if (password) {
-      const newPassword = await bcrypt.hash(password, 10);
+      const newPassword = await bcrypt.hash(password, config.bcrypt.saltRounds);
       toUpdate.password = newPassword;
     }
     const updatedUser = await this.userModel.update({
-      user_id,
+      userId,
       update: toUpdate,
     });
     return updatedUser;
@@ -113,5 +153,4 @@ class UserService {
   }
 }
 
-const userService = new UserService(usersModel);
-export { userService };
+export const userService = new UserService(usersModel);
