@@ -4,12 +4,12 @@ import { itemService } from '../services';
 const getItems = async (req, res, next) => {
   try {
     const count = Number(req.query.count || 1);
-    const perCount = Number(req.query.perCount || 20);
+    const perCount = Number(req.query.perCount || 250);
     const dis = req.query.dis;
     const isDiscount = req.query.isDis;
     const sortingInfo = { count, perCount, dis, isDiscount };
     const items = await itemService.getAll(sortingInfo);
-
+    console.log(dis, isDiscount);
     res.status(200).json(items);
   } catch (error) {
     next(error);
