@@ -40,7 +40,8 @@ function addAllElements() {
 
 function addAllEvents() {
     // Add row delete and call delivery cancel api
-    orderList.addEventListener("click", e => deleteUpdate(e))
+    orderList.addEventListener("click", e => Update(e))
+    document.addEventListener("DOMContentLoaded", e => modalManipulate())
 }
 
 
@@ -70,15 +71,13 @@ async function allOrdersAdmin()
             let categoryName = `<td>${matchCategory(category, categorylist)}</td>`
             let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
             let itemprice = `<td>${price}</td>`;
-            let state = ''
-            let stateDef = `<td>${state}</td>`;
+
             let buttons = `<td>
-            <btn class="button is-small is-info is-outlined" id="modify">수정</btn>
+            <btn class="js-modal-trigger button is-small is-info is-outlined" id="modify" data-target="modal-js-example">수정</btn>
             <btn class="button is-small is-danger is-outlined" id="delete">삭제</btn></td></tr>`;
             retHtml += (tableContent + itemName + brandName + categoryName +  orderDate + itemprice + buttons);
         }
         orderList.insertAdjacentHTML('beforeend', retHtml)
-        console.log(idArray)
     }
     catch(err)
     {
@@ -92,29 +91,45 @@ function matchCategory(categoryId, categoryList)
     return categoryList.filter(x => x._id === categoryId)[0].name
 }
 
-async function deleteUpdate(event)
+async function Update(event)
 {
     const btnTouched = event.target
-    if (btnTouched.id !== 'delete'){
-        return
+    if (btnTouched.id === 'delete')
+    {
+        const table = btnTouched.closest("table")
+        const currRow = btnTouched.closest("tr")
+        const itemId = idArray[Number(currRow.cells[0].innerHTML) - 1]
+        console.log(itemId)
+        //delete Row
+        table.deleteRow(currRow.rowIndex)
+
+        //Update on DB
+        // const res = await Api.delete(`/admin/items/${itemId}`)
+
+        // if (res.success) {
+        //     alert("성공적으로 삭제되었습니다")
+        //     return
+        // }
+        // else
+        //     return alert(res.reason);
     }
+    if (btnTouched.id === "modify")
+    {
+        console.log("modify touched!!!!!!!!!!!!")
+    }
+}
+
+async function modifyUpdate(event)
+{
+    const btnTouched = event.target
+    if (btnTouched.id !== "modify")
+        return
+
     const table = btnTouched.closest("table")
     const currRow = btnTouched.closest("tr")
     const itemId = idArray[Number(currRow.cells[0].innerHTML) - 1]
     console.log(itemId)
-    //delete Row
-    table.deleteRow(currRow.rowIndex)
-
-    //Update on DB
-    const res = await Api.delete(`/admin/items/{itemId}`)
-
-    if (res.success) {
-        return alert("성공적으로 삭제되었습니다")
-    }
-    else
-        return alert(res.reason);
 }
-
 
 function isLoggedIn()
 {
@@ -130,4 +145,51 @@ function isAdmin()
         alert("관리자가 아닙니다")
         window.location.href = "/users/login";
     }
+}
+
+
+function modalManipulate () 
+{
+    // Functions to open and close a modal
+    function openModal($el) {
+      $el.classList.add('is-active');
+    }
+  
+    function closeModal($el) {
+      $el.classList.remove('is-active');
+    }
+  
+    function closeAllModals() {
+      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+      });
+    }
+  
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+      const modal = $trigger.dataset.target;
+      const $target = document.getElementById(modal);
+  
+      $trigger.addEventListener('click', () => {
+        openModal($target);
+      });
+    });
+  
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+  
+      $close.addEventListener('click', () => {
+        closeModal($target);
+      });
+    });
+  
+    // Add a keyboard event to close all modals
+    document.addEventListener('keydown', (event) => {
+      const e = event || window.event;
+  
+      if (e.keyCode === 27) { // Escape key
+        closeAllModals();
+      }
+    });
 }
