@@ -325,8 +325,11 @@ function delSelect() {
 function goToBuy() {
   sessionStorage.setItem('order', ',');
   const cartList = sessionStorage.getItem('cart');
-  const itemList = sessionStorage
-      .getItem("cart")
+  if (!cartList) {
+    alert('장바구니에 상품이 없습니다.')
+    return;
+  }
+  const itemList = cartList
       .split(",")
       .filter((e) => e !== "");
   itemList.forEach(itemId => {

@@ -1,111 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon.png"
+    />
+    <!--bulma-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="order.css" />
+    <script src="order.js" type="module" defer></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
-  <!--bulma-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <!-- 커스텀 css, js -->
-  <link rel="stylesheet" href="order.css" />
-  <script src="order.js" type="module" defer></script>
+    <title>문어상점</title>
+  </head>
 
-  <title>문어상점</title>
-</head>
+  <body>
+    <!-- sticky 속성을 위한 wrapper -->
+    <div class="wrapper">
+      <!-- header 네비바(메뉴, 카테고리) -->
+      <header>
+        <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
+      </header>
 
-<body>
-  <!-- sticky 속성을 위한 wrapper -->
-  <div class="wrapper">
-    <!-- header 네비바(메뉴, 카테고리) -->
-    <header>
-      <!-- 타이틀 이미지, 로고 포함 네비바 template로 삽입 -->
-    </header>
+      <!-- 카테고리 네비바. template 로 삽입 -->
 
-    <!-- 카테고리 네비바. template 로 삽입 -->
+      <!-- 본문 -->
 
-    <!-- 본문 -->
-
-    <section>
-      <div class="container">
-        <div class="box is-size-5" id="order">주문하기</div>
-        <div class="box" id="userInfo">
-          <table id="userTable">
-            <tbody>
-              <tr>
-                <th id="zeroColumn"></th>
-                <th id="firstColumn">이름</th>
-                <td id="secondColumn">홍길동</td>
-                <th id="thirdColumn">주소</th>
-                <td id="postCode">10888</td>
-              </tr>
-              <tr>
-                <th></th>
-                <th>이메일</th>
-                <td id="email">ddd@naver.com</td>
-                <th></th>
-                <td id="adress1">서울시 ㅇㅇ로 ㅇㅇㅇ</td>
-              </tr>
-              <tr>
-                <th></th>
-                <th>전화번호</th>
-                <td id="phone">010000000</td>
-                <th></th>
-                <td id="adress2">ㅇㅇㅇ동 ㅇㅇㅇ호</td>
-              </tr>
-            </tbody>
-          </table>
-          <button class="button is-primary" id="correct">
-            회원정보 수정
-          </button>
+      <section>
+        <div class="container">
+          <div class="box is-size-5" id="order">주문하기</div>
+          <div class="box" id="userInfo">
+            <table id="userTable">
+              <tbody>
+                <tr>
+                  <th id="zeroColumn"></th>
+                  <th id="firstColumn">이름</th>
+                  <td id="secondColumn">홍길동</td>
+                  <th id="thirdColumn">주소</th>
+                  <td id="postCode">10888</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>이메일</th>
+                  <td id="email">ddd@naver.com</td>
+                  <th></th>
+                  <td id="address1">서울시 ㅇㅇ로 ㅇㅇㅇ</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>전화번호</th>
+                  <td id="phone">010000000</td>
+                  <th></th>
+                  <td id="address2">ㅇㅇㅇ동 ㅇㅇㅇ호</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="button is-primary" id="correct">
+              회원정보 수정
+            </button>
+          </div>
+          <div class="box" id="productsInfo">
+            <table id="productsTable">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="productName">상품명</th>
+                  <th class="eachPrice">가격</th>
+                  <th class="eachCount">수량</th>
+                  <th class="productPrice">금액</th>
+                </tr>
+              </thead>
+              <tbody id="productList">
+                <!--상품목록 들어갈 위치-->
+              </tbody>
+            </table>
+          </div>
+          <div class="box" id="buyInfo">
+            <table>
+              <tbody>
+                <tr>
+                  <td>상품 금액</td>
+                  <td></td>
+                  <td>배송비</td>
+                  <td></td>
+                  <td>총 결제 금액</td>
+                </tr>
+                <tr class="is-size-5">
+                  <th id="productsPrice">상품 금액</th>
+                  <th>+</th>
+                  <th>3000원</th>
+                  <th>=</th>
+                  <th id="totalPrice">총 결제 금액</th>
+                </tr>
+              </tbody>
+            </table>
+            <button class="button is-primary" id="buy">주문하기</button>
+          </div>
         </div>
-        <div class="box" id="productsInfo">
-          <table id="productsTable">
-            <thead>
-              <tr>
-                <th></th>
-                <th class="productName">상품명</th>
-                <th class="eachPrice">가격</th>
-                <th class="eachCount">수량</th>
-                <th class="productPrice">금액</th>
-              </tr>
-            </thead>
-            <tbody id="productList">
-              <!--상품목록 들어갈 위치-->
-            </tbody>
-          </table>
-        </div>
-        <div class="box" id="buyInfo">
-          <table>
-            <tbody>
-              <tr>
-                <td>상품 금액</td>
-                <td></td>
-                <td>배송비</td>
-                <td></td>
-                <td>총 결제 금액</td>
-              </tr>
-              <tr class="is-size-5">
-                <th id="productsPrice">상품 금액</th>
-                <th>+</th>
-                <th>3000원</th>
-                <th>=</th>
-                <th id="totalPrice">총 결제 금액</th>
-              </tr>
-            </tbody>
-          </table>
-          <button class="button is-primary" id="buy">주문하기</button>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- footer -->
-    <footer class="footer">
-      <!-- 푸터 콘텐츠. template 로 삽입 -->
-    </footer>
-  </div>
-</body>
-
+      <!-- footer -->
+      <footer class="footer">
+        <!-- 푸터 콘텐츠. template 로 삽입 -->
+      </footer>
+    </div>
+  </body>
 </html>
