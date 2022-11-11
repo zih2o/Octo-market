@@ -116,10 +116,15 @@ main {
 
 .title {
   text-align: center;
+  color: #80bd7a;
 }
 
 .button {
   font-weight: bold;
+}
+
+#submitButton {
+  background-color: #80bd7a;
 }
 
 .input:focus {
