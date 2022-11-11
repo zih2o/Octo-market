@@ -19,69 +19,21 @@ import {
 
 //This page is rendered when URI is given as /admin/orders/
 const orderList = document.querySelector('#orderList');
-// const orderList = document.getElementById('orderList');
-
-// Data mocked
-// sessionStorage.setItem('loginToken', JSON.stringify({
-//     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzE3Mzd9.AW1x6uJ2itKC8oMFXdL0CjFzaA2cisATQE263fzqF9Q",
-//     "userId": "6368bdf749dfe808988ea212",
-//     "userType": "admin"
-// }
-// ))
-// sessionStorage.setItem('userEmail', 'semin0706@naver.com')
-
-
-// var orders = JSON.stringify([
-//     {
-//         "_id": "555555",
-//         "orderInfo": [
-//             {
-//                 "item_id": "666666",
-//                 "name": "아이팟",
-//                 "amount": 10000,
-//                 "price": 10,
-//             },
-// 				],
-// 		"totalPrice": 10000,
-//         "email": "semin0706@naver.com",
-//         "address": {
-//             "postalCode": 1111,
-//             "address1": "경기도 안양시 비산동 KFC",
-//             "address2": "3333",
-// 		        },
-//         "state": "배송 준비",
-//         "createdAt": "2022-11-06",
-//         "updatedAt": "2022-11-07",
-//         },
-//     {
-//         "_id": "66666",
-//         "orderInfo": [
-//             {
-//                 "item_id": "77777",
-//                 "name": "갤럭시",
-//                 "amount": 10000,
-//                 "price": 10,
-//             },
-//                 ],
-//                 "totalPrice": 10000,
-//         "email": "semin0706@naver.com",
-//         "address": {
-//             "postalCode": 1111,
-//             "address1": "경기도 안양시 동안구 평촌동",
-//             "address2": "3333",
-//                 },
-//         "state": "배송 준비",
-//         "createdAt": "2022-11-06",
-//         "updatedAt": "2022-11-07",
-//     },
-// ])
-
 const accessToken = sessionStorage.getItem("loginToken")
 const userId = sessionStorage.getItem("userId")
 const userType = sessionStorage.getItem("adminToken")
 
+const orderName = document.querySelector("#orderName")
+const deliStatus = document.querySelector("#delivery")
+
+const modalCloseModal = document.querySelectorAll(".close-button");
+const modalPutModal = document.querySelector(".put-button");
+
+
 //const emailToken = sessionStorage.getItem('userEmail')
 
+var idArray = [];
+var rowInd;
 addAllElements();
 addAllEvents();
 
@@ -95,6 +47,8 @@ function addAllElements() {
 function addAllEvents() {
     // Add row delete and call delivery cancel api
     orderList.addEventListener("click", e => deleteUpdate(e))
+    modalPutModal.addEventListener("click", e => updateData(e))
+    modalCloseModal.forEach(button => button.addEventListener("click", closeModal));
 }
 
 
@@ -118,14 +72,16 @@ async function allOrdersAdmin()
                 },
             })
             let {name} = await res2.json()
-            let tableContent = `<tr><th>${id}</th>`;
+            let tableContent = `<tr><th>${id.substring(0, 6)}...</th>`;
+            idArray.push(id)
             let user = `<td>${name}</td>`;
             let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
             let userAddr = `<td>${address.address1+' '+address.address2}</td>`
             let orderName = `<td>${orderInfo[0].name} 등 ${orderInfo.length}개</td>`;
             let price = `<td>${totalPrice}</td>`;
             let stateDef = `<td>${state}</td>`;
-            let buttons = `<td><btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`;
+            let buttons = `<td><btn class="button is-small is-info is-outlined" id="modify">수정</btn>
+            <btn class="button is-small is-danger is-outlined">취소</btn></td></tr>`;
             retHtml += (tableContent + user + orderDate + userAddr + orderName + price + stateDef + buttons);
         }
         orderList.insertAdjacentHTML('beforeend', retHtml)
@@ -138,28 +94,46 @@ async function allOrdersAdmin()
     }
 }
 
+async function updateData(e)
+{
+    const res = await Api.put(`/admin/orders/${idArray[rowInd]}`, {
+        state:`${deliStatus.value}`
+    })
+    alert("배송 상태 수정이 반영되었습니다")
+    window.location.href = window.location.href;
+}
+
+
 async function deleteUpdate(event)
 {
     const btnTouched = event.target
-    if (!btnTouched.classList.contains('button')){
-        return
+    if (btnTouched.classList.contains('is-danger')){
+        const table = btnTouched.closest("table")
+        const currRow = btnTouched.closest("tr")
+        rowInd = currRow.rowIndex
+        const orderId = currRow.cells[0].innerHTML
+        const userId = currRow.cells[1]
+
+        //delete Row
+        table.deleteRow(currRow.rowIndex)
+ 
+        //Update on DB
+        const res = await Api.delete(`/admin/orders/${orderId}`)
+
+        if (res.success) {
+            return alert("성공적으로 취소되었습니다")
+        }
+        else
+            return alert(res.reason);
     }
-    const table = btnTouched.closest("table")
-    const currRow = btnTouched.closest("tr")
-    const orderId = currRow.cells[0].innerHTML
-    const userId = currRow.cells[1]
-
-    //delete Row
-    table.deleteRow(currRow.rowIndex)
-
-    //Update on DB
-    const res = await Api.delete(`/admin/orders/${orderId}`)
-
-    if (res.success) {
-        return alert("성공적으로 취소되었습니다")
+    else if (btnTouched.classList.contains('is-info'))
+    {
+        const currRow = btnTouched.closest("tr")
+        rowInd = currRow.rowIndex - 1
+        const modal = document.querySelector("#modal");
+        populateForm(rowInd);
+        modal.showModal();
     }
-    else
-        return alert(res.reason);
 }
 
 
@@ -177,4 +151,23 @@ function isAdmin()
         alert("관리자가 아닙니다")
         window.location.href = "/users/login";
     }
+}
+
+function closeModal()
+{
+    const modal = document.querySelector("#modal");
+    modal.setAttribute("close", "");
+  
+    modal.addEventListener(
+      "transitionend",
+      () => {
+        modal.removeAttribute("close");
+        modal.close();
+      },
+      {once: true}
+    );
+}
+
+function populateForm(itemRow) {
+    orderName.value = idArray[itemRow];
 }

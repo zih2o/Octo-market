@@ -107,6 +107,7 @@
 - **Router - Page** Page render management
 - Intersection observer를 이용한 파일 Lazy loading
 - JWT - sessionStorage를 사용한 authorization check
+- Daum Postcode Service를 사용한 주소 검색 구현
 - Bulma css, font awesome을 사용한 풍부한 css 스타일
 
 ### 2-2. BE
