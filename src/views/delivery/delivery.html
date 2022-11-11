@@ -102,27 +102,39 @@
         <!-- 푸터 콘텐츠. template 로 삽입 -->
       </footer>
 
-      <div class="modal" id="modal1">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">GeeksforGeeks</p>
-
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <h1>Hey Geek!</h1>
-
-            <p>
-              Learn all CS fundamentals, do programming, participate in
-              contests, an many more.
-            </p>
-          </section>
-          <footer class="modal-card-foot">
-            <button class="button is-danger">Cancel</button>
-          </footer>
+      <dialog class="custom-modal" id="modal">
+        <div class='custom-modal-body'>
+          <div class="modal-form">
+            <div class="field">
+              <label class="label" disabled>주문 ID</label>
+              <div class="control">
+                <input class="input" id="orderName" type="text" placeholder="" disabled>
+              </div>
+            </div>
+            <div class="field" id="Category">
+              <label class="label">주문 목록 수정</label>
+              <div class="control">
+                <input class="input" id="orderName" type="text" placeholder="" disabled>
+                <div class="select is-primary">
+                  <select id="order-info">
+                    <option>주문 취소</option>
+                  </select>
+                </div>
+              </div>
+              <label class="label">주문 상태 수정</label>
+              <div class="control">
+                <div class="select is-primary">
+                  <select id="delivery">
+                    <option>주문 취소</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button class="button close-button">취소</button>
+            <button class="button is-success put-button close-button">수정</button>
+          </div>
         </div>
-      </div>
+      </dialog>
     </div>
   </body>
 </html>
