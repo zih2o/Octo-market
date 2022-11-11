@@ -105,7 +105,7 @@ const createProductBox = data => {
 
 // 스크롤 페이지네이션 시 페이지 확인용 통신 횟수 카운트 변수
 let cnt = 1;
-
+const targetUl = document.getElementsByClassName('product-ul')[0];
 console.log('카테고리 목룍 ==>>> ', categoryList);
 
 
@@ -150,13 +150,13 @@ const callApi = async (number) => {
   const res = await fetch(url);
   console.log('1', res) // 여기서 4번?
   const fetchedProducts = await res.json();
-  console.log(fetchedProducts);
+  if (fetchedProducts.length <= 0) return;
 
   // const dummy = dummys[cnt - 1];
   // let dummy = sliceChunkDataArr(dummys.items, 8)[cnt - 1];
   // console.log(dummy);
 
-  const targetUl = document.getElementsByClassName('product-ul')[0];
+  
 
   // 추가할 상품 데이터가 있다면
   if (fetchedProducts) {
@@ -165,8 +165,8 @@ const callApi = async (number) => {
       let ojbox = createProductBox(oj);
       insertBoxesTemplate += ojbox;
     });
-    // targetUl.insertAdjacentHTML('beforeend', insertBoxesTemplate);
-    targetUl.innerHTML = insertBoxesTemplate;
+    targetUl.insertAdjacentHTML('beforeend', insertBoxesTemplate);
+    // targetUl.innerHTML = insertBoxesTemplate;
 
     // 감지할 div 를 만들어 li의 맨 뒤에 추가해준다
     const lastLi = document.createElement('div');
@@ -174,7 +174,7 @@ const callApi = async (number) => {
     targetUl.appendChild(lastLi);
 
     // 타겟인 요소를 감지실행
-    intersaction();
+    intersaction(number);
   }
 };
 
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 // 감지 함수
-const intersaction = () => {
+const intersaction = (number) => {
   // 화면 아래 100px 부터 감지, 감지 대상이 빈 div 이므로 threshold 미적용
   let options = {
     root: null,
@@ -204,7 +204,7 @@ const intersaction = () => {
         // 감시 대상을 감지 목록에서 제외
         entry.target.remove();
         // 감지 시 api 실행
-        callApi();
+        callApi(number);
       }
     });
   };
@@ -215,13 +215,16 @@ const intersaction = () => {
 //상품 정렬 버튼
 const createdAtBtn = document.querySelector('.createdAt');
 createdAtBtn.addEventListener('click', ()=>{
+
   callApi(1)
 });
 const lowPriceBtn = document.querySelector('.lowPrice');
 lowPriceBtn.addEventListener('click', () =>{
+  
   callApi(2)
 });
 const highPriceBtn = document.querySelector('.highPrice');
 highPriceBtn.addEventListener('click', ()=>{
+
   callApi(3)
 });
