@@ -68,6 +68,7 @@ async function handleSubmit(e) {
         "address1": addrIn1.value,
         "address2": addrIn2.value,
     };
+    console.log(address.postalCode);
 
     if (address === ' '){
         alert("주소가 공란입니다.")
@@ -96,10 +97,9 @@ async function handleSubmit(e) {
         console.log(data)
         const res = await Api.put(`/users/${userId}`, data);
 
-        if (res.statusCode === 200)
-            return alert("정상적으로 수정되었습니다.")
-        else
-            return alert(res.reason)
+        
+        alert("정상적으로 수정되었습니다.")
+        window.location.hrer = '/';
     }
     catch (err)
     {

@@ -344,7 +344,7 @@ function goToBuy() {
     alert("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동합니다.");
     window.location.href = "/users/login";
   } else {
-    window.location.href = "/orders";
+    window.location.href = `/orders/${sessionStorage.getItem(userId)}`;
   }
 }
 
