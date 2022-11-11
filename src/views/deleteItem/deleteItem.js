@@ -1,0 +1,184 @@
+import * as Api from '/api.js';
+import {
+    // 회원가입 등 네비바 랜더링
+    drawNavbar,
+    // 토큰 보유에 따라 네비바 변화
+    activeNavbar,
+    // 푸터 랜더링
+    drawFooter,
+    // 관리자 로그인 그리기
+    drawAdminLink,
+  } from '/useful-functions.js';
+  
+  // html 랜더링 관련 함수들 실행
+  drawNavbar();
+  activeNavbar();
+  drawFooter();
+  drawAdminLink();
+
+
+//This page is rendered when URI is given as /admin/orders/
+const orderList = document.querySelector('#orderList');
+// const orderList = document.getElementById('orderList');
+
+// Data mocked
+// sessionStorage.setItem('loginToken', JSON.stringify({
+//     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY4YmRmNzQ5ZGZlODA4OTg4ZWEyMTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njc4NzE3Mzd9.AW1x6uJ2itKC8oMFXdL0CjFzaA2cisATQE263fzqF9Q",
+//     "userId": "6368bdf749dfe808988ea212",
+//     "userType": "admin"
+// }
+// ))
+// sessionStorage.setItem('userEmail', 'semin0706@naver.com')
+
+
+// var orders = JSON.stringify([
+//     {
+//         "_id": "555555",
+//         "orderInfo": [
+//             {
+//                 "item_id": "666666",
+//                 "name": "아이팟",
+//                 "amount": 10000,
+//                 "price": 10,
+//             },
+// 				],
+// 		"totalPrice": 10000,
+//         "email": "semin0706@naver.com",
+//         "address": {
+//             "postalCode": 1111,
+//             "address1": "경기도 안양시 비산동 KFC",
+//             "address2": "3333",
+// 		        },
+//         "state": "배송 준비",
+//         "createdAt": "2022-11-06",
+//         "updatedAt": "2022-11-07",
+//         },
+//     {
+//         "_id": "66666",
+//         "orderInfo": [
+//             {
+//                 "item_id": "77777",
+//                 "name": "갤럭시",
+//                 "amount": 10000,
+//                 "price": 10,
+//             },
+//                 ],
+//                 "totalPrice": 10000,
+//         "email": "semin0706@naver.com",
+//         "address": {
+//             "postalCode": 1111,
+//             "address1": "경기도 안양시 동안구 평촌동",
+//             "address2": "3333",
+//                 },
+//         "state": "배송 준비",
+//         "createdAt": "2022-11-06",
+//         "updatedAt": "2022-11-07",
+//     },
+// ])
+
+const accessToken = sessionStorage.getItem("loginToken")
+const userId = sessionStorage.getItem("userId")
+const userType = sessionStorage.getItem("adminToken")
+
+//const emailToken = sessionStorage.getItem('userEmail')
+
+addAllElements();
+addAllEvents();
+
+
+function addAllElements() {
+    isLoggedIn();
+    isAdmin();
+    allOrdersAdmin();
+}
+
+function addAllEvents() {
+    // Add row delete and call delivery cancel api
+    orderList.addEventListener("click", e => deleteUpdate(e))
+}
+
+
+async function allOrdersAdmin()
+{
+    /* Read and Add rows to table if get request is successful */
+    var retHtml = "";
+    var recur = false;
+    try
+    {
+        const items = await (await fetch(`/items`)).json();
+        const categorylist = await (await fetch(`/categories`)).json()
+
+
+        if (items.length > 0)
+            recur = true
+        else
+            recur = false
+        var count = 1;
+
+        for (let item of items){
+            const {name, brand, price, createdAt, category, description, isRecommend, isDiscount} = item;
+            let tableContent = `<tr><th>${name}</th>`;
+            let brandName = `<td>${brand}</td>`;
+            let categoryName = `<td>${matchCategory(category, categorylist)}</td>`
+            let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
+            let itemprice = `<td>${price}</td>`;
+            let state = ''
+            let stateDef = `<td>${state}</td>`;
+            let buttons = `<td><btn class="button is-small is-danger is-outlined" id="delete">취소</btn></td></tr>`;
+            retHtml += (tableContent + brandName + categoryName +  orderDate + itemprice + buttons);
+        }
+        orderList.insertAdjacentHTML('beforeend', retHtml)
+
+    }
+    catch(err)
+    {
+        console.error(err.stack);
+        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    }
+}
+
+function matchCategory(categoryId, categoryList)
+{
+    return categoryList.filter(x => x._id === categoryId)[0].name
+}
+
+async function deleteUpdate(event)
+{
+    const btnTouched = event.target
+    if (btnTouched.id !== 'delete'){
+        return
+    }
+    const table = btnTouched.closest("table")
+    const currRow = btnTouched.closest("tr")
+    const orderId = currRow.cells[0].innerHTML
+    const userId = currRow.cells[1]
+
+    //delete Row
+    table.deleteRow(currRow.rowIndex)
+
+    //Update on DB
+    //const res = await Api.delete(`/admin/orders/${orderId}`)
+
+    if (res.success) {
+        return alert("성공적으로 취소되었습니다")
+    }
+    else
+        return alert(res.reason);
+}
+
+
+function isLoggedIn()
+{
+    if (!accessToken){
+        alert("로그인 후 이용해 주세요.");
+        window.location.href = "/users/login";
+    }
+}
+
+function isAdmin()
+{
+    if (userType !== "admin"){
+        alert("관리자가 아닙니다")
+        window.location.href = "/users/login";
+    }
+}

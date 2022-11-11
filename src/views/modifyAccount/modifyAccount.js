@@ -27,12 +27,9 @@ const addrIn2 = document.querySelector("#sample6_detailAddress");
 const phone = document.querySelector("#phoneNum");
 const submitBtn = document.querySelector("#submitBtn");
 
-const {accessToken, userId, userType} = {
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY5Y2FjZjg4M2Y0Njg2YmNkYWViNWUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2Nzg3NzcxM30.-wwMXn85_1UFtDrKX8itCngS1r56vQowwgp3v5hUtdY",
-    "userId": "6369cacf883f4686bcdaeb5e",
-    "userType": "user"
-};
-sessionStorage.setItem('token', accessToken)
+const accessToken = sessionStorage.getItem("loginToken")
+const userId = sessionStorage.getItem("userId")
+const userType = sessionStorage.getItem("adminToken")
 
 // const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
 // const emailToken = sessionStorage.getItem('userEmail')

@@ -123,8 +123,39 @@ main {
   flex-direction: column;
   justify-content: left;
   height: 100%;
-  width: 100%;
+  width: 90%;
   overflow-y: scroll;
+}
+
+#itemTable {
+  margin-left: 40px;
+  vertical-align: middle;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+}
+
+.itemId {
+  width: 30%;
+}
+
+.itemBrand {
+  width: 10%;
+}
+
+.itemCategory {
+  width: 10%;
+}
+
+.itemDate {
+  width: 10%;
+}
+
+.itemPrice {
+  width: 10%;
+}
+
+.itemModify {
+  width: 30%;
 }
 
 #notifier {
@@ -136,30 +167,6 @@ main {
   margin: 10px 10px 10px 40px;
 }
 
-#progress {
-  display: flex;
-  height: 40%;
-  width: 100%;
-  overflow-x: hidden;
-  justify-content: space-around;
-  align-items: center;
-}
-
-#progress>div>p {
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  width: 96px;
-  text-align: center;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-
-#itemTable {
-  margin-left: 40px;
-  vertical-align: middle;
-  overflow-y: scroll;
-  margin-bottom: 20px;
-}
 
 /* 푸터 영역 */
 #footer-icons {
