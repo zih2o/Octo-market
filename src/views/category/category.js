@@ -13,7 +13,7 @@ import {
   //숫자 자리수마다 , 찍기
   addCommas,
   drawAdminLink,
-} from '/useful-functions.js';
+} from '../../../useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
