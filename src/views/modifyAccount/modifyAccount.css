@@ -132,6 +132,13 @@ main {
   margin-top: 50px;
 }
 
+#deleteId {
+  width: 100%;
+  text-align: right;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
 .field {
   width: 400px;
 }
