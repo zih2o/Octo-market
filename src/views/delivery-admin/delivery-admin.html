@@ -66,18 +66,34 @@
 
     <footer class="footer"></footer>
 
-    <!-- <div id="modal-js-example" class="modal">
-    <div class="modal-background"></div>
-
-    <div class="modal-content">
-      <div class="box">
-        <p>Modal JS example</p>
-        content location
-    </div>
-    </div>
-
-    <button class="modal-close is-large" aria-label="close"></button>
-  </div> -->
+    <dialog class="custom-modal" id="modal">
+      <div class='custom-modal-body'>
+        <div class="modal-form">
+          <div class="field">
+            <label class="label" disabled>주문 ID</label>
+            <div class="control">
+              <input class="input" id="orderName" type="text" placeholder="" disabled>
+            </div>
+          </div>
+          <div class="field" id="Category">
+            <label class="label">상품 카테고리</label>
+            <div class="control">
+              <div class="select is-primary">
+                <select id="delivery">
+                  <option>결제 완료</option>
+                  <option>배송 준비</option>
+                  <option>배송 중</option>
+                  <option>배송 완료</option>
+                  <option>주문 취소</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="button close-button">취소</button>
+          <button class="button is-success put-button close-button">수정</button>
+        </div>
+      </div>
+    </dialog>
   </div>
 </body>
 
