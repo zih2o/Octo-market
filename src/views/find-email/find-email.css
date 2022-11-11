@@ -92,7 +92,6 @@ main {
   z-index: 99;
 }
 
-
 .active {
   display: none;
 }
@@ -194,4 +193,12 @@ main {
 #footer-ul a {
   background-color: hsl(0, 0%, 98%);
   color: #b0a8b9;
+}
+
+#submitButton {
+  background-color: #80bd7a;
+}
+
+#find-title {
+  color: #80bd7a;
 }
