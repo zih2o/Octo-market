@@ -342,6 +342,10 @@ main {
   padding: 10px 20px;
   background-color: #51c498;
   border-radius: 25px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .md-category-li:active,
@@ -349,11 +353,11 @@ main {
   background-color: #9986f1;
 }
 
-.md-category-button {
+/* .md-category-button {
   color: white;
   font-size: 20px;
   font-weight: 600;
-}
+} */
 
 .md .item-container {
   display: flex;

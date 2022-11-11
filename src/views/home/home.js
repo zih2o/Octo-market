@@ -61,16 +61,15 @@ categoryList.then(datas => {
   // li 생성 및 사용할 데이터 객체로 저장
   datas.map(el => {
     const template = `
-        <li class="md-category-li">
-        <a class="md-category-button" href="#" data-id="${el._id}">
-        ${el.name}
-        </a>
+        <li class="md-category-li" data-id="${el._id}">
+          ${el.name}
         </li>
         `;
     mdCategoryStr += template;
     const path = `/items/category/categorylist/${el._id}`;
     categoryOj[path] = el.name;
   });
+  console.log(categoryOj)
   mdCategoryUl.insertAdjacentHTML('beforeend', mdCategoryStr);
   // console.log('timing check')
 
@@ -80,24 +79,31 @@ categoryList.then(datas => {
 
   categoryTitle.innerText = '전체보기';
 
+  mdCategoryUl.addEventListener('click',(event) => {
+    const target = event.target
+    const id = target.dataset.id
 
+    if(id == null) return
+
+    fillRecommend(`/items/category/categorylist/${id}`)
+  })
 
   // md 카테고리 a 태그 연결 대신 해당 카테고리 데이터로 li들을 채움
-  const mdcategoryButtons = document.getElementsByClassName('md-category-button');
-  // foreach, map 은 안되고 for 만 가능
-  for (let i = 0; i < mdcategoryButtons.length; i++) {
-    // console.log('md카테 하나', mdcategoryButtons[i]);
-    mdcategoryButtons[i].addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log(e.target)
-      console.log('데이터 셋으로 가져온 데이터 =>', e.target.dataset.id);
-      fillRecommend(`/items/category/categorylist/${e.target.dataset.id}`);
-       console.log(
-         '카테고리 타겟팅',
-         e.target.dataset.id,
-       );
-    })
-  }
+  // const mdcategoryButtons = document.getElementsByClassName('md-category-li');
+  // // foreach, map 은 안되고 for 만 가능
+  // for (let i = 0; i < mdcategoryButtons.length; i++) {
+  //   // console.log('md카테 하나', mdcategoryButtons[i]);
+  //   mdcategoryButtons[i].addEventListener('click', (e) => {
+  //     e.preventDefault();
+  //     console.log(e.target)
+  //     console.log('데이터 셋으로 가져온 데이터 =>', e.target.dataset.id);
+  //     fillRecommend(`/items/category/categorylist/${e.target.dataset.id}`);
+  //      console.log(
+  //        '카테고리 타겟팅',
+  //        e.target.dataset.id,
+  //      );
+  //   })
+  // }
 
 
   // 카테고리 클릭 이벤트 발생 시 박스에 데이터를 채워주는 함수

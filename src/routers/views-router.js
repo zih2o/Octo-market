@@ -16,7 +16,7 @@ viewsRouter.use('/users/findemail', serveStatic('find-email'));
 viewsRouter.use('/users/updateInfo', serveStatic('modifyAccount'));
 
 //items
-viewsRouter.use('/items/category/categorylist/:catId', serveStatic('category'));
+viewsRouter.use('/items/category-page/:catId', serveStatic('category'));
 viewsRouter.use('/items/itemlist/:itemId', serveStatic('product-detail'));
 
 //order
