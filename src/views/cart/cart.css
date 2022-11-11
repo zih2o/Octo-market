@@ -108,7 +108,8 @@ main {
 
 /* 메인 콘텐츠 영역*/
 .container {
-  padding: 30px;
+  padding: 50px;
+  margin-bottom: 60px;
 }
 
 #cart {
@@ -205,12 +206,13 @@ main {
 
 #payment button {
   width: 100%;
+  background-color: #80bd7a;
 }
 
 #payment {
   height: 40vh;
   width: 30%;
-  background-color: #eefffd;
+  background-color: #effaee;
   box-shadow: none;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
