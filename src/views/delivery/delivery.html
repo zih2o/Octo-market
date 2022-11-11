@@ -7,9 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png" />
-
-  <link rel="stylesheet" href="delivery.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="delivery.css" />
   <script type="module" src="delivery.js" defer></script>
   <title>Document</title>
 </head>
@@ -28,7 +27,7 @@
             <span>사용자 정보</span>
             <ul>
               <li><a>주문 확인/취소</a></li>
-              <li><a>회원 정보 수정</a></li>
+              <li><a href="/users/updateInfo">회원 정보 수정</a></li>
             </ul>
           </li>
           <li id="is-admin"></li>
@@ -86,38 +85,6 @@
               </tr>
             </thead>
             <tbody class="order" id="orderList">
-              <!-- <tr>
-                            <th>00001</th>
-                            <td>냐쵸 외 5건</td>
-                            <td>배송 준비</td>
-                            <td>
-                                <btn class="button is-small is-danger is-outlined">취소</btn>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>00001</th>
-                            <td>냐쵸 외 5건</td>
-                            <td>배송 준비</td>
-                            <td>
-                                <btn class="button is-small is-danger is-outlined">취소</btn>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>00001</th>
-                            <td>냐쵸 외 5건</td>
-                            <td>배송 준비</td>
-                            <td>
-                                <btn class="button is-small is-danger is-outlined">취소</btn>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>00001</th>
-                            <td>냐쵸 외 5건</td>
-                            <td>배송 완료</td>
-                            <td>
-                                <btn class="button is-small is-danger is-outlined">환불</btn>
-                            </td>
-                        </tr> -->
             </tbody>
           </table>
         </div>

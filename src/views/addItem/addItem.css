@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'S-CoreDream-3Light';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
-    format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -57,7 +56,7 @@ main {
 }
 
 #menu-box a,
-#sort-box > div {
+#sort-box>div {
   color: #4b4453;
   background-color: white;
   padding: 10px 20px;
@@ -69,7 +68,7 @@ main {
 }
 
 #menu-box a,
-#sort-box > div {
+#sort-box>div {
   position: relative;
   font-size: 1.25em;
   font-weight: 600;
@@ -97,6 +96,8 @@ main {
 }
 
 /* main 영역 */
+
+
 #menu {
   display: flex;
   justify-content: center;
@@ -111,7 +112,7 @@ main {
 
 #content {
   display: flex;
-  width: 80vw;
+  width: 70vw;
   height: 100vh;
   margin-top: 50px;
   border-color: lightgray white white lightgray;
@@ -132,7 +133,7 @@ main {
   justify-content: space-around;
 }
 
-#productClassify > div {
+#productClassify>div {
   width: 49%;
 }
 
@@ -141,7 +142,7 @@ main {
   align-items: stretch;
 }
 
-.filebox > .file-name {
+.filebox>.file-name {
   margin-left: 2px;
   color: lightgrey;
 }
@@ -151,7 +152,7 @@ main {
   justify-content: space-around;
 }
 
-#costModifier > div {
+#costModifier>div {
   width: 49%;
 }
 
@@ -160,22 +161,22 @@ main {
   justify-content: flex-start;
 }
 
-#event > .check {
+#event>.check {
   width: 33%;
   text-align: center;
 }
 
-#event > .check > .control {
+#event>.check>.control {
   height: 40px;
   align-items: center;
 }
 
-#event > .check > .control > input {
+#event>.check>.control>input {
   width: 60%;
   text-align: center;
 }
 
-label > input {
+label>input {
   margin-top: 7px;
   width: 25px;
   height: 25px;
@@ -197,7 +198,7 @@ label > input {
   margin: 50px 0 0 0;
 }
 
-#footer-textbox > div {
+#footer-textbox>div {
   display: flex;
   justify-content: center;
 }

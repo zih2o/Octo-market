@@ -28,6 +28,7 @@ body {
 main {
   flex: 1;
 }
+
 #admin-login {
   width: 30px;
   height: 30px;
@@ -120,12 +121,14 @@ main {
   text-align: end;
   width: 1200px;
   margin: 50px auto 0 auto;
-  /* display: flex;
-  justify-content: flex-end; */
 }
 
-.categoryBtn > div:nth-child(2n + 1) {
+.categoryBtn > span:nth-child(2n + 1) {
   cursor: pointer;
+}
+
+.categoryBtn > span:nth-child(2n) {
+  cursor: none;
 }
 
 .space {
@@ -239,6 +242,7 @@ main {
 
 .item-info-container {
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .item-namebox,
@@ -262,16 +266,26 @@ main {
 
 /* 탑 이동 스크롤 버튼 */
 #scroll-top-Btn {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 100px; /* Place the button at the bottom of the page */
-  right: 80px; /* Place the button 30px from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: #51c498; /* Set a background color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  border-radius: 80px; /* Rounded corners */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Fixed/sticky position */
+  bottom: 100px;
+  /* Place the button at the bottom of the page */
+  right: 80px;
+  /* Place the button 30px from the right */
+  z-index: 99;
+  /* Make sure it does not overlap */
+  border: none;
+  /* Remove borders */
+  outline: none;
+  /* Remove outline */
+  background-color: #51c498;
+  /* Set a background color */
+  cursor: pointer;
+  /* Add a mouse pointer on hover */
+  border-radius: 80px;
+  /* Rounded corners */
   box-shadow: 3px 3px 5px #4b4453;
 }
 
@@ -281,13 +295,16 @@ main {
   line-height: 90px;
   /* display: table-cell; */
 
-  font-size: 40px; /* Increase font size */
+  font-size: 40px;
+  /* Increase font size */
   font-weight: 700;
-  color: white; /* Text color */
+  color: white;
+  /* Text color */
 }
 
 #scroll-top-Btn:hover {
-  background-color: #555; /* Add a dark-grey background on hover */
+  background-color: #555;
+  /* Add a dark-grey background on hover */
 }
 
 /* 푸터 영역 */

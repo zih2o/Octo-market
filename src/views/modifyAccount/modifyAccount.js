@@ -1,4 +1,4 @@
-import * as Api from '../api.js';
+import * as Api from '/api.js';
 import {
     // 회원가입 등 네비바 랜더링
     drawNavbar,
@@ -8,7 +8,7 @@ import {
     drawFooter,
     // 관리자 로그인 그리기
     drawAdminLink,
-  } from '../useful-functions.js';
+  } from '/useful-functions.js';
   
   // html 랜더링 관련 함수들 실행
   drawNavbar();
@@ -27,12 +27,9 @@ const addrIn2 = document.querySelector("#sample6_detailAddress");
 const phone = document.querySelector("#phoneNum");
 const submitBtn = document.querySelector("#submitBtn");
 
-const {accessToken, userId, userType} = {
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY5Y2FjZjg4M2Y0Njg2YmNkYWViNWUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2Nzg3NzcxM30.-wwMXn85_1UFtDrKX8itCngS1r56vQowwgp3v5hUtdY",
-    "userId": "6369cacf883f4686bcdaeb5e",
-    "userType": "user"
-};
-sessionStorage.setItem('token', accessToken)
+const accessToken = sessionStorage.getItem("loginToken")
+const userId = sessionStorage.getItem("userId")
+const userType = sessionStorage.getItem("adminToken")
 
 // const {accessToken, userId, userType} = JSON.parse(sessionStorage.getItem('loginToken'));
 // const emailToken = sessionStorage.getItem('userEmail')
@@ -43,6 +40,7 @@ addAllEvents()
 // Event grouper
 function addAllElements() {
     emailAttach();
+    userIdhref();
 }
 function addAllEvents() {
     submitBtn.addEventListener("click", handleSubmit)
@@ -82,7 +80,7 @@ async function handleSubmit(e) {
         alert("전화번호가 공란입니다.")
         return;
     }
-    if (!/^[\d]$/.test(phoneNum)){
+    if (!/^[\d]+$/.test(phoneNum)){
         alert("전화번호는 숫자만 입력해 주세요.")
         return;
     }
@@ -108,4 +106,10 @@ async function handleSubmit(e) {
         console.error(err.stack);
         alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
+}
+
+function userIdhref()
+{
+    let menu_href = document.querySelector(".menu-list > li > ul > li > a")
+    menu_href.setAttribute('href',`/users/userlist/${userId}`)
 }

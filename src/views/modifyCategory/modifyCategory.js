@@ -206,7 +206,7 @@ async function getCategory() {
           retHTML += `<option>${category[i].name}</option>`
           categoryId.push(category[i]._id)
         }
-      return [retHTML, category.length, categoryId]
+      return [retHTML, category.length, categoryId] 
   }
   catch (e)
   {
