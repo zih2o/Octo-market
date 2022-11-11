@@ -60,7 +60,7 @@ async function buy() {
 async function userInfo() {
   try {
     const userInfo = await Api.get(`/users/${userId}`);
-
+    
     postData.address = userInfo.address;
 
     const name = document.querySelector("#secondColumn");
