@@ -104,7 +104,10 @@
 <img src="https://camo.githubusercontent.com/75ddce514d1531301dd02977fe246e648ad6ba6d1d62e7b494557c71aae1af69/68747470733a2f2f696d672e736869656c64732e696f2f7374617469632f76313f7374796c653d666f722d7468652d6261646765266d6573736167653d466f6e742b417765736f6d6526636f6c6f723d353238444437266c6f676f3d466f6e742b417765736f6d65266c6f676f436f6c6f723d464646464646266c6162656c3d">
 </div>
 
-- 프론트 기술 요약 설명 적어주세요 :))
+- **Router - Page** Page render management
+- Intersection observer를 이용한 파일 Lazy loading
+- JWT - sessionStorage를 사용한 authorization check
+- Bulma css, font awesome을 사용한 풍부한 css 스타일
 
 ### 2-2. BE
 
@@ -136,9 +139,9 @@
 
 | 이름 | Position | Task |
 | ------ | ------ | ----- |
-| 김제원 | 팀장/FE | 발표 |
-| 김지윤 | FE |  | 
-| 박세민 | FE |  |
+| 김제원 | 팀장/FE | 발표, Main page, menu bar structure and style |
+| 김지윤 | FE | Cart, category, item page structure and style  | 
+| 박세민 | FE | Individual, data-control page structure and style |
 | 한대근 | BE | Users/Items API, Validation, Deployment |
 | 박지수 | BE | Categories/Admin/Orders API, Validation |
 
