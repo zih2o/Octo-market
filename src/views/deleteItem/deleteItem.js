@@ -147,14 +147,14 @@ async function Update(event)
         table.deleteRow(currRow.rowIndex)
 
         //Update on DB
-        // const res = await Api.delete(`/admin/items/${itemId}`)
+        const res = await Api.delete(`/admin/items/${itemId}`)
 
-        // if (res.success) {
-        //     alert("성공적으로 삭제되었습니다")
-        //     return
-        // }
-        // else
-        //     return alert(res.reason);
+        if (res.success) {
+            alert("성공적으로 삭제되었습니다")
+            return
+        }
+        else
+            return alert(res.reason);
     }
     if (btnTouched.id === "modify")
     {
