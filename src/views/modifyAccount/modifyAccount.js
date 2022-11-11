@@ -1,4 +1,4 @@
-import * as Api from '../api.js';
+import * as Api from '/api.js';
 import {
     // 회원가입 등 네비바 랜더링
     drawNavbar,
@@ -8,7 +8,7 @@ import {
     drawFooter,
     // 관리자 로그인 그리기
     drawAdminLink,
-  } from '../useful-functions.js';
+  } from '/useful-functions.js';
   
   // html 랜더링 관련 함수들 실행
   drawNavbar();
@@ -43,6 +43,7 @@ addAllEvents()
 // Event grouper
 function addAllElements() {
     emailAttach();
+    userIdhref();
 }
 function addAllEvents() {
     submitBtn.addEventListener("click", handleSubmit)
@@ -82,7 +83,7 @@ async function handleSubmit(e) {
         alert("전화번호가 공란입니다.")
         return;
     }
-    if (!/^[\d]$/.test(phoneNum)){
+    if (!/^[\d]+$/.test(phoneNum)){
         alert("전화번호는 숫자만 입력해 주세요.")
         return;
     }
@@ -108,4 +109,10 @@ async function handleSubmit(e) {
         console.error(err.stack);
         alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
+}
+
+function userIdhref()
+{
+    let menu_href = document.querySelector(".menu-list > li > ul > li > a")
+    menu_href.setAttribute('href',`/users/userlist/${userId}`)
 }

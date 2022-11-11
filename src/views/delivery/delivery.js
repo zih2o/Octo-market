@@ -1,4 +1,4 @@
-import * as Api from '../../api.js';
+import * as Api from '/api.js';
 import {
     // 회원가입 등 네비바 랜더링
     drawNavbar,
@@ -8,7 +8,7 @@ import {
     drawFooter,
     // 관리자 로그인 그리기
     drawAdminLink,
-  } from '../../useful-functions.js';
+  } from '/useful-functions.js';
   
   // html 랜더링 관련 함수들 실행
   drawNavbar();
@@ -93,6 +93,7 @@ addAllEvents()
 function addAllElements() {
     isLoggedIn();
     allOrders();
+    userIdhref();
 }
 function addAllEvents() {
     orderList.addEventListener("click", e=>deleteUpdate(e))
@@ -176,6 +177,13 @@ function checkStatus(strIn)
     else if (strIn === "주문 취소")
         return 4;
 }
+
+function userIdhref()
+{
+    let menu_href = document.querySelector(".menu-list > li > ul > li > a")
+    menu_href.setAttribute('href',`/users/userlist/${userId}`)
+}
+
 
 function updateDeliveryStatus(arrIn)
 {
