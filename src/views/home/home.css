@@ -454,6 +454,28 @@ main {
 /* 캐러셀 */
 .carousel-container {
   overflow: hidden;
+  height: 400px;
+  max-height: 400px;
+}
+
+.carousel-item {
+  height: 400px;
+  max-height: 400px;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.carousel-item.item-1 {
+  background-image: url('../images/banner_1.png');
+}
+
+.carousel-item.item-2 {
+  background-image: url('../images/banner_2.png');
+}
+
+.carousel-item.item-3 {
+  background-image: url('../images/banner_3.png');
 }
 
 .slider-pagination {
