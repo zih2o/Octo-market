@@ -21,7 +21,7 @@ viewsRouter.use('/items/itemlist/:itemId', serveStatic('product-detail'));
 
 //order
 viewsRouter.use('/cart', serveStatic('cart'));
-viewsRouter.use('/orders', serveStatic('order'));
+viewsRouter.use('/orders/:userId', serveStatic('order'));
 
 //admin
 viewsRouter.use('/admin/login', serveStatic('login-admin'));
