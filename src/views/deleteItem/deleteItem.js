@@ -9,7 +9,7 @@ import {
     // 관리자 로그인 그리기
     drawAdminLink,
   } from '/useful-functions.js';
-  
+
   // html 랜더링 관련 함수들 실행
   drawNavbar();
   activeNavbar();
@@ -59,7 +59,7 @@ async function allOrdersAdmin()
             recur = true
         else
             recur = false
-        
+
         var count = 1;
         for (let item of items){
             const {name, brand, price, createdAt, category, description, isRecommend, isDiscount, id} = item;
@@ -106,7 +106,7 @@ async function deleteUpdate(event)
     table.deleteRow(currRow.rowIndex)
 
     //Update on DB
-    const res = await Api.delete(`/admin/items/{itemId}`)
+    const res = await Api.delete(`/admin/items/${itemId}`)
 
     if (res.success) {
         return alert("성공적으로 삭제되었습니다")

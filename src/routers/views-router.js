@@ -12,7 +12,7 @@ viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/users/signup', serveStatic('register'));
 viewsRouter.use('/users/login', serveStatic('login'));
 viewsRouter.use('/users/userlist/:userId', serveStatic('delivery'));
-viewsRouter.use('/users/findemail', serveStatic('find-email'));
+viewsRouter.use('/users/find-email', serveStatic('find-email'));
 viewsRouter.use('/users/updateInfo', serveStatic('modifyAccount'));
 
 //items

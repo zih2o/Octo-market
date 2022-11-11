@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'S-CoreDream-3Light';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -56,7 +57,7 @@ main {
 }
 
 #menu-box a,
-#sort-box>div {
+#sort-box > div {
   color: #4b4453;
   background-color: white;
   padding: 10px 20px;
@@ -68,7 +69,7 @@ main {
 }
 
 #menu-box a,
-#sort-box>div {
+#sort-box > div {
   position: relative;
   font-size: 1.25em;
   font-weight: 600;
@@ -124,9 +125,16 @@ main {
   margin: 100px 0px 0px 200px;
 }
 
-
 select {
   width: 20vw;
+}
+
+#category {
+  border: solid #80bd7a 1px;
+}
+
+#btnSubmit {
+  background-color: #80bd7a;
 }
 
 /* 푸터 영역 */
@@ -144,7 +152,7 @@ select {
   margin: 50px 0 0 0;
 }
 
-#footer-textbox>div {
+#footer-textbox > div {
   display: flex;
   justify-content: center;
 }
