@@ -84,7 +84,7 @@ const createProductBox = data => {
   <li class="product-item" style="width:25%;">
     <div class="item-container">
       <div class="item-photobox">
-        <a href="/${data._id}">
+        <a href="/items/itemlist/${data._id}">
           <img src="${data.imageUrl}" alt="${data.name}" loading="lazy">
         </a>
       </div>
@@ -222,5 +222,6 @@ highPriceBtn.addEventListener('click', ()=>{
 });
 const createdAtBtn = document.querySelector('.createdAt');
 createdAtBtn.addEventListener('click', ()=>{
+  console.log("createdAt btn")
   callApi(1)
 });
