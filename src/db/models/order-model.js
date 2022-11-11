@@ -36,7 +36,7 @@ export class OrderModel {
   }
 
   async removeOrder(orderId) {
-    await Order.deleteOne({ _id: orderId });
+    await Order.findOneAndDelete({ _id: orderId });
     return;
   }
 }

@@ -37,7 +37,7 @@
               <span>관리자 메뉴</span>
               <ul>
                 <li><a href="/admin/items">상품 추가</a></li>
-                <li><a href="/admin/items/delete">상품 삭제</a></li>
+                <li><a href="/admin/items/delete">상품 수정/삭제</a></li>
                 <li><a href="/admin/categories">카테고리 변경</a></li>
               </ul>
             </li>
@@ -67,18 +67,42 @@
 
     <footer class="footer"></footer>
 
-    <!-- <div id="modal-js-example" class="modal">
-    <div class="modal-background"></div>
-
-    <div class="modal-content">
-      <div class="box">
-        <p>Modal JS example</p>
-        content location
-    </div>
-    </div>
-
-    <button class="modal-close is-large" aria-label="close"></button>
-  </div> -->
+    <dialog class="custom-modal" id="modal">
+      <div class='custom-modal-body'>
+        <div class="modal-form">
+          <div class="field">
+            <label class="label">상품명</label>
+            <div class="control">
+              <input class="input" id="productName" type="text" placeholder="상품명을 적어주세요" />
+            </div>
+          </div>
+          <div class="field" id="productClassify">
+            <div>
+              <label class="label">상품 브랜드</label>
+              <div class="control">
+                <input class="input" id="productBrand" type="text" placeholder="브랜드를 적어주세요" />
+              </div>
+            </div>
+            <div id="Category" disabled>
+              <label class="label">상품 카테고리</label>
+              <div class="control">
+                <div class="select is-primary">
+                  <select id="productCategory" disabled></select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">상품 상세 설명</label>
+            <div class="control">
+              <textarea class="textarea" id="productDesc" placeholder="상품명을 적어주세요"></textarea>
+            </div>
+          </div>
+          <button class="button close-button">취소</button>
+          <button class="button is-success put-button close-button">수정</button>
+        </div>
+      </div>
+    </dialog>
   </div>
 </body>
 
