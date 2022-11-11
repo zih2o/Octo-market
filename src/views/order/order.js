@@ -1,4 +1,4 @@
-import * as Api from "../api.js";
+import * as Api from "../../api.js";
 import {
   addCommas,
   // 회원가입 등 네비바 랜더링
@@ -8,7 +8,7 @@ import {
   // 푸터 랜더링
   drawFooter,
   drawAdminLink
-} from "../useful-functions.js";
+} from "../../useful-functions.js";
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
@@ -29,6 +29,13 @@ const postData = {
   address: {},
 };
 
+const buynowProduct = {
+  itemId: '',
+  name: '',
+  amount: 1,
+  price: 0,
+};
+
 userInfo();
 buyNow();
 
@@ -36,20 +43,24 @@ buyNow();
 async function buy() {
   try {
     await Api.post(`/orders/personal/${userId}`, postData);
-
     const itemsId = sessionStorage.getItem("order");
-    const itemIdArray = itemsId.split(",").filter((e) => e !== "");
-    itemIdArray.forEach(e => {
-      if (sessionStorage.getItem(e)) {
-        sessionStorage.removeItem(e);
-        sessionStorage.setItem('cart', sessionStorage.getItem('cart').replace(e, ''));
-      }
-    })
 
-    alert(`주문이 완료되었습니다.`);
-    sessionStorage.removeItem('order');
-    // 홈페이지로 이동
-    window.location.href = "/";
+    if (!itemsId) {
+      alert(`주문이 완료되었습니다.`);
+      window.location.href = "/";
+    } else {
+      const itemIdArray = itemsId.split(",").filter((e) => e !== "");
+      itemIdArray.forEach(e => {
+        if (sessionStorage.getItem(e)) {
+          sessionStorage.removeItem(e);
+          sessionStorage.setItem('cart', sessionStorage.getItem('cart').replace(e, ''));
+        }
+      })
+      alert(`주문이 완료되었습니다.`);
+      sessionStorage.removeItem('order');
+      // 홈페이지로 이동
+      window.location.href = "/";
+    }  
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
@@ -60,7 +71,7 @@ async function buy() {
 async function userInfo() {
   try {
     const userInfo = await Api.get(`/users/${userId}`);
-
+    
     postData.address = userInfo.address;
 
     const name = document.querySelector("#secondColumn");
@@ -84,6 +95,7 @@ async function userInfo() {
   } catch (err) {}
 }
 
+
 //buyNow 값 유무 확인
 async function buyNow() {
   if (sessionStorage.getItem("buyNow")) {
@@ -101,6 +113,10 @@ async function buyNow() {
       } else {
         price = Number(item.price);
       }
+
+      buynowProduct.itemId = item.itemId;
+      buynowProduct.name = item.name;
+      buynowProduct.price = price;
 
       const productList = document.querySelector("#productList");
       productList.insertAdjacentHTML(

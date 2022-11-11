@@ -116,6 +116,12 @@ main {
   font-weight: bold;
 }
 
+.title {
+  text-align: center;
+  font-size: 40px;
+  color: #80bd7a;
+}
+
 .register-user-form-container {
   display: flex;
   align-items: center;
@@ -138,12 +144,9 @@ main {
   margin-right: 5px;
 }
 
-.title {
-  text-align: center;
-}
-
 .button {
   font-weight: bold;
+  background-color: #80bd7a;
 }
 
 .input:focus {
@@ -166,6 +169,11 @@ main {
 
 #sample6_postcodeBtn {
   width: 33%;
+  background-color: #80bd7a;
+}
+
+#submitButton {
+  background-color: #80bd7a;
 }
 
 /* 푸터 영역 */

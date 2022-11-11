@@ -325,8 +325,11 @@ function delSelect() {
 function goToBuy() {
   sessionStorage.setItem('order', ',');
   const cartList = sessionStorage.getItem('cart');
-  const itemList = sessionStorage
-      .getItem("cart")
+  if (!cartList) {
+    alert('장바구니에 상품이 없습니다.')
+    return;
+  }
+  const itemList = cartList
       .split(",")
       .filter((e) => e !== "");
   itemList.forEach(itemId => {
@@ -341,7 +344,7 @@ function goToBuy() {
     alert("로그인 후 이용하실 수 있습니다. 로그인 페이지로 이동합니다.");
     window.location.href = "/users/login";
   } else {
-    window.location.href = "/orders";
+    window.location.href = `/orders/${sessionStorage.getItem('userId')}`;
   }
 }
 

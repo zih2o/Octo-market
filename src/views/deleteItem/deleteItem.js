@@ -9,7 +9,7 @@ import {
     // 관리자 로그인 그리기
     drawAdminLink,
   } from '/useful-functions.js';
-  
+
   // html 랜더링 관련 함수들 실행
   drawNavbar();
   activeNavbar();
@@ -72,7 +72,7 @@ async function allOrdersAdmin()
             recur = true
         else
             recur = false
-        
+
         var count = 1;
         for (let item of items){
             const {name, brand, price, createdAt, category, description, imageUrl, isRecommend, isDiscount, dispercent, id} = item;

@@ -40,9 +40,11 @@ export const activeNavbar = () => {
   const joinBtn = document.getElementById('join');
   const mypageBtn = document.getElementById('mypage');
 
+
   const loginAfter = document.getElementById('vb-login-after');
   const logoutAfter = document.getElementById('vb-logout-after');
   const joinAfter = document.getElementById('vb-join-after');
+  const cart = document.getElementById('cart');
 
   // 로그인 시 세션 스토리지 확인용
   // sessionStorage.setItem('loginToken', '1');
@@ -83,6 +85,11 @@ export const activeNavbar = () => {
       window.location.href =
         '/admin';
     });
+    cart.removeAttribute('href');
+    cart.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('장바구니를 이용하시려면 일반 회원 계정으로 로그인해주세요.');
+    })
   }
 
   // 로그아웃 시 세션스토리지 토큰 제거
@@ -120,7 +127,8 @@ export const drawNavbar = () => {
   let userId = '';
   if (sessionStorage.getItem('userId') && sessionStorage.getItem('adminToken'))
   {
-    userId = `/admin/`
+    userId = `/admin/`;
+    
   }
   else if (sessionStorage.getItem('userId')) {
     userId = `/users/userlist/${sessionStorage.getItem('userId')}`;
@@ -154,7 +162,7 @@ export const drawNavbar = () => {
                 <strong>회원가입</strong>
               </a>
               <div class="vertical-bar" id="vb-join-after"></div>
-              <a href="/cart/" class="button is-primary" id="cart">
+              <a href="/cart" class="button is-primary" id="cart">
                 <strong>장바구니</strong>
               </a>
               <div class="vertical-bar" id="vb-cart-after"></div>
@@ -172,10 +180,17 @@ export const drawNavbar = () => {
 };
 
 export const drawCategoryBar = () => {
+  const path = window.location.pathname;
+  let link = '';
+  if (path.length === 1) {
+    link = '#category-title';
+  } else {
+    link = '/';
+  }
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a id="category-name" href="/"><strong>전체보기</strong></a></li>
+        <li id="entire"><a id="category-name" href=${link}><strong>전체보기</strong></a></li>
 
       </ul>
     </div>

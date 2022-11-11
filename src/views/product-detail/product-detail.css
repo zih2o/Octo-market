@@ -191,3 +191,8 @@ main {
   background-color: hsl(0, 0%, 98%);
   color: #b0a8b9;
 }
+
+.button {
+  background-color: #80bd7a;
+  color: white;
+}

@@ -120,12 +120,12 @@ main {
   width: 15px;
   height: 15px;
   margin: 10px;
-  background-color: #c4fcef;
+  background-color: #dcf9d7;
   pointer-events: none;
 }
 
 .slider-pagination .slider-page.is-active {
-  background-color: #00c9a7;
+  background-color: #80bd7a;
   transform: scale(1.8);
 }
 
@@ -340,7 +340,7 @@ main {
 
 .md-category-li {
   padding: 10px 20px;
-  background-color: #51c498;
+  background-color: #80bd7a;
   border-radius: 25px;
   color: white;
   font-size: 20px;
@@ -413,7 +413,7 @@ main {
   z-index: 99; /* Make sure it does not overlap */
   border: none; /* Remove borders */
   outline: none; /* Remove outline */
-  background-color: #51c498; /* Set a background color */
+  background-color: #80bd7a; /* Set a background color */
   cursor: pointer; /* Add a mouse pointer on hover */
   border-radius: 80px; /* Rounded corners */
   box-shadow: 3px 3px 5px #4b4453;
