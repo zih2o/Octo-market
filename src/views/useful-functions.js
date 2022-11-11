@@ -112,7 +112,7 @@ export const fillCategoryBar = async () => {
   categorys.map(el => {
     const template = `
       <li>
-        <a id="category-name" href="/items/category-page/createdAt/${el._id}">
+        <a id="category-name" href="/items/category-page/${el._id}">
           <strong>${el.name}</strong>
         </a>
       </li>
