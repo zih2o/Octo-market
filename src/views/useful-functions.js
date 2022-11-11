@@ -105,7 +105,7 @@ export const fillCategoryBar = async () => {
   categorys.map(el => {
     const template = `
       <li>
-        <a href="/items/category/categorylist/${el._id}">
+        <a id="category-name" href="/items/category-page/${el._id}">
           <strong>${el.name}</strong>
         </a>
       </li>
@@ -170,7 +170,7 @@ export const drawCategoryBar = () => {
   const template = `
     <div class="tabs is-medium is-centered position-sticky" id="category-bar">
       <ul id="category-ul">
-        <li id="entire"><a href="/"><strong>전체보기</strong></a></li>
+        <li id="entire"><a id="category-name" href="/"><strong>전체보기</strong></a></li>
 
       </ul>
     </div>

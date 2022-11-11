@@ -97,11 +97,20 @@ main {
 
 /*  카테고리바의 sticky 속성 적용에 필요한 스타일  */
 /* sticky 컴포넌트는 부모 태그 아래에 붙어서 화면에 남아 있는다 */
+#category-ul {
+  border: none;
+}
+
+#category-name {
+  border: none;
+}
+
 #category-bar {
+  border-bottom: 1px solid #dbdbdb;
   position: sticky;
   z-index: 999;
   top: 0;
-  padding: 10px 0 2px 0;
+  padding: 20px 0 30px 0;
   background-color: #ffffff;
 }
 

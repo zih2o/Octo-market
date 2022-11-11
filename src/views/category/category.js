@@ -13,7 +13,7 @@ import {
   //숫자 자리수마다 , 찍기
   addCommas,
   drawAdminLink,
-} from '../useful-functions.js';
+} from '/useful-functions.js';
 
 // html 랜더링 관련 함수들 실행
 drawNavbar();
@@ -56,8 +56,7 @@ categoryList.then(datas => {
   // console.log('카테고리 목록 조회 datas ', datas)
 
   datas.map(el => {
-    const path = `/items/category/${el._id}`;
-    console.log('카테고리 목록 조회 name ', el.name)
+    const path = `/items/category-page/${el._id}/`;
     categoryOj[path] = el.name;
   });
 
@@ -66,23 +65,15 @@ categoryList.then(datas => {
   // url 로 현재 상품 리스트 타이틀 텍스트 설정하기
   const categoryTitle = document.querySelector('#category-title');
   let pathname = window.location.pathname;
-
-  console.log('pathname => ', pathname)
-  const categoryTitleName =
-    categoryOj[`/${pathname}`];
-  console.log(
-    '완성 url =>>>',
-    `/${pathname}`,
-  );
+  const categoryTitleName = categoryOj[pathname];
+  console.log(categoryTitleName)
   categoryTitle.innerText = categoryTitleName;
 
 });
-console.log('categoryoj===.>> ', categoryOj);
 
 // 데이터 객체로 html화 하여 상품을 만들고 문자열로 만드는 함수
 const createProductBox = data => {
   const calcPrice = addCommas(data.price);
-  console.log(calcPrice);
   let name = '';
   if (data.name.length >= 10) {
     name = data.name.slice(0, 20) + '...';
@@ -91,21 +82,20 @@ const createProductBox = data => {
   }
   const product = `
   <li class="product-item" style="width:25%;">
-  <div class="item-container">
-  <div class="item-photobox">
-                <a href="/${data._id}">
-                    <img src="${'../images/dummy.png'}" alt="${
-    data.name
-  }" loading="lazy">
-                    </a>
-                    </div>
-                    <div class="item-info-container">
-                    <div class="item-namebox"><strong><span>${name}</span></strong></div>
-                    <div class="item-pricebox"><strong><span>${calcPrice}</span></strong></div>
-                    </div>
-                    </div>
-                    </li>
-                    `;
+    <div class="item-container">
+      <div class="item-photobox">
+        <a href="/${data._id}">
+          <img src="${data.imageUrl}" alt="${data.name}" loading="lazy">
+        </a>
+      </div>
+      <div class="item-info-container">
+        <div class="item-namebox"><strong><span>${name}</span></strong></div>
+        <div class="item-pricebox"><strong><span>${calcPrice}</span></strong></div>
+      </div>
+    </div>
+  </li>
+  `;
+
   return product;
 };
 
@@ -120,16 +110,15 @@ console.log('카테고리 목룍 ==>>> ', categoryList);
 
 
 // 페이지 첫 돔 로딩시, callApi 호출
-window.addEventListener('DOMContentLoaded', function () {
-  callApi(1);
-});
-
 
 // 쿼리에 맞는 상품 데이터를 API로 요청 및 http 랜더링 함수
 // 페이지 정보를 쿼리로 보내서 다음 데이터를 fetch로 가져옴
 const callApi = async (number) => {
-  let url = '/items/category/';
-
+  let pathname = window.location.pathname;
+  const arrPathName = pathname.split('/')
+  const catId = arrPathName[3]
+  let url = `/items/category/${catId}/`
+  console.log(url)
   let params = {};
   if (number === 2) {
     params = {
@@ -150,17 +139,18 @@ const callApi = async (number) => {
       count: `${cnt}`,
       perCount: '20',
       sort: 'createdAt',
-      // sc: `${sc}`,
+      sc: -1,
     };
   }
-  console.log(params.sort);
+  
   url = `${url}?${new URLSearchParams(params).toString()}`;
   console.log('url => ', url);
 
   // 서버 연결 시 사용할 fetch문
   const res = await fetch(url);
+  console.log('1', res) // 여기서 4번?
   const fetchedProducts = await res.json();
-  console.log('fetchedProducts: ', fetchedProducts);
+  console.log(fetchedProducts);
 
   // const dummy = dummys[cnt - 1];
   // let dummy = sliceChunkDataArr(dummys.items, 8)[cnt - 1];
@@ -186,6 +176,10 @@ const callApi = async (number) => {
     intersaction();
   }
 };
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  callApi(1);
+});
 
 // 감지 함수
 const intersaction = () => {
@@ -217,11 +211,16 @@ const intersaction = () => {
   observer.observe(document.querySelector('#intersaction')); // 감시 대상 설정
 };
 
-
 //상품 정렬 버튼
 const lowPriceBtn = document.querySelector('.lowPrice');
-lowPriceBtn.addEventListener('click', callApi(2));
-const highPriceBtn = document.querySelector('.lowPrice');
-highPriceBtn.addEventListener('click', callApi(3));
-const createdAtBtn = document.querySelector('createdAtBtn');
-createdAtBtn.addEventListener('click', callApi(1));
+lowPriceBtn.addEventListener('click', () =>{
+  callApi(2)
+});
+const highPriceBtn = document.querySelector('.highPrice');
+highPriceBtn.addEventListener('click', ()=>{
+  callApi(3)
+});
+const createdAtBtn = document.querySelector('.createdAt');
+createdAtBtn.addEventListener('click', ()=>{
+  callApi(1)
+});
