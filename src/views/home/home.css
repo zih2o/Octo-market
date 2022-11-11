@@ -102,31 +102,13 @@ main {
   position: sticky;
   z-index: 999;
   top: 0;
-  padding: 10px 0 2px 0;
   background-color: #ffffff;
+  margin: 0;
 }
 
 /* 메인 콘텐츠 영역*/
 #carousel-top > p {
   color: white;
-}
-
-/* 캐러셀 */
-.carousel-container {
-  overflow: hidden;
-}
-
-.slider-pagination .slider-page {
-  width: 15px;
-  height: 15px;
-  margin: 10px;
-  background-color: #dcf9d7;
-  pointer-events: none;
-}
-
-.slider-pagination .slider-page.is-active {
-  background-color: #80bd7a;
-  transform: scale(1.8);
 }
 
 /*할인 상품 섹션 */
@@ -467,4 +449,35 @@ main {
 #footer-ul a {
   background-color: hsl(0, 0%, 98%);
   color: #b0a8b9;
+}
+
+/* 캐러셀 */
+.carousel-container {
+  overflow: hidden;
+}
+
+.slider-pagination {
+  bottom: 18px;
+  padding: 0;
+}
+
+.slider-pagination .slider-page {
+  width: 8px;
+  height: 8px;
+  background-color: #dcf9d7;
+  pointer-events: none;
+  margin: 0 6px;
+}
+
+.slider-pagination .slider-page.is-active {
+  background-color: #80bd7a;
+  transform: scale(1.5);
+}
+
+.slider-navigation-next {
+  right: 25px !important;
+}
+
+.slider-navigation-previous {
+  left: 25px !important;
 }
