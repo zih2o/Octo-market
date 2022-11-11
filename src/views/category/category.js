@@ -142,7 +142,7 @@ const callApi = async (number) => {
       sc : -1,
     };
   }
-  
+
   url = `${url}?${new URLSearchParams(params).toString()}`;
   console.log('url => ', url);
 
@@ -156,7 +156,7 @@ const callApi = async (number) => {
   // let dummy = sliceChunkDataArr(dummys.items, 8)[cnt - 1];
   // console.log(dummy);
 
-  
+
 
   // 추가할 상품 데이터가 있다면
   if (fetchedProducts) {
@@ -212,19 +212,27 @@ const intersaction = (number) => {
   observer.observe(document.querySelector('#intersaction')); // 감시 대상 설정
 };
 
+const productListInit = () => {
+  const productUlEl = document.querySelector('.product-ul');
+  if (productUlEl) productUlEl.innerHTML = '';
+};
+
 //상품 정렬 버튼
 const createdAtBtn = document.querySelector('.createdAt');
-createdAtBtn.addEventListener('click', ()=>{
-
-  callApi(1)
+createdAtBtn.addEventListener('click', () => {
+  productListInit();
+  cnt = 1;
+  callApi(1);
 });
 const lowPriceBtn = document.querySelector('.lowPrice');
-lowPriceBtn.addEventListener('click', () =>{
-  
-  callApi(2)
+lowPriceBtn.addEventListener('click', () => {
+  productListInit();
+  cnt = 1;
+  callApi(2);
 });
 const highPriceBtn = document.querySelector('.highPrice');
-highPriceBtn.addEventListener('click', ()=>{
-
-  callApi(3)
+highPriceBtn.addEventListener('click', () => {
+  productListInit();
+  cnt = 1;
+  callApi(3);
 });

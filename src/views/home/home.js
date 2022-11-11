@@ -245,6 +245,7 @@ const callApi = async () => {
   // 서버 연결 시 사용할 fetch문
   const res = await fetch(url);
   const fetchedProducts = await res.json();
+  if (fetchedProducts.length <= 0) return;
 
   // const dummy = dummys[cnt - 1];
   // let dummy = sliceChunkDataArr(dummys.items, 8)[cnt - 1];
