@@ -99,6 +99,8 @@ async function updateData(e)
     const res = await Api.put(`/admin/orders/${idArray[rowInd]}`, {
         state:`${deliStatus.value}`
     })
+    alert("배송 상태 수정이 반영되었습니다")
+    window.location.href = window.location.href;
 }
 
 
@@ -164,8 +166,6 @@ function closeModal()
       },
       {once: true}
     );
-    alert("수정 내용이 반영되었습니다")
-    window.location.href = window.location.href;
 }
 
 function populateForm(itemRow) {
