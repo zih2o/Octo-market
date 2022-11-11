@@ -26,6 +26,7 @@ const addrIn1 = document.querySelector("#sample6_address");
 const addrIn2 = document.querySelector("#sample6_detailAddress");
 const phone = document.querySelector("#phoneNum");
 const submitBtn = document.querySelector("#submitBtn");
+const deleteId = document.querySelector('#deleteId');
 
 const accessToken = sessionStorage.getItem("loginToken")
 const userId = sessionStorage.getItem("userId")
@@ -44,9 +45,22 @@ function addAllElements() {
 }
 function addAllEvents() {
     submitBtn.addEventListener("click", handleSubmit)
+    deleteId.addEventListener("click", membershipDelete)
 }
 
+async function membershipDelete() {
+    try {
+        await Api.delete(`/users/${userId}`);
 
+        sessionStorage.removeItem('loginToken');
+        sessionStorage.removeItem('userId');
+
+        alert('회원탈퇴가 완료되었습니다.') 
+        window.location.href = '/';
+    } catch (err) {
+        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    }
+}
 
 async function emailAttach () {
     const userInfo = await Api.get('/users', userId);
