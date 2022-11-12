@@ -72,7 +72,7 @@ async function allOrdersAdmin()
                 },
             })
             let {name} = await res2.json()
-            let tableContent = `<tr><th>${id.substring(0, 6)}...</th>`;
+            let tableContent = `<tr><th>${id}</th>`;
             idArray.push(id)
             let user = `<td>${name}</td>`;
             let orderDate = `<td>${createdAt.split('T')[0].replaceAll('-', '.')}</td>`
@@ -113,10 +113,8 @@ async function deleteUpdate(event)
         rowInd = currRow.rowIndex
         const orderId = currRow.cells[0].innerHTML
         const userId = currRow.cells[1]
-
         //delete Row
         table.deleteRow(currRow.rowIndex)
- 
         //Update on DB
         const res = await Api.delete(`/admin/orders/${orderId}`)
 
