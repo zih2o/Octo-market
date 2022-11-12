@@ -76,7 +76,7 @@ async function allOrdersAdmin()
         var count = 1;
         for (let item of items){
             const {name, brand, price, createdAt, category, description, imageUrl, isRecommend, isDiscount, dispercent, id} = item;
-            let tableContent = `<tr><th>${String(count++).padStart(5, '0')}</th>`;
+            let tableContent = `<tr><th>${id}</th>`;
             let itemName = `<td>${name}</td>`;
             let brandName = `<td>${brand}</td>`;
             let nameCate = matchCategory(category, categorylist)
@@ -141,7 +141,7 @@ async function Update(event)
     {
         const table = btnTouched.closest("table")
         const currRow = btnTouched.closest("tr")
-        const itemId = itemArray[0][Number(currRow.cells[0].innerHTML) - 1]
+        const itemId = currRow.cells[0].innerHTML
         console.log(itemId)
         //delete Row
         table.deleteRow(currRow.rowIndex)
