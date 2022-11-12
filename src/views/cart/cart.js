@@ -136,7 +136,7 @@ async function getProductList() {
           }
           state.deliveryCharge = 3000;
           settingInfo();
-        } 
+        }         
         makeProductList(itemId);
         const plusBtn = document.querySelectorAll(".plusBtn");
         const minusBtn = document.querySelectorAll(".minusBtn");
@@ -317,6 +317,13 @@ function delSelect() {
   if (resetChecked.length === 0) {
     state.deliveryCharge = 0;
   }
+
+  const itemList = sessionStorage
+      .getItem("cart")
+      .split(",")
+      .filter((e) => e !== "");
+
+  itemList.forEach(e => sessionStorage.setItem(e, 1));
   settingInfo();
   return;
 }
