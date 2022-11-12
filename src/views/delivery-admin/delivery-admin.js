@@ -115,7 +115,6 @@ async function deleteUpdate(event)
         const userId = currRow.cells[1]
         //delete Row
         table.deleteRow(currRow.rowIndex)
-        alert(`${orderId}`)
         //Update on DB
         const res = await Api.delete(`/admin/orders/${orderId}`)
 
