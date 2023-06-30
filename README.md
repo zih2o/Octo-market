@@ -2,7 +2,7 @@
 
 <div>
 
-<img alt="쇼핑-데모 로고" src="https://octomaket.s3.ap-northeast-2.amazonaws.com/1668143702910_apple-icon-180x180.png](https://github.com/zih2o/Octo-market/assets/85221728/159f19d0-f765-4d94-9767-b150d6dc154c">
+<img alt="쇼핑-데모 로고" src="https://github.com/zih2o/Octo-market/assets/85221728/159f19d0-f765-4d94-9767-b150d6dc154c">
 
 </div>
 
